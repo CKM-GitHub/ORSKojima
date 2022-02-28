@@ -1,0 +1,1472 @@
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+--  ======================================================================
+--       Program Call    “X•ÜƒŒƒW ƒWƒƒ[ƒiƒ‹ˆóü
+--       Program ID      TempoRegiPoint
+--       Create date:    2019.12.22
+--       Update date:    2020.06.06  ŽG“ü‹àAŽGŽx•¥A—¼‘ÖŽd—l•ÏX
+--                       2020.07.17  Œ”‚ª‘‚¦‚é‚ðC³
+--  ======================================================================
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'D_SelectData_ForTempoRegiJournal')
+  DROP PROCEDURE [dbo].[D_SelectData_ForTempoRegiJournal]
+GO
+
+
+CREATE PROCEDURE [dbo].[D_SelectData_ForTempoRegiJournal]
+(
+    @StoreCD   varchar(4),
+    @DateFrom  varchar(10),
+    @DateTo    varchar(10)
+)AS
+
+--********************************************--
+--                                            --
+--                 ˆ—ŠJŽn                   --
+--                                            --
+--********************************************--
+
+BEGIN
+    SET NOCOUNT ON;
+
+    -- y“X•Ü¸ŽZzƒ[ƒNƒe[ƒuƒ‹‚Pì¬
+    SELECT * 
+      INTO #Temp_D_StoreCalculation1
+      FROM (
+            SELECT CalculationDate                  -- ¸ŽZ“ú
+                  ,[10000yen] [10000yenNum]         -- Œ»‹àŽc‚10,000–‡”
+                  ,[5000yen] [5000yenNum]           -- Œ»‹àŽc‚5,000–‡”
+                  ,[2000yen] [2000yenNum]           -- Œ»‹àŽc‚2,000–‡”
+                  ,[1000yen] [1000yenNum]           -- Œ»‹àŽc‚1,000–‡”
+                  ,[500yen] [500yenNum]             -- Œ»‹àŽc‚500–‡”
+                  ,[100yen] [100yenNum]             -- Œ»‹àŽc‚100–‡”
+                  ,[50yen] [50yenNum]               -- Œ»‹àŽc‚50–‡”
+                  ,[10yen] [10yenNum]               -- Œ»‹àŽc‚10–‡”
+                  ,[5yen] [5yenNum]                 -- Œ»‹àŽc‚5–‡”
+                  ,[1yen] [1yenNum]                 -- Œ»‹àŽc‚1–‡”
+                  ,[10000yen]*10000 [10000yenGaku]  -- Œ»‹àŽc‚10,000‹àŠz
+                  ,[5000yen]*5000 [5000yenGaku]     -- Œ»‹àŽc‚5,000‹àŠz
+                  ,[2000yen]*2000 [2000yenGaku]     -- Œ»‹àŽc‚2,000‹àŠz
+                  ,[1000yen]*1000 [1000yenGaku]     -- Œ»‹àŽc‚1,000‹àŠz
+                  ,[500yen]*500 [500yenGaku]        -- Œ»‹àŽc‚500‹àŠz
+                  ,[100yen]*100 [100yenGaku]        -- Œ»‹àŽc‚100‹àŠz
+                  ,[50yen]*50 [50yenGaku]           -- Œ»‹àŽc‚50‹àŠz
+                  ,[10yen]*10 [10yenGaku]           -- Œ»‹àŽc‚10‹àŠz
+                  ,[5yen]*5 [5yenGaku]              -- Œ»‹àŽc‚5‹àŠz
+                  ,[1yen]*1 [1yenGaku]              -- Œ»‹àŽc‚1‹àŠz
+                  ,Change                           -- ’Þ‘K€”õ‹à
+                  ,Etcyen                           -- ‚»‚Ì‘¼‹àŠz
+              FROM D_StoreCalculation
+             WHERE StoreCD = @StoreCD
+               AND CalculationDate >= convert(date, @DateFrom)
+               AND CalculationDate <= convert(date, @DateTo)
+           ) S1;
+
+    SELECT *
+      INTO #Temp_D_DepositHistory0
+      FROM (
+            SELECT DepositDateTime                  -- “o˜^“ú
+                  ,Number                           -- “`•[”Ô†
+                  ,StoreCD                          -- “X•ÜCD
+                  ,SKUCD                            -- 
+                  ,JanCD                            -- JanCD
+                  ,AdminNO
+                  ,SalesSU                          -- 
+                  ,SalesUnitPrice                   -- 
+                  ,TotalGaku                        -- ‰¿Ši
+                  ,SalesTax                         -- ÅŠz
+                  ,SalesTaxRate                     -- Å—¦
+                  ,DataKBN                          -- ƒf[ƒ^Ží•Ê(1:”Ì”„î•ñA2:”Ì”„–¾×î•ñA3:“üo‹àî•ñ)
+                  ,DepositKBN                       -- “üo‹à‹æ•ª
+                  ,CancelKBN                        -- ŽæÁ‹æ•ª(1:ŽæÁA2:•Ô•iA3:’ù³)
+                  ,RecoredKBN                       -- Ô•‹æ•ª(0:•A1:Ô)
+                  ,NotReceiptFlg                    -- ƒŒƒV[ƒgˆóü‘ÎÛŠz•ª(0:‘ÎÛA1:‘ÎÛŠO)
+                  ,DenominationCD                   -- 
+                  ,DepositGaku                      -- 
+                  ,Refund                           -- 
+                  ,DepositNO                        -- 
+                  ,DiscountGaku                     -- 
+                  ,CustomerCD                       -- 
+                  ,ExchangeDenomination             -- 
+                  ,ExchangeCount                    -- 
+                  ,[Rows]                           -- 
+                  ,AccountingDate                   -- 
+                  ,InsertOperator
+                  ,Remark
+              FROM D_DepositHistory
+             WHERE StoreCD = @StoreCD
+               AND AccountingDate >= convert(date, @DateFrom)
+               AND AccountingDate <= convert(date, @DateTo)
+               AND DataKBN IN (2,3)
+               AND DepositKBN IN (1,2,3,5,6)
+           ) H1;
+--Temp_D_DepositHistory0‚ÉIndexiNumberj‚ð‚Â‚¯‚½‚Ù‚¤‚ª‚æ‚¢Hš
+    -- ƒCƒ“ƒfƒbƒNƒXindex1ì¬
+    CREATE CLUSTERED INDEX index_D_DepositHistory0 on [#Temp_D_DepositHistory0] ([Number]);
+    
+    -- y”Ì”„zƒ[ƒNƒe[ƒuƒ‹‚Pì¬
+    SELECT * 
+      INTO #Temp_D_DepositHistory1
+      FROM (
+            SELECT distinct history.DepositDateTime RegistDate                  -- “o˜^“úŽž
+                  ,CONVERT(Date, history.DepositDateTime) DepositDate           -- “o˜^“ú
+                  ,history.Number SalesNO                                       -- “`•[”Ô†
+                  ,history.StoreCD                                              -- “X•ÜCD
+                  ,history.DepositNO                                            -- Sort‚Ì‚½‚ß‚ÉŽæ“¾
+                  ,history.JanCD                                                -- JanCD
+                  ,(SELECT top 1 sku.SKUShortName
+                      FROM M_SKU AS sku
+                     WHERE sku.AdminNO = history.AdminNO
+                       AND sku.DeleteFlg = 0
+                       AND sku.ChangeDate <= history.AccountingDate
+                     ORDER BY sku.ChangeDate DESC
+                   ) As SKUShortName                                            -- ¤•i–¼
+                  ,CASE
+                     WHEN history.SalesSU = 1 THEN NULL
+                     ELSE history.SalesUnitPrice
+                   END AS SalesUnitPrice                                        -- ’P‰¿
+                  ,CASE
+                     WHEN history.SalesSU = 1 THEN NULL
+                     ELSE CASE WHEN history.RecoredKBN = 1 OR history.CancelKBN = 2 THEN history.SalesSU * (-1) ELSE history.SalesSU END
+                   END AS SalesSU                                               -- ”—Ê
+                  ,CASE WHEN history.RecoredKBN = 1 OR history.CancelKBN = 2 THEN history.TotalGaku * (-1)
+                        ELSE history.TotalGaku
+                   END Kakaku                                                   -- ‰¿Ši
+                  ,history.SalesTax                                             -- ÅŠz
+                  ,history.SalesTaxRate                                         -- Å—¦
+                  ,CASE WHEN history.RecoredKBN = 1 OR history.CancelKBN = 2 THEN history.TotalGaku * (-1)
+                        ELSE history.TotalGaku
+                   END TotalGaku                                                -- ”Ì”„‡ŒvŠz
+
+                  ,CASE WHEN history.RecoredKBN = 1 AND history.CancelKBN = 3 THEN (sales.SalesHontaiGaku8 + sales.SalesTax8) * (-1) 
+				        ELSE  sales.SalesHontaiGaku8 + sales.SalesTax8 
+			       END TargetAmount8                                            -- 8“‘ÎÛŠz
+                  ,CASE WHEN history.RecoredKBN = 1 AND history.CancelKBN = 3 THEN (sales.SalesHontaiGaku10 + sales.SalesTax10) * (-1)
+				        ELSE sales.SalesHontaiGaku10 + sales.SalesTax10
+				   END TargetAmount10                                           -- 10“‘ÎÛŠz
+                  ,CASE WHEN history.RecoredKBN = 1 AND history.CancelKBN = 3 THEN sales.SalesTax8 * (-1)
+						ELSE sales.SalesTax8
+					END SalesTax8                                               -- ŠOÅ8“
+                  ,CASE WHEN history.RecoredKBN = 1 AND history.CancelKBN = 3 THEN sales.SalesTax10 * (-1)
+						ELSE sales.SalesTax10
+					END SalesTax10                                              -- ŠOÅ10“
+                  ,(SELECT top 1 staff.ReceiptPrint
+                      FROM M_Staff AS staff
+                     WHERE  staff.StaffCD = sales.StaffCD
+                       AND staff.DeleteFlg = 0
+                       AND staff.ChangeDate <= sales.SalesDate
+                     ORDER BY staff.ChangeDate DESC
+                    ) AS StaffReceiptPrint                                      -- ’S“–ƒŒƒV[ƒg•\‹L
+                  ,(SELECT top 1 store.ReceiptPrint
+                      FROM M_Store AS store
+                     WHERE store.StoreCD = sales.StoreCD
+                       AND store.DeleteFlg = 0
+                       AND store.ChangeDate <= sales.SalesDate
+                     ORDER BY store.ChangeDate DESC
+                    ) AS StoreReceiptPrint                                      -- “X•ÜƒŒƒV[ƒg•\‹L
+                  ,history.AccountingDate
+                  ,history.RecoredKBN
+              FROM #Temp_D_DepositHistory0 AS history
+              LEFT OUTER JOIN D_Sales AS sales ON sales.SalesNO = history.Number
+
+             WHERE history.DataKBN = 2
+               AND history.DepositKBN = 1
+           ) D1;
+
+    -- y”Ì”„zƒ[ƒNƒe[ƒuƒ‹‚Qì¬
+    SELECT * 
+      INTO #Temp_D_DepositHistory2
+      FROM (
+            SELECT D.SalesNO                                                                     -- “`•[”Ô†
+                  ,MAX(CASE D.RANK WHEN  1 THEN D.DenominationName ELSE NULL END) PaymentName1   -- Žx•¥•û–@–¼1
+                  ,MAX(CASE D.RANK WHEN  1 THEN CASE D.RecoredKBN WHEN 1 THEN D.DepositGaku * (-1) ELSE D.DepositGaku END  ELSE NULL END) AmountPay1     -- Žx•¥•û–@Šz1
+                  ,MAX(CASE D.RANK WHEN  2 THEN D.DenominationName ELSE NULL END) PaymentName2   -- Žx•¥•û–@–¼2
+                  ,MAX(CASE D.RANK WHEN  2 THEN CASE D.RecoredKBN WHEN 1 THEN D.DepositGaku * (-1) ELSE D.DepositGaku END  ELSE NULL END) AmountPay2     -- Žx•¥•û–@Šz2
+                  ,MAX(CASE D.RANK WHEN  3 THEN D.DenominationName ELSE NULL END) PaymentName3   -- Žx•¥•û–@–¼3
+                  ,MAX(CASE D.RANK WHEN  3 THEN CASE D.RecoredKBN WHEN 1 THEN D.DepositGaku * (-1) ELSE D.DepositGaku END  ELSE NULL END) AmountPay3     -- Žx•¥•û–@Šz3
+                  ,MAX(CASE D.RANK WHEN  4 THEN D.DenominationName ELSE NULL END) PaymentName4   -- Žx•¥•û–@–¼4
+                  ,MAX(CASE D.RANK WHEN  4 THEN CASE D.RecoredKBN WHEN 1 THEN D.DepositGaku * (-1) ELSE D.DepositGaku END  ELSE NULL END) AmountPay4     -- Žx•¥•û–@Šz4
+                  ,MAX(CASE D.RANK WHEN  5 THEN D.DenominationName ELSE NULL END) PaymentName5   -- Žx•¥•û–@–¼5
+                  ,MAX(CASE D.RANK WHEN  5 THEN CASE D.RecoredKBN WHEN 1 THEN D.DepositGaku * (-1) ELSE D.DepositGaku END  ELSE NULL END) AmountPay5     -- Žx•¥•û–@Šz5
+                  ,MAX(CASE D.RANK WHEN  6 THEN D.DenominationName ELSE NULL END) PaymentName6   -- Žx•¥•û–@–¼6
+                  ,MAX(CASE D.RANK WHEN  6 THEN CASE D.RecoredKBN WHEN 1 THEN D.DepositGaku * (-1) ELSE D.DepositGaku END  ELSE NULL END) AmountPay6     -- Žx•¥•û–@Šz6
+                  ,MAX(CASE D.RANK WHEN  7 THEN D.DenominationName ELSE NULL END) PaymentName7   -- Žx•¥•û–@–¼7
+                  ,MAX(CASE D.RANK WHEN  7 THEN CASE D.RecoredKBN WHEN 1 THEN D.DepositGaku * (-1) ELSE D.DepositGaku END  ELSE NULL END) AmountPay7     -- Žx•¥•û–@Šz7
+                  ,MAX(CASE D.RANK WHEN  8 THEN D.DenominationName ELSE NULL END) PaymentName8   -- Žx•¥•û–@–¼8
+                  ,MAX(CASE D.RANK WHEN  8 THEN CASE D.RecoredKBN WHEN 1 THEN D.DepositGaku * (-1) ELSE D.DepositGaku END  ELSE NULL END) AmountPay8     -- Žx•¥•û–@Šz8
+                  ,MAX(CASE D.RANK WHEN  9 THEN D.DenominationName ELSE NULL END) PaymentName9   -- Žx•¥•û–@–¼9
+                  ,MAX(CASE D.RANK WHEN  9 THEN CASE D.RecoredKBN WHEN 1 THEN D.DepositGaku * (-1) ELSE D.DepositGaku END  ELSE NULL END) AmountPay9     -- Žx•¥•û–@Šz9
+                  ,MAX(CASE D.RANK WHEN 10 THEN D.DenominationName ELSE NULL END) PaymentName10  -- Žx•¥•û–@–¼10
+                  ,MAX(CASE D.RANK WHEN 10 THEN CASE D.RecoredKBN WHEN 1 THEN D.DepositGaku * (-1) ELSE D.DepositGaku END  ELSE NULL END) AmountPay10    -- Žx•¥•û–@Šz10
+                  ,D.RecoredKbn
+                  ,D.DepositDateTime
+              FROM (
+                    SELECT history.Number SalesNO
+                          ,history.DenominationCD
+                          ,denominationKbn.DenominationName
+                          ,history.DepositGaku + history.Refund DepositGaku
+                          ,history.DepositDateTime
+                          --,ROW_NUMBER() OVER(PARTITION BY history.Number ORDER BY history.DepositDateTime ASC) as RANK	š
+                          ,ROW_NUMBER() OVER(PARTITION BY history.Number ORDER BY history.DepositNO ASC) as RANK
+                          ,history.RecoredKBN
+                      FROM #Temp_D_DepositHistory0 history
+                      LEFT OUTER JOIN D_Sales sales ON sales.SalesNO = history.Number
+                      LEFT OUTER JOIN M_DenominationKBN denominationKbn ON denominationKbn.DenominationCD = history.DenominationCD
+                     WHERE history.DataKBN = 3
+                       AND history.DepositKBN = 1
+                   ) D
+             GROUP BY D.SalesNO
+                    , D.RecoredKBN, D.DepositDateTime
+           ) D2;
+
+    -- y”Ì”„zƒ[ƒNƒe[ƒuƒ‹‚Rì¬
+    SELECT * 
+      INTO #Temp_D_DepositHistory3
+      FROM (
+            SELECT history.Number  SalesNO                   -- “`•[”Ô†
+                  ,SUM(CASE WHEN history.RecoredKBN = 1 OR history.CancelKBN = 2 THEN history.Refund * (-1) ELSE history.Refund END) Refund                      -- ’Þ‘K
+                  ,SUM(CASE WHEN history.RecoredKBN = 1 OR history.CancelKBN = 2 THEN history.DiscountGaku * (-1) ELSE history.DiscountGaku END) DiscountGaku    -- ’lˆøŠz
+              FROM #Temp_D_DepositHistory0 AS history
+              LEFT OUTER JOIN D_Sales AS sales ON sales.SalesNO = history.Number
+             WHERE history.DataKBN = 3 
+               AND history.DepositKBN = 1
+             GROUP BY history.Number
+           ) D3;
+
+    -- y’Þ‘K€”õzƒ[ƒNƒe[ƒuƒ‹‚Sì¬
+    SELECT * 
+      INTO #Temp_D_DepositHistory4
+      FROM (
+            SELECT CONVERT(Date, D.DepositDateTime) RegistDate                             -- “o˜^“ú
+                  ,D.DepositDateTime ChangePreparationDate1                                -- ’Þ‘K€”õ“ú1
+                  ,'Œ»‹à' ChangePreparationName1                                           -- ’Þ‘K€”õ–¼1
+                  ,D.DepositGaku ChangePreparationAmount1                                  -- ’Þ‘K€”õŠz1
+                  ,NULL ChangePreparationDate2                                             -- ’Þ‘K€”õ“ú2
+                  ,NULL ChangePreparationName2                                             -- ’Þ‘K€”õ–¼2
+                  ,NULL ChangePreparationAmount2                                           -- ’Þ‘K€”õŠz2
+                  ,NULL ChangePreparationDate3                                             -- ’Þ‘K€”õ“ú3
+                  ,NULL ChangePreparationName3                                             -- ’Þ‘K€”õ–¼3
+                  ,NULL ChangePreparationAmount3                                           -- ’Þ‘K€”õŠz3
+                  ,NULL ChangePreparationDate4                                             -- ’Þ‘K€”õ“ú4
+                  ,NULL ChangePreparationName4                                             -- ’Þ‘K€”õ–¼4
+                  ,NULL ChangePreparationAmount4                                           -- ’Þ‘K€”õŠz4
+                  ,NULL ChangePreparationDate5                                             -- ’Þ‘K€”õ“ú5
+                  ,NULL ChangePreparationName5                                             -- ’Þ‘K€”õ–¼5
+                  ,NULL ChangePreparationAmount5                                           -- ’Þ‘K€”õŠz5
+                  ,NULL ChangePreparationDate6                                             -- ’Þ‘K€”õ“ú6
+                  ,NULL ChangePreparationName6                                             -- ’Þ‘K€”õ–¼6
+                  ,NULL ChangePreparationAmount6                                           -- ’Þ‘K€”õŠz6
+                  ,NULL ChangePreparationDate7                                             -- ’Þ‘K€”õ“ú7
+                  ,NULL ChangePreparationName7                                             -- ’Þ‘K€”õ–¼7
+                  ,NULL ChangePreparationAmount7                                           -- ’Þ‘K€”õŠz7
+                  ,NULL ChangePreparationDate8                                             -- ’Þ‘K€”õ“ú8
+                  ,NULL ChangePreparationName8                                             -- ’Þ‘K€”õ–¼8
+                  ,NULL ChangePreparationAmount8                                           -- ’Þ‘K€”õŠz8
+                  ,NULL ChangePreparationDate9                                             -- ’Þ‘K€”õ“ú9
+                  ,NULL ChangePreparationName9                                             -- ’Þ‘K€”õ–¼9
+                  ,NULL ChangePreparationAmount9                                           -- ’Þ‘K€”õŠz9
+                  ,NULL ChangePreparationDate10                                            -- ’Þ‘K€”õ“ú10
+                  ,NULL ChangePreparationName10                                            -- ’Þ‘K€”õ–¼10
+                  ,NULL ChangePreparationAmount10                                          -- ’Þ‘K€”õŠz10
+                  ,D.Remark ChangePreparationRemark                                        -- ’Þ‘K€”õ”õl
+                  ,D.DepositNO
+              FROM #Temp_D_DepositHistory0 D
+              INNER JOIN (
+                                   SELECT MAX(history.DepositNO) DepositNO
+                                     FROM #Temp_D_DepositHistory0 history
+                                    WHERE history.DataKBN = 3
+                                      AND history.DepositKBN = 6
+                                      AND history.CancelKBN = 0
+                                    GROUP BY history.AccountingDate
+                                  ) AS DD
+              ON DD.DepositNO = D.DepositNO
+           ) D4;
+
+    -- yŽG“ü‹àzƒ[ƒNƒe[ƒuƒ‹‚Tì¬
+    SELECT * 
+      INTO #Temp_D_DepositHistory5
+      FROM (
+            SELECT CONVERT(Date, history.DepositDateTime)  AS RegistDate             -- “o˜^“ú
+                    ,history.DepositDateTime                 AS MiscDepositDate1       -- ŽG“ü‹à“ú1
+                    ,denominationKbn.DenominationName        AS MiscDepositName1       -- ŽG“ü‹à–¼1
+                    ,history.DepositGaku                     AS MiscDepositAmount1     -- ŽG“ü‹àŠz1
+                    --,ROW_NUMBER() OVER(PARTITION BY history.Number ORDER BY history.DepositDateTime ASC) as RANK	š
+                    --,ROW_NUMBER() OVER(PARTITION BY history.Number,history.DepositNO ORDER BY history.DepositNO ASC) as RANK
+                    ,history.DepositNO	                   --2020.11.20 add
+                    ,history.InsertOperator                  AS StaffReceiptPrint
+                    ,history.Remark                          AS MiscDepositRemark      -- ŽG“ü‹à”õl
+                FROM #Temp_D_DepositHistory0 history
+                LEFT OUTER JOIN M_DenominationKBN denominationKbn ON denominationKbn.DenominationCD = history.DenominationCD
+                WHERE history.DataKBN = 3
+                AND history.DepositKBN = 2
+                AND history.CancelKBN = 0
+                AND history.CustomerCD IS NULL
+           ) D5;
+
+    -- y“ü‹àzƒ[ƒNƒe[ƒuƒ‹‚T‚Pì¬
+    SELECT * 
+      INTO #Temp_D_DepositHistory51
+      FROM (
+            SELECT CONVERT(Date, history.DepositDateTime) AS RegistDate
+                    ,history.DepositDateTime                AS DepositDate1
+                    ,history.CustomerCD
+                    ,(SELECT top 1 customer.CustomerName
+                    FROM M_Customer AS customer
+                    WHERE customer.CustomerCD = history.CustomerCD             --DeleteFlg‚Í‚ ‚¦‚Ä•s—v
+                    AND customer.ChangeDate <= history.DepositDateTime
+                    ORDER BY customer.ChangeDate DESC
+                    ) AS CustomerName
+                    ,denominationKbn.DenominationName                                                              AS DepositName1
+                    ,history.DenominationCD 
+                    ,CASE history.RecoredKBN WHEN 1 THEN history.DepositGaku * (-1) ELSE history.DepositGaku END   AS DepositAmount1
+                    ,history.DepositNO	                  --2020.11.20 add
+                    ,history.InsertOperator                 AS StaffReceiptPrint
+                    ,history.Remark                         AS DepositRemark
+                FROM #Temp_D_DepositHistory0 history
+                LEFT OUTER JOIN M_DenominationKBN denominationKbn ON denominationKbn.DenominationCD = history.DenominationCD
+
+            WHERE history.DataKBN = 3
+                AND history.DepositKBN = 2
+                AND history.CustomerCD IS NOT NULL
+           ) D51;
+
+    -- yŽGŽx•¥zƒ[ƒNƒe[ƒuƒ‹‚Uì¬
+    SELECT * 
+      INTO #Temp_D_DepositHistory6
+      FROM (
+            SELECT CONVERT(Date, history.DepositDateTime) AS RegistDate
+                    ,history.DepositDateTime                AS MiscPaymentDate1
+                    ,history.DenominationCD
+                    ,denominationKbn.DenominationName       AS MiscPaymentName1
+                    ,history.DepositGaku                    AS MiscPaymentAmount1
+                    ,history.Remark                         AS MiscPaymentRemark
+                    ,history.DepositNO
+                    ,history.AccountingDate
+                    ,history.InsertOperator                 AS StaffReceiptPrint
+                FROM #Temp_D_DepositHistory0 history
+                LEFT OUTER JOIN M_DenominationKBN denominationKbn ON denominationKbn.DenominationCD = history.DenominationCD
+                WHERE history.DataKBN = 3
+                AND history.DepositKBN = 3
+                AND history.CancelKBN = 0
+           ) D6;
+
+    -- y—¼‘Özƒ[ƒNƒe[ƒuƒ‹‚Vì¬
+    SELECT * 
+      INTO #Temp_D_DepositHistory7
+      FROM (
+            SELECT CONVERT(Date, history.DepositDateTime) AS RegistDate
+                    ,COUNT(*) OVER(partition by CONVERT(Date, history.DepositDateTime)) AS ExchangeCount
+                    ,history.DepositDateTime                AS ExchangeDate1
+                    ,denominationKbn.DenominationName       AS ExchangeName1
+                    ,ABS(history.DepositGaku)               AS ExchangeAmount1
+                    ,history.ExchangeDenomination           AS ExchangeDenomination1
+                    ,ABS(history.ExchangeCount)             AS ExchangeCount1
+                    --,ROW_NUMBER() OVER (PARTITION BY  history.Number ORDER BY history.DepositDateTime) AS RANK	š
+                    --,ROW_NUMBER() OVER(PARTITION BY history.Number,history.DepositNO ORDER BY history.DepositNO ASC) as RANK
+                    ,history.DepositNO
+                    ,history.InsertOperator                 AS StaffReceiptPrint
+                    ,history.Remark                         AS ExchangeRemark
+                FROM #Temp_D_DepositHistory0 history
+                LEFT OUTER JOIN M_DenominationKBN denominationKbn ON denominationKbn.DenominationCD = history.DenominationCD
+                WHERE history.DataKBN = 3
+                AND history.DepositKBN = 5
+                AND history.CancelKBN = 0
+           ) D7;
+
+    -- y¸ŽZˆ—FŒ»‹à”„ã(+)zƒ[ƒNƒe[ƒuƒ‹‚Xì¬
+    SELECT * 
+      INTO #Temp_D_DepositHistory9
+      FROM (
+            SELECT D.RegistDate                                   -- “o˜^“ú
+                  ,SUM(D.DepositGaku) DepositGaku                 -- Œ»‹à”„ã(+)
+              FROM (
+                    SELECT history.DepositNO
+                          ,CONVERT(DATE, history.DepositDateTime) RegistDate
+                          ,CASE history.RecoredKBN WHEN 1 THEN history.DepositGaku * (-1) ELSE history.DepositGaku END AS DepositGaku
+                      FROM #Temp_D_DepositHistory0 AS history
+                      LEFT OUTER JOIN D_Sales AS sales ON sales.SalesNO = history.Number
+                      LEFT OUTER JOIN M_DenominationKBN AS denominationKbn ON denominationKbn.DenominationCD = history.DenominationCD
+                     WHERE history.DataKBN = 3
+                       AND history.DepositKBN = 1
+                       AND denominationKbn.SystemKBN = 1
+                   ) D
+             GROUP BY D.RegistDate
+           ) D9;
+
+    -- y¸ŽZˆ—FŒ»‹à“ü‹à(+)zƒ[ƒNƒe[ƒuƒ‹‚P‚Oì¬
+    SELECT * 
+      INTO #Temp_D_DepositHistory10
+      FROM (
+            SELECT D.RegistDate                                   -- “o˜^“ú
+                  ,SUM(D.DepositGaku) DepositGaku                 -- Œ»‹à”„ã(+)
+              FROM (
+                    SELECT history.DepositNO
+                          ,CONVERT(DATE, history.DepositDateTime) RegistDate
+                          ,CASE history.RecoredKBN WHEN 1 THEN history.DepositGaku * (-1) ELSE history.DepositGaku END AS DepositGaku
+                      FROM #Temp_D_DepositHistory0 AS history
+                     INNER JOIN M_DenominationKBN AS denominationKbn ON denominationKbn.DenominationCD = history.DenominationCD
+                     WHERE history.DataKBN = 3
+                       AND history.DepositKBN = 2
+                       AND denominationKbn.SystemKBN = 1
+                   ) D
+             GROUP BY D.RegistDate
+           ) D10;
+
+    -- y¸ŽZˆ—FŒ»‹àŽx•¥(-)zƒ[ƒNƒe[ƒuƒ‹‚P‚Pì¬
+    SELECT * 
+      INTO #Temp_D_DepositHistory11
+      FROM (
+            SELECT D.RegistDate                                   -- “o˜^“ú
+                  ,SUM(D.DepositGaku) DepositGaku                 -- Œ»‹àŽx•¥(-)
+              FROM (
+                    SELECT history.DepositNO
+                          ,CONVERT(DATE, history.DepositDateTime) RegistDate
+                          ,history.DepositGaku
+                      FROM #Temp_D_DepositHistory0 AS history
+                     INNER JOIN M_DenominationKBN AS denominationKbn ON denominationKbn.DenominationCD = history.DenominationCD
+                     WHERE history.DataKBN = 3
+                       AND history.DepositKBN = 3
+                       AND history.CancelKBN = 0
+                       AND denominationKbn.SystemKBN = 1
+                   ) D
+             GROUP BY D.RegistDate
+           ) D11;
+
+    -- y¸ŽZˆ—zƒ[ƒNƒe[ƒuƒ‹‚P‚Qì¬
+    SELECT * 
+      INTO #Temp_D_DepositHistory12
+      FROM (
+            SELECT CONVERT(DATE, history.DepositDateTime) RegistDate 
+                  ,COUNT(DISTINCT sales.SalesNO) SalesNOCount
+                  ,COUNT(DISTINCT sales.CustomerCD) CustomerCDCount
+                  ,SUM(CASE history.RecoredKBN WHEN 1 THEN history.SalesSU * (-1) ELSE history.SalesSu END) SalesSUSum
+                  ,SUM(CASE history.RecoredKBN WHEN 1 THEN history.TotalGaku * (-1) ELSE history.TotalGaku END) TotalGakuSum
+                  ,SUM(CASE history.RecoredKBN WHEN 1 THEN history.DiscountGaku * (-1) ELSE history.DiscountGaku END) DiscountGaku
+              FROM #Temp_D_DepositHistory0 AS history
+              LEFT OUTER JOIN D_Sales AS sales ON sales.SalesNO = history.Number
+             WHERE history.DataKBN = 2
+               AND history.DepositKBN = 1
+               AND sales.DeleteDateTime IS NULL
+               AND sales.BillingType = 1
+             GROUP BY CONVERT(DATE, history.DepositDateTime)
+           ) D12;
+
+    -- y¸ŽZˆ—zƒ[ƒNƒe[ƒuƒ‹‚P‚Rì¬
+    SELECT * 
+      INTO #Temp_D_DepositHistory13
+      FROM (
+            SELECT D.RegistDate                                                 -- “o˜^“ú
+                  ,SUM(D.TaxableAmount) TaxableAmount                           -- “àÅ•ª”Ì”„Šz‚Ì‡Œv
+                  ,SUM(D.ForeignTaxableAmount) ForeignTaxableAmount             -- ŠOÅ•ª”Ì”„Šz‚Ì‡Œv
+                  ,SUM(D.TaxExemptionAmount) TaxExemptionAmount                 -- ”ñ‰ÛÅ•ª”Ì”„Šz‚Ì‡Œv
+                  ,SUM(D.TotalWithoutTax) TotalWithoutTax                       -- Å”²‡Œv‚Ì‡Œv
+                  ,SUM(D.Tax) Tax                                               -- “àÅ‚Ì‡Œv
+                  ,SUM(D.OutsideTax) OutsideTax                                 -- ŠOÅ‚Ì‡Œv
+                  ,SUM(D.ConsumptionTax) ConsumptionTax                         -- Á”ïÅŒv‚Ì‡Œv
+                  ,SUM(D.TaxIncludedTotal) TaxIncludedTotal                     -- Åž‡Œv‚Ì‡Œv
+              FROM (
+                    SELECT history.DepositNO                                    -- 
+                          ,CONVERT(DATE, history.DepositDateTime) RegistDate    -- “o˜^“ú
+                          ,CASE history.RecoredKBN WHEN 1 THEN salesDetails.SalesGaku * (-1) ELSE salesDetails.SalesGaku END TaxableAmount                       -- “àÅ•ª”Ì”„Šz
+                          ,0 ForeignTaxableAmount                                                                                                                -- ŠOÅ•ª”Ì”„Šz
+                          ,0 TaxExemptionAmount                                                                                                                  -- ”ñ‰ÛÅ•ª”Ì”„Šz
+                          ,CASE history.RecoredKBN WHEN 1 THEN salesDetails.SalesHontaiGaku * (-1) ELSE salesDetails.SalesHontaiGaku END TotalWithoutTax         -- Å”²‡Œv
+                          ,CASE history.RecoredKBN WHEN 1 THEN salesDetails.SalesTax * (-1) ELSE salesDetails.SalesTax END Tax                                   -- “àÅ
+                          ,0 OutsideTax                                                                                                                          -- ŠOÅ
+                          ,CASE history.RecoredKBN WHEN 1 THEN salesDetails.SalesTax * (-1) ELSE salesDetails.SalesTax END ConsumptionTax                        -- Á”ïÅŒv
+                          ,CASE history.RecoredKBN WHEN 1 THEN salesDetails.SalesGaku * (-1) ELSE salesDetails.SalesGaku END TaxIncludedTotal                    -- Åž‡Œv
+                      FROM #Temp_D_DepositHistory0 history
+                      LEFT OUTER JOIN D_SalesDetails AS salesDetails ON salesDetails.SalesNO = history.Number
+                                                                 AND salesDetails.SalesRows = history.[Rows]
+                      LEFT OUTER JOIN D_Sales AS sales ON sales.SalesNO = salesDetails.SalesNO
+                     WHERE history.DataKBN = 2
+                       AND history.DepositKBN = 1
+                       AND salesDetails.DeleteDateTime IS NULL
+                       AND sales.DeleteDateTime IS NULL
+                       AND sales.BillingType = 1
+                   ) D
+             GROUP BY D.RegistDate
+           ) D13;
+
+    -- y¸ŽZˆ—zƒ[ƒNƒe[ƒuƒ‹‚P‚Sì¬
+    SELECT * 
+      INTO #Temp_D_DepositHistory14
+      FROM (
+            SELECT D.RegistDate                                                                                      -- “o˜^“ú
+                  ,MAX(CASE D.DenominationCD WHEN  1 THEN D.DenominationName  ELSE null END) AS denominationName1    -- ‹àŽí‹æ•ª–¼1
+                  ,MAX(CASE D.DenominationCD WHEN  1 THEN D.Kingaku           ELSE null END) AS Kingaku1             -- ‹àŠz1
+                  ,MAX(CASE d.DenominationCD WHEN  2 THEN D.DenominationName  ELSE null END) AS denominationName2    -- ‹àŽí‹æ•ª–¼2
+                  ,MAX(CASE d.DenominationCD WHEN  2 THEN D.Kingaku           ELSE null END) AS Kingaku2             -- ‹àŠz2
+                  ,MAX(CASE d.DenominationCD WHEN  3 THEN D.DenominationName  ELSE null END) AS denominationName3    -- ‹àŽí‹æ•ª–¼3
+                  ,MAX(CASE d.DenominationCD WHEN  3 THEN D.Kingaku           ELSE null END) AS Kingaku3             -- ‹àŠz3
+                  ,MAX(CASE d.DenominationCD WHEN  4 THEN D.DenominationName  ELSE null END) AS denominationName4    -- ‹àŽí‹æ•ª–¼4
+                  ,MAX(CASE d.DenominationCD WHEN  4 THEN D.Kingaku           ELSE null END) AS Kingaku4             -- ‹àŠz4
+                  ,MAX(CASE d.DenominationCD WHEN  5 THEN D.DenominationName  ELSE null END) AS denominationName5    -- ‹àŽí‹æ•ª–¼5
+                  ,MAX(CASE d.DenominationCD WHEN  5 THEN D.Kingaku           ELSE null END) AS Kingaku5             -- ‹àŠz5
+                  ,MAX(CASE d.DenominationCD WHEN  6 THEN D.DenominationName  ELSE null END) AS denominationName6    -- ‹àŽí‹æ•ª–¼6
+                  ,MAX(CASE d.DenominationCD WHEN  6 THEN D.Kingaku           ELSE null END) AS Kingaku6             -- ‹àŠz6
+                  ,MAX(CASE d.DenominationCD WHEN  7 THEN D.DenominationName  ELSE null END) AS denominationName7    -- ‹àŽí‹æ•ª–¼7
+                  ,MAX(CASE d.DenominationCD WHEN  7 THEN D.Kingaku           ELSE null END) AS Kingaku7             -- ‹àŠz7
+                  ,MAX(CASE d.DenominationCD WHEN  8 THEN D.DenominationName  ELSE null END) AS denominationName8    -- ‹àŽí‹æ•ª–¼8
+                  ,MAX(CASE d.DenominationCD WHEN  8 THEN D.Kingaku           ELSE null END) AS Kingaku8             -- ‹àŠz8
+                  ,MAX(CASE d.DenominationCD WHEN  9 THEN D.DenominationName  ELSE null END) AS denominationName9    -- ‹àŽí‹æ•ª–¼9
+                  ,MAX(CASE d.DenominationCD WHEN  9 THEN D.Kingaku           ELSE null END) AS Kingaku9             -- ‹àŠz9
+                  ,MAX(CASE d.DenominationCD WHEN 10 THEN D.DenominationName  ELSE null END) AS denominationName10   -- ‹àŽí‹æ•ª–¼10
+                  ,MAX(CASE d.DenominationCD WHEN 10 THEN D.Kingaku           ELSE null END) AS Kingaku10            -- ‹àŠz10
+                  ,MAX(CASE d.DenominationCD WHEN 11 THEN D.DenominationName  ELSE null END) AS denominationName11   -- ‹àŽí‹æ•ª–¼11
+                  ,MAX(CASE d.DenominationCD WHEN 11 THEN D.Kingaku           ELSE null END) AS Kingaku11            -- ‹àŠz11
+                  ,MAX(CASE d.DenominationCD WHEN 12 THEN D.DenominationName  ELSE null END) AS denominationName12   -- ‹àŽí‹æ•ª–¼12
+                  ,MAX(CASE d.DenominationCD WHEN 12 THEN D.Kingaku           ELSE null END) AS Kingaku12            -- ‹àŠz12
+                  ,MAX(CASE d.DenominationCD WHEN 13 THEN D.DenominationName  ELSE null END) AS denominationName13   -- ‹àŽí‹æ•ª–¼13
+                  ,MAX(CASE d.DenominationCD WHEN 13 THEN D.Kingaku           ELSE null END) AS Kingaku13            -- ‹àŠz13
+                  ,MAX(CASE d.DenominationCD WHEN 14 THEN D.DenominationName  ELSE null END) AS denominationName14   -- ‹àŽí‹æ•ª–¼14
+                  ,MAX(CASE d.DenominationCD WHEN 14 THEN D.Kingaku           ELSE null END) AS Kingaku14            -- ‹àŠz14
+                  ,MAX(CASE d.DenominationCD WHEN 15 THEN D.DenominationName  ELSE null END) AS denominationName15   -- ‹àŽí‹æ•ª–¼15
+                  ,MAX(CASE d.DenominationCD WHEN 15 THEN D.Kingaku           ELSE null END) AS Kingaku15            -- ‹àŠz15
+                  ,MAX(CASE d.DenominationCD WHEN 16 THEN D.DenominationName  ELSE null END) AS denominationName16   -- ‹àŽí‹æ•ª–¼16
+                  ,MAX(CASE d.DenominationCD WHEN 16 THEN D.Kingaku           ELSE null END) AS Kingaku16            -- ‹àŠz16
+                  ,MAX(CASE d.DenominationCD WHEN 17 THEN D.DenominationName  ELSE null END) AS denominationName17   -- ‹àŽí‹æ•ª–¼17
+                  ,MAX(CASE d.DenominationCD WHEN 17 THEN D.Kingaku           ELSE null END) AS Kingaku17            -- ‹àŠz17
+                  ,MAX(CASE d.DenominationCD WHEN 18 THEN D.DenominationName  ELSE null END) AS denominationName18   -- ‹àŽí‹æ•ª–¼18
+                  ,MAX(CASE d.DenominationCD WHEN 18 THEN D.Kingaku           ELSE null END) AS Kingaku18            -- ‹àŠz18
+                  ,MAX(CASE d.DenominationCD WHEN 19 THEN D.DenominationName  ELSE null END) AS denominationName19   -- ‹àŽí‹æ•ª–¼19
+                  ,MAX(CASE d.DenominationCD WHEN 19 THEN D.Kingaku           ELSE null END) AS Kingaku19            -- ‹àŠz19
+                  ,MAX(CASE d.DenominationCD WHEN 20 THEN D.DenominationName  ELSE null END) AS denominationName20   -- ‹àŽí‹æ•ª–¼20
+                  ,MAX(CASE d.DenominationCD WHEN 20 THEN D.Kingaku           ELSE null END) AS Kingaku20            -- ‹àŠz20
+              FROM (
+                    SELECT CONVERT(DATE, history.DepositDateTime) RegistDate
+                          ,denominationKbn.DenominationCD 
+                          ,MAX(CASE WHEN denominationKbn.SystemKBN = 2 THEN multiPorpose.IDName
+                                    ELSE denominationKbn.DenominationName 
+                               END) DenominationName
+                          ,SUM(CASE history.RecoredKBN WHEN 1 THEN history.DepositGaku * (-1) ELSE history.DepositGaku END) Kingaku
+                      FROM #Temp_D_DepositHistory0 history
+                      LEFT OUTER JOIN D_Sales AS sales ON sales.SalesNO = history.number
+                      LEFT OUTER JOIN M_DenominationKBN AS denominationKbn ON denominationKbn.DenominationCD = history.DenominationCD
+                      LEFT OUTER JOIN M_MultiPorpose AS multiporpose ON multiporpose.id = 303
+                                                                 AND multiporpose.[key] = denominationKbn.CardCompany 
+                     WHERE history.DataKBN = 3
+                       AND history.DepositKBN = 1
+                       AND sales.DeleteDateTime IS NULL
+                       AND sales.BillingType = 1
+                     GROUP BY CONVERT(DATE, history.DepositDateTime)
+                             ,denominationKbn.DenominationCD
+                             ,denominationKbn.CardCompany
+                   ) D
+             GROUP BY D.RegistDate
+           ) D14;
+
+    -- y¸ŽZˆ—zƒ[ƒNƒe[ƒuƒ‹‚P‚Tì¬
+    SELECT * 
+      INTO #Temp_D_DepositHistory15
+      FROM (
+            SELECT D.RegistDate
+                  ,SUM(DepositTransfer) DepositTransfer      -- “ü‹à Už
+                  ,SUM(DepositCash) DepositCash              -- “ü‹à Œ»‹à
+                  ,SUM(DepositCheck) DepositCheck            -- “ü‹à ¬ØŽè
+                  ,SUM(DepositBill) DepositBill              -- “ü‹à ŽèŒ`
+                  ,SUM(DepositOffset) DepositOffset          -- “ü‹à ‘ŠŽEË“dŽqŒˆÏ
+                  ,SUM(DepositAdjustment) DepositAdjustment  -- “ü‹à ’²®Ë‚»‚Ì‘¼
+                  ,SUM(PaymentTransfer) PaymentTransfer      -- Žx•¥ Už
+                  ,SUM(PaymentCash) PaymentCash              -- Žx•¥ Œ»‹à
+                  ,SUM(PaymentCheck) PaymentCheck            -- Žx•¥ ¬ØŽè
+                  ,SUM(PaymentBill) PaymentBill              -- Žx•¥ ŽèŒ`
+                  ,SUM(PaymentOffset) PaymentOffset          -- Žx•¥ ‘ŠŽEË“dŽqŒˆÏ
+                  ,SUM(PaymentAdjustment) PaymentAdjustment  -- Žx•¥ ’²®Ë‚»‚Ì‘¼
+              FROM (
+                    SELECT history.DepositNO
+                          ,CONVERT(DATE, history.DepositDateTime) RegistDate
+                          ,CASE WHEN history.DepositKBN = 2 AND denominationKbn.SystemKBN = 5 THEN CASE history.RecoredKBN WHEN 1 THEN  history.DepositGaku * (-1) ELSE history.DepositGaku END
+                                ELSE 0
+                           END AS DepositTransfer    -- “ü‹à Už
+                          ,CASE WHEN history.DepositKBN = 2 AND denominationKbn.SystemKBN = 1 THEN CASE history.RecoredKBN WHEN 1 THEN  history.DepositGaku * (-1) ELSE history.DepositGaku END
+                                ELSE 0
+                           END AS DepositCash        -- “ü‹à Œ»‹à
+                          ,CASE WHEN history.DepositKBN = 2 AND denominationKbn.SystemKBN = 6 THEN CASE history.RecoredKBN WHEN 1 THEN  history.DepositGaku * (-1) ELSE history.DepositGaku END
+                                ELSE 0
+                           END AS DepositCheck       -- “ü‹à ¬ØŽè
+                          ,CASE WHEN history.DepositKBN = 2 AND denominationKbn.SystemKBN = 11 THEN CASE history.RecoredKBN WHEN 1 THEN  history.DepositGaku * (-1) ELSE history.DepositGaku END
+                                ELSE 0
+                           END AS DepositBill        -- “ü‹à ŽèŒ`
+                          ,CASE WHEN history.DepositKBN = 2 AND denominationKbn.SystemKBN = 10 THEN CASE history.RecoredKBN WHEN 1 THEN  history.DepositGaku * (-1) ELSE history.DepositGaku END
+                                ELSE 0
+                           END AS DepositOffset      -- “ü‹à ‘ŠŽE
+                          ,CASE WHEN history.DepositKBN = 2 AND denominationKbn.SystemKBN NOT IN (5,1,6,11,10) THEN CASE history.RecoredKBN WHEN 1 THEN  history.DepositGaku * (-1) ELSE history.DepositGaku END
+                                ELSE 0
+                           END AS DepositAdjustment  -- “ü‹à ’²®
+                          ,CASE WHEN history.DepositKBN = 3 AND denominationKbn.SystemKBN = 5 THEN CASE history.RecoredKBN WHEN 1 THEN  history.DepositGaku * (-1) ELSE history.DepositGaku END
+                                ELSE 0
+                           END AS PaymentTransfer    -- Žx•¥ Už
+                          ,CASE WHEN history.DepositKBN = 3 AND denominationKbn.SystemKBN = 1 THEN CASE history.RecoredKBN WHEN 1 THEN  history.DepositGaku * (-1) ELSE history.DepositGaku END
+                                ELSE 0
+                           END AS PaymentCash        -- Žx•¥ Œ»‹à
+                          ,CASE WHEN history.DepositKBN = 3 AND denominationKbn.SystemKBN = 6 THEN CASE history.RecoredKBN WHEN 1 THEN  history.DepositGaku * (-1) ELSE history.DepositGaku END
+                                ELSE 0
+                           END AS PaymentCheck       -- Žx•¥ ¬ØŽè
+                          ,CASE WHEN history.DepositKBN = 3 AND denominationKbn.SystemKBN = 11 THEN CASE history.RecoredKBN WHEN 1 THEN  history.DepositGaku * (-1) ELSE history.DepositGaku END
+                                ELSE 0
+                           END AS PaymentBill        -- Žx•¥ ŽèŒ`
+                          ,CASE WHEN history.DepositKBN = 3 AND denominationKbn.SystemKBN = 10 THEN CASE history.RecoredKBN WHEN 1 THEN  history.DepositGaku * (-1) ELSE history.DepositGaku END
+                                ELSE 0
+                           END AS PaymentOffset      -- Žx•¥ ‘ŠŽE
+                          ,CASE WHEN history.DepositKBN = 3 AND denominationKbn.SystemKBN NOT IN (5,1,6,11,10) THEN CASE history.RecoredKBN WHEN 1 THEN  history.DepositGaku * (-1) ELSE history.DepositGaku END
+                                ELSE 0
+                           END AS PaymentAdjustment  -- Žx•¥ ’²®
+                      FROM #Temp_D_DepositHistory0 AS history
+                      LEFT OUTER JOIN M_DenominationKBN AS denominationKbn ON denominationKbn.DenominationCD = history.DenominationCD
+                     WHERE history.DataKBN = 3
+                   ) D
+             GROUP BY D.RegistDate
+           ) D15;
+
+    -- y¸ŽZˆ—zƒ[ƒNƒe[ƒuƒ‹‚P‚Uì¬
+    SELECT * 
+      INTO #Temp_D_DepositHistory16
+      FROM (
+            SELECT RegistDate                                                              -- “o˜^“ú
+                  ,SUM(OtherAmountReturns) OtherAmountReturns                              -- ‘¼Œ»‹à •Ô•i
+                  --,SUM(OtherAmountDiscount) OtherAmountDiscount                            -- ‘¼Œ»‹à ’lˆø
+                  ,SUM(OtherAmountCancel) OtherAmountCancel                                -- ‘¼Œ»‹à ŽæÁ
+                  ,SUM(OtherAmountDelivery) OtherAmountDelivery                            -- ‘¼Œ»‹à ”z’B
+              FROM (
+                    SELECT history.DepositNO 
+                          ,CONVERT(DATE, history.DepositDateTime) RegistDate               -- “o˜^“ú
+                          ,CASE WHEN history.CancelKBN = 2 THEN history.DepositGaku * (-1)
+                                ELSE 0
+                           END AS OtherAmountReturns                                       -- ‘¼Œ»‹à •Ô•i
+                          ,0 OtherAmountDiscount                                           -- ‘¼Œ»‹à ’lˆø
+                          ,CASE WHEN history.CancelKBN = 1 THEN history.DepositGaku
+                                ELSE 0
+                           END AS OtherAmountCancel                                        -- ‘¼Œ»‹à ’lˆø
+                          ,0 OtherAmountDelivery                                           -- ‘¼Œ»‹à ”z’B
+                      FROM #Temp_D_DepositHistory0 AS history
+                     WHERE history.DataKBN = 2
+                       AND history.DepositKBN = 1
+                       AND history.CancelKBN IN (1, 2)
+                       AND history.RecoredKBN = 0
+                   ) D
+             GROUP BY D.RegistDate
+           ) D16;
+
+    -- y¸ŽZˆ—zƒ[ƒNƒe[ƒuƒ‹‚P‚U-‚Qì¬
+    SELECT * 
+      INTO #Temp_D_DepositHistory162
+      FROM (
+            SELECT CONVERT(DATE, history.DepositDateTime) RegistDate                                                                             -- “o˜^“ú
+                  ,SUM(CASE history.RecoredKBN WHEN 1 THEN history.DepositGaku * (-1) ELSE history.DepositGaku END) OtherAmountDiscount          -- ‘¼Œ»‹à ’lˆø                  
+              FROM #Temp_D_DepositHistory0 AS history
+              LEFT OUTER JOIN M_DenominationKBN AS M
+                ON M.DenominationCD = history.DenominationCD
+             WHERE history.DataKBN = 3
+               AND history.DepositKBN = 1
+               AND M.SystemKBN = 8
+             GROUP BY CONVERT(DATE, history.DepositDateTime)
+           ) D162;
+           
+    -- y¸ŽZˆ—zƒ[ƒNƒe[ƒuƒ‹‚P‚Vì¬
+    SELECT * 
+      INTO #Temp_D_DepositHistory17
+      FROM (
+            SELECT RegistDate                                                              -- “o˜^“ú
+                  ,SUM(ByTimeZoneTaxIncluded_0000_0100) ByTimeZoneTaxIncluded_0000_0100    -- ŽžŠÔ‘Ñ•Ê(Åž) 00:00`01:00
+                  ,SUM(ByTimeZoneTaxIncluded_0100_0200) ByTimeZoneTaxIncluded_0100_0200    -- ŽžŠÔ‘Ñ•Ê(Åž) 01:00`02:00
+                  ,SUM(ByTimeZoneTaxIncluded_0200_0300) ByTimeZoneTaxIncluded_0200_0300    -- ŽžŠÔ‘Ñ•Ê(Åž) 02:00`03:00
+                  ,SUM(ByTimeZoneTaxIncluded_0300_0400) ByTimeZoneTaxIncluded_0300_0400    -- ŽžŠÔ‘Ñ•Ê(Åž) 03:00`04:00
+                  ,SUM(ByTimeZoneTaxIncluded_0400_0500) ByTimeZoneTaxIncluded_0400_0500    -- ŽžŠÔ‘Ñ•Ê(Åž) 04:00`05:00
+                  ,SUM(ByTimeZoneTaxIncluded_0500_0600) ByTimeZoneTaxIncluded_0500_0600    -- ŽžŠÔ‘Ñ•Ê(Åž) 05:00`06:00
+                  ,SUM(ByTimeZoneTaxIncluded_0600_0700) ByTimeZoneTaxIncluded_0600_0700    -- ŽžŠÔ‘Ñ•Ê(Åž) 06:00`07:00
+                  ,SUM(ByTimeZoneTaxIncluded_0700_0800) ByTimeZoneTaxIncluded_0700_0800    -- ŽžŠÔ‘Ñ•Ê(Åž) 07:00`08:00
+                  ,SUM(ByTimeZoneTaxIncluded_0800_0900) ByTimeZoneTaxIncluded_0800_0900    -- ŽžŠÔ‘Ñ•Ê(Åž) 08:00`09:00
+                  ,SUM(ByTimeZoneTaxIncluded_0900_1000) ByTimeZoneTaxIncluded_0900_1000    -- ŽžŠÔ‘Ñ•Ê(Åž) 09:00`10:00
+                  ,SUM(ByTimeZoneTaxIncluded_1000_1100) ByTimeZoneTaxIncluded_1000_1100    -- ŽžŠÔ‘Ñ•Ê(Åž) 10:00`11:00
+                  ,SUM(ByTimeZoneTaxIncluded_1100_1200) ByTimeZoneTaxIncluded_1100_1200    -- ŽžŠÔ‘Ñ•Ê(Åž) 11:00`12:00
+                  ,SUM(ByTimeZoneTaxIncluded_1200_1300) ByTimeZoneTaxIncluded_1200_1300    -- ŽžŠÔ‘Ñ•Ê(Åž) 12:00`13:00
+                  ,SUM(ByTimeZoneTaxIncluded_1300_1400) ByTimeZoneTaxIncluded_1300_1400    -- ŽžŠÔ‘Ñ•Ê(Åž) 13:00`14:00
+                  ,SUM(ByTimeZoneTaxIncluded_1400_1500) ByTimeZoneTaxIncluded_1400_1500    -- ŽžŠÔ‘Ñ•Ê(Åž) 14:00`15:00
+                  ,SUM(ByTimeZoneTaxIncluded_1500_1600) ByTimeZoneTaxIncluded_1500_1600    -- ŽžŠÔ‘Ñ•Ê(Åž) 15:00`16:00
+                  ,SUM(ByTimeZoneTaxIncluded_1600_1700) ByTimeZoneTaxIncluded_1600_1700    -- ŽžŠÔ‘Ñ•Ê(Åž) 16:00`17:00
+                  ,SUM(ByTimeZoneTaxIncluded_1700_1800) ByTimeZoneTaxIncluded_1700_1800    -- ŽžŠÔ‘Ñ•Ê(Åž) 17:00`18:00
+                  ,SUM(ByTimeZoneTaxIncluded_1800_1900) ByTimeZoneTaxIncluded_1800_1900    -- ŽžŠÔ‘Ñ•Ê(Åž) 18:00`19:00
+                  ,SUM(ByTimeZoneTaxIncluded_1900_2000) ByTimeZoneTaxIncluded_1900_2000    -- ŽžŠÔ‘Ñ•Ê(Åž) 19:00`20:00
+                  ,SUM(ByTimeZoneTaxIncluded_2000_2100) ByTimeZoneTaxIncluded_2000_2100    -- ŽžŠÔ‘Ñ•Ê(Åž) 20:00`21:00
+                  ,SUM(ByTimeZoneTaxIncluded_2100_2200) ByTimeZoneTaxIncluded_2100_2200    -- ŽžŠÔ‘Ñ•Ê(Åž) 21:00`22:00
+                  ,SUM(ByTimeZoneTaxIncluded_2200_2300) ByTimeZoneTaxIncluded_2200_2300    -- ŽžŠÔ‘Ñ•Ê(Åž) 22:00`23:00
+                  ,SUM(ByTimeZoneTaxIncluded_2300_2400) ByTimeZoneTaxIncluded_2300_2400    -- ŽžŠÔ‘Ñ•Ê(Åž) 23:00`24:00
+                  ,COUNT(ByTimeZoneSalesNO_0000_0100) ByTimeZoneSalesNO_0000_0100          -- ŽžŠÔ‘Ñ•Ê(”„ã”Ô†) 00:00`01:00
+                  ,COUNT(ByTimeZoneSalesNO_0100_0200) ByTimeZoneSalesNO_0100_0200          -- ŽžŠÔ‘Ñ•Ê(”„ã”Ô†) 01:00`02:00
+                  ,COUNT(ByTimeZoneSalesNO_0200_0300) ByTimeZoneSalesNO_0200_0300          -- ŽžŠÔ‘Ñ•Ê(”„ã”Ô†) 02:00`03:00
+                  ,COUNT(ByTimeZoneSalesNO_0300_0400) ByTimeZoneSalesNO_0300_0400          -- ŽžŠÔ‘Ñ•Ê(”„ã”Ô†) 03:00`04:00
+                  ,COUNT(ByTimeZoneSalesNO_0400_0500) ByTimeZoneSalesNO_0400_0500          -- ŽžŠÔ‘Ñ•Ê(”„ã”Ô†) 04:00`05:00
+                  ,COUNT(ByTimeZoneSalesNO_0500_0600) ByTimeZoneSalesNO_0500_0600          -- ŽžŠÔ‘Ñ•Ê(”„ã”Ô†) 05:00`06:00
+                  ,COUNT(ByTimeZoneSalesNO_0600_0700) ByTimeZoneSalesNO_0600_0700          -- ŽžŠÔ‘Ñ•Ê(”„ã”Ô†) 06:00`07:00
+                  ,COUNT(ByTimeZoneSalesNO_0700_0800) ByTimeZoneSalesNO_0700_0800          -- ŽžŠÔ‘Ñ•Ê(”„ã”Ô†) 07:00`08:00
+                  ,COUNT(ByTimeZoneSalesNO_0800_0900) ByTimeZoneSalesNO_0800_0900          -- ŽžŠÔ‘Ñ•Ê(”„ã”Ô†) 08:00`09:00
+                  ,COUNT(ByTimeZoneSalesNO_0900_1000) ByTimeZoneSalesNO_0900_1000          -- ŽžŠÔ‘Ñ•Ê(”„ã”Ô†) 09:00`10:00
+                  ,COUNT(ByTimeZoneSalesNO_1000_1100) ByTimeZoneSalesNO_1000_1100          -- ŽžŠÔ‘Ñ•Ê(”„ã”Ô†) 10:00`11:00
+                  ,COUNT(ByTimeZoneSalesNO_1100_1200) ByTimeZoneSalesNO_1100_1200          -- ŽžŠÔ‘Ñ•Ê(”„ã”Ô†) 11:00`12:00
+                  ,COUNT(ByTimeZoneSalesNO_1200_1300) ByTimeZoneSalesNO_1200_1300          -- ŽžŠÔ‘Ñ•Ê(”„ã”Ô†) 12:00`13:00
+                  ,COUNT(ByTimeZoneSalesNO_1300_1400) ByTimeZoneSalesNO_1300_1400          -- ŽžŠÔ‘Ñ•Ê(”„ã”Ô†) 13:00`14:00
+                  ,COUNT(ByTimeZoneSalesNO_1400_1500) ByTimeZoneSalesNO_1400_1500          -- ŽžŠÔ‘Ñ•Ê(”„ã”Ô†) 14:00`15:00
+                  ,COUNT(ByTimeZoneSalesNO_1500_1600) ByTimeZoneSalesNO_1500_1600          -- ŽžŠÔ‘Ñ•Ê(”„ã”Ô†) 15:00`16:00
+                  ,COUNT(ByTimeZoneSalesNO_1600_1700) ByTimeZoneSalesNO_1600_1700          -- ŽžŠÔ‘Ñ•Ê(”„ã”Ô†) 16:00`17:00
+                  ,COUNT(ByTimeZoneSalesNO_1700_1800) ByTimeZoneSalesNO_1700_1800          -- ŽžŠÔ‘Ñ•Ê(”„ã”Ô†) 17:00`18:00
+                  ,COUNT(ByTimeZoneSalesNO_1800_1900) ByTimeZoneSalesNO_1800_1900          -- ŽžŠÔ‘Ñ•Ê(”„ã”Ô†) 18:00`19:00
+                  ,COUNT(ByTimeZoneSalesNO_1900_2000) ByTimeZoneSalesNO_1900_2000          -- ŽžŠÔ‘Ñ•Ê(”„ã”Ô†) 19:00`20:00
+                  ,COUNT(ByTimeZoneSalesNO_2000_2100) ByTimeZoneSalesNO_2000_2100          -- ŽžŠÔ‘Ñ•Ê(”„ã”Ô†) 20:00`21:00
+                  ,COUNT(ByTimeZoneSalesNO_2100_2200) ByTimeZoneSalesNO_2100_2200          -- ŽžŠÔ‘Ñ•Ê(”„ã”Ô†) 21:00`22:00
+                  ,COUNT(ByTimeZoneSalesNO_2200_2300) ByTimeZoneSalesNO_2200_2300          -- ŽžŠÔ‘Ñ•Ê(”„ã”Ô†) 22:00`23:00
+                  ,COUNT(ByTimeZoneSalesNO_2300_2400) ByTimeZoneSalesNO_2300_2400          -- ŽžŠÔ‘Ñ•Ê(”„ã”Ô†) 23:00`24:00
+              FROM (
+                    SELECT --history.DepositNO 
+                          --,
+                          CONVERT(DATE, history.DepositDateTime) RegistDate  -- “o˜^“ú
+                          ,SUM(CASE WHEN FORMAT(history.DepositDateTime, 'HH:mm') >= '00:00' AND FORMAT(history.DepositDateTime, 'HH:mm') < '01:00' THEN CASE WHEN history.RecoredKBN = 1 OR history.CancelKBN = 2 THEN history.TotalGaku * (-1) ELSE history.TotalGaku END
+                                ELSE 0
+                           END) AS ByTimeZoneTaxIncluded_0000_0100  -- ŽžŠÔ‘Ñ•Ê(Åž) 00:00`01:00
+                          ,SUM(CASE WHEN FORMAT(history.DepositDateTime, 'HH:mm') >= '01:00' AND FORMAT(history.DepositDateTime, 'HH:mm') < '02:00' THEN CASE WHEN history.RecoredKBN = 1 OR history.CancelKBN = 2 THEN history.TotalGaku * (-1) ELSE history.TotalGaku END
+                                ELSE 0
+                           END) AS ByTimeZoneTaxIncluded_0100_0200  -- ŽžŠÔ‘Ñ•Ê(Åž) 01:00`02:00
+                          ,SUM(CASE WHEN FORMAT(history.DepositDateTime, 'HH:mm') >= '02:00' AND FORMAT(history.DepositDateTime, 'HH:mm') < '03:00' THEN CASE WHEN history.RecoredKBN = 1 OR history.CancelKBN = 2 THEN history.TotalGaku * (-1) ELSE history.TotalGaku END
+                                ELSE 0
+                           END) AS ByTimeZoneTaxIncluded_0200_0300  -- ŽžŠÔ‘Ñ•Ê(Åž) 02:00`03:00
+                          ,SUM(CASE WHEN FORMAT(history.DepositDateTime, 'HH:mm') >= '03:00' AND FORMAT(history.DepositDateTime, 'HH:mm') < '04:00' THEN CASE WHEN history.RecoredKBN = 1 OR history.CancelKBN = 2 THEN history.TotalGaku * (-1) ELSE history.TotalGaku END
+                                ELSE 0
+                           END) AS ByTimeZoneTaxIncluded_0300_0400  -- ŽžŠÔ‘Ñ•Ê(Åž) 03:00`04:00
+                          ,SUM(CASE WHEN FORMAT(history.DepositDateTime, 'HH:mm') >= '04:00' AND FORMAT(history.DepositDateTime, 'HH:mm') < '05:00' THEN CASE WHEN history.RecoredKBN = 1 OR history.CancelKBN = 2 THEN history.TotalGaku * (-1) ELSE history.TotalGaku END
+                                ELSE 0
+                           END) AS ByTimeZoneTaxIncluded_0400_0500  -- ŽžŠÔ‘Ñ•Ê(Åž) 04:00`05:00
+                          ,SUM(CASE WHEN FORMAT(history.DepositDateTime, 'HH:mm') >= '05:00' AND FORMAT(history.DepositDateTime, 'HH:mm') < '06:00' THEN CASE WHEN history.RecoredKBN = 1 OR history.CancelKBN = 2 THEN history.TotalGaku * (-1) ELSE history.TotalGaku END
+                                ELSE 0
+                           END) AS ByTimeZoneTaxIncluded_0500_0600  -- ŽžŠÔ‘Ñ•Ê(Åž) 05:00`06:00
+                          ,SUM(CASE WHEN FORMAT(history.DepositDateTime, 'HH:mm') >= '06:00' AND FORMAT(history.DepositDateTime, 'HH:mm') < '07:00' THEN CASE WHEN history.RecoredKBN = 1 OR history.CancelKBN = 2 THEN history.TotalGaku * (-1) ELSE history.TotalGaku END
+                                ELSE 0
+                           END) AS ByTimeZoneTaxIncluded_0600_0700  -- ŽžŠÔ‘Ñ•Ê(Åž) 06:00`07:00
+                          ,SUM(CASE WHEN FORMAT(history.DepositDateTime, 'HH:mm') >= '07:00' AND FORMAT(history.DepositDateTime, 'HH:mm') < '08:00' THEN CASE WHEN history.RecoredKBN = 1 OR history.CancelKBN = 2 THEN history.TotalGaku * (-1) ELSE history.TotalGaku END
+                                ELSE 0
+                           END) AS ByTimeZoneTaxIncluded_0700_0800  -- ŽžŠÔ‘Ñ•Ê(Åž) 07:00`08:00
+                          ,SUM(CASE WHEN FORMAT(history.DepositDateTime, 'HH:mm') >= '08:00' AND FORMAT(history.DepositDateTime, 'HH:mm') < '09:00' THEN CASE WHEN history.RecoredKBN = 1 OR history.CancelKBN = 2 THEN history.TotalGaku * (-1) ELSE history.TotalGaku END
+                                ELSE 0
+                           END) AS ByTimeZoneTaxIncluded_0800_0900  -- ŽžŠÔ‘Ñ•Ê(Åž) 08:00`09:00
+                          ,SUM(CASE WHEN FORMAT(history.DepositDateTime, 'HH:mm') >= '09:00' AND FORMAT(history.DepositDateTime, 'HH:mm') < '10:00' THEN CASE WHEN history.RecoredKBN = 1 OR history.CancelKBN = 2 THEN history.TotalGaku * (-1) ELSE history.TotalGaku END
+                                ELSE 0
+                           END) AS ByTimeZoneTaxIncluded_0900_1000  -- ŽžŠÔ‘Ñ•Ê(Åž) 09:00`10:00
+                          ,SUM(CASE WHEN FORMAT(history.DepositDateTime, 'HH:mm') >= '10:00' AND FORMAT(history.DepositDateTime, 'HH:mm') < '11:00' THEN CASE WHEN history.RecoredKBN = 1 OR history.CancelKBN = 2 THEN history.TotalGaku * (-1) ELSE history.TotalGaku END
+                                ELSE 0
+                           END) AS ByTimeZoneTaxIncluded_1000_1100  -- ŽžŠÔ‘Ñ•Ê(Åž) 10:00`11:00
+                          ,SUM(CASE WHEN FORMAT(history.DepositDateTime, 'HH:mm') >= '11:00' AND FORMAT(history.DepositDateTime, 'HH:mm') < '12:00' THEN CASE WHEN history.RecoredKBN = 1 OR history.CancelKBN = 2 THEN history.TotalGaku * (-1) ELSE history.TotalGaku END
+                                ELSE 0
+                           END) AS ByTimeZoneTaxIncluded_1100_1200  -- ŽžŠÔ‘Ñ•Ê(Åž) 11:00`12:00
+                          ,SUM(CASE WHEN FORMAT(history.DepositDateTime, 'HH:mm') >= '12:00' AND FORMAT(history.DepositDateTime, 'HH:mm') < '13:00' THEN CASE WHEN history.RecoredKBN = 1 OR history.CancelKBN = 2 THEN history.TotalGaku * (-1) ELSE history.TotalGaku END
+                                ELSE 0
+                           END) AS ByTimeZoneTaxIncluded_1200_1300  -- ŽžŠÔ‘Ñ•Ê(Åž) 12:00`13:00
+                          ,SUM(CASE WHEN FORMAT(history.DepositDateTime, 'HH:mm') >= '13:00' AND FORMAT(history.DepositDateTime, 'HH:mm') < '14:00' THEN CASE WHEN history.RecoredKBN = 1 OR history.CancelKBN = 2 THEN history.TotalGaku * (-1) ELSE history.TotalGaku END
+                                ELSE 0
+                           END) AS ByTimeZoneTaxIncluded_1300_1400  -- ŽžŠÔ‘Ñ•Ê(Åž) 13:00`14:00
+                          ,SUM(CASE WHEN FORMAT(history.DepositDateTime, 'HH:mm') >= '14:00' AND FORMAT(history.DepositDateTime, 'HH:mm') < '15:00' THEN CASE WHEN history.RecoredKBN = 1 OR history.CancelKBN = 2 THEN history.TotalGaku * (-1) ELSE history.TotalGaku END
+                                ELSE 0
+                           END) AS ByTimeZoneTaxIncluded_1400_1500  -- ŽžŠÔ‘Ñ•Ê(Åž) 14:00`15:00
+                          ,SUM(CASE WHEN FORMAT(history.DepositDateTime, 'HH:mm') >= '15:00' AND FORMAT(history.DepositDateTime, 'HH:mm') < '16:00' THEN CASE WHEN history.RecoredKBN = 1 OR history.CancelKBN = 2 THEN history.TotalGaku * (-1) ELSE history.TotalGaku END
+                                ELSE 0
+                           END) AS ByTimeZoneTaxIncluded_1500_1600  -- ŽžŠÔ‘Ñ•Ê(Åž) 15:00`16:00
+                          ,SUM(CASE WHEN FORMAT(history.DepositDateTime, 'HH:mm') >= '16:00' AND FORMAT(history.DepositDateTime, 'HH:mm') < '17:00' THEN CASE WHEN history.RecoredKBN = 1 OR history.CancelKBN = 2 THEN history.TotalGaku * (-1) ELSE history.TotalGaku END
+                                ELSE 0
+                           END) AS ByTimeZoneTaxIncluded_1600_1700  -- ŽžŠÔ‘Ñ•Ê(Åž) 16:00`17:00
+                          ,SUM(CASE WHEN FORMAT(history.DepositDateTime, 'HH:mm') >= '17:00' AND FORMAT(history.DepositDateTime, 'HH:mm') < '18:00' THEN CASE WHEN history.RecoredKBN = 1 OR history.CancelKBN = 2 THEN history.TotalGaku * (-1) ELSE history.TotalGaku END
+                                ELSE 0
+                           END) AS ByTimeZoneTaxIncluded_1700_1800  -- ŽžŠÔ‘Ñ•Ê(Åž) 17:00`18:00
+                          ,SUM(CASE WHEN FORMAT(history.DepositDateTime, 'HH:mm') >= '18:00' AND FORMAT(history.DepositDateTime, 'HH:mm') < '19:00' THEN CASE WHEN history.RecoredKBN = 1 OR history.CancelKBN = 2 THEN history.TotalGaku * (-1) ELSE history.TotalGaku END
+                                ELSE 0
+                           END) AS ByTimeZoneTaxIncluded_1800_1900  -- ŽžŠÔ‘Ñ•Ê(Åž) 18:00`19:00
+                          ,SUM(CASE WHEN FORMAT(history.DepositDateTime, 'HH:mm') >= '19:00' AND FORMAT(history.DepositDateTime, 'HH:mm') < '20:00' THEN CASE WHEN history.RecoredKBN = 1 OR history.CancelKBN = 2 THEN history.TotalGaku * (-1) ELSE history.TotalGaku END
+                                ELSE 0
+                           END) AS ByTimeZoneTaxIncluded_1900_2000  -- ŽžŠÔ‘Ñ•Ê(Åž) 19:00`20:00
+                          ,SUM(CASE WHEN FORMAT(history.DepositDateTime, 'HH:mm') >= '20:00' AND FORMAT(history.DepositDateTime, 'HH:mm') < '21:00' THEN CASE WHEN history.RecoredKBN = 1 OR history.CancelKBN = 2 THEN history.TotalGaku * (-1) ELSE history.TotalGaku END
+                                ELSE 0
+                           END) AS ByTimeZoneTaxIncluded_2000_2100  -- ŽžŠÔ‘Ñ•Ê(Åž) 20:00`21:00
+                          ,SUM(CASE WHEN FORMAT(history.DepositDateTime, 'HH:mm') >= '21:00' AND FORMAT(history.DepositDateTime, 'HH:mm') < '22:00' THEN CASE WHEN history.RecoredKBN = 1 OR history.CancelKBN = 2 THEN history.TotalGaku * (-1) ELSE history.TotalGaku END
+                                ELSE 0
+                           END) AS ByTimeZoneTaxIncluded_2100_2200  -- ŽžŠÔ‘Ñ•Ê(Åž) 21:00`22:00
+                          ,SUM(CASE WHEN FORMAT(history.DepositDateTime, 'HH:mm') >= '22:00' AND FORMAT(history.DepositDateTime, 'HH:mm') < '23:00' THEN CASE WHEN history.RecoredKBN = 1 OR history.CancelKBN = 2 THEN history.TotalGaku * (-1) ELSE history.TotalGaku END
+                                ELSE 0
+                           END) AS ByTimeZoneTaxIncluded_2200_2300  -- ŽžŠÔ‘Ñ•Ê(Åž) 22:00`23:00
+                          ,SUM(CASE WHEN FORMAT(history.DepositDateTime, 'HH:mm') >= '23:00' AND FORMAT(history.DepositDateTime, 'HH:mm') < '24:00' THEN CASE WHEN history.RecoredKBN = 1 OR history.CancelKBN = 2 THEN history.TotalGaku * (-1) ELSE history.TotalGaku END
+                                ELSE 0
+                           END) AS ByTimeZoneTaxIncluded_2300_2400  -- ŽžŠÔ‘Ñ•Ê(Åž) 23:00`24:00
+                           -- ----------------------------------------------------------------------------------------------------------------------------------------
+                          ,MAX(CASE WHEN FORMAT(history.DepositDateTime, 'HH:mm') >= '00:00' AND FORMAT(history.DepositDateTime, 'HH:mm') < '01:00' THEN sales.SalesNO
+                                ELSE NULL
+                           END) AS ByTimeZoneSalesNO_0000_0100  -- ŽžŠÔ‘Ñ•Ê(”„ã”Ô†) 00:00`01:00
+                          ,MAX(CASE WHEN FORMAT(history.DepositDateTime, 'HH:mm') >= '01:00' AND FORMAT(history.DepositDateTime, 'HH:mm') < '02:00' THEN sales.SalesNO
+                                ELSE NULL
+                           END) AS ByTimeZoneSalesNO_0100_0200  -- ŽžŠÔ‘Ñ•Ê(”„ã”Ô†) 01:00`02:00
+                          ,MAX(CASE WHEN FORMAT(history.DepositDateTime, 'HH:mm') >= '02:00' AND FORMAT(history.DepositDateTime, 'HH:mm') < '03:00' THEN sales.SalesNO
+                                ELSE NULL
+                           END) AS ByTimeZoneSalesNO_0200_0300  -- ŽžŠÔ‘Ñ•Ê(”„ã”Ô†) 02:00`03:00
+                          ,MAX(CASE WHEN FORMAT(history.DepositDateTime, 'HH:mm') >= '03:00' AND FORMAT(history.DepositDateTime, 'HH:mm') < '04:00' THEN sales.SalesNO
+                                ELSE NULL
+                           END) AS ByTimeZoneSalesNO_0300_0400  -- ŽžŠÔ‘Ñ•Ê(”„ã”Ô†) 03:00`04:00
+                          ,MAX(CASE WHEN FORMAT(history.DepositDateTime, 'HH:mm') >= '04:00' AND FORMAT(history.DepositDateTime, 'HH:mm') < '05:00' THEN sales.SalesNO
+                                ELSE NULL
+                           END) AS ByTimeZoneSalesNO_0400_0500  -- ŽžŠÔ‘Ñ•Ê(”„ã”Ô†) 04:00`05:00
+                          ,MAX(CASE WHEN FORMAT(history.DepositDateTime, 'HH:mm') >= '05:00' AND FORMAT(history.DepositDateTime, 'HH:mm') < '06:00' THEN sales.SalesNO
+                                ELSE NULL
+                           END) AS ByTimeZoneSalesNO_0500_0600  -- ŽžŠÔ‘Ñ•Ê(”„ã”Ô†) 05:00`06:00
+                          ,MAX(CASE WHEN FORMAT(history.DepositDateTime, 'HH:mm') >= '06:00' AND FORMAT(history.DepositDateTime, 'HH:mm') < '07:00' THEN sales.SalesNO
+                                ELSE NULL
+                           END) AS ByTimeZoneSalesNO_0600_0700  -- ŽžŠÔ‘Ñ•Ê(”„ã”Ô†) 06:00`07:00
+                          ,MAX(CASE WHEN FORMAT(history.DepositDateTime, 'HH:mm') >= '07:00' AND FORMAT(history.DepositDateTime, 'HH:mm') < '08:00' THEN sales.SalesNO
+                                ELSE NULL
+                           END) AS ByTimeZoneSalesNO_0700_0800  -- ŽžŠÔ‘Ñ•Ê(”„ã”Ô†) 07:00`08:00
+                          ,MAX(CASE WHEN FORMAT(history.DepositDateTime, 'HH:mm') >= '08:00' AND FORMAT(history.DepositDateTime, 'HH:mm') < '09:00' THEN sales.SalesNO
+                                ELSE NULL
+                           END) AS ByTimeZoneSalesNO_0800_0900  -- ŽžŠÔ‘Ñ•Ê(”„ã”Ô†) 08:00`09:00
+                          ,MAX(CASE WHEN FORMAT(history.DepositDateTime, 'HH:mm') >= '09:00' AND FORMAT(history.DepositDateTime, 'HH:mm') < '10:00' THEN sales.SalesNO
+                                ELSE NULL
+                           END) AS ByTimeZoneSalesNO_0900_1000  -- ŽžŠÔ‘Ñ•Ê(”„ã”Ô†) 09:00`10:00
+                          ,MAX(CASE WHEN FORMAT(history.DepositDateTime, 'HH:mm') >= '10:00' AND FORMAT(history.DepositDateTime, 'HH:mm') < '11:00' THEN sales.SalesNO
+                                ELSE NULL
+                           END) AS ByTimeZoneSalesNO_1000_1100  -- ŽžŠÔ‘Ñ•Ê(”„ã”Ô†) 10:00`11:00
+                          ,MAX(CASE WHEN FORMAT(history.DepositDateTime, 'HH:mm') >= '11:00' AND FORMAT(history.DepositDateTime, 'HH:mm') < '12:00' THEN sales.SalesNO
+                                ELSE NULL
+                           END) AS ByTimeZoneSalesNO_1100_1200  -- ŽžŠÔ‘Ñ•Ê(”„ã”Ô†) 11:00`12:00
+                          ,MAX(CASE WHEN FORMAT(history.DepositDateTime, 'HH:mm') >= '12:00' AND FORMAT(history.DepositDateTime, 'HH:mm') < '13:00' THEN sales.SalesNO
+                                ELSE NULL
+                           END) AS ByTimeZoneSalesNO_1200_1300  -- ŽžŠÔ‘Ñ•Ê(”„ã”Ô†) 12:00`13:00
+                          ,MAX(CASE WHEN FORMAT(history.DepositDateTime, 'HH:mm') >= '13:00' AND FORMAT(history.DepositDateTime, 'HH:mm') < '14:00' THEN sales.SalesNO
+                                ELSE NULL
+                           END) AS ByTimeZoneSalesNO_1300_1400  -- ŽžŠÔ‘Ñ•Ê(”„ã”Ô†) 13:00`14:00
+                          ,MAX(CASE WHEN FORMAT(history.DepositDateTime, 'HH:mm') >= '14:00' AND FORMAT(history.DepositDateTime, 'HH:mm') < '15:00' THEN sales.SalesNO
+                                ELSE NULL
+                           END) AS ByTimeZoneSalesNO_1400_1500  -- ŽžŠÔ‘Ñ•Ê(”„ã”Ô†) 14:00`15:00
+                          ,MAX(CASE WHEN FORMAT(history.DepositDateTime, 'HH:mm') >= '15:00' AND FORMAT(history.DepositDateTime, 'HH:mm') < '16:00' THEN sales.SalesNO
+                                ELSE NULL
+                           END) AS ByTimeZoneSalesNO_1500_1600  -- ŽžŠÔ‘Ñ•Ê(”„ã”Ô†) 15:00`16:00
+                          ,MAX(CASE WHEN FORMAT(history.DepositDateTime, 'HH:mm') >= '16:00' AND FORMAT(history.DepositDateTime, 'HH:mm') < '17:00' THEN sales.SalesNO
+                                ELSE NULL
+                           END) AS ByTimeZoneSalesNO_1600_1700  -- ŽžŠÔ‘Ñ•Ê(”„ã”Ô†) 16:00`17:00
+                          ,MAX(CASE WHEN FORMAT(history.DepositDateTime, 'HH:mm') >= '17:00' AND FORMAT(history.DepositDateTime, 'HH:mm') < '18:00' THEN sales.SalesNO
+                                ELSE NULL
+                           END) AS ByTimeZoneSalesNO_1700_1800  -- ŽžŠÔ‘Ñ•Ê(”„ã”Ô†) 17:00`18:00
+                          ,MAX(CASE WHEN FORMAT(history.DepositDateTime, 'HH:mm') >= '18:00' AND FORMAT(history.DepositDateTime, 'HH:mm') < '19:00' THEN sales.SalesNO
+                                ELSE NULL
+                           END) AS ByTimeZoneSalesNO_1800_1900  -- ŽžŠÔ‘Ñ•Ê(”„ã”Ô†) 18:00`19:00
+                          ,MAX(CASE WHEN FORMAT(history.DepositDateTime, 'HH:mm') >= '19:00' AND FORMAT(history.DepositDateTime, 'HH:mm') < '20:00' THEN sales.SalesNO
+                                ELSE NULL
+                           END) AS ByTimeZoneSalesNO_1900_2000  -- ŽžŠÔ‘Ñ•Ê(”„ã”Ô†) 19:00`20:00
+                          ,MAX(CASE WHEN FORMAT(history.DepositDateTime, 'HH:mm') >= '20:00' AND FORMAT(history.DepositDateTime, 'HH:mm') < '21:00' THEN sales.SalesNO
+                                ELSE NULL
+                           END) AS ByTimeZoneSalesNO_2000_2100  -- ŽžŠÔ‘Ñ•Ê(”„ã”Ô†) 20:00`21:00
+                          ,MAX(CASE WHEN FORMAT(history.DepositDateTime, 'HH:mm') >= '21:00' AND FORMAT(history.DepositDateTime, 'HH:mm') < '22:00' THEN sales.SalesNO
+                                ELSE NULL
+                           END) AS ByTimeZoneSalesNO_2100_2200  -- ŽžŠÔ‘Ñ•Ê(”„ã”Ô†) 21:00`22:00
+                          ,MAX(CASE WHEN FORMAT(history.DepositDateTime, 'HH:mm') >= '22:00' AND FORMAT(history.DepositDateTime, 'HH:mm') < '23:00' THEN sales.SalesNO
+                                ELSE NULL
+                           END) AS ByTimeZoneSalesNO_2200_2300  -- ŽžŠÔ‘Ñ•Ê(”„ã”Ô†) 22:00`23:00
+                          ,MAX(CASE WHEN FORMAT(history.DepositDateTime, 'HH:mm') >= '23:00' AND FORMAT(history.DepositDateTime, 'HH:mm') < '24:00' THEN sales.SalesNO
+                                ELSE NULL
+                           END) AS ByTimeZoneSalesNO_2300_2400  -- ŽžŠÔ‘Ñ•Ê(”„ã”Ô†) 23:00`24:00
+                      FROM #Temp_D_DepositHistory0 AS history
+                      LEFT OUTER JOIN D_Sales AS sales ON sales.SalesNO = history.Number
+                     WHERE history.DataKBN = 2
+                       AND history.DepositKBN = 1
+                       AND sales.DeleteDateTime IS NULL
+                       AND sales.BillingType = 1
+                     group by CONVERT(DATE, history.DepositDateTime), sales.SalesNO
+                   ) D
+             GROUP BY D.RegistDate
+           ) D17;
+
+    -- y¸ŽZˆ—zƒ[ƒNƒe[ƒuƒ‹‚Wì¬
+    SELECT * 
+      INTO #Temp_D_DepositHistory8
+      FROM (
+            SELECT storeCalculation.CalculationDate RegistDate    -- “o˜^“ú
+                  ,7 DisplayOrder                                 -- –¾×•\Ž¦‡ˆÊ
+                  ,storeCalculation.[10000yenNum]                 -- Œ»‹àŽc‚10,000–‡”
+                  ,storeCalculation.[5000yenNum]                  -- Œ»‹àŽc‚5,000–‡”
+                  ,storeCalculation.[2000yenNum]                  -- Œ»‹àŽc‚2,000–‡”
+                  ,storeCalculation.[1000yenNum]                  -- Œ»‹àŽc‚1,000–‡”
+                  ,storeCalculation.[500yenNum]                   -- Œ»‹àŽc‚500–‡”
+                  ,storeCalculation.[100yenNum]                   -- Œ»‹àŽc‚100–‡”
+                  ,storeCalculation.[50yenNum]                    -- Œ»‹àŽc‚50–‡”
+                  ,storeCalculation.[10yenNum]                    -- Œ»‹àŽc‚10–‡”
+                  ,storeCalculation.[5yenNum]                     -- Œ»‹àŽc‚5–‡”
+                  ,storeCalculation.[1yenNum]                     -- Œ»‹àŽc‚1–‡”
+                  ,storeCalculation.[10000yenGaku]                -- Œ»‹àŽc‚10,000‹àŠz
+                  ,storeCalculation.[5000yenGaku]                 -- Œ»‹àŽc‚5,000‹àŠz
+                  ,storeCalculation.[2000yenGaku]                 -- Œ»‹àŽc‚2,000‹àŠz
+                  ,storeCalculation.[1000yenGaku]                 -- Œ»‹àŽc‚1,000‹àŠz
+                  ,storeCalculation.[500yenGaku]                  -- Œ»‹àŽc‚500‹àŠz
+                  ,storeCalculation.[100yenGaku]                  -- Œ»‹àŽc‚100‹àŠz
+                  ,storeCalculation.[50yenGaku]                   -- Œ»‹àŽc‚50‹àŠz
+                  ,storeCalculation.[10yenGaku]                   -- Œ»‹àŽc‚10‹àŠz
+                  ,storeCalculation.[5yenGaku]                    -- Œ»‹àŽc‚5‹àŠz
+                  ,storeCalculation.[1yenGaku]                    -- Œ»‹àŽc‚1‹àŠz
+                  ,storeCalculation.Etcyen                        -- ‚»‚Ì‘¼‹àŠz
+                  ,storeCalculation.Change                        -- ’Þ‘K€”õ‹à
+                  ,tempHistory9.DepositGaku                       -- Œ»‹àŽc‚ Œ»‹à”„ã(+)
+                  ,tempHistory10.DepositGaku CashDeposit          -- Œ»‹àŽc‚ Œ»‹à“ü‹à(+)
+                  ,tempHistory11.DepositGaku CashPayment          -- Œ»‹àŽc‚ Œ»‹àŽx•¥(-) 
+                  ,storeCalculation.[10000yenGaku]
+                    + storeCalculation.[5000yenGaku]
+                    + storeCalculation.[2000yenGaku]
+                    + storeCalculation.[1000yenGaku]
+                    + storeCalculation.[500yenGaku]
+                    + storeCalculation.[100yenGaku]
+                    + storeCalculation.[50yenGaku]
+                    + storeCalculation.[10yenGaku]
+                    + storeCalculation.[5yenGaku]
+                    + storeCalculation.[1yenGaku]
+                    + storeCalculation.Etcyen
+                   AS CashBalance                                 -- Œ»‹àŽc‚ Œ»‹àŽc‚10,000‹àŠz`‚»‚Ì‘¼‹àŠz‚Ü‚Å‚Ì‡Œv
+                  ,storeCalculation.Change
+                    + tempHistory9.DepositGaku
+                    + tempHistory10.DepositGaku
+                    - tempHistory11.DepositGaku
+                  AS ComputerTotal                               -- ºÝËß­°ÀŒv ’Þ‘K€”õ‹à`Œ»‹àŽc‚ Œ»‹àŽx•¥(-)‚Ü‚Å‚Ì‡Œv
+                  ,(
+                    storeCalculation.[10000yenGaku]
+                     + storeCalculation.[5000yenGaku]
+                     + storeCalculation.[2000yenGaku]
+                     + storeCalculation.[1000yenGaku]
+                     + storeCalculation.[500yenGaku]
+                     + storeCalculation.[100yenGaku]
+                     + storeCalculation.[50yenGaku]
+                     + storeCalculation.[10yenGaku]
+                     + storeCalculation.[5yenGaku]
+                     + storeCalculation.[1yenGaku]
+                     + storeCalculation.Etcyen
+                   ) - (
+                    storeCalculation.Change
+                     + tempHistory9.DepositGaku
+                     + tempHistory10.DepositGaku
+                     - tempHistory11.DepositGaku
+                  ) AS CashShortage                              -- Œ»‹à‰ß•s‘« Œ»‹àŽc‚-ºÝËß­°ÀŒv
+                  ,tempHistory12.SalesNOCount                     -- ‘”„ “`•[”
+                  ,tempHistory12.CustomerCDCount                  -- ‘”„ ‹q”(l)
+                  ,tempHistory12.SalesSUSum                       -- ‘”„ ”„ã”—Ê
+                  ,tempHistory12.TotalGakuSum                     -- ‘”„ ”„ã‹àŠz
+                  ,tempHistory13.ForeignTaxableAmount             -- Žæˆø•Ê ŠOÅ‘ÎÛŠz
+                  ,tempHistory13.TaxableAmount                    -- Žæˆø•Ê “àÅ‘ÎÛŠz
+                  ,tempHistory13.TaxExemptionAmount               -- Žæˆø•Ê ”ñ‰ÛÅ‘ÎÛŠz
+                  ,tempHistory13.TotalWithoutTax                  -- Žæˆø•Ê Å”²‡Œv
+                  ,tempHistory13.Tax                              -- Žæˆø•Ê “àÅ
+                  ,tempHistory13.OutsideTax                       -- Žæˆø•Ê ŠOÅ
+                  ,tempHistory13.ConsumptionTax                   -- Žæˆø•Ê Á”ïÅŒv
+                  ,tempHistory13.TaxIncludedTotal                 -- Žæˆø•Ê Åž‡Œv
+                  ,tempHistory14.DenominationName1                -- ŒˆÏ•Ê ‹àŽí‹æ•ª–¼1
+                  ,tempHistory14.Kingaku1                         -- ŒˆÏ•Ê ‹àŠz1
+                  ,tempHistory14.DenominationName2                -- ŒˆÏ•Ê ‹àŽí‹æ•ª–¼2
+                  ,tempHistory14.Kingaku2                         -- ŒˆÏ•Ê ‹àŠz2
+                  ,tempHistory14.DenominationName3                -- ŒˆÏ•Ê ‹àŽí‹æ•ª–¼3
+                  ,tempHistory14.Kingaku3                         -- ŒˆÏ•Ê ‹àŠz3
+                  ,tempHistory14.DenominationName4                -- ŒˆÏ•Ê ‹àŽí‹æ•ª–¼4
+                  ,tempHistory14.Kingaku4                         -- ŒˆÏ•Ê ‹àŠz4
+                  ,tempHistory14.DenominationName5                -- ŒˆÏ•Ê ‹àŽí‹æ•ª–¼5
+                  ,tempHistory14.Kingaku5                         -- ŒˆÏ•Ê ‹àŠz5
+                  ,tempHistory14.DenominationName6                -- ŒˆÏ•Ê ‹àŽí‹æ•ª–¼6
+                  ,tempHistory14.Kingaku6                         -- ŒˆÏ•Ê ‹àŠz6
+                  ,tempHistory14.DenominationName7                -- ŒˆÏ•Ê ‹àŽí‹æ•ª–¼7
+                  ,tempHistory14.Kingaku7                         -- ŒˆÏ•Ê ‹àŠz7
+                  ,tempHistory14.DenominationName8                -- ŒˆÏ•Ê ‹àŽí‹æ•ª–¼8
+                  ,tempHistory14.Kingaku8                         -- ŒˆÏ•Ê ‹àŠz8
+                  ,tempHistory14.DenominationName9                -- ŒˆÏ•Ê ‹àŽí‹æ•ª–¼9
+                  ,tempHistory14.Kingaku9                         -- ŒˆÏ•Ê ‹àŠz9
+                  ,tempHistory14.DenominationName10               -- ŒˆÏ•Ê ‹àŽí‹æ•ª–¼10
+                  ,tempHistory14.Kingaku10                        -- ŒˆÏ•Ê ‹àŠz10
+                  ,tempHistory14.DenominationName11               -- ŒˆÏ•Ê ‹àŽí‹æ•ª–¼11
+                  ,tempHistory14.Kingaku11                        -- ŒˆÏ•Ê ‹àŠz11
+                  ,tempHistory14.DenominationName12               -- ŒˆÏ•Ê ‹àŽí‹æ•ª–¼12
+                  ,tempHistory14.Kingaku12                        -- ŒˆÏ•Ê ‹àŠz12
+                  ,tempHistory14.DenominationName13               -- ŒˆÏ•Ê ‹àŽí‹æ•ª–¼13
+                  ,tempHistory14.Kingaku13                        -- ŒˆÏ•Ê ‹àŠz13
+                  ,tempHistory14.DenominationName14               -- ŒˆÏ•Ê ‹àŽí‹æ•ª–¼14
+                  ,tempHistory14.Kingaku14                        -- ŒˆÏ•Ê ‹àŠz14
+                  ,tempHistory14.DenominationName15               -- ŒˆÏ•Ê ‹àŽí‹æ•ª–¼15
+                  ,tempHistory14.Kingaku15                        -- ŒˆÏ•Ê ‹àŠz15
+                  ,tempHistory14.DenominationName16               -- ŒˆÏ•Ê ‹àŽí‹æ•ª–¼16
+                  ,tempHistory14.Kingaku16                        -- ŒˆÏ•Ê ‹àŠz16
+                  ,tempHistory14.DenominationName17               -- ŒˆÏ•Ê ‹àŽí‹æ•ª–¼17
+                  ,tempHistory14.Kingaku17                        -- ŒˆÏ•Ê ‹àŠz17
+                  ,tempHistory14.DenominationName18               -- ŒˆÏ•Ê ‹àŽí‹æ•ª–¼18
+                  ,tempHistory14.Kingaku18                        -- ŒˆÏ•Ê ‹àŠz18
+                  ,tempHistory14.DenominationName19               -- ŒˆÏ•Ê ‹àŽí‹æ•ª–¼19
+                  ,tempHistory14.Kingaku19                        -- ŒˆÏ•Ê ‹àŠz19
+                  ,tempHistory14.DenominationName20               -- ŒˆÏ•Ê ‹àŽí‹æ•ª–¼20
+                  ,tempHistory14.Kingaku20                        -- ŒˆÏ•Ê ‹àŠz20
+                  ,tempHistory15.DepositTransfer                  -- “ü‹àŽx•¥Œv “ü‹à Už
+                  ,tempHistory15.DepositCash                      -- “ü‹àŽx•¥Œv “ü‹à Œ»‹à
+                  ,tempHistory15.DepositCheck                     -- “ü‹àŽx•¥Œv “ü‹à ¬ØŽè
+                  ,tempHistory15.DepositBill                      -- “ü‹àŽx•¥Œv “ü‹à ŽèŒ`
+                  ,tempHistory15.DepositOffset                    -- “ü‹àŽx•¥Œv “ü‹à ‘ŠŽE
+                  ,tempHistory15.DepositAdjustment                -- “ü‹àŽx•¥Œv “ü‹à ’²®
+                  ,tempHistory15.PaymentTransfer                  -- “ü‹àŽx•¥Œv Žx•¥ Už
+                  ,tempHistory15.PaymentCash                      -- “ü‹àŽx•¥Œv Žx•¥ Œ»‹à
+                  ,tempHistory15.PaymentCheck                     -- “ü‹àŽx•¥Œv Žx•¥ ¬ØŽè
+                  ,tempHistory15.PaymentBill                      -- “ü‹àŽx•¥Œv Žx•¥ ŽèŒ`
+                  ,tempHistory15.PaymentOffset                    -- “ü‹àŽx•¥Œv Žx•¥ ‘ŠŽE
+                  ,tempHistory15.PaymentAdjustment                -- “ü‹àŽx•¥Œv Žx•¥ ’²®
+                  ,tempHistory16.OtherAmountReturns               -- ‘¼‹àŠz •Ô•i
+                  ,tempHistory162.OtherAmountDiscount             -- ‘¼‹àŠz ’lˆø
+                  ,tempHistory16.OtherAmountCancel                -- ‘¼‹àŠz ŽæÁ
+                  ,tempHistory16.OtherAmountDelivery              -- ‘¼‹àŠz ”z’B
+                  ,tempHistory7.ExchangeCount                     -- —¼‘Ö‰ñ”
+                  ,tempHistory17.ByTimeZoneTaxIncluded_0000_0100  -- ŽžŠÔ‘Ñ•Ê(Åž) 00:00`01:00
+                  ,tempHistory17.ByTimeZoneTaxIncluded_0100_0200  -- ŽžŠÔ‘Ñ•Ê(Åž) 01:00`02:00
+                  ,tempHistory17.ByTimeZoneTaxIncluded_0200_0300  -- ŽžŠÔ‘Ñ•Ê(Åž) 02:00`03:00
+                  ,tempHistory17.ByTimeZoneTaxIncluded_0300_0400  -- ŽžŠÔ‘Ñ•Ê(Åž) 03:00`04:00
+                  ,tempHistory17.ByTimeZoneTaxIncluded_0400_0500  -- ŽžŠÔ‘Ñ•Ê(Åž) 04:00`05:00
+                  ,tempHistory17.ByTimeZoneTaxIncluded_0500_0600  -- ŽžŠÔ‘Ñ•Ê(Åž) 05:00`06:00
+                  ,tempHistory17.ByTimeZoneTaxIncluded_0600_0700  -- ŽžŠÔ‘Ñ•Ê(Åž) 06:00`07:00
+                  ,tempHistory17.ByTimeZoneTaxIncluded_0700_0800  -- ŽžŠÔ‘Ñ•Ê(Åž) 07:00`08:00
+                  ,tempHistory17.ByTimeZoneTaxIncluded_0800_0900  -- ŽžŠÔ‘Ñ•Ê(Åž) 08:00`09:00
+                  ,tempHistory17.ByTimeZoneTaxIncluded_0900_1000  -- ŽžŠÔ‘Ñ•Ê(Åž) 09:00`10:00
+                  ,tempHistory17.ByTimeZoneTaxIncluded_1000_1100  -- ŽžŠÔ‘Ñ•Ê(Åž) 10:00`11:00
+                  ,tempHistory17.ByTimeZoneTaxIncluded_1100_1200  -- ŽžŠÔ‘Ñ•Ê(Åž) 11:00`12:00
+                  ,tempHistory17.ByTimeZoneTaxIncluded_1200_1300  -- ŽžŠÔ‘Ñ•Ê(Åž) 12:00`13:00
+                  ,tempHistory17.ByTimeZoneTaxIncluded_1300_1400  -- ŽžŠÔ‘Ñ•Ê(Åž) 13:00`14:00
+                  ,tempHistory17.ByTimeZoneTaxIncluded_1400_1500  -- ŽžŠÔ‘Ñ•Ê(Åž) 14:00`15:00
+                  ,tempHistory17.ByTimeZoneTaxIncluded_1500_1600  -- ŽžŠÔ‘Ñ•Ê(Åž) 15:00`16:00
+                  ,tempHistory17.ByTimeZoneTaxIncluded_1600_1700  -- ŽžŠÔ‘Ñ•Ê(Åž) 16:00`17:00
+                  ,tempHistory17.ByTimeZoneTaxIncluded_1700_1800  -- ŽžŠÔ‘Ñ•Ê(Åž) 17:00`18:00
+                  ,tempHistory17.ByTimeZoneTaxIncluded_1800_1900  -- ŽžŠÔ‘Ñ•Ê(Åž) 18:00`19:00
+                  ,tempHistory17.ByTimeZoneTaxIncluded_1900_2000  -- ŽžŠÔ‘Ñ•Ê(Åž) 19:00`20:00
+                  ,tempHistory17.ByTimeZoneTaxIncluded_2000_2100  -- ŽžŠÔ‘Ñ•Ê(Åž) 20:00`21:00
+                  ,tempHistory17.ByTimeZoneTaxIncluded_2100_2200  -- ŽžŠÔ‘Ñ•Ê(Åž) 21:00`22:00
+                  ,tempHistory17.ByTimeZoneTaxIncluded_2200_2300  -- ŽžŠÔ‘Ñ•Ê(Åž) 22:00`23:00
+                  ,tempHistory17.ByTimeZoneTaxIncluded_2300_2400  -- ŽžŠÔ‘Ñ•Ê(Åž) 23:00`24:00
+                  ,tempHistory17.ByTimeZoneSalesNO_0000_0100      -- ŽžŠÔ‘Ñ•ÊŒ” 00:00`01:00
+                  ,tempHistory17.ByTimeZoneSalesNO_0100_0200      -- ŽžŠÔ‘Ñ•ÊŒ” 01:00`02:00
+                  ,tempHistory17.ByTimeZoneSalesNO_0200_0300      -- ŽžŠÔ‘Ñ•ÊŒ” 02:00`03:00
+                  ,tempHistory17.ByTimeZoneSalesNO_0300_0400      -- ŽžŠÔ‘Ñ•ÊŒ” 03:00`04:00
+                  ,tempHistory17.ByTimeZoneSalesNO_0400_0500      -- ŽžŠÔ‘Ñ•ÊŒ” 04:00`05:00
+                  ,tempHistory17.ByTimeZoneSalesNO_0500_0600      -- ŽžŠÔ‘Ñ•ÊŒ” 05:00`06:00
+                  ,tempHistory17.ByTimeZoneSalesNO_0600_0700      -- ŽžŠÔ‘Ñ•ÊŒ” 06:00`07:00
+                  ,tempHistory17.ByTimeZoneSalesNO_0700_0800      -- ŽžŠÔ‘Ñ•ÊŒ” 07:00`08:00
+                  ,tempHistory17.ByTimeZoneSalesNO_0800_0900      -- ŽžŠÔ‘Ñ•ÊŒ” 08:00`09:00
+                  ,tempHistory17.ByTimeZoneSalesNO_0900_1000      -- ŽžŠÔ‘Ñ•ÊŒ” 09:00`10:00
+                  ,tempHistory17.ByTimeZoneSalesNO_1000_1100      -- ŽžŠÔ‘Ñ•ÊŒ” 10:00`11:00
+                  ,tempHistory17.ByTimeZoneSalesNO_1100_1200      -- ŽžŠÔ‘Ñ•ÊŒ” 11:00`12:00
+                  ,tempHistory17.ByTimeZoneSalesNO_1200_1300      -- ŽžŠÔ‘Ñ•ÊŒ” 12:00`13:00
+                  ,tempHistory17.ByTimeZoneSalesNO_1300_1400      -- ŽžŠÔ‘Ñ•ÊŒ” 13:00`14:00
+                  ,tempHistory17.ByTimeZoneSalesNO_1400_1500      -- ŽžŠÔ‘Ñ•ÊŒ” 14:00`15:00
+                  ,tempHistory17.ByTimeZoneSalesNO_1500_1600      -- ŽžŠÔ‘Ñ•ÊŒ” 15:00`16:00
+                  ,tempHistory17.ByTimeZoneSalesNO_1600_1700      -- ŽžŠÔ‘Ñ•ÊŒ” 16:00`17:00
+                  ,tempHistory17.ByTimeZoneSalesNO_1700_1800      -- ŽžŠÔ‘Ñ•ÊŒ” 17:00`18:00
+                  ,tempHistory17.ByTimeZoneSalesNO_1800_1900      -- ŽžŠÔ‘Ñ•ÊŒ” 18:00`19:00
+                  ,tempHistory17.ByTimeZoneSalesNO_1900_2000      -- ŽžŠÔ‘Ñ•ÊŒ” 19:00`20:00
+                  ,tempHistory17.ByTimeZoneSalesNO_2000_2100      -- ŽžŠÔ‘Ñ•ÊŒ” 20:00`21:00
+                  ,tempHistory17.ByTimeZoneSalesNO_2100_2200      -- ŽžŠÔ‘Ñ•ÊŒ” 21:00`22:00
+                  ,tempHistory17.ByTimeZoneSalesNO_2200_2300      -- ŽžŠÔ‘Ñ•ÊŒ” 22:00`23:00
+                  ,tempHistory17.ByTimeZoneSalesNO_2300_2400      -- ŽžŠÔ‘Ñ•ÊŒ” 23:00`24:00
+                  ,tempHistory12.DiscountGaku                     -- ’lˆøŠz
+              FROM #Temp_D_StoreCalculation1 AS storeCalculation
+              LEFT OUTER JOIN #Temp_D_DepositHistory7   AS tempHistory7    ON tempHistory7.RegistDate   = storeCalculation.CalculationDate
+              LEFT OUTER JOIN #Temp_D_DepositHistory9   AS tempHistory9    ON tempHistory9.RegistDate   = storeCalculation.CalculationDate
+              LEFT OUTER JOIN #Temp_D_DepositHistory10  AS tempHistory10   ON tempHistory10.RegistDate  = storeCalculation.CalculationDate
+              LEFT OUTER JOIN #Temp_D_DepositHistory11  AS tempHistory11   ON tempHistory11.RegistDate  = storeCalculation.CalculationDate
+              LEFT OUTER JOIN #Temp_D_DepositHistory12  AS tempHistory12   ON tempHistory12.RegistDate  = storeCalculation.CalculationDate
+              LEFT OUTER JOIN #Temp_D_DepositHistory13  AS tempHistory13   ON tempHistory13.RegistDate  = storeCalculation.CalculationDate
+              LEFT OUTER JOIN #Temp_D_DepositHistory14  AS tempHistory14   ON tempHistory14.RegistDate  = storeCalculation.CalculationDate
+              LEFT OUTER JOIN #Temp_D_DepositHistory15  AS tempHistory15   ON tempHistory15.RegistDate  = storeCalculation.CalculationDate
+              LEFT OUTER JOIN #Temp_D_DepositHistory16  AS tempHistory16   ON tempHistory16.RegistDate  = storeCalculation.CalculationDate
+              LEFT OUTER JOIN #Temp_D_DepositHistory162 AS tempHistory162  ON tempHistory162.RegistDate = storeCalculation.CalculationDate
+              LEFT OUTER JOIN #Temp_D_DepositHistory17  AS tempHistory17   ON tempHistory17.RegistDate  = storeCalculation.CalculationDate
+           ) D8;
+
+
+    -- ÅI
+    SELECT MSI.Picture AS Logo                                   -- ƒƒS
+          ,MSI.CompanyName                                       -- ‰ïŽÐ–¼
+          ,MSI.StoreName                                         -- “X•Ü–¼
+          ,A.CalendarDate                                        -- “ú•t
+          ,A.Address1                                            -- ZŠ‚P
+          ,A.Address2                                            -- ZŠ‚Q
+          ,A.TelephoneNO                                         -- “d˜b”Ô†
+          ,A.IssueDate                                           -- ”­s“úŽž
+          ,REPLACE(CONVERT(VARCHAR,A.IssueDate,120),'-','/') AS BreakIssueDate    -- ƒuƒŒƒCƒN”»’f—p”­s“úŽž
+          ,A.DepositDate                                         -- ”­s“ú
+          ,ROW_NUMBER() OVER(
+               PARTITION BY A.StoreCD 
+                   ORDER BY A.IssueDate, A.DepositNO             -- ƒŒƒV[ƒg‚Æ‡”Ô‚ð“¯‚¶‚É‚·‚é
+           ) AS DetailOrder                                      -- –¾×•\Ž¦‡
+          ,A.DepositNO
+		  ,CASE A.CancelKBN WHEN 0 THEN ' ' 
+		                    WHEN 1 THEN 'ŽæÁ'
+							WHEN 2 THEN '•Ô•i'
+							WHEN 3 THEN '’ù³'
+							ELSE ' '
+		   END AS CancelKBN                                      -- ŽæÁ‹æ•ª(1:ŽæÁ 2:•Ô•i 3:’ù³)
+          ,CASE A.RecoredKBN WHEN 0 THEN 1 WHEN 1 THEN 0 END AS RecoredKBN    -- Ô•‹æ•ª(0:•A1:Ô@¨@OrderBy‚Ìˆ×‚É”½“]‚³‚¹‚é)
+          ,A.JanCD                                               -- JANCD
+          ,A.SKUShortName                                        -- ¤•i–¼
+          ,A.SalesUnitPrice                                      -- ’P‰¿
+          ,A.SalesSU                                             -- ”—Ê
+          ,A.kakaku                                              -- ‰¿Ši
+          ,A.SalesTax                                            -- ÅŠz
+          ,A.SalesTaxRate                                        -- Å—¦
+          ,A.TotalGaku                                           -- ”Ì”„‡ŒvŠz
+          ,A.SumSalesSU                                          -- ¬Œv”—Ê
+          ,A.Subtotal                                            -- ¬Œv‹àŠz
+          ,A.TargetAmount8                                       -- 8“‘ÎÛŠz
+          ,A.ConsumptionTax8                                     -- ŠOÅ8“
+          ,A.TargetAmount10                                      -- 10“‘ÎÛŠz
+          ,A.ConsumptionTax10                                    -- ŠOÅ10“
+          ,A.Total                                               -- ‡Œv
+          --
+          ,tempHistory2.PaymentName1                             -- Žx•¥•û–@–¼1
+          ,tempHistory2.AmountPay1                               -- Žx•¥•û–@Šz1
+          ,tempHistory2.PaymentName2                             -- Žx•¥•û–@–¼2
+          ,tempHistory2.AmountPay2                               -- Žx•¥•û–@Šz2
+          ,tempHistory2.PaymentName3                             -- Žx•¥•û–@–¼3
+          ,tempHistory2.AmountPay3                               -- Žx•¥•û–@Šz3
+          ,tempHistory2.PaymentName4                             -- Žx•¥•û–@–¼4
+          ,tempHistory2.AmountPay4                               -- Žx•¥•û–@Šz4
+          ,tempHistory2.PaymentName5                             -- Žx•¥•û–@–¼5
+          ,tempHistory2.AmountPay5                               -- Žx•¥•û–@Šz5
+          ,tempHistory2.PaymentName6                             -- Žx•¥•û–@–¼6
+          ,tempHistory2.AmountPay6                               -- Žx•¥•û–@Šz6
+          ,tempHistory2.PaymentName7                             -- Žx•¥•û–@–¼7
+          ,tempHistory2.AmountPay7                               -- Žx•¥•û–@Šz7
+          ,tempHistory2.PaymentName8                             -- Žx•¥•û–@–¼8
+          ,tempHistory2.AmountPay8                               -- Žx•¥•û–@Šz8
+          ,tempHistory2.PaymentName9                             -- Žx•¥•û–@–¼9
+          ,tempHistory2.AmountPay9                               -- Žx•¥•û–@Šz9
+          ,tempHistory2.PaymentName10                            -- Žx•¥•û–@–¼10
+          ,tempHistory2.AmountPay10                              -- Žx•¥•û–@Šz10
+          --
+          ,tempHistory3.Refund                                   -- ’Þ‘K
+          ,tempHistory3.DiscountGaku                             -- ’lˆøŠz
+          --
+          ,A.StaffReceiptPrint                                   -- ’S“–CD
+          ,A.StoreReceiptPrint                                   -- “X•ÜCD
+          ,A.SalesNO + convert(varchar,A.IssueDate,126) + (case A.RecoredKBN when 0 then '1' when 1 then '0' end)  AS SalesNO  -- ”„ã”Ô†(Report‘¤ƒuƒŒƒCƒN”»’f—p)
+          ,A.SalesNO AS DispSalesNO                              -- •\Ž¦—p”„ã”Ô†
+
+          --
+          ,tempHistory4.RegistDate ChangePreparationRegistDate   -- “o˜^“ú
+          ,tempHistory4.ChangePreparationDate1                   -- ’Þ‘K€”õ“ú1
+          ,tempHistory4.ChangePreparationName1                   -- ’Þ‘K€”õ–¼1
+          ,tempHistory4.ChangePreparationAmount1                 -- ’Þ‘K€”õŠz1
+          ,tempHistory4.ChangePreparationDate2                   -- ’Þ‘K€”õ“ú2
+          ,tempHistory4.ChangePreparationName2                   -- ’Þ‘K€”õ–¼2
+          ,tempHistory4.ChangePreparationAmount2                 -- ’Þ‘K€”õŠz2
+          ,tempHistory4.ChangePreparationDate3                   -- ’Þ‘K€”õ“ú3
+          ,tempHistory4.ChangePreparationName3                   -- ’Þ‘K€”õ–¼3
+          ,tempHistory4.ChangePreparationAmount3                 -- ’Þ‘K€”õŠz3
+          ,tempHistory4.ChangePreparationDate4                   -- ’Þ‘K€”õ“ú4
+          ,tempHistory4.ChangePreparationName4                   -- ’Þ‘K€”õ–¼4
+          ,tempHistory4.ChangePreparationAmount4                 -- ’Þ‘K€”õŠz4
+          ,tempHistory4.ChangePreparationDate5                   -- ’Þ‘K€”õ“ú5
+          ,tempHistory4.ChangePreparationName5                   -- ’Þ‘K€”õ–¼5
+          ,tempHistory4.ChangePreparationAmount5                 -- ’Þ‘K€”õŠz5
+          ,tempHistory4.ChangePreparationDate6                   -- ’Þ‘K€”õ“ú6
+          ,tempHistory4.ChangePreparationName6                   -- ’Þ‘K€”õ–¼6
+          ,tempHistory4.ChangePreparationAmount6                 -- ’Þ‘K€”õŠz6
+          ,tempHistory4.ChangePreparationDate7                   -- ’Þ‘K€”õ“ú7
+          ,tempHistory4.ChangePreparationName7                   -- ’Þ‘K€”õ–¼7
+          ,tempHistory4.ChangePreparationAmount7                 -- ’Þ‘K€”õŠz7
+          ,tempHistory4.ChangePreparationDate8                   -- ’Þ‘K€”õ“ú8
+          ,tempHistory4.ChangePreparationName8                   -- ’Þ‘K€”õ–¼8
+          ,tempHistory4.ChangePreparationAmount8                 -- ’Þ‘K€”õŠz8
+          ,tempHistory4.ChangePreparationDate9                   -- ’Þ‘K€”õ“ú9
+          ,tempHistory4.ChangePreparationName9                   -- ’Þ‘K€”õ–¼9
+          ,tempHistory4.ChangePreparationAmount9                 -- ’Þ‘K€”õŠz9
+          ,tempHistory4.ChangePreparationDate10                  -- ’Þ‘K€”õ“ú10
+          ,tempHistory4.ChangePreparationName10                  -- ’Þ‘K€”õ–¼10
+          ,tempHistory4.ChangePreparationAmount10                -- ’Þ‘K€”õŠz10
+          ,tempHistory4.ChangePreparationRemark                  -- ’Þ‘K€”õ”õl
+          --
+          ,tempHistory5.RegistDate MiscDepositRegistDate         -- “o˜^“ú
+          ,tempHistory5.MiscDepositDate1                         -- ŽG“ü‹à“ú1
+          ,tempHistory5.MiscDepositName1                         -- ŽG“ü‹à–¼1
+          ,tempHistory5.MiscDepositAmount1                       -- ŽG“ü‹àŠz1
+          ,tempHistory5.MiscDepositRemark                        -- ŽG“ü‹à”õl
+          --
+          ,tempHistory51.RegistDate DepositRegistDate            -- “o˜^“ú
+          ,tempHistory51.CustomerCD                              -- “ü‹àŒ³CD
+          ,tempHistory51.CustomerName                            -- “ü‹àŒ³–¼
+          ,tempHistory51.DepositDate1                            -- “ü‹à“ú1
+          ,tempHistory51.DepositName1                            -- “ü‹à–¼1
+          ,tempHistory51.DepositAmount1                          -- “ü‹àŠz1
+          ,tempHistory51.DepositRemark                           -- “ü‹à”õl
+          --
+          ,tempHistory6.RegistDate MiscPaymentRegistDate         -- “o˜^“ú
+          ,tempHistory6.MiscPaymentDate1                         -- ŽGŽx•¥“ú1
+          ,tempHistory6.MiscPaymentName1                         -- ŽGŽx•¥–¼1
+          ,tempHistory6.MiscPaymentAmount1                       -- ŽGŽx•¥Šz1
+          ,tempHistory6.MiscPaymentRemark                        -- ŽGŽx•¥”õl
+          --
+          ,tempHistory7.RegistDate ExchangeRegistDate            -- “o˜^“ú
+          ,tempHistory7.ExchangeDate1                            -- —¼‘Ö“ú1
+          ,tempHistory7.ExchangeName1                            -- —¼‘Ö–¼1
+          ,tempHistory7.ExchangeAmount1                          -- —¼‘ÖŠz1
+          ,tempHistory7.ExchangeDenomination1                    -- —¼‘ÖŽ†•¼1
+          ,tempHistory7.ExchangeCount1                           -- —¼‘Ö–‡”1
+          ,tempHistory7.ExchangeRemark                           -- —¼‘Ö”õl
+          --
+          ,tempHistory8.RegistDate CashBalanceRegistDate         -- “o˜^“ú
+          ,tempHistory8.[10000yenNum]                            --y¸ŽZˆ—zŒ»‹àŽc‚@10,000@–‡”
+          ,tempHistory8.[5000yenNum]                             --y¸ŽZˆ—zŒ»‹àŽc‚@5,000@–‡”
+          ,tempHistory8.[2000yenNum]                             --y¸ŽZˆ—zŒ»‹àŽc‚@2,000@–‡”
+          ,tempHistory8.[1000yenNum]                             --y¸ŽZˆ—zŒ»‹àŽc‚@1,000@–‡”
+          ,tempHistory8.[500yenNum]                              --y¸ŽZˆ—zŒ»‹àŽc‚@500@–‡”
+          ,tempHistory8.[100yenNum]                              --y¸ŽZˆ—zŒ»‹àŽc‚@100@–‡”
+          ,tempHistory8.[50yenNum]                               --y¸ŽZˆ—zŒ»‹àŽc‚@50@–‡”
+          ,tempHistory8.[10yenNum]                               --y¸ŽZˆ—zŒ»‹àŽc‚@10@–‡”
+          ,tempHistory8.[5yenNum]                                --y¸ŽZˆ—zŒ»‹àŽc‚@5@–‡”
+          ,tempHistory8.[1yenNum]                                --y¸ŽZˆ—zŒ»‹àŽc‚@1@–‡”
+          ,tempHistory8.[10000yenGaku]                           --y¸ŽZˆ—zŒ»‹àŽc‚@10,000@‹àŠz
+          ,tempHistory8.[5000yenGaku]                            --y¸ŽZˆ—zŒ»‹àŽc‚@5,000@‹àŠz
+          ,tempHistory8.[2000yenGaku]                            --y¸ŽZˆ—zŒ»‹àŽc‚@2,000@‹àŠz
+          ,tempHistory8.[1000yenGaku]                            --y¸ŽZˆ—zŒ»‹àŽc‚@1,000@‹àŠz
+          ,tempHistory8.[500yenGaku]                             --y¸ŽZˆ—zŒ»‹àŽc‚@500@‹àŠz
+          ,tempHistory8.[100yenGaku]                             --y¸ŽZˆ—zŒ»‹àŽc‚@100@‹àŠz
+          ,tempHistory8.[50yenGaku]                              --y¸ŽZˆ—zŒ»‹àŽc‚@50@‹àŠz
+          ,tempHistory8.[10yenGaku]                              --y¸ŽZˆ—zŒ»‹àŽc‚@10@‹àŠz
+          ,tempHistory8.[5yenGaku]                               --y¸ŽZˆ—zŒ»‹àŽc‚@5@‹àŠz
+          ,tempHistory8.[1yenGaku]                               --y¸ŽZˆ—zŒ»‹àŽc‚@1@‹àŠz
+          ,tempHistory8.Etcyen                                   --y¸ŽZˆ—z‚»‚Ì‘¼‹àŠz
+          ,tempHistory8.Change                                   --y¸ŽZˆ—z’Þ‘K€”õ‹à
+          ,tempHistory8.DepositGaku                              --y¸ŽZˆ—zŒ»‹àŽc‚ Œ»‹à”„ã(+)
+          ,tempHistory8.CashDeposit                              --y¸ŽZˆ—zŒ»‹àŽc‚ Œ»‹à“ü‹à(+)
+          ,tempHistory8.CashPayment                              --y¸ŽZˆ—zŒ»‹àŽc‚ Œ»‹àŽx•¥(-)
+          ,tempHistory8.CashBalance                              --y¸ŽZˆ—zŒ»‹àŽc‚ ‚»‚Ì‘¼‹àŠz`Œ»‹àŽc‚Œ»‹àŽx•¥(-)‚Ü‚Å‚Ì‡Œv
+          ,tempHistory8.ComputerTotal                            --y¸ŽZˆ—zºÝËß­°ÀŒv Œ»‹àŽc‚ 10,000@‹àŠz`Œ»‹àŽc‚@1@‹àŠz‚Ü‚Å‚Ì‡Œv
+          ,tempHistory8.CashShortage                             --y¸ŽZˆ—zŒ»‹àŽc‚ Œ»‹à‰ß•s‘«
+          ,tempHistory8.SalesNOCount                             --y¸ŽZˆ—z‘”„@“`•[”
+          ,tempHistory8.CustomerCDCount                          --y¸ŽZˆ—z‘”„@‹q”(l)
+          ,tempHistory8.SalesSUSum                               --y¸ŽZˆ—z‘”„@”„ã”—Ê
+          ,tempHistory8.TotalGakuSum                             --y¸ŽZˆ—z‘”„@”„ã‹àŠz
+          ,tempHistory8.ForeignTaxableAmount                     --y¸ŽZˆ—zŽæˆø•Ê@ŠOÅ‘ÎÛŠz
+          ,tempHistory8.TaxableAmount                            --y¸ŽZˆ—zŽæˆø•Ê@“àÅ‘ÎÛŠz
+          ,tempHistory8.TaxExemptionAmount                       --y¸ŽZˆ—zŽæˆø•Ê@”ñ‰ÛÅ‘ÎÛŠz
+          ,tempHistory8.TotalWithoutTax                          --y¸ŽZˆ—zŽæˆø•Ê@Å”²‡Œv
+          ,tempHistory8.Tax                                      --y¸ŽZˆ—zŽæˆø•Ê@“àÅ
+          ,tempHistory8.OutsideTax                               --y¸ŽZˆ—zŽæˆø•Ê@ŠOÅ
+          ,tempHistory8.ConsumptionTax                           --y¸ŽZˆ—zŽæˆø•Ê@Á”ïÅŒv
+          ,tempHistory8.TaxIncludedTotal                         --y¸ŽZˆ—zŽæˆø•Ê@Åž‡Œv
+          ,tempHistory8.DiscountGaku                             --y¸ŽZˆ—zŽæˆø•Ê@’lˆøŠz
+          ,tempHistory8.DenominationName1                        --y¸ŽZˆ—zŒˆÏ•Ê  ‹àŽí‹æ•ª–¼1
+          ,tempHistory8.Kingaku1                                 --y¸ŽZˆ—zŒˆÏ•Ê  ‹àŠz1
+          ,tempHistory8.DenominationName2                        --y¸ŽZˆ—zŒˆÏ•Ê  ‹àŽí‹æ•ª–¼2
+          ,tempHistory8.Kingaku2                                 --y¸ŽZˆ—zŒˆÏ•Ê  ‹àŠz2
+          ,tempHistory8.DenominationName3                        --y¸ŽZˆ—zŒˆÏ•Ê  ‹àŽí‹æ•ª–¼3
+          ,tempHistory8.Kingaku3                                 --y¸ŽZˆ—zŒˆÏ•Ê  ‹àŠz3
+          ,tempHistory8.DenominationName4                        --y¸ŽZˆ—zŒˆÏ•Ê  ‹àŽí‹æ•ª–¼4
+          ,tempHistory8.Kingaku4                                 --y¸ŽZˆ—zŒˆÏ•Ê  ‹àŠz4
+          ,tempHistory8.DenominationName5                        --y¸ŽZˆ—zŒˆÏ•Ê  ‹àŽí‹æ•ª–¼5
+          ,tempHistory8.Kingaku5                                 --y¸ŽZˆ—zŒˆÏ•Ê  ‹àŠz5
+          ,tempHistory8.DenominationName6                        --y¸ŽZˆ—zŒˆÏ•Ê  ‹àŽí‹æ•ª–¼6
+          ,tempHistory8.Kingaku6                                 --y¸ŽZˆ—zŒˆÏ•Ê  ‹àŠz6
+          ,tempHistory8.DenominationName7                        --y¸ŽZˆ—zŒˆÏ•Ê  ‹àŽí‹æ•ª–¼7
+          ,tempHistory8.Kingaku7                                 --y¸ŽZˆ—zŒˆÏ•Ê  ‹àŠz7
+          ,tempHistory8.DenominationName8                        --y¸ŽZˆ—zŒˆÏ•Ê  ‹àŽí‹æ•ª–¼8
+          ,tempHistory8.Kingaku8                                 --y¸ŽZˆ—zŒˆÏ•Ê  ‹àŠz8
+          ,tempHistory8.DenominationName9                        --y¸ŽZˆ—zŒˆÏ•Ê  ‹àŽí‹æ•ª–¼9
+          ,tempHistory8.Kingaku9                                 --y¸ŽZˆ—zŒˆÏ•Ê  ‹àŠz9
+          ,tempHistory8.DenominationName10                       --y¸ŽZˆ—zŒˆÏ•Ê  ‹àŽí‹æ•ª–¼10
+          ,tempHistory8.Kingaku10                                --y¸ŽZˆ—zŒˆÏ•Ê  ‹àŠz10
+          ,tempHistory8.DenominationName11                       --y¸ŽZˆ—zŒˆÏ•Ê  ‹àŽí‹æ•ª–¼11
+          ,tempHistory8.Kingaku11                                --y¸ŽZˆ—zŒˆÏ•Ê  ‹àŠz11
+          ,tempHistory8.DenominationName12                       --y¸ŽZˆ—zŒˆÏ•Ê  ‹àŽí‹æ•ª–¼12
+          ,tempHistory8.Kingaku12                                --y¸ŽZˆ—zŒˆÏ•Ê  ‹àŠz12
+          ,tempHistory8.DenominationName13                       --y¸ŽZˆ—zŒˆÏ•Ê  ‹àŽí‹æ•ª–¼13
+          ,tempHistory8.Kingaku13                                --y¸ŽZˆ—zŒˆÏ•Ê  ‹àŠz13
+          ,tempHistory8.DenominationName14                       --y¸ŽZˆ—zŒˆÏ•Ê  ‹àŽí‹æ•ª–¼14
+          ,tempHistory8.Kingaku14                                --y¸ŽZˆ—zŒˆÏ•Ê  ‹àŠz14
+          ,tempHistory8.DenominationName15                       --y¸ŽZˆ—zŒˆÏ•Ê  ‹àŽí‹æ•ª–¼15
+          ,tempHistory8.Kingaku15                                --y¸ŽZˆ—zŒˆÏ•Ê  ‹àŠz15
+          ,tempHistory8.DenominationName16                       --y¸ŽZˆ—zŒˆÏ•Ê  ‹àŽí‹æ•ª–¼16
+          ,tempHistory8.Kingaku16                                --y¸ŽZˆ—zŒˆÏ•Ê  ‹àŠz16
+          ,tempHistory8.DenominationName17                       --y¸ŽZˆ—zŒˆÏ•Ê  ‹àŽí‹æ•ª–¼17
+          ,tempHistory8.Kingaku17                                --y¸ŽZˆ—zŒˆÏ•Ê  ‹àŠz17
+          ,tempHistory8.DenominationName18                       --y¸ŽZˆ—zŒˆÏ•Ê  ‹àŽí‹æ•ª–¼18
+          ,tempHistory8.Kingaku18                                --y¸ŽZˆ—zŒˆÏ•Ê  ‹àŠz18
+          ,tempHistory8.DenominationName19                       --y¸ŽZˆ—zŒˆÏ•Ê  ‹àŽí‹æ•ª–¼19
+          ,tempHistory8.Kingaku19                                --y¸ŽZˆ—zŒˆÏ•Ê  ‹àŠz19
+          ,tempHistory8.DenominationName20                       --y¸ŽZˆ—zŒˆÏ•Ê  ‹àŽí‹æ•ª–¼20
+          ,tempHistory8.Kingaku20                                --y¸ŽZˆ—zŒˆÏ•Ê  ‹àŠz20
+          ,tempHistory8.DepositTransfer                          --y¸ŽZˆ—z“ü‹àŽx•¥Œv “ü‹à Už
+          ,tempHistory8.DepositCash                              --y¸ŽZˆ—z“ü‹àŽx•¥Œv “ü‹à Œ»‹à
+          ,tempHistory8.DepositCheck                             --y¸ŽZˆ—z“ü‹àŽx•¥Œv “ü‹à ¬ØŽè
+          ,tempHistory8.DepositBill                              --y¸ŽZˆ—z“ü‹àŽx•¥Œv “ü‹à ŽèŒ`
+          ,tempHistory8.DepositOffset                            --y¸ŽZˆ—z“ü‹àŽx•¥Œv “ü‹à ‘ŠŽE
+          ,tempHistory8.DepositAdjustment                        --y¸ŽZˆ—z“ü‹àŽx•¥Œv “ü‹à ’²®
+          ,tempHistory8.PaymentTransfer                          --y¸ŽZˆ—z“ü‹àŽx•¥Œv Žx•¥ Už
+          ,tempHistory8.PaymentCash                              --y¸ŽZˆ—z“ü‹àŽx•¥Œv Žx•¥ Œ»‹à
+          ,tempHistory8.PaymentCheck                             --y¸ŽZˆ—z“ü‹àŽx•¥Œv Žx•¥ ¬ØŽè
+          ,tempHistory8.PaymentBill                              --y¸ŽZˆ—z“ü‹àŽx•¥Œv Žx•¥ ŽèŒ`
+          ,tempHistory8.PaymentOffset                            --y¸ŽZˆ—z“ü‹àŽx•¥Œv Žx•¥ ‘ŠŽE
+          ,tempHistory8.PaymentAdjustment                        --y¸ŽZˆ—z“ü‹àŽx•¥Œv Žx•¥ ’²®
+          ,tempHistory8.OtherAmountReturns                       --y¸ŽZˆ—z‘¼‹àŠz •Ô•i
+          ,tempHistory8.OtherAmountDiscount                      --y¸ŽZˆ—z‘¼‹àŠz ’lˆø
+          ,tempHistory8.OtherAmountCancel                        --y¸ŽZˆ—z‘¼‹àŠz ŽæÁ
+          ,tempHistory8.OtherAmountDelivery                      --y¸ŽZˆ—z‘¼‹àŠz ”z’B
+          ,tempHistory8.ExchangeCount                            --y¸ŽZˆ—z—¼‘Ö‰ñ”
+          ,tempHistory8.ByTimeZoneTaxIncluded_0000_0100          --y¸ŽZˆ—zŽžŠÔ‘Ñ•Ê(Åž) 00:00`01:00
+          ,tempHistory8.ByTimeZoneTaxIncluded_0100_0200          --y¸ŽZˆ—zŽžŠÔ‘Ñ•Ê(Åž) 01:00`02:00
+          ,tempHistory8.ByTimeZoneTaxIncluded_0200_0300          --y¸ŽZˆ—zŽžŠÔ‘Ñ•Ê(Åž) 02:00`03:00
+          ,tempHistory8.ByTimeZoneTaxIncluded_0300_0400          --y¸ŽZˆ—zŽžŠÔ‘Ñ•Ê(Åž) 03:00`04:00
+          ,tempHistory8.ByTimeZoneTaxIncluded_0400_0500          --y¸ŽZˆ—zŽžŠÔ‘Ñ•Ê(Åž) 04:00`05:00
+          ,tempHistory8.ByTimeZoneTaxIncluded_0500_0600          --y¸ŽZˆ—zŽžŠÔ‘Ñ•Ê(Åž) 05:00`06:00
+          ,tempHistory8.ByTimeZoneTaxIncluded_0600_0700          --y¸ŽZˆ—zŽžŠÔ‘Ñ•Ê(Åž) 06:00`07:00
+          ,tempHistory8.ByTimeZoneTaxIncluded_0700_0800          --y¸ŽZˆ—zŽžŠÔ‘Ñ•Ê(Åž) 07:00`08:00
+          ,tempHistory8.ByTimeZoneTaxIncluded_0800_0900          --y¸ŽZˆ—zŽžŠÔ‘Ñ•Ê(Åž) 08:00`09:00
+          ,tempHistory8.ByTimeZoneTaxIncluded_0900_1000          --y¸ŽZˆ—zŽžŠÔ‘Ñ•Ê(Åž) 09:00`10:00
+          ,tempHistory8.ByTimeZoneTaxIncluded_1000_1100          --y¸ŽZˆ—zŽžŠÔ‘Ñ•Ê(Åž) 10:00`11:00
+          ,tempHistory8.ByTimeZoneTaxIncluded_1100_1200          --y¸ŽZˆ—zŽžŠÔ‘Ñ•Ê(Åž) 11:00`12:00
+          ,tempHistory8.ByTimeZoneTaxIncluded_1200_1300          --y¸ŽZˆ—zŽžŠÔ‘Ñ•Ê(Åž) 12:00`13:00
+          ,tempHistory8.ByTimeZoneTaxIncluded_1300_1400          --y¸ŽZˆ—zŽžŠÔ‘Ñ•Ê(Åž) 13:00`14:00
+          ,tempHistory8.ByTimeZoneTaxIncluded_1400_1500          --y¸ŽZˆ—zŽžŠÔ‘Ñ•Ê(Åž) 14:00`15:00
+          ,tempHistory8.ByTimeZoneTaxIncluded_1500_1600          --y¸ŽZˆ—zŽžŠÔ‘Ñ•Ê(Åž) 15:00`16:00
+          ,tempHistory8.ByTimeZoneTaxIncluded_1600_1700          --y¸ŽZˆ—zŽžŠÔ‘Ñ•Ê(Åž) 16:00`17:00
+          ,tempHistory8.ByTimeZoneTaxIncluded_1700_1800          --y¸ŽZˆ—zŽžŠÔ‘Ñ•Ê(Åž) 17:00`18:00
+          ,tempHistory8.ByTimeZoneTaxIncluded_1800_1900          --y¸ŽZˆ—zŽžŠÔ‘Ñ•Ê(Åž) 18:00`19:00
+          ,tempHistory8.ByTimeZoneTaxIncluded_1900_2000          --y¸ŽZˆ—zŽžŠÔ‘Ñ•Ê(Åž) 19:00`20:00
+          ,tempHistory8.ByTimeZoneTaxIncluded_2000_2100          --y¸ŽZˆ—zŽžŠÔ‘Ñ•Ê(Åž) 20:00`21:00
+          ,tempHistory8.ByTimeZoneTaxIncluded_2100_2200          --y¸ŽZˆ—zŽžŠÔ‘Ñ•Ê(Åž) 21:00`22:00
+          ,tempHistory8.ByTimeZoneTaxIncluded_2200_2300          --y¸ŽZˆ—zŽžŠÔ‘Ñ•Ê(Åž) 22:00`23:00
+          ,tempHistory8.ByTimeZoneTaxIncluded_2300_2400          --y¸ŽZˆ—zŽžŠÔ‘Ñ•Ê(Åž) 23:00`24:00
+          ,tempHistory8.ByTimeZoneSalesNO_0000_0100              --y¸ŽZˆ—zŽžŠÔ‘Ñ•ÊŒ” 00:00`01:00
+          ,tempHistory8.ByTimeZoneSalesNO_0100_0200              --y¸ŽZˆ—zŽžŠÔ‘Ñ•ÊŒ” 01:00`02:00
+          ,tempHistory8.ByTimeZoneSalesNO_0200_0300              --y¸ŽZˆ—zŽžŠÔ‘Ñ•ÊŒ” 02:00`03:00
+          ,tempHistory8.ByTimeZoneSalesNO_0300_0400              --y¸ŽZˆ—zŽžŠÔ‘Ñ•ÊŒ” 03:00`04:00
+          ,tempHistory8.ByTimeZoneSalesNO_0400_0500              --y¸ŽZˆ—zŽžŠÔ‘Ñ•ÊŒ” 04:00`05:00
+          ,tempHistory8.ByTimeZoneSalesNO_0500_0600              --y¸ŽZˆ—zŽžŠÔ‘Ñ•ÊŒ” 05:00`06:00
+          ,tempHistory8.ByTimeZoneSalesNO_0600_0700              --y¸ŽZˆ—zŽžŠÔ‘Ñ•ÊŒ” 06:00`07:00
+          ,tempHistory8.ByTimeZoneSalesNO_0700_0800              --y¸ŽZˆ—zŽžŠÔ‘Ñ•ÊŒ” 07:00`08:00
+          ,tempHistory8.ByTimeZoneSalesNO_0800_0900              --y¸ŽZˆ—zŽžŠÔ‘Ñ•ÊŒ” 08:00`09:00
+          ,tempHistory8.ByTimeZoneSalesNO_0900_1000              --y¸ŽZˆ—zŽžŠÔ‘Ñ•ÊŒ” 09:00`10:00
+          ,tempHistory8.ByTimeZoneSalesNO_1000_1100              --y¸ŽZˆ—zŽžŠÔ‘Ñ•ÊŒ” 10:00`11:00
+          ,tempHistory8.ByTimeZoneSalesNO_1100_1200              --y¸ŽZˆ—zŽžŠÔ‘Ñ•ÊŒ” 11:00`12:00
+          ,tempHistory8.ByTimeZoneSalesNO_1200_1300              --y¸ŽZˆ—zŽžŠÔ‘Ñ•ÊŒ” 12:00`13:00
+          ,tempHistory8.ByTimeZoneSalesNO_1300_1400              --y¸ŽZˆ—zŽžŠÔ‘Ñ•ÊŒ” 13:00`14:00
+          ,tempHistory8.ByTimeZoneSalesNO_1400_1500              --y¸ŽZˆ—zŽžŠÔ‘Ñ•ÊŒ” 14:00`15:00
+          ,tempHistory8.ByTimeZoneSalesNO_1500_1600              --y¸ŽZˆ—zŽžŠÔ‘Ñ•ÊŒ” 15:00`16:00
+          ,tempHistory8.ByTimeZoneSalesNO_1600_1700              --y¸ŽZˆ—zŽžŠÔ‘Ñ•ÊŒ” 16:00`17:00
+          ,tempHistory8.ByTimeZoneSalesNO_1700_1800              --y¸ŽZˆ—zŽžŠÔ‘Ñ•ÊŒ” 17:00`18:00
+          ,tempHistory8.ByTimeZoneSalesNO_1800_1900              --y¸ŽZˆ—zŽžŠÔ‘Ñ•ÊŒ” 18:00`19:00
+          ,tempHistory8.ByTimeZoneSalesNO_1900_2000              --y¸ŽZˆ—zŽžŠÔ‘Ñ•ÊŒ” 19:00`20:00
+          ,tempHistory8.ByTimeZoneSalesNO_2000_2100              --y¸ŽZˆ—zŽžŠÔ‘Ñ•ÊŒ” 20:00`21:00
+          ,tempHistory8.ByTimeZoneSalesNO_2100_2200              --y¸ŽZˆ—zŽžŠÔ‘Ñ•ÊŒ” 21:00`22:00
+          ,tempHistory8.ByTimeZoneSalesNO_2200_2300              --y¸ŽZˆ—zŽžŠÔ‘Ñ•ÊŒ” 22:00`23:00
+          ,tempHistory8.ByTimeZoneSalesNO_2300_2400              --y¸ŽZˆ—zŽžŠÔ‘Ñ•ÊŒ” 23:00`24:00
+      FROM (
+            SELECT calendar.CalendarDate                                           -- “ú•t
+                  ,@StoreCD AS StoreCD
+                  ,store.StoreName                                                 -- “X•Ü–¼
+                  ,store.Address1                                                  -- ZŠ‚P
+                  ,store.Address2                                                  -- ZŠ‚Q
+                  ,store.TelephoneNO                                               -- “d˜b”Ô†
+                  ,CASE 
+                       WHEN tempHistory1.RegistDate IS NOT NULL THEN tempHistory1.RegistDate
+                       --ELSE CONCAT(calendar.CalendarDate, ' 00:00:00.000')
+                       ELSE tempHistory0.DepositDateTime
+                   END IssueDate                                                   -- ”­s“úŽž
+                  ,CASE 
+                       WHEN tempHistory1.DepositDate IS NOT NULL THEN tempHistory1.DepositDate
+                       ELSE calendar.CalendarDate
+                   END DepositDate                                                 -- ”­s“ú
+                  ,tempHistory1.SalesNO
+                  ,tempHistory1.JanCD                                              -- JANCD
+                  ,tempHistory1.SKUShortName                                       -- ¤•i–¼
+                  ,tempHistory1.SalesUnitPrice                                     -- ’P‰¿
+                  ,tempHistory1.SalesSU                                            -- ”—Ê
+                  ,tempHistory1.kakaku                                             -- ‰¿Ši
+                  ,tempHistory1.SalesTax                                           -- ÅŠz
+                  ,tempHistory1.SalesTaxRate                                       -- Å—¦
+                  ,tempHistory1.TotalGaku                                          -- ”Ì”„‡ŒvŠz
+                  --
+                  ,(SELECT SUM(CASE 
+                                   WHEN SalesSU IS NULL THEN 1 
+                                   ELSE SalesSU 
+                               END)
+                      FROM #Temp_D_DepositHistory1 t
+                     WHERE t.SalesNO= tempHistory1.SalesNO
+                     AND   t.RegistDate = tempHistory1.RegistDate
+                     AND   t.RecoredKBN = tempHistory1.RecoredKBN
+                    ) SumSalesSU                                                   -- ¬Œv”—Ê
+                  ,(SELECT SUM(kakaku) 
+                      FROM #Temp_D_DepositHistory1 t 
+                     WHERE t.SalesNO = tempHistory1.SalesNO
+                     AND   t.RegistDate = tempHistory1.RegistDate
+                     AND   t.RecoredKBN = tempHistory1.RecoredKBN
+                    ) Subtotal                                                     -- ¬Œv‹àŠz
+                  ,tempHistory1.TargetAmount8                                      -- 8“‘ÎÛŠz
+                  ,tempHistory1.SalesTax8 ConsumptionTax8                          -- ŠOÅ8“
+                  ,tempHistory1.TargetAmount10                                     -- 10“‘ÎÛŠz
+                  ,tempHistory1.SalesTax10 ConsumptionTax10                        -- ŠOÅ10“
+                  ,(SELECT SUM(TotalGaku) 
+                      FROM #Temp_D_DepositHistory1 t 
+                     WHERE t.SalesNO = tempHistory1.SalesNO
+                     AND   t.RegistDate = tempHistory1.RegistDate
+                     AND   t.RecoredKBN = tempHistory1.RecoredKBN
+                    ) Total                                                        -- ‡Œv
+                  --
+                  ,ISNULL(tempHistory1.StaffReceiptPrint
+                         ,(SELECT top 1 staff.ReceiptPrint
+                             FROM F_Staff(CONVERT(DATE, GETDATE())) AS staff
+                            WHERE staff.StaffCD = tempHistory0.InsertOperator
+                              AND staff.DeleteFlg = 0
+                            ORDER BY staff.ChangeDate DESC
+                            )) AS StaffReceiptPrint                                -- ’S“–CD
+                  ,store.ReceiptPrint StoreReceiptPrint                            -- “X•ÜCD
+                  ,tempHistory0.DepositNO
+                  ,tempHistory0.CancelKBN											--ŽæÁ‹æ•ª(1:ŽæÁA2:•Ô•iA3:’ù³
+                  ,tempHistory0.RecoredKBN
+              FROM M_Calendar AS calendar
+             INNER JOIN F_Store(CONVERT(DATE, GETDATE())) AS store
+                ON store.StoreCD = @StoreCD
+               AND store.DeleteFlg = 0
+             INNER JOIN #Temp_D_DepositHistory0 AS tempHistory0 ON tempHistory0.StoreCD = store.StoreCD
+                                                               AND tempHistory0.AccountingDate = calendar.CalendarDate
+              LEFT OUTER JOIN #Temp_D_DepositHistory1 AS tempHistory1 ON tempHistory1.DepositNO = tempHistory0.DepositNO
+             WHERE calendar.CalendarDate >= convert(date, @DateFrom)
+               AND calendar.CalendarDate <= convert(date, @DateTo)
+            --      )
+           ) A
+      LEFT OUTER JOIN #Temp_D_DepositHistory2 tempHistory2   ON tempHistory2.SalesNO = A.SalesNO
+                                                            AND tempHistory2.RecoredKBN = A.RecoredKBN
+                                                            AND tempHistory2.DepositDateTime = A.DepositDate
+      LEFT OUTER JOIN #Temp_D_DepositHistory3 tempHistory3   ON tempHistory3.SalesNO = A.SalesNO
+      
+      LEFT OUTER JOIN #Temp_D_DepositHistory4 tempHistory4   ON tempHistory4.DepositNO = A.DepositNO
+      LEFT OUTER JOIN #Temp_D_DepositHistory5 tempHistory5   ON tempHistory5.DepositNO = A.DepositNO
+      LEFT OUTER JOIN #Temp_D_DepositHistory51 tempHistory51 ON tempHistory51.DepositNO = A.DepositNO
+      LEFT OUTER JOIN #Temp_D_DepositHistory6 tempHistory6   ON tempHistory6.DepositNO = A.DepositNO
+      LEFT OUTER JOIN #Temp_D_DepositHistory7 tempHistory7   ON tempHistory7.DepositNO = A.DepositNO
+      
+      LEFT OUTER JOIN #Temp_D_DepositHistory8 tempHistory8   ON tempHistory8.RegistDate = A.CalendarDate
+      LEFT OUTER JOIN M_StoreImage MSI ON MSI.StoreCD = @StoreCD
+
+     ORDER BY DetailOrder ASC
+         ;
+    
+    -- ƒ[ƒNƒe[ƒuƒ‹‚ðíœ
+        DROP TABLE #Temp_D_StoreCalculation1;
+        DROP TABLE #Temp_D_DepositHistory0;
+        DROP TABLE #Temp_D_DepositHistory1;
+        DROP TABLE #Temp_D_DepositHistory2;
+        DROP TABLE #Temp_D_DepositHistory3;
+        DROP TABLE #Temp_D_DepositHistory4;
+        DROP TABLE #Temp_D_DepositHistory5;
+        DROP TABLE #Temp_D_DepositHistory51;
+        DROP TABLE #Temp_D_DepositHistory6;
+        DROP TABLE #Temp_D_DepositHistory7;
+        DROP TABLE #Temp_D_DepositHistory8;
+        DROP TABLE #Temp_D_DepositHistory9;
+        DROP TABLE #Temp_D_DepositHistory10;
+        DROP TABLE #Temp_D_DepositHistory11;
+        DROP TABLE #Temp_D_DepositHistory12;
+        DROP TABLE #Temp_D_DepositHistory13;
+        DROP TABLE #Temp_D_DepositHistory14;
+        DROP TABLE #Temp_D_DepositHistory15;
+        DROP TABLE #Temp_D_DepositHistory16;
+        DROP TABLE #Temp_D_DepositHistory162;
+        DROP TABLE #Temp_D_DepositHistory17;
+
+END

@@ -1,0 +1,265 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{AD4207DD-806F-4AC7-8936-5220BDEACC64}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Prerequest</RootNamespace>
+    <AssemblyName>Prerequest</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Dropbox.Api, Version=4.0.0.0, Culture=neutral, PublicKeyToken=310f0e82fbb45d01, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dropbox.Api.4.4.0\lib\net45\Dropbox.Api.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Management.Automation, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\WindowsPowerShell\3.0\System.Management.Automation.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="FileCopy.cs" />
+    <Compile Include="ImageDownload.cs" />
+    <Compile Include="IniManager.cs" />
+    <Compile Include="MenuManager.cs" />
+    <Compile Include="OverridePort.cs" />
+    <Compile Include="Prerequisity.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Prerequisity.Designer.cs">
+      <DependentUpon>Prerequisity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Prerequisity.resx">
+      <DependentUpon>Prerequisity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bm_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bm_2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bm_3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bmback_3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bmback_31.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bn_9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bn_10.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bn_11.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bn_12.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bn_13.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bn_14.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bn_15.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Close-2-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cs.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ct.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Haspo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HHaspo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HOther.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HoverSetting.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HoverSetting1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HTennic.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img_380355.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MHaspo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MOther.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MTennic.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\nc_5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\nc_6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\nc2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\nc3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\nc4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ncl_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Ok-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pb_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pm_4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pm_6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pn_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Base.Client\Base.Client.csproj">
+      <Project>{79af5f26-a50b-433c-9f87-c9173b9efe04}</Project>
+      <Name>Base.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BL\BL.csproj">
+      <Project>{fb2217ab-ee9b-4996-a8f1-321320cbc791}</Project>
+      <Name>BL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DL\DL.csproj">
+      <Project>{9a22d9a9-e851-4765-8842-93fd4cb77300}</Project>
+      <Name>DL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Entity\Entity.csproj">
+      <Project>{9dd6c82a-1899-478f-bc18-524ad0b0dcc8}</Project>
+      <Name>Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EPSON_TM30\EPSON_TM30.csproj">
+      <Project>{9dea7f04-51d2-4678-9c2c-74745d9b61bd}</Project>
+      <Name>EPSON_TM30</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.6">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.6 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

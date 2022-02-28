@@ -1,0 +1,609 @@
+﻿namespace TempoRegiHanbaiTouroku
+{
+    partial class FrmWaribikiritsu
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.ckmShop_Label7 = new CKM_Controls.CKMShop_Label();
+            this.txtRitsu = new CKM_Controls.CKM_TextBox();
+            this.SLblTeika = new CKM_Controls.CKMShop_Label();
+            this.ckmShop_Label12 = new CKM_Controls.CKMShop_Label();
+            this.lblTeika = new CKM_Controls.CKMShop_Label();
+            this.lblTanka = new CKM_Controls.CKMShop_Label();
+            this.ckmShop_Label17 = new CKM_Controls.CKMShop_Label();
+            this.lblSKUName = new CKM_Controls.CKMShop_Label();
+            this.lblJANCD = new CKM_Controls.CKMShop_Label();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnClose = new CKM_Controls.CKM_Button();
+            this.btnProcess = new CKM_Controls.CKM_Button();
+            this.ckmShop_Label1 = new CKM_Controls.CKMShop_Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.lblGenkaTanka = new CKM_Controls.CKMShop_Label();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.lblIppanTanka = new CKM_Controls.CKMShop_Label();
+            this.ckmShop_Label4 = new CKM_Controls.CKMShop_Label();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.lblSaleTanka = new CKM_Controls.CKMShop_Label();
+            this.ckmShop_Label6 = new CKM_Controls.CKMShop_Label();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.lblGaishoTanka = new CKM_Controls.CKMShop_Label();
+            this.ckmShop_Label9 = new CKM_Controls.CKMShop_Label();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.lblKaiinTanka = new CKM_Controls.CKMShop_Label();
+            this.ckmShop_Label11 = new CKM_Controls.CKMShop_Label();
+            this.panel4.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
+            this.panel5.SuspendLayout();
+            this.panel6.SuspendLayout();
+            this.panel7.SuspendLayout();
+            this.panel8.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // ckmShop_Label7
+            // 
+            this.ckmShop_Label7.AutoSize = true;
+            this.ckmShop_Label7.Back_Color = CKM_Controls.CKMShop_Label.CKM_Color.Default;
+            this.ckmShop_Label7.BackColor = System.Drawing.Color.Transparent;
+            this.ckmShop_Label7.Font = new System.Drawing.Font("MS Gothic", 26F, System.Drawing.FontStyle.Bold);
+            this.ckmShop_Label7.Font_Size = CKM_Controls.CKMShop_Label.CKM_FontSize.Normal;
+            this.ckmShop_Label7.FontBold = true;
+            this.ckmShop_Label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(130)))), ((int)(((byte)(53)))));
+            this.ckmShop_Label7.Location = new System.Drawing.Point(53, 303);
+            this.ckmShop_Label7.Name = "ckmShop_Label7";
+            this.ckmShop_Label7.Size = new System.Drawing.Size(126, 35);
+            this.ckmShop_Label7.TabIndex = 28;
+            this.ckmShop_Label7.Text = "割引率";
+            this.ckmShop_Label7.Text_Color = CKM_Controls.CKMShop_Label.CKM_Color.Green;
+            this.ckmShop_Label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtRitsu
+            // 
+            this.txtRitsu.AllowMinus = false;
+            this.txtRitsu.Back_Color = CKM_Controls.CKM_TextBox.CKM_Color.Green;
+            this.txtRitsu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(239)))), ((int)(((byte)(218)))));
+            this.txtRitsu.BorderColor = false;
+            this.txtRitsu.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtRitsu.ClientColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(239)))), ((int)(((byte)(218)))));
+            this.txtRitsu.Ctrl_Byte = CKM_Controls.CKM_TextBox.Bytes.半角;
+            this.txtRitsu.Ctrl_Type = CKM_Controls.CKM_TextBox.Type.Price;
+            this.txtRitsu.DecimalPlace = 1;
+            this.txtRitsu.EnabledInsertKeyModeOnMouseEnter = false;
+            this.txtRitsu.Font = new System.Drawing.Font("MS Gothic", 26F);
+            this.txtRitsu.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.txtRitsu.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Overwrite;
+            this.txtRitsu.IntegerPart = 3;
+            this.txtRitsu.IsCorrectDate = true;
+            this.txtRitsu.isEnterKeyDown = false;
+            this.txtRitsu.IsFirstTime = true;
+            this.txtRitsu.isMaxLengthErr = false;
+            this.txtRitsu.IsNumber = true;
+            this.txtRitsu.IsShop = false;
+            this.txtRitsu.IsTimemmss = false;
+            this.txtRitsu.Length = 5;
+            this.txtRitsu.Location = new System.Drawing.Point(185, 301);
+            this.txtRitsu.MaxLength = 5;
+            this.txtRitsu.MoveNext = true;
+            this.txtRitsu.Name = "txtRitsu";
+            this.txtRitsu.Size = new System.Drawing.Size(160, 42);
+            this.txtRitsu.TabIndex = 0;
+            this.txtRitsu.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtRitsu.TextSize = CKM_Controls.CKM_TextBox.FontSize.Medium;
+            this.txtRitsu.UseColorSizMode = false;
+            this.txtRitsu.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtShippingSu_KeyDown);
+            // 
+            // SLblTeika
+            // 
+            this.SLblTeika.AutoSize = true;
+            this.SLblTeika.Back_Color = CKM_Controls.CKMShop_Label.CKM_Color.Default;
+            this.SLblTeika.BackColor = System.Drawing.Color.Transparent;
+            this.SLblTeika.Font = new System.Drawing.Font("MS Gothic", 26F, System.Drawing.FontStyle.Bold);
+            this.SLblTeika.Font_Size = CKM_Controls.CKMShop_Label.CKM_FontSize.Normal;
+            this.SLblTeika.FontBold = true;
+            this.SLblTeika.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(130)))), ((int)(((byte)(53)))));
+            this.SLblTeika.Location = new System.Drawing.Point(53, 249);
+            this.SLblTeika.Name = "SLblTeika";
+            this.SLblTeika.Size = new System.Drawing.Size(126, 35);
+            this.SLblTeika.TabIndex = 32;
+            this.SLblTeika.Text = "定　価";
+            this.SLblTeika.Text_Color = CKM_Controls.CKMShop_Label.CKM_Color.Green;
+            this.SLblTeika.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // ckmShop_Label12
+            // 
+            this.ckmShop_Label12.AutoSize = true;
+            this.ckmShop_Label12.Back_Color = CKM_Controls.CKMShop_Label.CKM_Color.Default;
+            this.ckmShop_Label12.BackColor = System.Drawing.Color.Transparent;
+            this.ckmShop_Label12.Font = new System.Drawing.Font("MS Gothic", 26F, System.Drawing.FontStyle.Bold);
+            this.ckmShop_Label12.Font_Size = CKM_Controls.CKMShop_Label.CKM_FontSize.Normal;
+            this.ckmShop_Label12.FontBold = true;
+            this.ckmShop_Label12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(130)))), ((int)(((byte)(53)))));
+            this.ckmShop_Label12.Location = new System.Drawing.Point(69, 67);
+            this.ckmShop_Label12.Name = "ckmShop_Label12";
+            this.ckmShop_Label12.Size = new System.Drawing.Size(110, 35);
+            this.ckmShop_Label12.TabIndex = 37;
+            this.ckmShop_Label12.Text = "JANCD";
+            this.ckmShop_Label12.Text_Color = CKM_Controls.CKMShop_Label.CKM_Color.Green;
+            this.ckmShop_Label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // lblTeika
+            // 
+            this.lblTeika.Back_Color = CKM_Controls.CKMShop_Label.CKM_Color.Default;
+            this.lblTeika.BackColor = System.Drawing.Color.Transparent;
+            this.lblTeika.Font = new System.Drawing.Font("MS Gothic", 26F);
+            this.lblTeika.Font_Size = CKM_Controls.CKMShop_Label.CKM_FontSize.Medium0;
+            this.lblTeika.FontBold = false;
+            this.lblTeika.ForeColor = System.Drawing.Color.Black;
+            this.lblTeika.Location = new System.Drawing.Point(15, 3);
+            this.lblTeika.Name = "lblTeika";
+            this.lblTeika.Size = new System.Drawing.Size(230, 35);
+            this.lblTeika.TabIndex = 58;
+            this.lblTeika.Text = "999,999,999\t\t\t\t\t\t\t\t\t\t";
+            this.lblTeika.Text_Color = CKM_Controls.CKMShop_Label.CKM_Color.Default;
+            this.lblTeika.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // lblTanka
+            // 
+            this.lblTanka.Back_Color = CKM_Controls.CKMShop_Label.CKM_Color.Default;
+            this.lblTanka.BackColor = System.Drawing.Color.Transparent;
+            this.lblTanka.Font = new System.Drawing.Font("MS Gothic", 26F);
+            this.lblTanka.Font_Size = CKM_Controls.CKMShop_Label.CKM_FontSize.Normal;
+            this.lblTanka.FontBold = false;
+            this.lblTanka.ForeColor = System.Drawing.Color.Black;
+            this.lblTanka.Location = new System.Drawing.Point(14, 4);
+            this.lblTanka.Name = "lblTanka";
+            this.lblTanka.Size = new System.Drawing.Size(230, 35);
+            this.lblTanka.TabIndex = 62;
+            this.lblTanka.Text = "999,999,999";
+            this.lblTanka.Text_Color = CKM_Controls.CKMShop_Label.CKM_Color.Default;
+            this.lblTanka.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // ckmShop_Label17
+            // 
+            this.ckmShop_Label17.AutoSize = true;
+            this.ckmShop_Label17.Back_Color = CKM_Controls.CKMShop_Label.CKM_Color.Default;
+            this.ckmShop_Label17.BackColor = System.Drawing.Color.Transparent;
+            this.ckmShop_Label17.Font = new System.Drawing.Font("MS Gothic", 26F, System.Drawing.FontStyle.Bold);
+            this.ckmShop_Label17.Font_Size = CKM_Controls.CKMShop_Label.CKM_FontSize.Normal;
+            this.ckmShop_Label17.FontBold = true;
+            this.ckmShop_Label17.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(130)))), ((int)(((byte)(53)))));
+            this.ckmShop_Label17.Location = new System.Drawing.Point(53, 361);
+            this.ckmShop_Label17.Name = "ckmShop_Label17";
+            this.ckmShop_Label17.Size = new System.Drawing.Size(126, 35);
+            this.ckmShop_Label17.TabIndex = 60;
+            this.ckmShop_Label17.Text = "単　価";
+            this.ckmShop_Label17.Text_Color = CKM_Controls.CKMShop_Label.CKM_Color.Green;
+            this.ckmShop_Label17.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // lblSKUName
+            // 
+            this.lblSKUName.Back_Color = CKM_Controls.CKMShop_Label.CKM_Color.Default;
+            this.lblSKUName.BackColor = System.Drawing.Color.Transparent;
+            this.lblSKUName.Font = new System.Drawing.Font("MS Gothic", 26F, System.Drawing.FontStyle.Bold);
+            this.lblSKUName.Font_Size = CKM_Controls.CKMShop_Label.CKM_FontSize.Normal;
+            this.lblSKUName.FontBold = true;
+            this.lblSKUName.ForeColor = System.Drawing.Color.Black;
+            this.lblSKUName.Location = new System.Drawing.Point(185, 115);
+            this.lblSKUName.Name = "lblSKUName";
+            this.lblSKUName.Size = new System.Drawing.Size(800, 120);
+            this.lblSKUName.TabIndex = 70;
+            this.lblSKUName.Text = "商品名ＸＸＸＸＸＸ10ＸＸＸＸＸＸＸＸＸ20ＸＸＸＸＸＸＸＸＸ30ＸＸＸＸＸＸＸＸＸ40ＸＸＸＸＸＸＸＸＸ50";
+            this.lblSKUName.Text_Color = CKM_Controls.CKMShop_Label.CKM_Color.Default;
+            this.lblSKUName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblJANCD
+            // 
+            this.lblJANCD.Back_Color = CKM_Controls.CKMShop_Label.CKM_Color.Default;
+            this.lblJANCD.BackColor = System.Drawing.Color.Transparent;
+            this.lblJANCD.Font = new System.Drawing.Font("MS Gothic", 26F, System.Drawing.FontStyle.Bold);
+            this.lblJANCD.Font_Size = CKM_Controls.CKMShop_Label.CKM_FontSize.Normal;
+            this.lblJANCD.FontBold = true;
+            this.lblJANCD.ForeColor = System.Drawing.Color.Black;
+            this.lblJANCD.Location = new System.Drawing.Point(185, 63);
+            this.lblJANCD.Name = "lblJANCD";
+            this.lblJANCD.Size = new System.Drawing.Size(515, 43);
+            this.lblJANCD.TabIndex = 71;
+            this.lblJANCD.Text = "49XXXXXXXXX13";
+            this.lblJANCD.Text_Color = CKM_Controls.CKMShop_Label.CKM_Color.Default;
+            this.lblJANCD.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.tableLayoutPanel1);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel4.Location = new System.Drawing.Point(0, 694);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(1034, 106);
+            this.panel4.TabIndex = 82;
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
+            this.tableLayoutPanel1.Controls.Add(this.btnClose, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.btnProcess, 1, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1034, 106);
+            this.tableLayoutPanel1.TabIndex = 1;
+            // 
+            // btnClose
+            // 
+            this.btnClose.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(242)))), ((int)(((byte)(204)))));
+            this.btnClose.BackgroundColor = CKM_Controls.CKM_Button.CKM_Color.Yellow;
+            this.btnClose.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnClose.DefaultBtnSize = false;
+            this.btnClose.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnClose.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClose.Font = new System.Drawing.Font("MS Gothic", 30F, System.Drawing.FontStyle.Bold);
+            this.btnClose.Font_Size = CKM_Controls.CKM_Button.CKM_FontSize.XLarge;
+            this.btnClose.Location = new System.Drawing.Point(1, 1);
+            this.btnClose.Margin = new System.Windows.Forms.Padding(1);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(308, 104);
+            this.btnClose.TabIndex = 2;
+            this.btnClose.Tag = "0";
+            this.btnClose.Text = "戻　る";
+            this.btnClose.UseVisualStyleBackColor = false;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
+            // btnProcess
+            // 
+            this.btnProcess.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(242)))), ((int)(((byte)(204)))));
+            this.btnProcess.BackgroundColor = CKM_Controls.CKM_Button.CKM_Color.Yellow;
+            this.btnProcess.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnProcess.DefaultBtnSize = false;
+            this.btnProcess.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnProcess.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnProcess.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnProcess.Font = new System.Drawing.Font("MS Gothic", 30F, System.Drawing.FontStyle.Bold);
+            this.btnProcess.Font_Size = CKM_Controls.CKM_Button.CKM_FontSize.XLarge;
+            this.btnProcess.Location = new System.Drawing.Point(311, 1);
+            this.btnProcess.Margin = new System.Windows.Forms.Padding(1);
+            this.btnProcess.Name = "btnProcess";
+            this.btnProcess.Size = new System.Drawing.Size(722, 104);
+            this.btnProcess.TabIndex = 1;
+            this.btnProcess.Tag = "1";
+            this.btnProcess.Text = "決　定";
+            this.btnProcess.UseVisualStyleBackColor = false;
+            this.btnProcess.Click += new System.EventHandler(this.btnProcess_Click);
+            // 
+            // ckmShop_Label1
+            // 
+            this.ckmShop_Label1.AutoSize = true;
+            this.ckmShop_Label1.Back_Color = CKM_Controls.CKMShop_Label.CKM_Color.Default;
+            this.ckmShop_Label1.BackColor = System.Drawing.Color.Transparent;
+            this.ckmShop_Label1.Font = new System.Drawing.Font("MS Gothic", 26F, System.Drawing.FontStyle.Bold);
+            this.ckmShop_Label1.Font_Size = CKM_Controls.CKMShop_Label.CKM_FontSize.Normal;
+            this.ckmShop_Label1.FontBold = true;
+            this.ckmShop_Label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(130)))), ((int)(((byte)(53)))));
+            this.ckmShop_Label1.Location = new System.Drawing.Point(367, 304);
+            this.ckmShop_Label1.Name = "ckmShop_Label1";
+            this.ckmShop_Label1.Size = new System.Drawing.Size(443, 35);
+            this.ckmShop_Label1.TabIndex = 83;
+            this.ckmShop_Label1.Text = "20%割引の場合は20と入力";
+            this.ckmShop_Label1.Text_Color = CKM_Controls.CKMShop_Label.CKM_Color.Green;
+            this.ckmShop_Label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // panel1
+            // 
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.lblTeika);
+            this.panel1.Location = new System.Drawing.Point(185, 246);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(240, 44);
+            this.panel1.TabIndex = 84;
+            // 
+            // panel2
+            // 
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.lblTanka);
+            this.panel2.Location = new System.Drawing.Point(185, 356);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(240, 44);
+            this.panel2.TabIndex = 85;
+            // 
+            // panel3
+            // 
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Controls.Add(this.lblGenkaTanka);
+            this.panel3.Location = new System.Drawing.Point(473, 246);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(240, 44);
+            this.panel3.TabIndex = 86;
+            // 
+            // lblGenkaTanka
+            // 
+            this.lblGenkaTanka.Back_Color = CKM_Controls.CKMShop_Label.CKM_Color.Default;
+            this.lblGenkaTanka.BackColor = System.Drawing.Color.Transparent;
+            this.lblGenkaTanka.Font = new System.Drawing.Font("MS Gothic", 26F);
+            this.lblGenkaTanka.Font_Size = CKM_Controls.CKMShop_Label.CKM_FontSize.Medium0;
+            this.lblGenkaTanka.FontBold = false;
+            this.lblGenkaTanka.ForeColor = System.Drawing.Color.Black;
+            this.lblGenkaTanka.Location = new System.Drawing.Point(15, 3);
+            this.lblGenkaTanka.Name = "lblGenkaTanka";
+            this.lblGenkaTanka.Size = new System.Drawing.Size(230, 35);
+            this.lblGenkaTanka.TabIndex = 58;
+            this.lblGenkaTanka.Text = "999,999,999\t\t\t\t\t\t\t\t\t\t";
+            this.lblGenkaTanka.Text_Color = CKM_Controls.CKMShop_Label.CKM_Color.Default;
+            this.lblGenkaTanka.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // panel5
+            // 
+            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel5.Controls.Add(this.lblIppanTanka);
+            this.panel5.Location = new System.Drawing.Point(185, 472);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(240, 44);
+            this.panel5.TabIndex = 88;
+            // 
+            // lblIppanTanka
+            // 
+            this.lblIppanTanka.Back_Color = CKM_Controls.CKMShop_Label.CKM_Color.Default;
+            this.lblIppanTanka.BackColor = System.Drawing.Color.Transparent;
+            this.lblIppanTanka.Font = new System.Drawing.Font("MS Gothic", 26F);
+            this.lblIppanTanka.Font_Size = CKM_Controls.CKMShop_Label.CKM_FontSize.Normal;
+            this.lblIppanTanka.FontBold = false;
+            this.lblIppanTanka.ForeColor = System.Drawing.Color.Black;
+            this.lblIppanTanka.Location = new System.Drawing.Point(14, 4);
+            this.lblIppanTanka.Name = "lblIppanTanka";
+            this.lblIppanTanka.Size = new System.Drawing.Size(230, 35);
+            this.lblIppanTanka.TabIndex = 62;
+            this.lblIppanTanka.Text = "999,999,999";
+            this.lblIppanTanka.Text_Color = CKM_Controls.CKMShop_Label.CKM_Color.Default;
+            this.lblIppanTanka.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // ckmShop_Label4
+            // 
+            this.ckmShop_Label4.AutoSize = true;
+            this.ckmShop_Label4.Back_Color = CKM_Controls.CKMShop_Label.CKM_Color.Default;
+            this.ckmShop_Label4.BackColor = System.Drawing.Color.Transparent;
+            this.ckmShop_Label4.Font = new System.Drawing.Font("MS Gothic", 26F, System.Drawing.FontStyle.Bold);
+            this.ckmShop_Label4.Font_Size = CKM_Controls.CKMShop_Label.CKM_FontSize.Normal;
+            this.ckmShop_Label4.FontBold = true;
+            this.ckmShop_Label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(130)))), ((int)(((byte)(53)))));
+            this.ckmShop_Label4.Location = new System.Drawing.Point(53, 477);
+            this.ckmShop_Label4.Name = "ckmShop_Label4";
+            this.ckmShop_Label4.Size = new System.Drawing.Size(126, 35);
+            this.ckmShop_Label4.TabIndex = 87;
+            this.ckmShop_Label4.Text = "現　金";
+            this.ckmShop_Label4.Text_Color = CKM_Controls.CKMShop_Label.CKM_Color.Green;
+            this.ckmShop_Label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // panel6
+            // 
+            this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel6.Controls.Add(this.lblSaleTanka);
+            this.panel6.Location = new System.Drawing.Point(185, 635);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(240, 44);
+            this.panel6.TabIndex = 90;
+            // 
+            // lblSaleTanka
+            // 
+            this.lblSaleTanka.Back_Color = CKM_Controls.CKMShop_Label.CKM_Color.Default;
+            this.lblSaleTanka.BackColor = System.Drawing.Color.Transparent;
+            this.lblSaleTanka.Font = new System.Drawing.Font("MS Gothic", 26F);
+            this.lblSaleTanka.Font_Size = CKM_Controls.CKMShop_Label.CKM_FontSize.Normal;
+            this.lblSaleTanka.FontBold = false;
+            this.lblSaleTanka.ForeColor = System.Drawing.Color.Black;
+            this.lblSaleTanka.Location = new System.Drawing.Point(14, 4);
+            this.lblSaleTanka.Name = "lblSaleTanka";
+            this.lblSaleTanka.Size = new System.Drawing.Size(230, 35);
+            this.lblSaleTanka.TabIndex = 62;
+            this.lblSaleTanka.Text = "999,999,999";
+            this.lblSaleTanka.Text_Color = CKM_Controls.CKMShop_Label.CKM_Color.Default;
+            this.lblSaleTanka.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // ckmShop_Label6
+            // 
+            this.ckmShop_Label6.AutoSize = true;
+            this.ckmShop_Label6.Back_Color = CKM_Controls.CKMShop_Label.CKM_Color.Default;
+            this.ckmShop_Label6.BackColor = System.Drawing.Color.Transparent;
+            this.ckmShop_Label6.Font = new System.Drawing.Font("MS Gothic", 26F, System.Drawing.FontStyle.Bold);
+            this.ckmShop_Label6.Font_Size = CKM_Controls.CKMShop_Label.CKM_FontSize.Normal;
+            this.ckmShop_Label6.FontBold = true;
+            this.ckmShop_Label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(130)))), ((int)(((byte)(53)))));
+            this.ckmShop_Label6.Location = new System.Drawing.Point(53, 639);
+            this.ckmShop_Label6.Name = "ckmShop_Label6";
+            this.ckmShop_Label6.Size = new System.Drawing.Size(126, 35);
+            this.ckmShop_Label6.TabIndex = 89;
+            this.ckmShop_Label6.Text = "セール";
+            this.ckmShop_Label6.Text_Color = CKM_Controls.CKMShop_Label.CKM_Color.Green;
+            this.ckmShop_Label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // panel7
+            // 
+            this.panel7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel7.Controls.Add(this.lblGaishoTanka);
+            this.panel7.Location = new System.Drawing.Point(185, 581);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(240, 44);
+            this.panel7.TabIndex = 92;
+            // 
+            // lblGaishoTanka
+            // 
+            this.lblGaishoTanka.Back_Color = CKM_Controls.CKMShop_Label.CKM_Color.Default;
+            this.lblGaishoTanka.BackColor = System.Drawing.Color.Transparent;
+            this.lblGaishoTanka.Font = new System.Drawing.Font("MS Gothic", 26F);
+            this.lblGaishoTanka.Font_Size = CKM_Controls.CKMShop_Label.CKM_FontSize.Normal;
+            this.lblGaishoTanka.FontBold = false;
+            this.lblGaishoTanka.ForeColor = System.Drawing.Color.Black;
+            this.lblGaishoTanka.Location = new System.Drawing.Point(14, 4);
+            this.lblGaishoTanka.Name = "lblGaishoTanka";
+            this.lblGaishoTanka.Size = new System.Drawing.Size(230, 35);
+            this.lblGaishoTanka.TabIndex = 62;
+            this.lblGaishoTanka.Text = "999,999,999";
+            this.lblGaishoTanka.Text_Color = CKM_Controls.CKMShop_Label.CKM_Color.Default;
+            this.lblGaishoTanka.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // ckmShop_Label9
+            // 
+            this.ckmShop_Label9.AutoSize = true;
+            this.ckmShop_Label9.Back_Color = CKM_Controls.CKMShop_Label.CKM_Color.Default;
+            this.ckmShop_Label9.BackColor = System.Drawing.Color.Transparent;
+            this.ckmShop_Label9.Font = new System.Drawing.Font("MS Gothic", 26F, System.Drawing.FontStyle.Bold);
+            this.ckmShop_Label9.Font_Size = CKM_Controls.CKMShop_Label.CKM_FontSize.Normal;
+            this.ckmShop_Label9.FontBold = true;
+            this.ckmShop_Label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(130)))), ((int)(((byte)(53)))));
+            this.ckmShop_Label9.Location = new System.Drawing.Point(14, 585);
+            this.ckmShop_Label9.Name = "ckmShop_Label9";
+            this.ckmShop_Label9.Size = new System.Drawing.Size(165, 35);
+            this.ckmShop_Label9.TabIndex = 91;
+            this.ckmShop_Label9.Text = "外商/ｺｰﾁ";
+            this.ckmShop_Label9.Text_Color = CKM_Controls.CKMShop_Label.CKM_Color.Green;
+            this.ckmShop_Label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // panel8
+            // 
+            this.panel8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel8.Controls.Add(this.lblKaiinTanka);
+            this.panel8.Location = new System.Drawing.Point(185, 527);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(240, 44);
+            this.panel8.TabIndex = 94;
+            // 
+            // lblKaiinTanka
+            // 
+            this.lblKaiinTanka.Back_Color = CKM_Controls.CKMShop_Label.CKM_Color.Default;
+            this.lblKaiinTanka.BackColor = System.Drawing.Color.Transparent;
+            this.lblKaiinTanka.Font = new System.Drawing.Font("MS Gothic", 26F);
+            this.lblKaiinTanka.Font_Size = CKM_Controls.CKMShop_Label.CKM_FontSize.Normal;
+            this.lblKaiinTanka.FontBold = false;
+            this.lblKaiinTanka.ForeColor = System.Drawing.Color.Black;
+            this.lblKaiinTanka.Location = new System.Drawing.Point(14, 4);
+            this.lblKaiinTanka.Name = "lblKaiinTanka";
+            this.lblKaiinTanka.Size = new System.Drawing.Size(230, 35);
+            this.lblKaiinTanka.TabIndex = 62;
+            this.lblKaiinTanka.Text = "999,999,999";
+            this.lblKaiinTanka.Text_Color = CKM_Controls.CKMShop_Label.CKM_Color.Default;
+            this.lblKaiinTanka.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // ckmShop_Label11
+            // 
+            this.ckmShop_Label11.AutoSize = true;
+            this.ckmShop_Label11.Back_Color = CKM_Controls.CKMShop_Label.CKM_Color.Default;
+            this.ckmShop_Label11.BackColor = System.Drawing.Color.Transparent;
+            this.ckmShop_Label11.Font = new System.Drawing.Font("MS Gothic", 26F, System.Drawing.FontStyle.Bold);
+            this.ckmShop_Label11.Font_Size = CKM_Controls.CKMShop_Label.CKM_FontSize.Normal;
+            this.ckmShop_Label11.FontBold = true;
+            this.ckmShop_Label11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(130)))), ((int)(((byte)(53)))));
+            this.ckmShop_Label11.Location = new System.Drawing.Point(53, 531);
+            this.ckmShop_Label11.Name = "ckmShop_Label11";
+            this.ckmShop_Label11.Size = new System.Drawing.Size(126, 35);
+            this.ckmShop_Label11.TabIndex = 93;
+            this.ckmShop_Label11.Text = "会　員";
+            this.ckmShop_Label11.Text_Color = CKM_Controls.CKMShop_Label.CKM_Color.Green;
+            this.ckmShop_Label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // FrmWaribikiritsu
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Window;
+            this.ClientSize = new System.Drawing.Size(1034, 800);
+            this.Controls.Add(this.panel8);
+            this.Controls.Add(this.ckmShop_Label11);
+            this.Controls.Add(this.ckmShop_Label9);
+            this.Controls.Add(this.ckmShop_Label6);
+            this.Controls.Add(this.panel5);
+            this.Controls.Add(this.ckmShop_Label4);
+            this.Controls.Add(this.panel3);
+            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.ckmShop_Label1);
+            this.Controls.Add(this.panel4);
+            this.Controls.Add(this.lblSKUName);
+            this.Controls.Add(this.ckmShop_Label17);
+            this.Controls.Add(this.ckmShop_Label12);
+            this.Controls.Add(this.txtRitsu);
+            this.Controls.Add(this.SLblTeika);
+            this.Controls.Add(this.ckmShop_Label7);
+            this.Controls.Add(this.lblJANCD);
+            this.Controls.Add(this.panel7);
+            this.Controls.Add(this.panel6);
+            this.Name = "FrmWaribikiritsu";
+            this.Text = "TempoRegiHanbaiTouroku";
+            this.Load += new System.EventHandler(this.Form_Load);
+            this.panel4.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            this.panel5.ResumeLayout(false);
+            this.panel6.ResumeLayout(false);
+            this.panel7.ResumeLayout(false);
+            this.panel8.ResumeLayout(false);
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+        private CKM_Controls.CKMShop_Label ckmShop_Label7;
+        private CKM_Controls.CKM_TextBox txtRitsu;
+        private CKM_Controls.CKMShop_Label SLblTeika;
+        private CKM_Controls.CKMShop_Label ckmShop_Label12;
+        private CKM_Controls.CKMShop_Label lblTeika;
+        private CKM_Controls.CKMShop_Label lblTanka;
+        private CKM_Controls.CKMShop_Label ckmShop_Label17;
+        private CKM_Controls.CKMShop_Label lblSKUName;
+        private CKM_Controls.CKMShop_Label lblJANCD;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        protected CKM_Controls.CKM_Button btnClose;
+        protected CKM_Controls.CKM_Button btnProcess;
+        private CKM_Controls.CKMShop_Label ckmShop_Label1;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panel3;
+        private CKM_Controls.CKMShop_Label lblGenkaTanka;
+        private System.Windows.Forms.Panel panel5;
+        private CKM_Controls.CKMShop_Label lblIppanTanka;
+        private CKM_Controls.CKMShop_Label ckmShop_Label4;
+        private System.Windows.Forms.Panel panel6;
+        private CKM_Controls.CKMShop_Label lblSaleTanka;
+        private CKM_Controls.CKMShop_Label ckmShop_Label6;
+        private System.Windows.Forms.Panel panel7;
+        private CKM_Controls.CKMShop_Label lblGaishoTanka;
+        private CKM_Controls.CKMShop_Label ckmShop_Label9;
+        private System.Windows.Forms.Panel panel8;
+        private CKM_Controls.CKMShop_Label lblKaiinTanka;
+        private CKM_Controls.CKMShop_Label ckmShop_Label11;
+    }
+}
+

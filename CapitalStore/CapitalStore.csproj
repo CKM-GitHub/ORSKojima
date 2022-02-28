@@ -1,0 +1,361 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8EDD28FC-6770-4576-964E-A4010BBDE9F4}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>CapitalStore</RootNamespace>
+    <AssemblyName>CapitalStore</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <InstallUrl>http://203.137.92.20/capitalStore20211015/</InstallUrl>
+    <UpdateUrl>http://203.137.92.20/capitalStore20211015/</UpdateUrl>
+    <ApplicationRevision>9</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>316D3B7D9D2FA278983EA52CF306F7F2A876BF27</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>CapitalStore_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AjaxControlToolkit">
+      <HintPath>..\MenuHosting\RunnerGlobe\AjaxControlToolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="Base.Client">
+      <HintPath>..\bin\Debug\Base.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Dropbox.Api">
+      <HintPath>..\packages\Dropbox.Api.4.0.0\lib\net45\Dropbox.Api.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.PointOfService, Version=1.14.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Base.Client\RequiredSource\Microsoft.PointOfService.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Management.Automation, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\WindowsPowerShell\3.0\System.Management.Automation.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CapitalsportsLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CapitalsportsLogin.Designer.cs">
+      <DependentUpon>CapitalsportsLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Capitalsports_MainMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Capitalsports_MainMenu.Designer.cs">
+      <DependentUpon>Capitalsports_MainMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ChangeInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChangeInfo.Designer.cs">
+      <DependentUpon>ChangeInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FileCopy.cs" />
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmList.Designer.cs">
+      <DependentUpon>FrmList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FTPData.cs" />
+    <Compile Include="Iconic.cs" />
+    <Compile Include="Prerequisity.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Prerequisity.Designer.cs">
+      <DependentUpon>Prerequisity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Setting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Setting.Designer.cs">
+      <DependentUpon>Setting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Store_Message.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Store_Message.Designer.cs">
+      <DependentUpon>Store_Message.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="CapitalsportsLogin.resx">
+      <DependentUpon>CapitalsportsLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Capitalsports_MainMenu.resx">
+      <DependentUpon>Capitalsports_MainMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChangeInfo.resx">
+      <DependentUpon>ChangeInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmList.resx">
+      <DependentUpon>FrmList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Prerequisity.resx">
+      <DependentUpon>Prerequisity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="Setting.resx">
+      <DependentUpon>Setting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Store_Message.resx">
+      <DependentUpon>Store_Message.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="CapitalStore_TemporaryKey.pfx" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BL\BL.csproj">
+      <Project>{fb2217ab-ee9b-4996-a8f1-321320cbc791}</Project>
+      <Name>BL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CKM_Controls\CKM_Controls\CKM_Controls.csproj">
+      <Project>{472a8d76-1ce3-430e-89fe-373d2f6b1031}</Project>
+      <Name>CKM_Controls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DL\DL.csproj">
+      <Project>{9a22d9a9-e851-4765-8842-93fd4cb77300}</Project>
+      <Name>DL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Entity\Entity.csproj">
+      <Project>{9dd6c82a-1899-478f-bc18-524ad0b0dcc8}</Project>
+      <Name>Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EPSON_TM30\EPSON_TM30.csproj">
+      <Project>{9dea7f04-51d2-4678-9c2c-74745d9b61bd}</Project>
+      <Name>EPSON_TM30</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Prerequest\Prerequest.csproj">
+      <Project>{ad4207dd-806f-4ac7-8936-5220bdeacc64}</Project>
+      <Name>Prerequest</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Logos\Haspo.ico" />
+    <Content Include="Logos\logo_mark_l5k_icon.ico" />
+    <Content Include="Resources\bmback_3.png" />
+    <None Include="Resources\pn_12.png" />
+    <None Include="Resources\pm_62.png" />
+    <None Include="Resources\pm_42.png" />
+    <None Include="Resources\pb_12.png" />
+    <None Include="Resources\Ok-icon2.png" />
+    <None Include="Resources\ncl_12.png" />
+    <None Include="Resources\nc42.png" />
+    <None Include="Resources\nc32.png" />
+    <None Include="Resources\nc22.png" />
+    <None Include="Resources\nc_62.png" />
+    <None Include="Resources\nc_52.png" />
+    <None Include="Resources\MTennic2.png" />
+    <None Include="Resources\MOther2.png" />
+    <None Include="Resources\MHaspo2.png" />
+    <None Include="Resources\logo2.png" />
+    <None Include="Resources\img_3803552.png" />
+    <None Include="Resources\HTennic2.png" />
+    <None Include="Resources\HoverSetting12.png" />
+    <None Include="Resources\HoverSetting2.png" />
+    <None Include="Resources\HOther2.png" />
+    <None Include="Resources\HHaspo2.png" />
+    <None Include="Resources\Haspo2.png" />
+    <None Include="Resources\ct2.png" />
+    <None Include="Resources\cs2.PNG" />
+    <None Include="Resources\Close-2-icon2.png" />
+    <None Include="Resources\bn_152.png" />
+    <None Include="Resources\bn_142.png" />
+    <None Include="Resources\bn_132.png" />
+    <None Include="Resources\bn_122.png" />
+    <None Include="Resources\bn_112.png" />
+    <None Include="Resources\bn_102.png" />
+    <None Include="Resources\bn_92.png" />
+    <None Include="Resources\bmback_312.png" />
+    <None Include="Resources\bmback_32.png" />
+    <None Include="Resources\bm_33.png" />
+    <None Include="Resources\bm_22.png" />
+    <None Include="Resources\bm_12.png" />
+    <Content Include="Resources\favicon.ico" />
+    <Content Include="Resources\HoverSetting.png" />
+    <None Include="Resources\tennic123_ARk_icon1.ico" />
+    <None Include="Resources\pn_11.png" />
+    <None Include="Resources\pn_1.png" />
+    <None Include="Resources\pm_61.png" />
+    <None Include="Resources\pm_6.png" />
+    <None Include="Resources\pm_41.png" />
+    <None Include="Resources\pm_4.png" />
+    <None Include="Resources\pb_11.png" />
+    <None Include="Resources\pb_1.png" />
+    <None Include="Resources\Ok-icon1.png" />
+    <None Include="Resources\Ok-icon.png" />
+    <None Include="Resources\ncl_11.png" />
+    <None Include="Resources\ncl_1.png" />
+    <None Include="Resources\nc41.png" />
+    <None Include="Resources\nc4.png" />
+    <None Include="Resources\nc31.png" />
+    <None Include="Resources\nc3.png" />
+    <None Include="Resources\nc21.png" />
+    <None Include="Resources\nc2.png" />
+    <None Include="Resources\nc_61.png" />
+    <None Include="Resources\nc_6.png" />
+    <None Include="Resources\nc_51.png" />
+    <None Include="Resources\nc_5.png" />
+    <None Include="Resources\MTennic1.png" />
+    <None Include="Resources\MTennic.png" />
+    <None Include="Resources\MOther1.png" />
+    <None Include="Resources\MOther.png" />
+    <None Include="Resources\MHaspo1.png" />
+    <None Include="Resources\MHaspo.png" />
+    <None Include="Resources\logo1.png" />
+    <Content Include="Resources\logo_mark_l5k_icon.ico" />
+    <None Include="Resources\logo_mark_l5k_icon1.ico" />
+    <None Include="Resources\logo.png" />
+    <None Include="Resources\img_3803551.png" />
+    <None Include="Resources\img_380355.png" />
+    <None Include="Resources\HTennic1.png" />
+    <None Include="Resources\HTennic.png" />
+    <None Include="Resources\HoverSetting11.png" />
+    <None Include="Resources\HoverSetting1.png" />
+    <None Include="Resources\HOther1.png" />
+    <None Include="Resources\HOther.png" />
+    <None Include="Resources\HHaspo1.png" />
+    <None Include="Resources\HHaspo.png" />
+    <None Include="Resources\haspoicon_fj7_icon1.ico" />
+    <None Include="Resources\Haspo1.png" />
+    <None Include="Resources\Haspo.png" />
+    <None Include="Resources\Haspo.ico" />
+    <None Include="Resources\ct1.png" />
+    <None Include="Resources\ct.png" />
+    <None Include="Resources\cs1.PNG" />
+    <None Include="Resources\cs.PNG" />
+    <None Include="Resources\Close-2-icon1.png" />
+    <None Include="Resources\Close-2-icon.png" />
+    <None Include="Resources\bn_91.png" />
+    <None Include="Resources\bn_9.png" />
+    <None Include="Resources\bn_151.png" />
+    <None Include="Resources\bn_15.png" />
+    <None Include="Resources\bn_141.png" />
+    <None Include="Resources\bn_14.png" />
+    <None Include="Resources\bn_131.png" />
+    <None Include="Resources\bn_13.png" />
+    <None Include="Resources\bn_121.png" />
+    <None Include="Resources\bn_12.png" />
+    <None Include="Resources\bn_111.png" />
+    <None Include="Resources\bn_11.png" />
+    <None Include="Resources\bn_101.png" />
+    <None Include="Resources\bn_10.png" />
+    <None Include="Resources\bmback_311.png" />
+    <None Include="Resources\bmback_31.png" />
+    <None Include="Resources\bm_32.png" />
+    <None Include="Resources\bm_31.png" />
+    <None Include="Resources\bm_3.png" />
+    <None Include="Resources\bm_21.png" />
+    <None Include="Resources\bm_2.png" />
+    <None Include="Resources\bm_11.png" />
+    <None Include="Resources\bm_1.png" />
+    <None Include="Logos\tennic123_ARk_icon.ico" />
+    <None Include="Logos\haspoicon_fj7_icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.6">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.6 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
