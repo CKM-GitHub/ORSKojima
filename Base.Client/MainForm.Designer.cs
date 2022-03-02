@@ -219,7 +219,7 @@
             this.lblOperator.Font = new System.Drawing.Font("ＭＳ ゴシック", 9F, System.Drawing.FontStyle.Bold);
             this.lblOperator.Location = new System.Drawing.Point(76, 12);
             this.lblOperator.Name = "lblOperator";
-            this.lblOperator.Size = new System.Drawing.Size(109, 15);
+            this.lblOperator.Size = new System.Drawing.Size(83, 12);
             this.lblOperator.TabIndex = 58;
             this.lblOperator.Text = "オペレーター";
             this.lblOperator.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -266,7 +266,7 @@
             this.PanelFooter.Size = new System.Drawing.Size(1370, 32);
             this.PanelFooter.TabIndex = 99;
             // 
-            // tableLayoutPanel1
+            // i
             // 
             this.i.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.i.ColumnCount = 12;
@@ -297,7 +297,7 @@
             this.i.Dock = System.Windows.Forms.DockStyle.Fill;
             this.i.Location = new System.Drawing.Point(0, 0);
             this.i.Margin = new System.Windows.Forms.Padding(0);
-            this.i.Name = "tableLayoutPanel1";
+            this.i.Name = "i";
             this.i.RowCount = 1;
             this.i.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.i.Size = new System.Drawing.Size(1370, 32);
@@ -320,7 +320,7 @@
             this.BtnF3.Size = new System.Drawing.Size(111, 28);
             this.BtnF3.TabIndex = 102;
             this.BtnF3.Tag = "2";
-            this.BtnF3.Text = "変更(F3)";
+            this.BtnF3.Text = "修正(F3)";
             this.BtnF3.UseVisualStyleBackColor = false;
             this.BtnF3.Click += new System.EventHandler(this.Btn_Click);
             this.BtnF3.MouseEnter += new System.EventHandler(this.BtnF1_MouseEnter);
@@ -408,7 +408,6 @@
             this.BtnF7.Size = new System.Drawing.Size(111, 28);
             this.BtnF7.TabIndex = 106;
             this.BtnF7.Tag = "6";
-            this.BtnF7.Text = "プレビュー(F7)";
             this.BtnF7.UseVisualStyleBackColor = false;
             this.BtnF7.Click += new System.EventHandler(this.Btn_Click);
             this.BtnF7.MouseEnter += new System.EventHandler(this.BtnF1_MouseEnter);
@@ -430,7 +429,7 @@
             this.BtnF8.Size = new System.Drawing.Size(111, 28);
             this.BtnF8.TabIndex = 107;
             this.BtnF8.Tag = "7";
-            this.BtnF8.Text = "CSV(F8)";
+            this.BtnF8.Text = "表示(F8)";
             this.BtnF8.UseVisualStyleBackColor = false;
             this.BtnF8.Click += new System.EventHandler(this.Btn_Click);
             this.BtnF8.MouseEnter += new System.EventHandler(this.BtnF1_MouseEnter);
@@ -452,7 +451,6 @@
             this.BtnF9.Size = new System.Drawing.Size(111, 28);
             this.BtnF9.TabIndex = 108;
             this.BtnF9.Tag = "8";
-            this.BtnF9.Text = "検索(F9)";
             this.BtnF9.UseVisualStyleBackColor = false;
             this.BtnF9.Click += new System.EventHandler(this.Btn_Click);
             this.BtnF9.MouseEnter += new System.EventHandler(this.BtnF1_MouseEnter);
@@ -474,7 +472,7 @@
             this.BtnF10.Size = new System.Drawing.Size(111, 28);
             this.BtnF10.TabIndex = 109;
             this.BtnF10.Tag = "9";
-            this.BtnF10.Text = "在庫変更(F10)";
+            this.BtnF10.Text = "出力(F10)";
             this.BtnF10.UseVisualStyleBackColor = false;
             this.BtnF10.Click += new System.EventHandler(this.Btn_Click);
             this.BtnF10.MouseEnter += new System.EventHandler(this.BtnF1_MouseEnter);
@@ -496,7 +494,6 @@
             this.BtnF11.Size = new System.Drawing.Size(111, 28);
             this.BtnF11.TabIndex = 110;
             this.BtnF11.Tag = "10";
-            this.BtnF11.Text = "表示(F11)";
             this.BtnF11.UseVisualStyleBackColor = false;
             this.BtnF11.Click += new System.EventHandler(this.Btn_Click);
             this.BtnF11.MouseEnter += new System.EventHandler(this.BtnF1_MouseEnter);
@@ -579,7 +576,7 @@
             this.lblStoreAuthoCD.ForeColor = System.Drawing.Color.Black;
             this.lblStoreAuthoCD.Location = new System.Drawing.Point(75, 171);
             this.lblStoreAuthoCD.Name = "lblStoreAuthoCD";
-            this.lblStoreAuthoCD.Size = new System.Drawing.Size(0, 15);
+            this.lblStoreAuthoCD.Size = new System.Drawing.Size(0, 12);
             this.lblStoreAuthoCD.TabIndex = 9;
             this.lblStoreAuthoCD.Text_Color = CKM_Controls.CKM_Label.CKM_Color.Default;
             this.lblStoreAuthoCD.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -596,7 +593,7 @@
             this.lblStoreCD.ForeColor = System.Drawing.Color.Black;
             this.lblStoreCD.Location = new System.Drawing.Point(216, 171);
             this.lblStoreCD.Name = "lblStoreCD";
-            this.lblStoreCD.Size = new System.Drawing.Size(0, 15);
+            this.lblStoreCD.Size = new System.Drawing.Size(0, 12);
             this.lblStoreCD.TabIndex = 10;
             this.lblStoreCD.Text_Color = CKM_Controls.CKM_Label.CKM_Color.Default;
             this.lblStoreCD.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -613,7 +610,7 @@
             this.lblStoreAuthorizationChangeDate.ForeColor = System.Drawing.Color.Black;
             this.lblStoreAuthorizationChangeDate.Location = new System.Drawing.Point(142, 171);
             this.lblStoreAuthorizationChangeDate.Name = "lblStoreAuthorizationChangeDate";
-            this.lblStoreAuthorizationChangeDate.Size = new System.Drawing.Size(0, 15);
+            this.lblStoreAuthorizationChangeDate.Size = new System.Drawing.Size(0, 12);
             this.lblStoreAuthorizationChangeDate.TabIndex = 11;
             this.lblStoreAuthorizationChangeDate.Text_Color = CKM_Controls.CKM_Label.CKM_Color.Default;
             this.lblStoreAuthorizationChangeDate.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -630,7 +627,7 @@
             this.lblProgramID.ForeColor = System.Drawing.Color.Black;
             this.lblProgramID.Location = new System.Drawing.Point(284, 171);
             this.lblProgramID.Name = "lblProgramID";
-            this.lblProgramID.Size = new System.Drawing.Size(0, 15);
+            this.lblProgramID.Size = new System.Drawing.Size(0, 12);
             this.lblProgramID.TabIndex = 12;
             this.lblProgramID.Text_Color = CKM_Controls.CKM_Label.CKM_Color.Default;
             this.lblProgramID.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -638,7 +635,7 @@
             // 
             // FrmMainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(198)))), ((int)(((byte)(224)))), ((int)(((byte)(180)))));
             this.ClientSize = new System.Drawing.Size(1370, 749);

@@ -37,42 +37,40 @@ namespace Base.Client
         public enum EProMode : short
         {
             /// <summary>
-            ///          入力プログラム
-            ///          </summary>
-            ///          <remarks></remarks>
+            /// 入力プログラム
+            /// </summary>
             INPUT,
             /// <summary>
-            ///          マスタメンテ
-            ///          </summary>
-            ///          <remarks></remarks>
+            /// マスタメンテ
+            /// </summary>
             MENTE,
             /// <summary>
             /// 照会
             /// </summary>
             SHOW,
+            /// <summary>
+            /// 出力プログラム
+            /// </summary>
+            OUTPUT,
             ///<summary>
             /// バッチプログラム
             ///</summary>
             BATCH,
             /// <summary>
-            ///          帳票プログラム
-            ///          </summary>
-            ///          <remarks></remarks>
+            /// 帳票プログラム
+            /// </summary>
             PRINT,
             /// <summary>
-            ///          メニュー
-            ///          </summary>
-            ///          <remarks></remarks>
+            /// メニュー
+            /// </summary>
             MENU,
             /// <summary>
-            ///         ''' 受注取込
-            ///         ''' </summary>
-            ///         ''' <remarks></remarks>
+            /// 受注取込
+            /// </summary>
             JUCHUTORIKOMIAPI,
             /// <summary>
-            ///         ''' Functions Buttons for KehiNyuuryoku Form
-            ///         ''' </summary>
-            ///         ''' <remarks></remarks>
+            /// Functions Buttons for KehiNyuuryoku Form
+            /// </summary>
             KehiNyuuryoku
         }
 
@@ -172,20 +170,14 @@ namespace Base.Client
                 _OldOperationMode = _OperationMode;
                 _OperationMode = value;
 
-                //KTP 2019-06-06 change color on mode change
                 switch (value)
                 {
                     case EOperationMode.INSERT:
                         if (this._ProMode == EProMode.MENTE || this._ProMode == EProMode.INPUT || this._ProMode == EProMode.KehiNyuuryoku)
-                        //this.ModeText = "登録";
-
-                        //else
                         {
                             this.ModeText = "新規";
                             lblMode.BackColor = INSERT_MODE_COLOR;
                         }
-
-
                         break;
 
                     case EOperationMode.UPDATE:
@@ -194,7 +186,6 @@ namespace Base.Client
                             this.ModeText = "修正";
                             lblMode.BackColor = UPDATE_MODE_COLOR;
                         }
-
                         break;
 
                     case EOperationMode.DELETE:
@@ -243,7 +234,6 @@ namespace Base.Client
         ///     ''' <remarks>ModeTextの名称を変更</remarks>
         public string ModeText
         {
-            //KTP 2019-03-06 to get mode text
             get { return lblMode.Text; }
             set
             {
@@ -297,7 +287,6 @@ namespace Base.Client
         }
 
         private bool F9 = true;
-        //ssa
         private bool F2 = true;
         private bool F3 = true;
         private bool F4 = true;
@@ -306,8 +295,8 @@ namespace Base.Client
         private bool F7 = true;
         private bool F8 = true;
         private bool F10 = true;
-        private bool F11 = true;//
-        private bool F12 = true;//07/10追加
+        private bool F11 = true;
+        private bool F12 = true;
         [Browsable(true)]
         [Category("CKM Properties")]
         [Description("Set F9 Button Visible")]
@@ -600,10 +589,7 @@ namespace Base.Client
                 else if (ctrl is CKM_TextBox)
                 {
                     ((CKM_TextBox)ctrl).Enabled = false;
-                    //if (!Enabled)
                     ((CKM_TextBox)ctrl).BackColor = SystemColors.Control;
-                    //else
-                    //    this.BackColor = SystemColors.Window;
                 }
                 else if (ctrl is ComboBox)
                     ((ComboBox)ctrl).Enabled = false;
@@ -639,9 +625,6 @@ namespace Base.Client
                 else if (ctrl is CKM_TextBox)
                 {
                     ((CKM_TextBox)ctrl).Enabled = true;
-                    //if (!Enabled)
-                    //    this.BackColor = SystemColors.Control;
-                    //else
                     ((CKM_TextBox)ctrl).BackColor = SystemColors.Window;
                 }
                 else if (ctrl is ComboBox)
@@ -726,227 +709,138 @@ namespace Base.Client
             //共通処理　受取パラメータ、接続情報
             //コマンドライン引数より情報取得
             //Iniファイルより情報取得
-            //this.GetCmdLine() == false ||
-
-            //KTP 2019-06-14
-            //if (!System.Diagnostics.Debugger.IsAttached)//check Debugger Mode for testing
-            //{
             if (this.GetCmdLine() == false || loginbl.ReadConfig() == false)
             {
                 //起動時エラー    DB接続不可能
                 this.Close();
                 System.Environment.Exit(0);
             }
-            //}
-            //else
-            //{
-            //    //Debugger Mode
-            //    InOperatorCD = "0001";
-
-            //    if (loginbl.ReadConfig() == false)
-            //    {
-            //        //起動時エラー    DB接続不可能
-            //        this.Close();
-            //        System.Environment.Exit(0);
-            //    }
-            //}
-
 
             //共通処理　Operator 確認
-            //[M_Staff]
-            M_Staff_Entity mse = new M_Staff_Entity
+            //[User](ORSコジマ様用)
+            M_User_Entity mue = new M_User_Entity
             {
-                StaffCD = InOperatorCD
+                Login_ID = InOperatorCD
             };
+            mue = loginbl.M_User_InitSelect(mue);
+            this.lblOperatorName.Text = mue.User_Name;
+            this.lblLoginDate.Text = mue.SysDate;
 
-            mse = loginbl.M_Staff_InitSelect(mse);
 
-            this.lblOperatorName.Text = mse.StaffName;
-            this.lblLoginDate.Text = mse.SysDate;
-            this.StoreCD = lblStoreCD.Text = mse.StoreCD;
 
-            //M_Staff_Entity mse2 = new M_Staff_Entity
+            // ★★↓↓↓SMS用なので後に消去予定↓↓↓★★
+            //
+            ////ログインIDチェック
+            //M_Staff_Entity mse = new M_Staff_Entity
             //{
             //    StaffCD = InOperatorCD
             //};
-            //mse2 = loginbl.M_Store_InitSelect(mse);
+            //mse = loginbl.M_Staff_InitSelect(mse);
+            //this.lblOperatorName.Text = mse.StaffName;
+            //this.lblLoginDate.Text = mse.SysDate;
+            //this.StoreCD = lblStoreCD.Text = mse.StoreCD;
 
-            //this.StoreName = mse2.StoreName; 
-            /// For Default Souko Bind
-            M_Staff_Entity mse1 = new M_Staff_Entity
-            {
-                StaffCD = InOperatorCD
-            };
-            mse1 = loginbl.M_Souko_InitSelect(mse1);
-            this.SoukoCD = mse1.SoukoCD.ToStringOrEmpty();
-
-            //共通処理　プログラム
-            //KTP - 2019-05-29 ProgramのチェックはM_Authorizations_AccessCheck にやっています。
-            //[M_Program]
-            //mpe = new M_Program_Entity
+            //M_Staff_Entity mse1 = new M_Staff_Entity
             //{
-            //    ProgramID = InProgramID,
-            //    Type = "1"  //仮
+            //    StaffCD = InOperatorCD
+            //};
+            //mse1 = loginbl.M_Souko_InitSelect(mse1);
+            //this.SoukoCD = mse1.SoukoCD.ToStringOrEmpty();
+            //
+            // ★★ ↑↑↑SMS用なので後に消去予定↑↑↑★★
+
+
+
+            // ★★↓↓↓PTKさんが引き継ぎ済みの部分なので　動かす為に今はコメントアウト↓↓↓★★★
+            //
+            ////共通処理　プログラム
+            ////Authorizations判断
+            //M_Authorizations_Entity mae;
+            //mae = new M_Authorizations_Entity
+            //{
+            //    ProgramID = lblProgramID.Text = this.InProgramID,
+            //    StaffCD = InOperatorCD,
+            //    PC = InPcID
             //};
 
-            //bool ret = loginbl.M_Program_InitSelect(mpe);
-            //if (ret == false)
+            //made = bbl.M_Authorizations_AccessCheck(mae);
+
+            //if (made == null)
             //{
-            //    //Ｓ０１２
-            //    bbl.ShowMessage("S012");
+            //    bbl.ShowMessage(mae.MessageID);
             //    //起動時エラー
             //    this.Close();
             //    System.Environment.Exit(0);
             //}
-
-            //Authorizations判断
-            M_Authorizations_Entity mae;
-            mae = new M_Authorizations_Entity
-            {
-                ProgramID = lblProgramID.Text = this.InProgramID,
-                StaffCD = InOperatorCD,
-                PC = InPcID
-            };
-
-            made = bbl.M_Authorizations_AccessCheck(mae);
-
-            if (made == null)
-            {
-                bbl.ShowMessage(mae.MessageID);
-                //起動時エラー
-                this.Close();
-                System.Environment.Exit(0);
-            }
-
-            //KTP 2019-05-29 Set ProgrameName, ProgramID
-            this.Text = made.ProgramID;
-            lblHeaderTitle.Text = made.ProgramName;
-            this.StoreAuthorizationsCD = lblStoreAuthoCD.Text = made.StoreAuthorizationsCD;
-            this.StoreAuthorizationsChangeDate = lblStoreAuthorizationChangeDate.Text = made.StoreAuthorization_ChangeDate;
+            //this.Text = made.ProgramID;
+            //lblHeaderTitle.Text = made.ProgramName;
+            //
+            // ★★↑↑↑PTKさんが引き継ぎ済みの部分なので 動かす為に今はコメントアウト↑↑↑★★
 
 
-            //KTP 2019-05-29 M_Authorizations_AccessCheckにやっています。 line no 513 to 521
-            //Program type判断
-            //switch (mpe.Type)
+
+
+
+            // ★★↓↓↓SMS用なので後に消去予定↓↓↓★★
+            //
+            //this.StoreAuthorizationsCD = lblStoreAuthoCD.Text = made.StoreAuthorizationsCD;
+            //this.StoreAuthorizationsChangeDate = lblStoreAuthorizationChangeDate.Text = made.StoreAuthorization_ChangeDate;
+
+
+            //処理可能店舗
+            //[M_StoreAuthorizations]
+            //M_StoreAuthorizations_Entity msa = new M_StoreAuthorizations_Entity
+            //{
+            //    StoreAuthorizationsCD = made.StoreAuthorizationsCD
+            //};
+
+            //DataTable dt = bbl.M_StoreAuthorizations_Select(msa);
+            //if (dt.Rows.Count > 0)
+            //{
+            //    availableStores = new string[dt.Rows.Count];
+            //    int i = 0;
+            //    foreach (DataRow row in dt.Rows)
+            //    {
+            //        availableStores[i] = row["StoreCD"].ToString();
+            //        i++;
+            //    }
+            //}
+
+            //プログラム起動履歴
+            //InsertLog(Get_L_Log_Entity(true));
+            //
+            // ★★ ↑↑↑SMS用なので後に消去予定↑↑↑★★
+
+
+
+            ////Todo:入力プログラム以外を考慮
+            //switch (made.ProgramType)
             //{
             //    case "1":
-
-            //        if (made.Insertable == "0" && made.Updatable == "0" && made.Deletable == "0" && made.Inquirable == "0")
+            //        if (made.Insertable == "1")
             //        {
-            //            //Ｓ００３
-            //            bbl.ShowMessage("S003");
-            //            //起動時エラー
-            //            this.Close();
-            //            System.Environment.Exit(0);
+            //            // 新規ボタン押下処理
+            //            FunctionProcess((int)EOperationMode.INSERT);
             //        }
-            //        break;
-
-            //    case "2":
-            //        if (made.Printable == "0")
+            //        else if (made.Updatable == "1")
             //        {
-            //            //Ｓ００３
-            //            bbl.ShowMessage("S003");
-            //            //起動時エラー
-            //            this.Close();
-            //            System.Environment.Exit(0);
+            //            // 修正ボタン押下処理
+            //            FunctionProcess((int)EOperationMode.UPDATE);
             //        }
-            //        break;
-
-            //    case "3":
-            //        if (made.Printable == "0" && made.Outputable == "0")
+            //        else if (made.Deletable == "1")
             //        {
-            //            //Ｓ００３
-            //            bbl.ShowMessage("S003");
-            //            //起動時エラー
-            //            this.Close();
-            //            System.Environment.Exit(0);
+            //            // 削除ボタン押下処理
+            //            FunctionProcess((int)EOperationMode.DELETE);
             //        }
-            //        break;
-
-            //    case "4":
-            //        if (made.Outputable == "0")
+            //        else
             //        {
-            //            //Ｓ００３
-            //            bbl.ShowMessage("S003");
-            //            //起動時エラー
-            //            this.Close();
-            //            System.Environment.Exit(0);
-            //        }
-            //        break;
-
-            //    case "5":
-            //        if (made.Inquirable == "0")
-            //        {
-            //            //Ｓ００３
-            //            bbl.ShowMessage("S003");
-            //            //起動時エラー
-            //            this.Close();
-            //            System.Environment.Exit(0);
-            //        }
-            //        break;
-
-            //    case "6":
-            //        if (made.Runable == "0")
-            //        {
-            //            //Ｓ００３
-            //            bbl.ShowMessage("S003");
-            //            //起動時エラー
-            //            this.Close();
-            //            System.Environment.Exit(0);
+            //            // 照会ボタン押下処理
+            //            FunctionProcess((int)EOperationMode.SHOW);
             //        }
             //        break;
             //}
 
-            //処理可能店舗
-            //[M_StoreAuthorizations]
-            M_StoreAuthorizations_Entity msa = new M_StoreAuthorizations_Entity
-            {
-                StoreAuthorizationsCD = made.StoreAuthorizationsCD
-            };
 
-            DataTable dt = bbl.M_StoreAuthorizations_Select(msa);
-            if (dt.Rows.Count > 0)
-            {
-                availableStores = new string[dt.Rows.Count];
-                int i = 0;
-                foreach (DataRow row in dt.Rows)
-                {
-                    availableStores[i] = row["StoreCD"].ToString();
-                    i++;
-                }
-            }
-
-            //プログラム起動履歴
-            //InsertLog(Get_L_Log_Entity(true));
-
-            //KTP 2019-05-29 Program Type Select from M_Authorizations_AccessCheck function
-            //Todo:入力プログラム以外を考慮
-            //switch (mpe.Type)
-            switch (made.ProgramType)
-            {
-                case "1":
-                    if (made.Insertable == "1")
-                    {
-                        // 新規ボタン押下処理
-                        FunctionProcess((int)EOperationMode.INSERT);
-                    }
-                    else if (made.Updatable == "1")
-                    {
-                        // 修正ボタン押下処理
-                        FunctionProcess((int)EOperationMode.UPDATE);
-                    }
-                    else if (made.Deletable == "1")
-                    {
-                        // 削除ボタン押下処理
-                        FunctionProcess((int)EOperationMode.DELETE);
-                    }
-                    else
-                    {
-                        // 照会ボタン押下処理
-                        FunctionProcess((int)EOperationMode.SHOW);
-                    }
-                    break;
-            }
         }
 
         /// <summary>
@@ -960,6 +854,7 @@ namespace Base.Client
 
             switch (mode)
             {
+               
                 case EProMode.INPUT:
                     {
                         this.BtnF7.Text = "行追加(F7)";
@@ -973,7 +868,6 @@ namespace Base.Client
                     {
                         this.BtnF2.Text = "新規(F2)";
                         this.BtnF7.Text = "";
-                        this.BtnF8.Text = "";
                         this.BtnF10.Text = "";
                     }
                     break;
@@ -988,6 +882,16 @@ namespace Base.Client
                         this.BtnF8.Text = "";
                         this.BtnF10.Text = "";
                         this.BtnF11.Text = "表示(F11)";
+                        this.BtnF12.Text = "";
+                        this.ModeVisible = false;
+                        break;
+                    }
+
+                case EProMode.OUTPUT:
+                    {
+                        this.BtnF2.Text = "";
+                        this.BtnF3.Text = "";
+                        this.BtnF5.Text = "";
                         this.BtnF12.Text = "";
                         this.ModeVisible = false;
                         break;
@@ -1912,200 +1816,7 @@ namespace Base.Client
             }
             return true;
         }
-        //protected bool RequireCheck(Control[] ctrl, TextBox txt = null)
-        //{
-        //    this.txt = txt;
-        //    foreach (Control c in ctrl)
-        //    {
-        //        if (c is CKM_TextBox)
-        //        {
-        //            if (txt == null)
-        //            {
-        //                if (string.IsNullOrWhiteSpace(((CKM_TextBox)c).Text))
-        //                {
-        //                    //  if (((CKM_TextBox)c).Name != "txtChangeDate")
-        //                    //if (txt.Name != "txtChangeDate")
-        //                    //{
-        //                        bbl.ShowMessage("E102");
-        //                        c.Focus();
-        //                    ((CKM_TextBox)c).IsFirstTime = false;
-        //                    //}
-        //                    return false;
-        //                    //bbl.ShowMessage("E102");
-        //                    //c.Focus();
-        //                    //return false;
-        //                }
-        //            }
-        //            else if (!string.IsNullOrWhiteSpace(txt.Text))
-        //            {
-        //                if (string.IsNullOrWhiteSpace(((CKM_TextBox)c).Text))
-        //                {
-        //                    ////  if (((CKM_TextBox)c).Name != "txtChangeDate")
-        //                    //if (txt.Name != "txtChangeDate")
-        //                    //  {
 
-        //                        bbl.ShowMessage("E102");
-        //                        c.Focus();
-        //                    ((CKM_TextBox)c).IsFirstTime = false;
-        //                    //}
-        //                    return false;
-        //                }
-
-        //            }
-        //        }
-        //        else if (c is CKM_ComboBox)
-        //        {
-        //            if (((CKM_ComboBox)c).SelectedIndex.Equals(-1))
-        //            {
-        //                bbl.ShowMessage("E102");
-        //                c.Focus();
-        //                return false;
-        //            }
-        //            if (((CKM_ComboBox)c).SelectedValue.Equals("-1"))
-        //            {
-        //                bbl.ShowMessage("E102");
-        //                c.Focus();
-        //                return false;
-        //            }
-        //        }
-        //    }
-        //    return true;
-        //}
-
-        //protected bool ReverseRequireCheck(Control[] ctrl, TextBox txt = null)
-        //{
-        //    txt1 = txt;
-        //    foreach (Control c in ctrl)
-        //    {
-        //        if (c is CKM_TextBox)
-        //        {
-        //            if (string.IsNullOrWhiteSpace(txt1.Text))
-        //            {
-        //                if (!string.IsNullOrWhiteSpace(((CKM_TextBox)c).Text))
-        //                {
-        //                    //   if (((CKM_TextBox)c).Name != "txtChangeDate")
-        //                    //if (txt.Name != "txtChangeDate")
-        //                    //{
-        //                    ((CKM_TextBox)c).IsFirstTime = false;
-        //                    bbl.ShowMessage("E102");
-        //                        txt1.Focus();
-        //                    //}
-        //                    return false;
-        //                }
-        //            }
-
-        //        }
-        //    }
-        //    return true;
-        //}
-        //protected bool RequireCheck(Control[] ctrl, TextBox txt = null)
-        //{
-        //    this.txt = txt;
-        //    foreach (Control c in ctrl)
-        //    {
-        //        if (c is CKM_TextBox)
-        //        {
-        //            if (txt == null)
-        //            {
-        //                if (string.IsNullOrWhiteSpace(((CKM_TextBox)c).Text))
-        //                {
-        //                    bbl.ShowMessage("E102");
-        //                    c.Focus();
-        //                    return false;
-        //                }
-        //            }
-
-        //            else if (string.IsNullOrWhiteSpace(((CKM_TextBox)c).Text))
-        //            {
-        //                bbl.ShowMessage("E102");
-        //                c.Focus();
-        //                return false;
-        //            }
-        //            //else if (!string.IsNullOrWhiteSpace(txt.Text))
-        //            //{
-        //            //    //if (((CKM_TextBox)c).Name == "txtChangeDate")
-        //            //    //{
-        //            //    //    if (!DateCheck(((CKM_TextBox)c).Text))
-        //            //    //    {
-        //            //    //        if (Datetemp == "")
-        //            //    //        {
-        //            //    //            return false;
-        //            //    //        }
-
-
-        //            //    //    }
-        //            //    //    else
-        //            //    //    {
-        //            //    //        SetTxtInMain(Datetemp, ((CKM_TextBox)c).Parent.Name);
-
-        //            //    //    }
-
-        //            //    //}
-        //            //    if (string.IsNullOrWhiteSpace(((CKM_TextBox)c).Text))
-        //            //    {
-        //            //        bbl.ShowMessage("E102");
-        //            //        c.Focus();
-        //            //        return false;
-        //            //    }
-
-        //            //}
-        //        }
-        //        else if (c is CKM_ComboBox)
-        //        {
-        //            if (((CKM_ComboBox)c).SelectedIndex.Equals(-1))
-        //            {
-        //                bbl.ShowMessage("E102");
-        //                c.Focus();
-        //                return false;
-        //            }
-        //            if (((CKM_ComboBox)c).SelectedValue.Equals("-1"))
-        //            {
-        //                bbl.ShowMessage("E102");
-        //                c.Focus();
-        //                return false;
-        //            }
-        //        }
-        //    }
-        //    return true;
-        //}
-        //protected bool ReverseRequireCheck(Control[] ctrl, TextBox txt = null)
-        //{
-        //    txt1 = txt;
-        //    foreach (Control c in ctrl)
-        //    {
-        //        if (c is CKM_TextBox)
-        //        {
-        //            if (string.IsNullOrWhiteSpace(txt1.Text))
-        //            {
-        //                //if (((CKM_TextBox)c).Name == "txtChangeDate")
-        //                //{
-        //                //    if (!DateCheck(((CKM_TextBox)c).Text))
-        //                //    {
-
-        //                //        if (Datetemp == "")
-        //                //        {
-        //                //            return false;
-        //                //        }
-        //                //    }else
-        //                //        SetTxtInMain(Datetemp, ((CKM_TextBox)c).Parent.Name);
-
-
-        //                //}
-        //                if (!string.IsNullOrWhiteSpace(((CKM_TextBox)c).Text))
-        //                {
-        //                  //  Datetemp = "";
-        //                    bbl.ShowMessage("E102");
-        //                    txt1.Focus();
-        //                    return false;
-        //                }
-
-
-        //            }
-
-        //        }
-        //    }
-        //    return true;
-        //}
         string Datetemp = "";
         private void BtnF1_MouseEnter(object sender, EventArgs e)
         {
@@ -2153,8 +1864,6 @@ namespace Base.Client
 
         }
         public void MoveNextControl(KeyEventArgs e)  //PTK  Addedd// if Something Changed, Discuss with PTK
-
-
         {
 
             IsmaxTabIndex(e, ActiveControl);
