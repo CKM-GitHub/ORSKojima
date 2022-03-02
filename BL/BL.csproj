@@ -137,6 +137,7 @@
     <Compile Include="NyuukaShoukai_BL.cs" />
     <Compile Include="NyuukinKesikomiItiranHyou_BL.cs" />
     <Compile Include="TempoRegiSaleSettei_BL.cs" />
+    <Compile Include="Tokuisaki_BL.cs" />
     <Compile Include="WebJuchuuKakunin_BL.cs" />
     <Compile Include="NyuukinNyuuryoku_BL.cs" />
     <Compile Include="NyuukinYoteiHyou_BL.cs" />

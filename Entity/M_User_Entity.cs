@@ -18,5 +18,7 @@ namespace Entity
         public string Updated_Date { get; set; }
         public string IsAdmin { get; set; }
 
+        public string SysDate { get; set; }
+
     }
 }
