@@ -1638,6 +1638,7 @@ namespace Base.Client
                     }
 
                 case EProMode.SHOW: // 照会
+                case EProMode.OUTPUT: // 照会
                     {
                         // 実行ファンクション
                         if (Index + 1 == FuncDisp)
