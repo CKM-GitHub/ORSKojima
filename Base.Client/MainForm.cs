@@ -104,8 +104,12 @@ namespace Base.Client
         /// <summary>
         ///     ''' 表示ファンクション
         ///     ''' </summary>
-        ///     ''' <remarks>F11を表示とする</remarks>
-        protected const short FuncDisp = 11;
+        ///     ''' <remarks>F8を表示とする</remarks>
+        protected const short FuncDisp = 8;
+        /// <summary>
+        ///     削除ファンクション
+        /// </summary>
+        protected const short FuncDelete = 4;
         /// <summary>
         ///     ''' 登録・印刷ファンクション
         ///     ''' </summary>
@@ -532,6 +536,14 @@ namespace Base.Client
         ///     ''' <remarks>プログラムでオーバーライドする</remarks>
         protected virtual void ExecDisp()
         {
+        }
+        /// <summary>
+        /// 削除押下時
+        /// </summary>
+        /// <remarks>プログラムでオーバーライドする</remarks>
+        protected virtual void ExecDelete()
+        {
+
         }
         /// <summary>
         ///     ''' 実行・登録押下時
@@ -1349,15 +1361,38 @@ namespace Base.Client
             }
             else if (Index < 5)
             {
-                if (this._ProMode != EProMode.SHOW)
+                switch (this._ProMode)
                 {
-                    //処理モード変更時  Todo:入力プログラム以外を考慮
-                    if (bbl.ShowMessage("Q005") != DialogResult.Yes)
-                    {
-                        PreviousCtrl.Focus();
-                        return;
-                    }
+                    case EProMode.OUTPUT:
+                        {
+                            break;
+                        }
+                    case EProMode.SHOW:
+                        { 
+                            break;
+                        }
+                    default:
+                        {
+                            //処理モード変更時  Todo:入力プログラム以外を考慮
+                            if (bbl.ShowMessage("Q005") != DialogResult.Yes)
+                            {
+                                PreviousCtrl.Focus();
+                                return;
+                            }
+                            break;
+                        }
+                               
+
                 }
+                //if (this._ProMode != EProMode.OUTPUT || this._ProMode != EProMode.SHOW)
+                //{
+                //    //処理モード変更時  Todo:入力プログラム以外を考慮
+                //    if (bbl.ShowMessage("Q005") != DialogResult.Yes)
+                //    {
+                //        PreviousCtrl.Focus();
+                //        return;
+                //    }
+                //}
             }
 
             FunctionProcess(Index);
@@ -1638,13 +1673,33 @@ namespace Base.Client
                     }
 
                 case EProMode.SHOW: // 照会
-                case EProMode.OUTPUT: // 照会
                     {
                         // 実行ファンクション
                         if (Index + 1 == FuncDisp)
                         {
                             this.Cursor = Cursors.WaitCursor;
                             ExecDisp();
+                            this.Cursor = Cursors.Default;
+                            return;
+                        }
+
+                        break;
+                    }
+
+                case EProMode.OUTPUT: //出力
+                    {
+                        // 実行ファンクション
+                        if (Index + 1 == FuncDisp)
+                        {
+                            this.Cursor = Cursors.WaitCursor;
+                            ExecDisp();
+                            this.Cursor = Cursors.Default;
+                            return;
+                        }
+                        else if (Index + 1 == FuncDelete)
+                        {
+                            this.Cursor = Cursors.WaitCursor;
+                            ExecDelete();
                             this.Cursor = Cursors.Default;
                             return;
                         }

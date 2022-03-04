@@ -97,6 +97,7 @@
     <Compile Include="D_RakutenRequest_Entity.cs" />
     <Compile Include="D_Sales_Entity.cs" />
     <Compile Include="D_Shipping_Entity.cs" />
+    <Compile Include="D_ShoppingCart_Entity.cs" />
     <Compile Include="D_SKENDeliveryDetails_Entity.cs" />
     <Compile Include="D_SKENDelivery_Entity.cs" />
     <Compile Include="D_StockReplica_Entity.cs" />

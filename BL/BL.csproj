@@ -65,6 +65,7 @@
     <Compile Include="Customer_BL.cs" />
     <Compile Include="DenominationKBN_BL.cs" />
     <Compile Include="Denomination_BL.cs" />
+    <Compile Include="ExhibitInformation_BL.cs" />
     <Compile Include="Extentions.cs" />
     <Compile Include="FBDataSakusei_BL.cs" />
     <Compile Include="Hacchuusho_BL.cs" />
