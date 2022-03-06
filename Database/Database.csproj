@@ -148,6 +148,7 @@
     <Content Include="StoreProcedure\M_User_InitSelect.sql" />
     <Content Include="StoreProcedure\PRC_EDIOrder_MailInsert.sql" />
     <Content Include="StoreProcedure\PRC_ExhibitInformation_Delete.sql" />
+    <Content Include="StoreProcedure\PRC_ExhibitInformation_Register.sql" />
     <Content Include="StoreProcedure\PRC_ExhibitInformation_SelectDataForDisp.sql" />
     <Content Include="StoreProcedure\PRC_JuchuuDataCheck.sql" />
     <Content Include="StoreProcedure\ptkEnco.sql" />

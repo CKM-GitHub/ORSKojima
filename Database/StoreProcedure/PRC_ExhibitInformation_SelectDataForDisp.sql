@@ -203,6 +203,28 @@ BEGIN
 	FROM #tmpSelectData tmp
 	;
 
+	--y‘e—˜—¦/Š„ˆø—¦‚ªŽw’è‚³‚ê‚½ê‡A•s—vƒf[ƒ^‚ðíœ‚·‚éz
+	-- ‘e—˜—¦
+	IF (@GrossProfit IS NOT NULL)
+	BEGIN
+		
+		DELETE 
+		FROM #tmpSelectData
+		WHERE GrossProfit >= @GrossProfit
+		;
+
+	END
+
+	-- Š„ˆø—¦
+	IF (@Discount IS NOT NULL)
+	BEGIN
+
+		DELETE 
+		FROM #tmpSelectData
+		WHERE Discount < @Discount
+		;
+
+	END
 
 
 
@@ -216,13 +238,6 @@ BEGIN
 	--yˆêŽžƒe[ƒuƒ‹‚ðíœz
 	DROP TABLE #tmpSelectData
 	;
-
-
-	--SELECT @CommentItemNM
-	--;
-	--SELECT @CommentItemNum
-	--;
-
 
 
 					

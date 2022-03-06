@@ -101,24 +101,31 @@ namespace Base.Client
             /// </summary>
             SHOW
         }
+
         /// <summary>
-        ///     ''' 表示ファンクション
-        ///     ''' </summary>
-        ///     ''' <remarks>F8を表示とする</remarks>
+        /// 表示ファンクション
+        /// </summary>
+        /// <remarks>F8を表示とする</remarks>
         protected const short FuncDisp = 8;
         /// <summary>
-        ///     削除ファンクション
+        ///　削除ファンクション
         /// </summary>
+        /// <remarks>F4を表示とする</remarks>
         protected const short FuncDelete = 4;
         /// <summary>
-        ///     ''' 登録・印刷ファンクション
-        ///     ''' </summary>
-        ///     ''' <remarks>F12を登録とする</remarks>
+        /// 出力ファンクション
+        /// </summary>
+        /// <remarks>F10を表示とする</remarks>
+        protected const short FuncOutput = 10;
+        /// <summary>
+        /// 登録・印刷ファンクション
+        /// </summary>
+        /// <remarks>F12を登録とする</remarks>
         public const short FuncExec = 12;
         /// <summary>
-        ///     ''' 終了ファンクション
-        ///     ''' </summary>
-        ///     ''' <remarks>F1を終了とする</remarks>
+        /// 終了ファンクション
+        /// </summary>
+        /// <remarks>F1を終了とする</remarks>
         public const short FuncEnd = 1;
 
 
@@ -538,12 +545,17 @@ namespace Base.Client
         {
         }
         /// <summary>
-        /// 削除押下時
+        /// 削除ボタン押下時
         /// </summary>
         /// <remarks>プログラムでオーバーライドする</remarks>
         protected virtual void ExecDelete()
         {
-
+        }
+        /// <summary>
+        /// 出力ボタン押下時
+        /// </summary>
+        protected virtual void ExecOutput()
+        {
         }
         /// <summary>
         ///     ''' 実行・登録押下時
@@ -1702,6 +1714,13 @@ namespace Base.Client
                             ExecDelete();
                             this.Cursor = Cursors.Default;
                             return;
+                        }
+                        else if (Index + 1 == FuncOutput)
+                        {
+                            this.Cursor = Cursors.WaitCursor;
+                            ExecOutput();
+                            this.Cursor = Cursors.Default;
+                            break;
                         }
 
                         break;

@@ -12,11 +12,9 @@ namespace DL
     public class ExhibitInformation_DL : Base_DL
     {
         /// <summary>
-        /// 
+        /// 画面表示用データ取得
         /// </summary>
-        /// <param name="hacchuuDate"></param>
-        /// <param name="vendorCD"></param>
-        /// <param name="storeCD"></param>
+        /// <param name="dse"></param>
         /// <returns></returns>
         public DataTable PRC_ExhibitInformation_SelectDataForDisp(D_ShoppingCart_Entity dse)
         {
@@ -37,6 +35,10 @@ namespace DL
             return SelectData(dic, "PRC_ExhibitInformation_SelectDataForDisp");
         }
 
+        /// <summary>
+        /// D_ShoppintCart 削除処理
+        /// </summary>
+        /// <returns></returns>
         public bool PRC_ExhibitInformation_Delete()
         {
             Dictionary<string, ValuePair> dic = new Dictionary<string, ValuePair>()
@@ -55,61 +57,35 @@ namespace DL
         }
 
         /// <summary>
-        /// 
+        /// 出品履歴データ（D_ExhibitHistory）更新処理
         /// </summary>
-        /// <param name="operationMode"></param>
-        /// <param name="operatorID"></param>
-        /// <param name="pc"></param>
-        /// <param name="storeCD"></param>
-        /// <param name="staffCD"></param>
-        /// <param name="hacchuuDate"></param>
-        /// <param name="dtTIkkatuHacchuuNyuuryoku"></param>
+        /// <param name="dse"></param>
+        /// <param name="dtRegist"></param>
         /// <returns></returns>
-        public bool PRC_ExhibitInformation_Register(int operationMode,string operatorID,string pc,string storeCD,string staffCD, string orderDate, string orderNO, string orderProcessNO, string ikkatuHacchuuMode, DataTable dtTIkkatuHacchuuNyuuryoku)
+        public bool PRC_ExhibitInformation_Register(D_ShoppingCart_Entity dse, DataTable dtRegist)
         {
-            Dictionary<string, ValuePair> dic = new Dictionary<string, ValuePair>
-            {
-                { "@p_OperateMode", new ValuePair { value1 = SqlDbType.Int, value2 = operationMode.ToString() } },
-                { "@p_Operator", new ValuePair { value1 = SqlDbType.VarChar, value2 = operatorID } },
-                { "@p_PC", new ValuePair { value1 = SqlDbType.VarChar, value2 = pc} },
-                { "@p_StoreCD", new ValuePair { value1 = SqlDbType.VarChar, value2 = storeCD} },
-                { "@p_StaffCD", new ValuePair { value1 = SqlDbType.VarChar, value2 = staffCD} },
-                { "@p_OrderDate", new ValuePair { value1 = SqlDbType.Date, value2 = orderDate} },
-                { "@p_OrderNO", new ValuePair { value1 = SqlDbType.VarChar, value2 = orderNO} },
-                { "@p_IkkatuHacchuuMode", new ValuePair { value1 = SqlDbType.VarChar, value2 = ikkatuHacchuuMode} },
-                { "@p_OrderProcessNO", new ValuePair { value1 = SqlDbType.VarChar, value2 = orderProcessNO} },
-            };
-            bool ret = true;
             string sp = "PRC_ExhibitInformation_Register";
-            try
-            {
-                StartTransaction();
-                command = new SqlCommand(sp, GetConnection(), transaction);
-                command.CommandType = CommandType.StoredProcedure;
-                foreach (KeyValuePair<string, ValuePair> pair in dic)
-                {
-                    ValuePair vp = pair.Value;
-                    AddParam(command, pair.Key, vp.value1, vp.value2);
-                }
-                SqlParameter p = command.Parameters.AddWithValue("@p_TExhibitInformation", dtTIkkatuHacchuuNyuuryoku);
-                p.SqlDbType = SqlDbType.Structured;
 
-                command.ExecuteNonQuery();
+            command = new SqlCommand(sp, GetConnection());
+            command.CommandType = CommandType.StoredProcedure;
+            command.CommandTimeout = 0;
 
-                CommitTransaction();
+            AddParam(command, "@TokuisakiCD", SqlDbType.VarChar, dse.TokuisakiCD);
+            AddParamForDataTable(command, "@TableRegist", SqlDbType.Structured, dtRegist);
+            AddParam(command, "@Operator", SqlDbType.VarChar, dse.Operator);
+            AddParam(command, "@PC", SqlDbType.VarChar, dse.PC);
 
-                ret = true;
-            }
-            catch (Exception e)
-            {
-                RollBackTransaction();
-                ret = false;
-                throw e;
-            }
-            finally
-            {
-                command.Connection.Close();
-            }
+            //OUTパラメータの追加
+            string outPutParam = "@OutTokuisakiCD";
+            command.Parameters.Add(outPutParam, SqlDbType.VarChar, 5);
+            command.Parameters[outPutParam].Direction = ParameterDirection.Output;
+
+            UseTransaction = true;
+
+            bool ret = InsertUpdateDeleteData(sp, ref outPutParam);
+            if (ret)
+                dse.TokuisakiCD = outPutParam;
+
             return ret;
         }
 

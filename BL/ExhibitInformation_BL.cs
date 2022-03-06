@@ -37,21 +37,16 @@ namespace BL
         {
             return ExhibitInformationDL.PRC_ExhibitInformation_Delete();
         }
-    
+
         /// <summary>
-        /// 
+        /// 出品履歴データ(D_ExhibitHistory)更新処理
         /// </summary>
-        /// <param name="operationMode"></param>
-        /// <param name="operatorID"></param>
-        /// <param name="pc"></param>
-        /// <param name="storeCD"></param>
-        /// <param name="staffCD"></param>
-        /// <param name="hacchuuDate"></param>
-        /// <param name="dtTIkkatuHacchuuNyuuryoku"></param>
+        /// <param name="dse"></param>
+        /// <param name="dtRegist"></param>
         /// <returns></returns>
-        public bool PRC_IkkatuHacchuuNyuuryoku_Register(int operationMode, string operatorID, string pc, string storeCD, string staffCD, string hacchuuDate, string orderNO, string orderProcessNO, string ikkatuHacchuuMode, DataTable dtTIkkatuHacchuuNyuuryoku)
+        public bool PRC_ExhibitInformation_Register(D_ShoppingCart_Entity dse, DataTable dtRegist)
         {
-            return ExhibitInformationDL.PRC_ExhibitInformation_Register(operationMode, operatorID, pc, storeCD, staffCD, hacchuuDate, orderNO, orderProcessNO, ikkatuHacchuuMode, dtTIkkatuHacchuuNyuuryoku);
+            return ExhibitInformationDL.PRC_ExhibitInformation_Register(dse, dtRegist);
         }
 
     }
