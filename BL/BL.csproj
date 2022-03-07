@@ -65,6 +65,7 @@
     <Compile Include="Customer_BL.cs" />
     <Compile Include="DenominationKBN_BL.cs" />
     <Compile Include="Denomination_BL.cs" />
+    <Compile Include="ExhibitInformation_BL.cs" />
     <Compile Include="Extentions.cs" />
     <Compile Include="FBDataSakusei_BL.cs" />
     <Compile Include="Hacchuusho_BL.cs" />
@@ -137,6 +138,7 @@
     <Compile Include="NyuukaShoukai_BL.cs" />
     <Compile Include="NyuukinKesikomiItiranHyou_BL.cs" />
     <Compile Include="TempoRegiSaleSettei_BL.cs" />
+    <Compile Include="Tokuisaki_BL.cs" />
     <Compile Include="WebJuchuuKakunin_BL.cs" />
     <Compile Include="NyuukinNyuuryoku_BL.cs" />
     <Compile Include="NyuukinYoteiHyou_BL.cs" />

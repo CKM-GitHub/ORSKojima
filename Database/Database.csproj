@@ -142,7 +142,14 @@
     <Content Include="StoreProcedure\M_Souko_SelectForTanaban.sql" />
     <Content Include="StoreProcedure\M_StorePoint_ExpirationDate.sql" />
     <Content Include="StoreProcedure\M_StorePoint_SelectForTempRegiPoint.sql" />
+    <Content Include="StoreProcedure\M_Tokuisaki_Delete.sql" />
+    <Content Include="StoreProcedure\M_Tokuisaki_Insert_Update.sql" />
+    <Content Include="StoreProcedure\M_Tokuisaki_Select.sql" />
+    <Content Include="StoreProcedure\M_User_InitSelect.sql" />
     <Content Include="StoreProcedure\PRC_EDIOrder_MailInsert.sql" />
+    <Content Include="StoreProcedure\PRC_ExhibitInformation_Delete.sql" />
+    <Content Include="StoreProcedure\PRC_ExhibitInformation_Register.sql" />
+    <Content Include="StoreProcedure\PRC_ExhibitInformation_SelectDataForDisp.sql" />
     <Content Include="StoreProcedure\PRC_JuchuuDataCheck.sql" />
     <Content Include="StoreProcedure\ptkEnco.sql" />
     <Content Include="StoreProcedure\Select_SetCheckdigit.sql" />
