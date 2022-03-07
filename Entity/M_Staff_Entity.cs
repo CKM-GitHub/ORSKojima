@@ -9,6 +9,8 @@ namespace Entity
     public class M_Staff_Entity : Base_Entity
     {
 
+        public string Login_ID { get; set; }
+
         public string StaffCD { get; set; }
 
         //KTP 2019-05-29　BaseEntity ほかの画面が使うこともあるので、BaseEntity に入れました。

@@ -32,11 +32,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.ckM_Button4 = new CKM_Controls.CKM_Button();
-            this.ckM_Button2 = new CKM_Controls.CKM_Button();
-            this.ckM_Button1 = new CKM_Controls.CKM_Button();
-            this.ckM_Button3 = new CKM_Controls.CKM_Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.ckM_Label2 = new CKM_Controls.CKM_Label();
             this.ckM_Label1 = new CKM_Controls.CKM_Label();
             this.txtPassword = new CKM_Controls.CKM_TextBox();
@@ -45,6 +40,11 @@
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.lblcent = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.ckM_Button4 = new CKM_Controls.CKM_Button();
+            this.ckM_Button2 = new CKM_Controls.CKM_Button();
+            this.ckM_Button1 = new CKM_Controls.CKM_Button();
+            this.ckM_Button3 = new CKM_Controls.CKM_Button();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -88,6 +88,152 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1148, 67);
             this.tableLayoutPanel1.TabIndex = 27;
+            // 
+            // ckM_Label2
+            // 
+            this.ckM_Label2.AutoSize = true;
+            this.ckM_Label2.Back_Color = CKM_Controls.CKM_Label.CKM_Color.Default;
+            this.ckM_Label2.BackColor = System.Drawing.Color.Transparent;
+            this.ckM_Label2.DefaultlabelSize = true;
+            this.ckM_Label2.Font = new System.Drawing.Font("MS Gothic", 14F, System.Drawing.FontStyle.Bold);
+            this.ckM_Label2.Font_Size = CKM_Controls.CKM_Label.CKM_FontSize.Small;
+            this.ckM_Label2.ForeColor = System.Drawing.Color.Black;
+            this.ckM_Label2.Location = new System.Drawing.Point(304, 270);
+            this.ckM_Label2.Name = "ckM_Label2";
+            this.ckM_Label2.Size = new System.Drawing.Size(114, 19);
+            this.ckM_Label2.TabIndex = 28;
+            this.ckM_Label2.Text = "パスワード";
+            this.ckM_Label2.Text_Color = CKM_Controls.CKM_Label.CKM_Color.Default;
+            this.ckM_Label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // ckM_Label1
+            // 
+            this.ckM_Label1.AutoSize = true;
+            this.ckM_Label1.Back_Color = CKM_Controls.CKM_Label.CKM_Color.Default;
+            this.ckM_Label1.BackColor = System.Drawing.Color.Transparent;
+            this.ckM_Label1.DefaultlabelSize = true;
+            this.ckM_Label1.Font = new System.Drawing.Font("MS Gothic", 14F, System.Drawing.FontStyle.Bold);
+            this.ckM_Label1.Font_Size = CKM_Controls.CKM_Label.CKM_FontSize.Small;
+            this.ckM_Label1.ForeColor = System.Drawing.Color.Black;
+            this.ckM_Label1.Location = new System.Drawing.Point(385, 217);
+            this.ckM_Label1.Name = "ckM_Label1";
+            this.ckM_Label1.Size = new System.Drawing.Size(31, 19);
+            this.ckM_Label1.TabIndex = 29;
+            this.ckM_Label1.Text = "ID";
+            this.ckM_Label1.Text_Color = CKM_Controls.CKM_Label.CKM_Color.Default;
+            this.ckM_Label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtPassword
+            // 
+            this.txtPassword.AllowMinus = false;
+            this.txtPassword.Back_Color = CKM_Controls.CKM_TextBox.CKM_Color.White;
+            this.txtPassword.BackColor = System.Drawing.Color.White;
+            this.txtPassword.BorderColor = false;
+            this.txtPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtPassword.ClientColor = System.Drawing.Color.White;
+            this.txtPassword.Ctrl_Byte = CKM_Controls.CKM_TextBox.Bytes.半全角;
+            this.txtPassword.Ctrl_Type = CKM_Controls.CKM_TextBox.Type.Normal;
+            this.txtPassword.DecimalPlace = 0;
+            this.txtPassword.EnabledInsertKeyModeOnMouseEnter = false;
+            this.txtPassword.Font = new System.Drawing.Font("MS Gothic", 22F);
+            this.txtPassword.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Overwrite;
+            this.txtPassword.IntegerPart = 0;
+            this.txtPassword.IsCorrectDate = true;
+            this.txtPassword.isEnterKeyDown = false;
+            this.txtPassword.IsFirstTime = true;
+            this.txtPassword.isMaxLengthErr = false;
+            this.txtPassword.IsNumber = true;
+            this.txtPassword.IsShop = false;
+            this.txtPassword.IsTimemmss = false;
+            this.txtPassword.Length = 10;
+            this.txtPassword.Location = new System.Drawing.Point(430, 261);
+            this.txtPassword.MaxLength = 10;
+            this.txtPassword.MoveNext = true;
+            this.txtPassword.Name = "txtPassword";
+            this.txtPassword.PasswordChar = '*';
+            this.txtPassword.Size = new System.Drawing.Size(405, 37);
+            this.txtPassword.TabIndex = 2;
+            this.txtPassword.TextSize = CKM_Controls.CKM_TextBox.FontSize.FMedium;
+            this.txtPassword.UseColorSizMode = false;
+            this.txtPassword.TextChanged += new System.EventHandler(this.txtPassword_TextChanged);
+            // 
+            // txtOperatorCD
+            // 
+            this.txtOperatorCD.AllowMinus = false;
+            this.txtOperatorCD.Back_Color = CKM_Controls.CKM_TextBox.CKM_Color.White;
+            this.txtOperatorCD.BackColor = System.Drawing.Color.White;
+            this.txtOperatorCD.BorderColor = false;
+            this.txtOperatorCD.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtOperatorCD.ClientColor = System.Drawing.Color.White;
+            this.txtOperatorCD.Ctrl_Byte = CKM_Controls.CKM_TextBox.Bytes.半角;
+            this.txtOperatorCD.Ctrl_Type = CKM_Controls.CKM_TextBox.Type.Normal;
+            this.txtOperatorCD.DecimalPlace = 0;
+            this.txtOperatorCD.EnabledInsertKeyModeOnMouseEnter = false;
+            this.txtOperatorCD.Font = new System.Drawing.Font("MS Gothic", 22F);
+            this.txtOperatorCD.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Overwrite;
+            this.txtOperatorCD.IntegerPart = 0;
+            this.txtOperatorCD.IsCorrectDate = true;
+            this.txtOperatorCD.isEnterKeyDown = false;
+            this.txtOperatorCD.IsFirstTime = true;
+            this.txtOperatorCD.isMaxLengthErr = false;
+            this.txtOperatorCD.IsNumber = true;
+            this.txtOperatorCD.IsShop = false;
+            this.txtOperatorCD.IsTimemmss = false;
+            this.txtOperatorCD.Length = 10;
+            this.txtOperatorCD.Location = new System.Drawing.Point(430, 207);
+            this.txtOperatorCD.MaxLength = 10;
+            this.txtOperatorCD.MoveNext = true;
+            this.txtOperatorCD.Name = "txtOperatorCD";
+            this.txtOperatorCD.Size = new System.Drawing.Size(405, 37);
+            this.txtOperatorCD.TabIndex = 1;
+            this.txtOperatorCD.TextSize = CKM_Controls.CKM_TextBox.FontSize.FMedium;
+            this.txtOperatorCD.UseColorSizMode = false;
+            this.txtOperatorCD.TextChanged += new System.EventHandler(this.txtOperatorCD_TextChanged);
+            // 
+            // lblProgress
+            // 
+            this.lblProgress.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.lblProgress.Location = new System.Drawing.Point(532, 340);
+            this.lblProgress.Name = "lblProgress";
+            this.lblProgress.Size = new System.Drawing.Size(200, 23);
+            this.lblProgress.TabIndex = 33;
+            this.lblProgress.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(428, 382);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(405, 23);
+            this.progressBar1.Step = 1;
+            this.progressBar1.TabIndex = 42;
+            this.progressBar1.Visible = false;
+            // 
+            // backgroundWorker1
+            // 
+            this.backgroundWorker1.WorkerReportsProgress = true;
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
+            this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
+            this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
+            // 
+            // lblcent
+            // 
+            this.lblcent.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.lblcent.Location = new System.Drawing.Point(532, 423);
+            this.lblcent.Name = "lblcent";
+            this.lblcent.Size = new System.Drawing.Size(200, 23);
+            this.lblcent.TabIndex = 43;
+            this.lblcent.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::CapitalSMS.Properties.Resources.nc2;
+            this.pictureBox1.Location = new System.Drawing.Point(506, 109);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(271, 73);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 32;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
             // 
             // ckM_Button4
             // 
@@ -186,147 +332,6 @@
             this.ckM_Button3.Click += new System.EventHandler(this.ckM_Button3_Click);
             this.ckM_Button3.MouseEnter += new System.EventHandler(this.ckM_Button2_MouseEnter);
             this.ckM_Button3.MouseLeave += new System.EventHandler(this.ckM_Button2_MouseLeave);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::CapitalSMS.Properties.Resources.nc2;
-            this.pictureBox1.Location = new System.Drawing.Point(506, 109);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(271, 73);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 32;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
-            // 
-            // ckM_Label2
-            // 
-            this.ckM_Label2.AutoSize = true;
-            this.ckM_Label2.Back_Color = CKM_Controls.CKM_Label.CKM_Color.Default;
-            this.ckM_Label2.BackColor = System.Drawing.Color.Transparent;
-            this.ckM_Label2.DefaultlabelSize = true;
-            this.ckM_Label2.Font = new System.Drawing.Font("MS Gothic", 14F, System.Drawing.FontStyle.Bold);
-            this.ckM_Label2.Font_Size = CKM_Controls.CKM_Label.CKM_FontSize.Small;
-            this.ckM_Label2.ForeColor = System.Drawing.Color.Black;
-            this.ckM_Label2.Location = new System.Drawing.Point(304, 270);
-            this.ckM_Label2.Name = "ckM_Label2";
-            this.ckM_Label2.Size = new System.Drawing.Size(114, 19);
-            this.ckM_Label2.TabIndex = 28;
-            this.ckM_Label2.Text = "パスワード";
-            this.ckM_Label2.Text_Color = CKM_Controls.CKM_Label.CKM_Color.Default;
-            this.ckM_Label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // ckM_Label1
-            // 
-            this.ckM_Label1.AutoSize = true;
-            this.ckM_Label1.Back_Color = CKM_Controls.CKM_Label.CKM_Color.Default;
-            this.ckM_Label1.BackColor = System.Drawing.Color.Transparent;
-            this.ckM_Label1.DefaultlabelSize = true;
-            this.ckM_Label1.Font = new System.Drawing.Font("MS Gothic", 14F, System.Drawing.FontStyle.Bold);
-            this.ckM_Label1.Font_Size = CKM_Controls.CKM_Label.CKM_FontSize.Small;
-            this.ckM_Label1.ForeColor = System.Drawing.Color.Black;
-            this.ckM_Label1.Location = new System.Drawing.Point(385, 217);
-            this.ckM_Label1.Name = "ckM_Label1";
-            this.ckM_Label1.Size = new System.Drawing.Size(31, 19);
-            this.ckM_Label1.TabIndex = 29;
-            this.ckM_Label1.Text = "ID";
-            this.ckM_Label1.Text_Color = CKM_Controls.CKM_Label.CKM_Color.Default;
-            this.ckM_Label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtPassword
-            // 
-            this.txtPassword.AllowMinus = false;
-            this.txtPassword.Back_Color = CKM_Controls.CKM_TextBox.CKM_Color.White;
-            this.txtPassword.BackColor = System.Drawing.Color.White;
-            this.txtPassword.BorderColor = false;
-            this.txtPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtPassword.ClientColor = System.Drawing.Color.White;
-            this.txtPassword.Ctrl_Byte = CKM_Controls.CKM_TextBox.Bytes.半全角;
-            this.txtPassword.Ctrl_Type = CKM_Controls.CKM_TextBox.Type.Normal;
-            this.txtPassword.DecimalPlace = 0;
-            this.txtPassword.Font = new System.Drawing.Font("MS Gothic", 22F);
-            this.txtPassword.IntegerPart = 0;
-            this.txtPassword.IsCorrectDate = true;
-            this.txtPassword.isEnterKeyDown = false;
-            this.txtPassword.IsFirstTime = true;
-            this.txtPassword.isMaxLengthErr = false;
-            this.txtPassword.IsNumber = true;
-            this.txtPassword.IsShop = false;
-            this.txtPassword.IsTimemmss = false;
-            this.txtPassword.Length = 10;
-            this.txtPassword.Location = new System.Drawing.Point(430, 261);
-            this.txtPassword.MaxLength = 10;
-            this.txtPassword.MoveNext = true;
-            this.txtPassword.Name = "txtPassword";
-            this.txtPassword.PasswordChar = '*';
-            this.txtPassword.Size = new System.Drawing.Size(405, 37);
-            this.txtPassword.TabIndex = 2;
-            this.txtPassword.TextSize = CKM_Controls.CKM_TextBox.FontSize.FMedium;
-            this.txtPassword.UseColorSizMode = false;
-            // 
-            // txtOperatorCD
-            // 
-            this.txtOperatorCD.AllowMinus = false;
-            this.txtOperatorCD.Back_Color = CKM_Controls.CKM_TextBox.CKM_Color.White;
-            this.txtOperatorCD.BackColor = System.Drawing.Color.White;
-            this.txtOperatorCD.BorderColor = false;
-            this.txtOperatorCD.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtOperatorCD.ClientColor = System.Drawing.Color.White;
-            this.txtOperatorCD.Ctrl_Byte = CKM_Controls.CKM_TextBox.Bytes.半角;
-            this.txtOperatorCD.Ctrl_Type = CKM_Controls.CKM_TextBox.Type.Normal;
-            this.txtOperatorCD.DecimalPlace = 0;
-            this.txtOperatorCD.Font = new System.Drawing.Font("MS Gothic", 22F);
-            this.txtOperatorCD.IntegerPart = 0;
-            this.txtOperatorCD.IsCorrectDate = true;
-            this.txtOperatorCD.isEnterKeyDown = false;
-            this.txtOperatorCD.IsFirstTime = true;
-            this.txtOperatorCD.isMaxLengthErr = false;
-            this.txtOperatorCD.IsNumber = true;
-            this.txtOperatorCD.IsShop = false;
-            this.txtOperatorCD.IsTimemmss = false;
-            this.txtOperatorCD.Length = 10;
-            this.txtOperatorCD.Location = new System.Drawing.Point(430, 207);
-            this.txtOperatorCD.MaxLength = 10;
-            this.txtOperatorCD.MoveNext = true;
-            this.txtOperatorCD.Name = "txtOperatorCD";
-            this.txtOperatorCD.Size = new System.Drawing.Size(405, 37);
-            this.txtOperatorCD.TabIndex = 1;
-            this.txtOperatorCD.TextSize = CKM_Controls.CKM_TextBox.FontSize.FMedium;
-            this.txtOperatorCD.UseColorSizMode = false;
-            this.txtOperatorCD.TextChanged += new System.EventHandler(this.txtOperatorCD_TextChanged);
-            // 
-            // lblProgress
-            // 
-            this.lblProgress.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.lblProgress.Location = new System.Drawing.Point(532, 340);
-            this.lblProgress.Name = "lblProgress";
-            this.lblProgress.Size = new System.Drawing.Size(200, 23);
-            this.lblProgress.TabIndex = 33;
-            this.lblProgress.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // progressBar1
-            // 
-            this.progressBar1.Location = new System.Drawing.Point(428, 382);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(405, 23);
-            this.progressBar1.Step = 1;
-            this.progressBar1.TabIndex = 42;
-            this.progressBar1.Visible = false;
-            // 
-            // backgroundWorker1
-            // 
-            this.backgroundWorker1.WorkerReportsProgress = true;
-            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
-            this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
-            this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
-            // 
-            // lblcent
-            // 
-            this.lblcent.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.lblcent.Location = new System.Drawing.Point(532, 423);
-            this.lblcent.Name = "lblcent";
-            this.lblcent.Size = new System.Drawing.Size(200, 23);
-            this.lblcent.TabIndex = 43;
-            this.lblcent.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // MainmenuLogin
             // 

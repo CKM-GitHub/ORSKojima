@@ -30,7 +30,7 @@ namespace DL
         {
             Dictionary<string, ValuePair> dic = new Dictionary<string, ValuePair>
             {
-                { "@StaffCD", new ValuePair { value1 = SqlDbType.VarChar, value2 = mse.StaffCD } }
+                { "@Login_ID", new ValuePair { value1 = SqlDbType.VarChar, value2 = mse.StaffCD } }
             };
             return SelectData(dic, "Check_RegisteredMenu");
         }
@@ -38,19 +38,19 @@ namespace DL
         {
             Dictionary<string, ValuePair> dic = new Dictionary<string, ValuePair>
             {
-                { "@StaffCD", new ValuePair { value1 = SqlDbType.VarChar, value2 = mse.StaffCD } },
+                { "@Login_ID", new ValuePair { value1 = SqlDbType.VarChar, value2 = mse.StaffCD } },
                 { "@Password", new ValuePair { value1 = SqlDbType.VarChar, value2 = mse.Password } }
             };
-            return SelectData(dic, "M_Staff_LoginSelect");
+            return SelectData(dic, "M_LoginStaffSelect");
         }
         public DataTable MH_Staff_LoginSelect(M_Staff_Entity mse)
         {
             Dictionary<string, ValuePair> dic = new Dictionary<string, ValuePair>
             {
-                { "@StaffCD", new ValuePair { value1 = SqlDbType.VarChar, value2 = mse.StaffCD } },
+                { "@Login_ID", new ValuePair { value1 = SqlDbType.VarChar, value2 = mse.StaffCD } },
                 { "@Password", new ValuePair { value1 = SqlDbType.VarChar, value2 = mse.Password } }
             };
-            return SelectData(dic, "M_StaffAccess");
+            return SelectData(dic, "M_LoginUserAccess");
         }
         //MH_Staff_LoginSelect
 
@@ -81,10 +81,10 @@ namespace DL
         /// <returns></returns>	
         public DataTable M_Staff_InitSelect(M_Staff_Entity mse)
         {
-            string sp = "M_Staff_InitSelect";
+            string sp = "M_LoginUserInitSelect";
             Dictionary<string, ValuePair> dic = new Dictionary<string, ValuePair>
             {
-                { "@StaffCD", new ValuePair { value1 = SqlDbType.VarChar, value2 = mse.StaffCD } }
+                { "@Login_ID", new ValuePair { value1 = SqlDbType.VarChar, value2 = mse.StaffCD } }
             };
             return SelectData(dic, sp);
         }

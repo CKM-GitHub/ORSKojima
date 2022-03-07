@@ -395,6 +395,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CapitalStore", "CapitalStor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TempoRegiSaleSettei", "TempoRegiSaleSettei\TempoRegiSaleSettei.csproj", "{8D3CF7EB-7F09-4744-A2C1-91D45C9BB792}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KojimaMenu", "KojimaMenu\KojimaMenu.csproj", "{52F1F9E1-EC8C-4FB5-BCCE-CEB774621EC0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -2743,6 +2745,18 @@ Global
 		{8D3CF7EB-7F09-4744-A2C1-91D45C9BB792}.Release|x64.Build.0 = Release|Any CPU
 		{8D3CF7EB-7F09-4744-A2C1-91D45C9BB792}.Release|x86.ActiveCfg = Release|Any CPU
 		{8D3CF7EB-7F09-4744-A2C1-91D45C9BB792}.Release|x86.Build.0 = Release|Any CPU
+		{52F1F9E1-EC8C-4FB5-BCCE-CEB774621EC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52F1F9E1-EC8C-4FB5-BCCE-CEB774621EC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52F1F9E1-EC8C-4FB5-BCCE-CEB774621EC0}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{52F1F9E1-EC8C-4FB5-BCCE-CEB774621EC0}.Debug|x64.Build.0 = Debug|Any CPU
+		{52F1F9E1-EC8C-4FB5-BCCE-CEB774621EC0}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{52F1F9E1-EC8C-4FB5-BCCE-CEB774621EC0}.Debug|x86.Build.0 = Debug|Any CPU
+		{52F1F9E1-EC8C-4FB5-BCCE-CEB774621EC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52F1F9E1-EC8C-4FB5-BCCE-CEB774621EC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52F1F9E1-EC8C-4FB5-BCCE-CEB774621EC0}.Release|x64.ActiveCfg = Release|Any CPU
+		{52F1F9E1-EC8C-4FB5-BCCE-CEB774621EC0}.Release|x64.Build.0 = Release|Any CPU
+		{52F1F9E1-EC8C-4FB5-BCCE-CEB774621EC0}.Release|x86.ActiveCfg = Release|Any CPU
+		{52F1F9E1-EC8C-4FB5-BCCE-CEB774621EC0}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

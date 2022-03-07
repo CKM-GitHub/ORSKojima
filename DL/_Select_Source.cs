@@ -22,7 +22,7 @@ namespace DL
         }
         public bool _changedPass(string cd, string pass)
         {
-            string sp = "_changedPass";
+            string sp = "M_LoginChangedPass";
 
             Dictionary<string, ValuePair> dic = new Dictionary<string, ValuePair>
             {

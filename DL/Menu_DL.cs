@@ -35,14 +35,13 @@ namespace DL
             return SelectData(dic, "D_MenuMessageSelect");
         }
 
-        public DataTable getMenuNo(string Staff_CD,string IsStored)
+        public DataTable getMenuNo(string Staff_CD)
         {
             Dictionary<string, ValuePair> dic = new Dictionary<string, ValuePair>();
 
-            dic.Add("@Staff_CD", new ValuePair { value1 = SqlDbType.VarChar, value2 = Staff_CD });
-            dic.Add("@IsStore", new ValuePair { value1 = SqlDbType.TinyInt, value2 =  IsStored });
+            dic.Add("@Login_ID", new ValuePair { value1 = SqlDbType.VarChar, value2 = Staff_CD });
             UseTransaction = true;
-            return SelectData(dic, "HMENU");
+            return SelectData(dic, "M_LoginHMNU");
         }
         public bool SettingSave(M_Setting ms)
         {

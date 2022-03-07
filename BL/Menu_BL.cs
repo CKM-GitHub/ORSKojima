@@ -26,9 +26,9 @@ namespace BL
             return mdl.D_MenuMessageSelect(SCD);
         }
         //D_MenuMessageSelect
-        public DataTable getMenuNo(string SCD,string IsStored)
+        public DataTable getMenuNo(string SCD)
         {
-            return mdl.getMenuNo(SCD,IsStored);
+            return mdl.getMenuNo(SCD);
         }
         public bool SettingSave(M_Setting ms)
         {

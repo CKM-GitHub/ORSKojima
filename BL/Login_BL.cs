@@ -94,10 +94,11 @@ namespace BL
             DataTable dt = msdl.M_Staff_InitSelect(mse);
             if (dt.Rows.Count > 0)
             {
-                mse.StaffName = dt.Rows[0]["StaffName"].ToString();
-                mse.SysDate = dt.Rows[0]["sysDate"].ToString();
-                mse.StoreCD = dt.Rows[0]["StoreCD"].ToString();
-                Base_DL.iniEntity.DatabaseDate = mse.SysDate;
+                mse.StaffName = dt.Rows[0]["User_Name"].ToString();
+                mse.Login_ID= dt.Rows[0]["Login_ID"].ToString();
+                //mse.SysDate = dt.Rows[0]["sysDate"].ToString();
+                //mse.StoreCD = dt.Rows[0]["StoreCD"].ToString();
+                //Base_DL.iniEntity.DatabaseDate = mse.SysDate;
                 //mse.StoreName = dt.Rows[0]["StoreName"].ToString(); ;
             }
 
@@ -176,134 +177,41 @@ namespace BL
         /// <returns></returns>
         public bool ReadConfig()
         {
-            // INIﾌｧｲﾙ取得
-            // 実行モジュールと同一フォルダのファイルを取得
-            string filePath = "";
-            //System.Diagnostics.Debug 
-
-
-
-            if (Debugger.IsAttached || Islocalized)
+            try
             {
-                System.Uri u = new System.Uri(System.Reflection.Assembly.GetExecutingAssembly().CodeBase);
-                filePath = System.IO.Path.GetDirectoryName(u.LocalPath) + @"\" + IniFileName ;
-                filePath = filePath.Replace("CapitalSMS\\", "").Replace("HaspoSMS\\", "").Replace("TennicSMS\\", "").Replace("CapitalStore\\", "");
+                this.GetInformationOfIniFile();
             }
-            else
+            catch
             {
-                filePath = @"C:\\SMS\\AppData\\CKM.ini";
-            }
-            // var f = Islocalized;
-            //if(System.Deployment.Internal.)
-            if (System.IO.File.Exists(filePath))
-            {
-                this.GetInformationOfIniFile(filePath);
-            }
-            else
-            {
-                //初期設定ファイルが取得できませんでした
                 return false;
             }
-
             return true;
-
         }
-        public void GetInformationOfIniFile(string filePath)
+        public void GetInformationOfIniFile()
         {
+            var filePath = "";
+            if (Debugger.IsAttached)
+            {
+                System.Uri u = new System.Uri(System.Reflection.Assembly.GetExecutingAssembly().CodeBase);
+                filePath = (System.IO.Path.GetDirectoryName(u.LocalPath) + @"\" + "ORS.ini").Replace("\\KojimaMenu","");
+            }
+            else
+            {
+                filePath = @"C:\ORS\AppData\ORS.ini";
+            }
             IniFile_DL idl = new IniFile_DL(filePath);
-            if (idl.IniReadValue("Database", "Login_Type") == "MMLocal")   // Modified by PTK (2020/01/24) for Multiple Server Instances
-            {
-                Base_DL.iniEntity.DatabaseServer = idl.IniReadValue("Database", "MMLocal").Split(',')[0];
-                Base_DL.iniEntity.DatabaseName = idl.IniReadValue("Database", "MMLocal").Split(',')[1];
-                Base_DL.iniEntity.DatabaseLoginID = idl.IniReadValue("Database", "MMLocal").Split(',')[2];
-                Base_DL.iniEntity.DatabasePassword = idl.IniReadValue("Database", "MMLocal").Split(',')[3];
-                Base_DL.iniEntity.Login_Type = "MMLocal";
-                Base_DL.iniEntity.StoreType = "1";
-            }
-            else if (idl.IniReadValue("Database", "Login_Type") == "CapitalMainMenuLogin")
-            {
-                Base_DL.iniEntity.DatabaseServer = idl.IniReadValue("Database", "CapitalMainMenuLogin").Split(',')[0];
-                Base_DL.iniEntity.DatabaseName = idl.IniReadValue("Database", "CapitalMainMenuLogin").Split(',')[1];
-                Base_DL.iniEntity.DatabaseLoginID = idl.IniReadValue("Database", "CapitalMainMenuLogin").Split(',')[2];
-                Base_DL.iniEntity.DatabasePassword = idl.IniReadValue("Database", "CapitalMainMenuLogin").Split(',')[3];
-                Base_DL.iniEntity.Login_Type = "CapitalMainMenuLogin";
-                Base_DL.iniEntity.StoreType = "0";
-            }
-            else if (idl.IniReadValue("Database", "Login_Type") == "HaspoMainMenuLogin")
-            {
-                Base_DL.iniEntity.DatabaseServer = idl.IniReadValue("Database", "HaspoMainMenuLogin").Split(',')[0];
-                Base_DL.iniEntity.DatabaseName = idl.IniReadValue("Database", "HaspoMainMenuLogin").Split(',')[1];
-                Base_DL.iniEntity.DatabaseLoginID = idl.IniReadValue("Database", "HaspoMainMenuLogin").Split(',')[2];
-                Base_DL.iniEntity.DatabasePassword = idl.IniReadValue("Database", "HaspoMainMenuLogin").Split(',')[3];
-                Base_DL.iniEntity.Login_Type = "HaspoMainMenuLogin";
-                Base_DL.iniEntity.StoreType = "0";
-            }
-            else if (idl.IniReadValue("Database", "Login_Type") == "CapitalStoreMenuLogin")
-            {
-                Base_DL.iniEntity.DatabaseServer = idl.IniReadValue("Database", "CapitalStoreMenuLogin").Split(',')[0];
-                Base_DL.iniEntity.DatabaseName = idl.IniReadValue("Database", "CapitalStoreMenuLogin").Split(',')[1];
-                Base_DL.iniEntity.DatabaseLoginID = idl.IniReadValue("Database", "CapitalStoreMenuLogin").Split(',')[2];
-                Base_DL.iniEntity.DatabasePassword = idl.IniReadValue("Database", "CapitalStoreMenuLogin").Split(',')[3];
-                Base_DL.iniEntity.Login_Type = "CapitalStoreMenuLogin";
-                Base_DL.iniEntity.StoreType = "1";
+            Base_DL.iniEntity.DatabaseServer = idl.IniReadValue("Database", "OrsKojima").Split(',')[0];
+            Base_DL.iniEntity.DatabaseName = idl.IniReadValue("Database", "OrsKojima").Split(',')[1];
+            Base_DL.iniEntity.DatabaseLoginID = idl.IniReadValue("Database", "OrsKojima").Split(',')[2];
+            Base_DL.iniEntity.DatabasePassword = idl.IniReadValue("Database", "OrsKojima").Split(',')[3];
+            Base_DL.iniEntity.Login_Type = "OrsKojima";
+            SyncPath=  idl.IniReadValue("ServerAuthen", "ftp");
+            ID = idl.IniReadValue("ServerAuthen", "ID");
+            IP = idl.IniReadValue("ServerAuthen", "IP");
+            Password = idl.IniReadValue("ServerAuthen", "Pass");
 
-            }
-            else if (idl.IniReadValue("Database", "Login_Type") == "HaspoStoreMenuLogin")
-            {
-                Base_DL.iniEntity.DatabaseServer = idl.IniReadValue("Database", "HaspoStoreMenuLogin").Split(',')[0];
-                Base_DL.iniEntity.DatabaseName = idl.IniReadValue("Database", "HaspoStoreMenuLogin").Split(',')[1];
-                Base_DL.iniEntity.DatabaseLoginID = idl.IniReadValue("Database", "HaspoStoreMenuLogin").Split(',')[2];
-                Base_DL.iniEntity.DatabasePassword = idl.IniReadValue("Database", "HaspoStoreMenuLogin").Split(',')[3];
-                Base_DL.iniEntity.Login_Type = "HaspoStoreMenuLogin";
-                Base_DL.iniEntity.StoreType = "1";
-            }
-            else if (idl.IniReadValue("Database", "Login_Type") == "TennicMainMenuLogin")
-            {
-                Base_DL.iniEntity.DatabaseServer = idl.IniReadValue("Database", "TennicMainMenuLogin").Split(',')[0];
-                Base_DL.iniEntity.DatabaseName = idl.IniReadValue("Database", "TennicMainMenuLogin").Split(',')[1];
-                Base_DL.iniEntity.DatabaseLoginID = idl.IniReadValue("Database", "TennicMainMenuLogin").Split(',')[2];
-                Base_DL.iniEntity.DatabasePassword = idl.IniReadValue("Database", "TennicMainMenuLogin").Split(',')[3];
-                Base_DL.iniEntity.Login_Type = "TennicMainMenuLogin";
-                Base_DL.iniEntity.StoreType = "0";
-            }
-
-            Base_DL.iniEntity.TimeoutValues = idl.IniReadValue("Database", "Timeout");
-
-            Base_DL.iniEntity.CmdTimeoutValues = idl.IniReadValue("Database", "CmdTimeOut");
-
-            try
-            {
-                Base_DL.iniEntity.IsDM_D30Used = (idl.IniReadValue("Database", "Logical_Printer").Trim().ToLower() == "epsontm-m30"); 
-            }
-            catch
-            {
-                Base_DL.iniEntity.IsDM_D30Used = false;
-            }
-
-            try
-            {
-                Base_DL.iniEntity.DeveloperMode = idl.IniReadValue("Database", "DeveloperMode");
-            }
-            catch
-            {
-                Base_DL.iniEntity.DeveloperMode = "";
-            }
-
-            try
-            {
-                Base_DL.iniEntity.StorePrinterName = idl.IniReadValue("Printer", "StorePrinterName").TrimEnd();
-            }
-            catch
-            {
-                Base_DL.iniEntity.StorePrinterName = "";
-            }
-
-            if (Base_DL.iniEntity.IsDM_D30Used)
-            {
-                Base_DL.iniEntity.DefaultMessage = GetMessages();
-            }
         }
-       
+
         protected string GetMessages()
         {
             var get = getd();

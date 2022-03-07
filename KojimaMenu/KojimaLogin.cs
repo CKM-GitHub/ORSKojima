@@ -17,15 +17,16 @@ using System.IO;
 using static CKM_Controls.CKM_Button;
 using System.Diagnostics;
 using System.Net;
+using System.Runtime.InteropServices;
 
 namespace MainMenu
 {
-    public partial class MainmenuLogin : Form
+    public partial class KojimaLogin : Form
     {
         Login_BL loginbl;
         M_Staff_Entity mse;
         FTPData ftp = new FTPData();
-        public MainmenuLogin(bool IsMainCall=false)
+        public KojimaLogin(bool IsMainCall = false)
         {
             if (!IsMainCall)
             {
@@ -36,19 +37,19 @@ namespace MainMenu
             }
             this.KeyPreview = true;
             InitializeComponent();
-            if (ApplicationDeployment.IsNetworkDeployed)
-            {
-                label2.Text = ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString(4);
-            }
-            else
-                ckM_Button3.Visible = false;
+            //if (ApplicationDeployment.IsNetworkDeployed)
+            //{
+            //    label2.Text = ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString(4);
+            //}
+            //else
+             //   ckM_Button3.Visible = false;
 
             Login_BL.Ver = label2.Text;
             Control.CheckForIllegalCrossThreadCalls = false;
         }
         private bool CheckExistFormRunning()
         {
-            Process[] localByName = Process.GetProcessesByName("CapitalSMS");
+            Process[] localByName = Process.GetProcessesByName("KojimaMenu");
             if (localByName.Count() > 1)
             {
                 MessageBox.Show("PLease close the running application before running the new instance one.");
@@ -63,6 +64,12 @@ namespace MainMenu
 
                 loginbl.ShowMessage("E101");
                 txtOperatorCD.Focus();
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(txtPassword.Text))
+            {
+                loginbl.ShowMessage("E101");
+                txtPassword.Focus();
                 return false;
             }
 
@@ -94,32 +101,10 @@ namespace MainMenu
 
         }
         private void MainmenuLogin_Load(object sender, EventArgs e)
-        {
-
-            Iconic ic = new Iconic();
-            if (ic.IsExistSettingIn(out string path))
-            {
-                try
-                {
-                    pictureBox1.Image = new Bitmap(path);
-                }
-                catch
-                {
-                }
-            }
+        { 
             loginbl = new Login_BL();
             txtOperatorCD.Focus();
-            Add_ButtonDesign();
-
-            //if (Login_BL.Islocalized)
-            //{
-            //    //var DefaultFlg = loginbl.CheckDefault("1"); // MenuFlg
-            //    //if (DefaultFlg.Rows.Count > 0)
-            //    //{
-            //    //    if (DefaultFlg.Rows[0]["DefaultKBN"].ToString() == "0")
-            //    //        Setting(DefaultFlg);
-            //    //}
-            //}
+            Add_ButtonDesign(); 
             Control.CheckForIllegalCrossThreadCalls = false;
             UpdatedFileList = null;
 
@@ -151,33 +136,12 @@ namespace MainMenu
             {
                 ChangeFont((CKM_FontSize.XLarge));
             }
-    
+
         }
         private void ChangeFont(CKM_Button.CKM_FontSize fs)
         {
             ckM_Button2.Font_Size = ckM_Button3.Font_Size = ckM_Button1.Font_Size = fs;
-        }
-        private void Setting(DataTable df)
-        {
-            //LoginLogo  
-            //  var L_pth = Login_BL.FtpPath.Replace("Sync", "Setting")+ df.Rows[0]["L_LogoName"].ToString();    /// FTP Logic
-            // var Bitmap = FTPData.GetImage(L_pth);
-            //if (Bitmap == null)
-            //{
-            //    MessageBox.Show("Server error");
-            //    return;
-            //}
-            //var I_Pth= Login_BL.FtpPath.Replace("Sync", "Setting") + df.Rows[0]["IconName"].ToString();        /// FTP Logic
-            //  var FStream = FTPData.GetImageStream(I_Pth);
-            pictureBox1.Image =Getbm((df.Rows[0]["L_LogoCD"] as byte[]));
-            try
-            {
-                this.Icon = new System.Drawing.Icon(new MemoryStream(df.Rows[0]["IconCD"] as byte[]), 32, 32);
-            }
-            catch
-            { }
-            ChangeFont_(df);
-        }
+        } 
         private Bitmap Getbm(byte[] blob)
         {
             MemoryStream mStream = new MemoryStream();
@@ -210,15 +174,15 @@ namespace MainMenu
                     k++;
                     dt.Rows.Add(new object[] { k.ToString(), 1, dr.ToString().Split('.').FirstOrDefault(), dr.ToString(), "00:00:00" });
                 }
-                FrmList frm = new FrmList(dt);
-                frm.ShowDialog();
-                UpdatedFileList = frm.dt;
+                //FrmList frm = new FrmList(dt);
+                //frm.ShowDialog();
+                //UpdatedFileList = frm.dt;
                 IsKeyCUsed = false;
             }
             else if (keyData == (Keys.Control | Keys.Alt | Keys.Shift | Keys.P))
             {
-                var pre = new Prerequest.Prerequisity();
-                pre.ShowDialog();
+                //var pre = new Prerequest.Prerequisity();
+                //pre.ShowDialog();
                 IsKeyCUsed = false;
 
             }
@@ -229,7 +193,7 @@ namespace MainMenu
         private void MainmenuLogin_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
-            { 
+            {
                 this.SelectNextControl(ActiveControl, true, true, true, true);
                 e.Handled = e.SuppressKeyPress = true;
             }
@@ -248,21 +212,26 @@ namespace MainMenu
             }
             else if (e.KeyData == Keys.F10)
             {
+                if (loginbl.ReadConfig() == false)
+                {
+                    this.Close();
+                    System.Environment.Exit(0);
+                }
                 var mse = loginbl.MH_Staff_LoginSelect(GetInfo());
                 if (mse.Rows.Count > 0)
                 {
                     if (mse.Rows[0]["MessageID"].ToString() == "Allow")
                     {
-                        if (loginbl.Check_RegisteredMenu(GetInfo()).Rows.Count > 0)
-                        {
-                            ChangeInfo changeInfo = new ChangeInfo(mse.Rows[0]["StaffCD"].ToString(), mse.Rows[0]["Password"].ToString(), mse.Rows[0]["StaffName"].ToString());
-                            changeInfo.ShowDialog();
-                        }
-                        else
-                        {
-                            loginbl.ShowMessage("S018");
-                            txtOperatorCD.Select();
-                        }
+                        //if (loginbl.Check_RegisteredMenu(GetInfo()).Rows.Count > 0)
+                        //{
+                        ChangeInfo changeInfo = new ChangeInfo(mse.Rows[0]["Login_ID"].ToString(), mse.Rows[0]["Password"].ToString(), mse.Rows[0]["User_Name"].ToString());
+                        changeInfo.ShowDialog();
+                        //}
+                        //else
+                        //{
+                        //    loginbl.ShowMessage("S018");
+                        //    txtOperatorCD.Select();
+                        //}
 
                     }
                     else
@@ -281,11 +250,11 @@ namespace MainMenu
         }
 
         protected string Getdate(string file)
-        { 
+        {
             FtpWebRequest reqFTP1;
             reqFTP1 = (FtpWebRequest)FtpWebRequest.Create(new Uri(Login_BL.SyncPath + file));
             reqFTP1.Credentials = new NetworkCredential(Login_BL.ID, Login_BL.Password);
-            reqFTP1.KeepAlive = false; 
+            reqFTP1.KeepAlive = false;
             reqFTP1.Method = WebRequestMethods.Ftp.GetDateTimestamp;
             reqFTP1.UseBinary = true;
             reqFTP1.Proxy = null;
@@ -294,7 +263,7 @@ namespace MainMenu
 
             response1.Close();
 
-            return server_Info.ToString("yyy-MM-dd HH:MM:ss") ;
+            return server_Info.ToString("yyy-MM-dd HH:MM:ss");
         }
 
         private void ckM_Button2_Click(object sender, EventArgs e)
@@ -311,63 +280,46 @@ namespace MainMenu
         }
         private void F11()
         {
-                var result = MessageBox.Show("サーバーから最新プログラムをダウンロードしますか？", "Synchronous Update Information", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-         
-                    this.Cursor = Cursors.WaitCursor;
-                    try
-                    {
-                        if (result == DialogResult.Yes)
-                        {
-                            backgroundWorker1.RunWorkerAsync();
-                        }
-                    }
-                    catch (Exception ex)
-                    { 
-                        this.Cursor = Cursors.Default;
-                        return;
-                    } 
-                    this.Cursor = Cursors.Default;
-                
+            var result = MessageBox.Show("サーバーから最新プログラムをダウンロードしますか？", "Synchronous Update Information", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            this.Cursor = Cursors.WaitCursor;
+            try
+            {
+                if (result == DialogResult.Yes)
+                {
+                    backgroundWorker1.RunWorkerAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                this.Cursor = Cursors.Default;
+                return;
+            }
+            this.Cursor = Cursors.Default;
+
             ckM_Button1.Focus();
         }
         private void Login_Click()
         {
             if (loginbl.ReadConfig() == false)
-            {
-                //起動時エラー    DB接続不可能
+            { 
                 this.Close();
                 System.Environment.Exit(0);
             }
             if (ErrorCheck())
             {
-                //共通処理　受取パラメータ、接続情報
-                //コマンドライン引数より情報取得
-                //Iniファイルより情報取得
-                if (loginbl.ReadConfig() == false)
-                {
-                    //起動時エラー    DB接続不可能
-                    this.Close();
-                    System.Environment.Exit(0);
-                }
-
                 var mse = loginbl.MH_Staff_LoginSelect(GetInfo());
                 if (mse.Rows.Count > 0)
                 {
                     if (mse.Rows[0]["MessageID"].ToString() == "Allow")
                     {
-                        if (loginbl.Check_RegisteredMenu(GetInfo()).Rows.Count > 0)
-                        {
+                    
                             var mseinfo = loginbl.M_Staff_InitSelect(GetInfo());
                             Main_Menu menuForm = new Main_Menu(GetInfo().StaffCD, mseinfo);
                             this.Hide();
                             menuForm.ShowDialog();
                             //this.Close();
-                        }
-                        else
-                        {
-                            loginbl.ShowMessage("S018");
-                            txtOperatorCD.Select();
-                        }
+                    
                     }
                     else
                     {
@@ -379,7 +331,7 @@ namespace MainMenu
                 {
                     loginbl.ShowMessage("E101");
                     txtOperatorCD.Select();
-                } 
+                }
             }
         }
 
@@ -425,13 +377,13 @@ namespace MainMenu
 
         private void ckM_Button2_MouseEnter(object sender, EventArgs e)
         {
-            (sender as CKM_Button).BackgroundImage = CapitalSMS.Properties.Resources.bmback_3;
+            (sender as CKM_Button).BackgroundImage = KojimaMenu.Properties.Resources.bmback_3;
             (sender as CKM_Button).ForeColor = Color.Black;
         }
 
         private void ckM_Button2_MouseLeave(object sender, EventArgs e)
         {
-            (sender as CKM_Button).BackgroundImage = CapitalSMS.Properties.Resources.bm_3;
+            (sender as CKM_Button).BackgroundImage = KojimaMenu.Properties. Resources.bm_3;
             (sender as CKM_Button).ForeColor = Color.White;
         }
 
@@ -440,18 +392,18 @@ namespace MainMenu
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-         protected string Maxcou = "";
+        protected string Maxcou = "";
         protected DataTable UpdatedFileList { get; set; }
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-          
-            var files = FTPData.GetFileList(Login_BL.SyncPath, Login_BL.ID, Login_BL.Password, @"C:\SMS\AppData\");
-            if (files.Count() == 0)
+            if (loginbl.ReadConfig() == false)
+            {
+                this.Close();
+                System.Environment.Exit(0);
+            }
+            //C:\ORS\AppData\ORS.ini
+            var files = FTPData.GetFileList(Login_BL.SyncPath, Login_BL.ID, Login_BL.Password, @"C:\ORS\AppData\");
+            if (files == null ||  files.Count() == 0)
             {
                 return;
             }
@@ -489,8 +441,8 @@ namespace MainMenu
                 }
                 lblProgress.Text = c.ToString() + " of " + max.ToString() + " Completed!";
                 lblProgress.Update();
-                FTPData ftp = new FTPData(Login_BL.SyncPath, "MainmenuLogin");
-                ftp.Download("", file, Login_BL.SyncPath, Login_BL.ID, Login_BL.Password, @"C:\SMS\AppData\");
+                FTPData ftp = new FTPData(Login_BL.SyncPath, "KojimaLogin");
+                ftp.Download("", file, Login_BL.SyncPath, Login_BL.ID, Login_BL.Password, @"C:\ORS\AppData\");
             }
             progressBar1.Enabled = progressBar1.Visible = false;
             progressBar1.Text = "";
@@ -530,7 +482,7 @@ namespace MainMenu
                 if (!IsKeyCUsed)
                     e.Handled = true;
             }
-           // e.Handled =  true;
+            // e.Handled =  true;
             IsKeyCUsed = true;
         }
 
@@ -542,15 +494,15 @@ namespace MainMenu
                 System.Environment.Exit(0);
             }
         }
-        
+
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left || e.Button != MouseButtons.Right)
             {
                 if (e.Clicks == 2)
                 {
-                    var pre = new Prerequest.Prerequisity();
-                    pre.ShowDialog();
+                    //var pre = new Prerequest.Prerequisity();
+                    //pre.ShowDialog();
                 }
             }
             else
@@ -574,33 +526,46 @@ namespace MainMenu
                         k++;
                         dt.Rows.Add(new object[] { k.ToString(), 1, dr.ToString().Split('.').FirstOrDefault(), dr.ToString(), "00:00:00" });
                     }
-                    FrmList frm = new FrmList(dt);
-                    frm.ShowDialog();
-                    UpdatedFileList = frm.dt;
+                    //FrmList frm = new FrmList(dt);
+                    //frm.ShowDialog();
+                    //UpdatedFileList = frm.dt;
                     IsKeyCUsed = false;
                 }
             }
         }
 
-        private void ckM_Button4_Click(object sender, EventArgs e)
+        private void KojimaLogin_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void txtPassword_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+        private void ckM_Button4_Click(object sender, EventArgs e)
+        {
+            if (loginbl.ReadConfig() == false)
+            {
+                this.Close();
+                System.Environment.Exit(0);
+            }
             var mse = loginbl.MH_Staff_LoginSelect(GetInfo());
             if (mse.Rows.Count > 0)
             {
                 if (mse.Rows[0]["MessageID"].ToString() == "Allow")
                 {
-                    if (loginbl.Check_RegisteredMenu(GetInfo()).Rows.Count > 0)
-                    {
-                        ChangeInfo changeInfo = new ChangeInfo(mse.Rows[0]["StaffCD"].ToString(), mse.Rows[0]["Password"].ToString(), mse.Rows[0]["StaffName"].ToString());
-                        changeInfo.ShowDialog();
-                    }
-                    else
-                    {
-                        loginbl.ShowMessage("S018");
-                        txtOperatorCD.Select();
-                    }
-          
+                    //if (loginbl.Check_RegisteredMenu(GetInfo()).Rows.Count > 0)
+                    //{
+                    ChangeInfo changeInfo = new ChangeInfo(mse.Rows[0]["Login_ID"].ToString(), mse.Rows[0]["Password"].ToString(), mse.Rows[0]["User_Name"].ToString());
+                    changeInfo.ShowDialog();
+                    //}
+                    //else
+                    //{
+                    //    loginbl.ShowMessage("S018");
+                    //    txtOperatorCD.Select();
+                    //}
+
                 }
                 else
                 {
@@ -614,11 +579,6 @@ namespace MainMenu
                 loginbl.ShowMessage("E101");
                 txtOperatorCD.Select();
             }
-        }
-
-        private void txtPassword_TextChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }
