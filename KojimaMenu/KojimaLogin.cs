@@ -157,10 +157,15 @@ namespace MainMenu
             if (keyData == (Keys.Control | Keys.Alt | Keys.Shift | Keys.C))
             {
 
-                var files = FTPData.GetFileList(Login_BL.SyncPath, Login_BL.ID, Login_BL.Password, @"C:\SMS\AppData\");
-                if (files.Count() == 0)
+                Login_BL lbl = new Login_BL();
+                if (!lbl.ReadConfig())
+                    return true;
+                var files = FTPData.GetFileList(Login_BL.SyncPath, Login_BL.ID, Login_BL.Password, @"C:\ORS\AppData\");
+
+                if (files == null || files.Count() == 0)
                 {
-                    MessageBox.Show("There is no available file on server!");
+                    MessageBox.Show("指定されたiniファイルがないか、サーバー上にファイルがありません", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return true;
                 }
                 DataTable dt = new DataTable();
                 dt.Columns.Add("No", typeof(string));
@@ -174,9 +179,9 @@ namespace MainMenu
                     k++;
                     dt.Rows.Add(new object[] { k.ToString(), 1, dr.ToString().Split('.').FirstOrDefault(), dr.ToString(), "00:00:00" });
                 }
-                //FrmList frm = new FrmList(dt);
-                //frm.ShowDialog();
-                //UpdatedFileList = frm.dt;
+                FrmList frm = new FrmList(dt);
+                frm.ShowDialog();
+                UpdatedFileList = frm.dt;
                 IsKeyCUsed = false;
             }
             else if (keyData == (Keys.Control | Keys.Alt | Keys.Shift | Keys.P))
@@ -509,10 +514,15 @@ namespace MainMenu
             {
                 if (e.Clicks == 2)
                 {
-                    var files = FTPData.GetFileList(Login_BL.SyncPath, Login_BL.ID, Login_BL.Password, @"C:\SMS\AppData\");
-                    if (files.Count() == 0)
+                    Login_BL lbl = new Login_BL();
+                    if (!lbl.ReadConfig())
+                        return;
+                    var files = FTPData.GetFileList(Login_BL.SyncPath, Login_BL.ID, Login_BL.Password, @"C:\ORS\AppData\");
+
+                    if (files == null ||files.Count() == 0 )
                     {
-                        MessageBox.Show("There is no available file on server!");
+                        MessageBox.Show("指定されたiniファイルがないか、サーバー上にファイルがありません", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
                     }
                     DataTable dt = new DataTable();
                     dt.Columns.Add("No", typeof(string));
@@ -526,9 +536,9 @@ namespace MainMenu
                         k++;
                         dt.Rows.Add(new object[] { k.ToString(), 1, dr.ToString().Split('.').FirstOrDefault(), dr.ToString(), "00:00:00" });
                     }
-                    //FrmList frm = new FrmList(dt);
-                    //frm.ShowDialog();
-                    //UpdatedFileList = frm.dt;
+                    FrmList frm = new FrmList(dt);
+                    frm.ShowDialog();
+                    UpdatedFileList = frm.dt;
                     IsKeyCUsed = false;
                 }
             }

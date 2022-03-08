@@ -22,6 +22,7 @@ namespace MainMenu
         StreamReader reader = null;
         string SenderPath = "";
         string SenderParent = "";
+        string ORSpath= @"C:\ORS\AppData\";
         public FTPData(string Sen = null, string par = null)
         {
             SenderPath = Sen;
@@ -30,6 +31,7 @@ namespace MainMenu
         }
         public static string[] GetFileList(string ftpuri, string UID, string PWD, string path)
         {
+          
             string[] downloadFiles;
             StringBuilder result = new StringBuilder();
             WebResponse response = null;
@@ -85,7 +87,7 @@ namespace MainMenu
         }
         public async void UpdateSyncData()
         {
-            var GetList = FTPData.GetFileList(SenderPath, Login_BL.ID, Login_BL.Password, @"C:\SMS\AppData\");   /// Add Network Credentials
+            var GetList = FTPData.GetFileList(SenderPath, Login_BL.ID, Login_BL.Password, ORSpath);   /// Add Network Credentials
             //  PTK async 2021-03-04
             bool UseAsync = true;
             var lblini = "";
@@ -137,7 +139,7 @@ namespace MainMenu
                             catch { }
                         });
                     }
-                    Download(cc.ToString() + lblini, file, SenderPath, Login_BL.ID, Login_BL.Password, @"C:\SMS\AppData\");
+                    Download(cc.ToString() + lblini, file, SenderPath, Login_BL.ID, Login_BL.Password, ORSpath);
                 }
                 MessageBox.Show("ダウンロードが終わりました", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 _Progressbar.Enabled = false;
@@ -149,7 +151,7 @@ namespace MainMenu
         }
         public async void _UpdateSyncData(string Path, string Parent)
         {
-            var GetList = FTPData.GetFileList(Path, Login_BL.ID, Login_BL.Password, @"C:\SMS\AppData\");   /// Add Network Credentials
+            var GetList = FTPData.GetFileList(Path, Login_BL.ID, Login_BL.Password, ORSpath);   /// Add Network Credentials
 
             //  PTK async 2021-03-04
             bool UseAsync = true;
@@ -187,9 +189,11 @@ namespace MainMenu
                             catch { }
                         });
                     }
-                    Download(cc.ToString() + lblini, file, Path, Login_BL.ID, Login_BL.Password, @"C:\SMS\AppData\");
+                    Download(cc.ToString() + lblini, file, Path, Login_BL.ID, Login_BL.Password, ORSpath);
                 }
-                MessageBox.Show("Now AppData Files are updated!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("すべてのファイルが更新されます", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                //  MessageBox.Show("Now AppData Files are updated!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 _Progress.Text = "";
                 // System.Windows.Forms.Cursor.Current = Cursors.Default;
             }
@@ -260,7 +264,7 @@ namespace MainMenu
         public void Sync(string path)
         {
 
-            var GetList = FTPData.GetFileList(path, Login_BL.ID, Login_BL.Password, @"C:\SMS\AppData\");   /// Add Network Credentials
+            var GetList = FTPData.GetFileList(path, Login_BL.ID, Login_BL.Password, ORSpath);   /// Add Network Credentials
             var lblini = " of " + GetList.Count().ToString();
             // ErrorStatus += GetList.Count();
             var lbb = (GetParentLbl("").Controls.Find("lblProgress", true)[0] as System.Windows.Forms.Label);

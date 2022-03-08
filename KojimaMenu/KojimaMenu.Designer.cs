@@ -265,7 +265,7 @@ namespace MainMenu
             this.panelLeft.Controls.Add(this.btnGym2);
             this.panelLeft.Location = new System.Drawing.Point(0, -2);
             this.panelLeft.Name = "panelLeft";
-            this.panelLeft.Size = new System.Drawing.Size(397, 531);
+            this.panelLeft.Size = new System.Drawing.Size(392, 531);
             this.panelLeft.TabIndex = 9;
             // 
             // btnGym20
