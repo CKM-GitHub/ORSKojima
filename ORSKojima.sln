@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26403.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31624.102
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BL", "BL\BL.csproj", "{FB2217AB-EE9B-4996-A8F1-321320CBC791}"
 EndProject
@@ -396,6 +396,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TempoRegiSaleSettei", "TempoRegiSaleSettei\TempoRegiSaleSettei.csproj", "{8D3CF7EB-7F09-4744-A2C1-91D45C9BB792}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KojimaMenu", "KojimaMenu\KojimaMenu.csproj", "{52F1F9E1-EC8C-4FB5-BCCE-CEB774621EC0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExhibitInformation", "ExhibitInformation\ExhibitInformation.csproj", "{2E73EEE1-7718-41BD-9C22-9B60883AFD86}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -2757,6 +2759,18 @@ Global
 		{52F1F9E1-EC8C-4FB5-BCCE-CEB774621EC0}.Release|x64.Build.0 = Release|Any CPU
 		{52F1F9E1-EC8C-4FB5-BCCE-CEB774621EC0}.Release|x86.ActiveCfg = Release|Any CPU
 		{52F1F9E1-EC8C-4FB5-BCCE-CEB774621EC0}.Release|x86.Build.0 = Release|Any CPU
+		{2E73EEE1-7718-41BD-9C22-9B60883AFD86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E73EEE1-7718-41BD-9C22-9B60883AFD86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E73EEE1-7718-41BD-9C22-9B60883AFD86}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{2E73EEE1-7718-41BD-9C22-9B60883AFD86}.Debug|x64.Build.0 = Debug|Any CPU
+		{2E73EEE1-7718-41BD-9C22-9B60883AFD86}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2E73EEE1-7718-41BD-9C22-9B60883AFD86}.Debug|x86.Build.0 = Debug|Any CPU
+		{2E73EEE1-7718-41BD-9C22-9B60883AFD86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E73EEE1-7718-41BD-9C22-9B60883AFD86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E73EEE1-7718-41BD-9C22-9B60883AFD86}.Release|x64.ActiveCfg = Release|Any CPU
+		{2E73EEE1-7718-41BD-9C22-9B60883AFD86}.Release|x64.Build.0 = Release|Any CPU
+		{2E73EEE1-7718-41BD-9C22-9B60883AFD86}.Release|x86.ActiveCfg = Release|Any CPU
+		{2E73EEE1-7718-41BD-9C22-9B60883AFD86}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
