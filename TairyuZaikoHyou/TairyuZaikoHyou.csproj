@@ -125,10 +125,6 @@
       <Project>{9dd6c82a-1899-478f-bc18-524ad0b0dcc8}</Project>
       <Name>Entity</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MainMenu\MainMenu.csproj">
-      <Project>{8016300c-8d6c-47c2-b1c2-552899bb9e87}</Project>
-      <Name>MainMenu</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Search\Search.csproj">
       <Project>{83d6364b-73ea-4288-bce7-55a1119ee5a2}</Project>
       <Name>Search</Name>
