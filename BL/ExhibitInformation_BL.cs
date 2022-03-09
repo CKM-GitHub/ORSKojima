@@ -49,5 +49,17 @@ namespace BL
             return ExhibitInformationDL.PRC_ExhibitInformation_Register(dse, dtRegist);
         }
 
+        /// <summary>
+        /// CSV用データ取得
+        /// </summary>
+        /// <param name="dse"></param>
+        /// <param name="dt"></param>
+        /// <returns></returns>
+        public DataTable PRC_ExhibitInformation_SelectDataForCSV(D_ShoppingCart_Entity dse, DataTable dt)
+        {
+            return ExhibitInformationDL.PRC_ExhibitInformation_SelectDataForCsv(dse, dt);
+        }
+
+
     }
 }

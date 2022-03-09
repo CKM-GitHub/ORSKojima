@@ -43,13 +43,7 @@ namespace DL
         {
             Dictionary<string, ValuePair> dic = new Dictionary<string, ValuePair>()
             {
-                //{ "@SoukoCD", new ValuePair { value1 = SqlDbType.VarChar, value2 = mse.SoukoCD } },
-                //{ "@ChangeDate", new ValuePair { value1 = SqlDbType.Date, value2 = mse.ChangeDate } },
-                //{ "@Operator", new ValuePair { value1 = SqlDbType.VarChar, value2 = mse.Operator } },
-                //{ "@Program", new ValuePair { value1 = SqlDbType.VarChar, value2 = mse.ProgramID } },
-                //{ "@PC", new ValuePair { value1 = SqlDbType.VarChar, value2 = mse.PC } },
-                //{ "@OperateMode", new ValuePair { value1 = SqlDbType.VarChar, value2 = mse.ProcessMode } },
-                //{ "@KeyItem", new ValuePair { value1 = SqlDbType.VarChar, value2 = mse.Key } }
+
             };
 
             //UseTransaction = true;
@@ -87,6 +81,23 @@ namespace DL
                 dse.TokuisakiCD = outPutParam;
 
             return ret;
+        }
+
+
+        public DataTable PRC_ExhibitInformation_SelectDataForCsv(D_ShoppingCart_Entity dse, DataTable dt)
+        {
+            string sp = "PRC_ExhibitInformation_SelectDataForCsv";
+
+            command = new SqlCommand(sp, GetConnection());
+            command.CommandType = CommandType.StoredProcedure;
+            command.CommandTimeout = 0;
+
+            AddParam(command, "@TokuisakiCD", SqlDbType.VarChar, dse.TokuisakiCD);
+            AddParamForDataTable(command, "@TableCSV", SqlDbType.Structured, dt);
+
+
+            return SelectData(sp);
+
         }
 
     }

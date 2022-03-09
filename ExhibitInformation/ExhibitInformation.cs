@@ -276,12 +276,14 @@ namespace ExhibitInformation
                 if (bbl.ShowMessage("Q211") != DialogResult.Yes)
                     return;
 
-                //
+                //対象データをDataTable型に変換
                 DataTable dtRegist = chkDt.CopyToDataTable();
 
+                //CSV用データを取得
+                DataTable dtCsv = eibl.PRC_ExhibitInformation_SelectDataForCSV(dse, dtRegist);
 
                 //CSV出力処理
-                if (this.OutputCSV(dtRegist))
+                if (this.OutputCSV(dtCsv))
                 { 
 
                     //出品履歴データ（D_ExhibitHistory）更新処理
@@ -401,54 +403,113 @@ namespace ExhibitInformation
         /// <returns></returns>
         private bool OutputCSV(DataTable dtRegist)
         {
-            string fname = "_" + DateTime.Now.ToString("yyyyMMdd HH:mm:ss").Replace(" ", "_").Replace(":", "");
-            string folderPath = "C:\\ORS\\ExhibitInformation\\";
 
-            if (!Directory.Exists(folderPath))
+            bool ret = false;
+            try
             {
-                Directory.CreateDirectory(folderPath);
-            }
+                string strFullPath;
 
-            SaveFileDialog savedialog = new SaveFileDialog();
-            savedialog.Filter = "csv|*.csv;";
-            savedialog.Title = "Save";
-            savedialog.FileName = "ExhibitInformation" + fname;
-            savedialog.InitialDirectory = folderPath;
-
-            savedialog.RestoreDirectory = true;
-
-
-            if (savedialog.ShowDialog() == DialogResult.OK)
-            {
-                if (Path.GetExtension(savedialog.FileName).Contains(".csv"))
+                using (SaveFileDialog saveFileDialog = new SaveFileDialog())
                 {
+                    // ファイルの種類リストを設定
+                    saveFileDialog.FileName = ProNm + " " + DateTime.Now.ToString("yyyyMMdd_HHmmss") + " " + InOperatorCD;
+                    saveFileDialog.Filter = "CSVファイル (*.CSV)|*.CSV";
+                    saveFileDialog.RestoreDirectory = true;
 
-                    var result = new StringBuilder();
-                    foreach (DataRow row in dtRegist.Rows)
+                    // ダイアログを表示
+                    DialogResult dialogResult = saveFileDialog.ShowDialog();
+                    if (dialogResult == DialogResult.Cancel)
                     {
-                        for (int i = 0; i < dtRegist.Columns.Count; i++)
-                        {
-                            result.Append(row[i].ToString());
-                        }
-                        result.AppendLine();
-                        result.Replace("/", "");
+                        // キャンセルされたので終了
+                        return ret;
                     }
 
-                    StreamWriter objWriter = new StreamWriter(savedialog.FileName, false);
-                    objWriter.WriteLine(result.ToString());
-                    objWriter.Close();
-
+                    // 選択されたファイル名 (ファイルパス) をテキストボックスに設定
+                    strFullPath = saveFileDialog.FileName;
                 }
 
-                return true;
-            }
-            else
-                return false;
 
+
+                //CSV出力処理                        
+                string field = string.Empty;
+
+                //CSVファイルに書き込むときに使うEncoding
+                System.Text.Encoding enc = System.Text.Encoding.GetEncoding("Shift_JIS");
+                using (StreamWriter sw = new StreamWriter(strFullPath, false, enc))
+                {
+
+                    foreach (DataRow row in dtRegist.Rows)
+                    {
+                        // 
+                        for (int i = 0; i < dtRegist.Columns.Count; i++)
+                        {
+                            field += EncloseDoubleQuotesIfNeed(row[i].ToString());
+                            if (i < dtRegist.Columns.Count - 1)
+                            {
+                                field += ", ";
+                            }
+                        };
+
+                        sw.Write(field);
+                        sw.Write("\r\n");
+                        field = "";
+
+                    }
+                }
+                ret = true;
+
+ //               bbl.ShowMessage("I201");
+
+                return ret;
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+            return ret;
 
         }
 
+        private string EncloseDoubleQuotesIfNeed(string field)
+        {
+            if (NeedEncloseDoubleQuotes(field))
+            {
+                return EncloseDoubleQuotes(field);
+            }
+            return field;
+        }
 
+        /// <summary>
+        /// 文字列をダブルクォートで囲む
+        /// </summary>
+        private string EncloseDoubleQuotes(string field)
+        {
+            if (field.IndexOf('"') > -1)
+            {
+                //"を""とする
+                field = field.Replace("\"", "\"\"");
+            }
+            return "\"" + field + "\"";
+        }
+
+        /// <summary>
+        /// 文字列をダブルクォートで囲む必要があるか調べる
+        /// </summary>
+        private bool NeedEncloseDoubleQuotes(string field)
+        {
+            return field.IndexOf('"') > -1 ||
+                field.IndexOf(',') > -1 ||
+                field.IndexOf('\r') > -1 ||
+                field.IndexOf('\n') > -1 ||
+                field.StartsWith(" ") ||
+                field.StartsWith("\t") ||
+                field.EndsWith(" ") ||
+                field.EndsWith("\t");
+
+
+        }
         // ==================================================
         // 終了処理
         // ==================================================

@@ -118,6 +118,23 @@ namespace DL
             }
             return dt;
         }
+
+        public DataTable SelectData(string sp)
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                command.CommandTimeout = string.IsNullOrWhiteSpace(iniEntity.CmdTimeoutValues) ? 0 : Convert.ToInt32(iniEntity.CmdTimeoutValues);
+                adapter = new SqlDataAdapter(command);
+                adapter.Fill(dt);
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            return dt;
+        }
+
         public DataSet SelectSetData(Dictionary<string, ValuePair> dic, string sp)
         {
 
