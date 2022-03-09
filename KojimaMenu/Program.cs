@@ -46,7 +46,7 @@ namespace KojimaMenu
             }
             catch (Exception ex)
             {
-                File.WriteAllText(dir, ex.StackTrace.ToString());
+                File.WriteAllText(@"C:\ORS\AppData\kojima.log", ex.StackTrace.ToString());
             }
         }
         static string EncodeTo64(string toEncode)
