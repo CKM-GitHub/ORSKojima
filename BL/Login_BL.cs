@@ -220,11 +220,11 @@ namespace BL
                 filePath = @"C:\ORS\AppData\ORS.ini";
             }
             IniFile_DL idl = new IniFile_DL(filePath);
-            Base_DL.iniEntity.DatabaseServer = idl.IniReadValue("Database", "OrsKojima").Split(',')[0];
-            Base_DL.iniEntity.DatabaseName = idl.IniReadValue("Database", "OrsKojima").Split(',')[1];
-            Base_DL.iniEntity.DatabaseLoginID = idl.IniReadValue("Database", "OrsKojima").Split(',')[2];
-            Base_DL.iniEntity.DatabasePassword = idl.IniReadValue("Database", "OrsKojima").Split(',')[3];
-            Base_DL.iniEntity.Login_Type = "OrsKojima";
+            Base_DL.iniEntity.DatabaseServer = idl.IniReadValue("Database", "ORS").Split(',')[0];
+            Base_DL.iniEntity.DatabaseName = idl.IniReadValue("Database", "ORS").Split(',')[1];
+            Base_DL.iniEntity.DatabaseLoginID = idl.IniReadValue("Database", "ORS").Split(',')[2];
+            Base_DL.iniEntity.DatabasePassword = idl.IniReadValue("Database", "ORS").Split(',')[3];
+            Base_DL.iniEntity.Login_Type = "ORS";
             SyncPath=  idl.IniReadValue("ServerAuthen", "ftp");
             ID = idl.IniReadValue("ServerAuthen", "ID");
             IP = idl.IniReadValue("ServerAuthen", "IP");
