@@ -116,7 +116,7 @@ namespace BL
             {
                 mse.StaffName = dt.Rows[0]["User_Name"].ToString();
                 mse.Login_ID= dt.Rows[0]["Login_ID"].ToString();
-                //mse.SysDate = dt.Rows[0]["sysDate"].ToString();
+                mse.SysDate = dt.Rows[0]["sysDate"].ToString();
                 //mse.StoreCD = dt.Rows[0]["StoreCD"].ToString();
                 //Base_DL.iniEntity.DatabaseDate = mse.SysDate;
                 //mse.StoreName = dt.Rows[0]["StoreName"].ToString(); ;

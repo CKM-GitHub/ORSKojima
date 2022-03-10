@@ -755,13 +755,14 @@ namespace Base.Client
             // ★★↓↓↓SMS用なので後に消去予定↓↓↓★★
             //
             ////ログインIDチェック
-            //M_Staff_Entity mse = new M_Staff_Entity
-            //{
-            //    StaffCD = InOperatorCD
-            //};
-            //mse = loginbl.M_Staff_InitSelect(mse);
-            //this.lblOperatorName.Text = mse.StaffName;
-            //this.lblLoginDate.Text = mse.SysDate;
+            M_Staff_Entity mse = new M_Staff_Entity
+            {
+                StaffCD = InOperatorCD
+            };
+            mse = loginbl.M_Staff_InitSelect(mse);
+            this.lblOperatorName.Text = mse.StaffName;
+            this.lblLoginDate.Text = mse.SysDate;
+
             //this.StoreCD = lblStoreCD.Text = mse.StoreCD;
 
             //M_Staff_Entity mse1 = new M_Staff_Entity
@@ -779,25 +780,25 @@ namespace Base.Client
             //
             ////共通処理　プログラム
             ////Authorizations判断
-            //M_Authorizations_Entity mae;
-            //mae = new M_Authorizations_Entity
-            //{
-            //    ProgramID = lblProgramID.Text = this.InProgramID,
-            //    StaffCD = InOperatorCD,
-            //    PC = InPcID
-            //};
+            M_Authorizations_Entity mae;
+            mae = new M_Authorizations_Entity
+            {
+                ProgramID = lblProgramID.Text = this.InProgramID,
+                StaffCD = InOperatorCD,
+                PC = InPcID
+            };
 
-            //made = bbl.M_Authorizations_AccessCheck(mae);
+            made = bbl.M_Authorizations_AccessCheck(mae);
 
-            //if (made == null)
-            //{
-            //    bbl.ShowMessage(mae.MessageID);
-            //    //起動時エラー
-            //    this.Close();
-            //    System.Environment.Exit(0);
-            //}
-            //this.Text = made.ProgramID;
-            //lblHeaderTitle.Text = made.ProgramName;
+            if (made == null)
+            {
+                bbl.ShowMessage(mae.MessageID);
+                //起動時エラー
+                this.Close();
+                System.Environment.Exit(0);
+            }
+            this.Text = made.ProgramID;
+            lblHeaderTitle.Text = made.ProgramName;
             //
             // ★★↑↑↑PTKさんが引き継ぎ済みの部分なので 動かす為に今はコメントアウト↑↑↑★★
 

@@ -19,7 +19,7 @@ namespace KojimaMenu
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //CreateIfMissingAsync();
+            CreateIfMissingAsync();
             Application.Run(new MainMenu.KojimaLogin(true));
         }
         public static void CreateIfMissingAsync()
@@ -46,7 +46,11 @@ namespace KojimaMenu
             }
             catch (Exception ex)
             {
-                File.WriteAllText(@"C:\ORS\AppData\kojima.log", ex.StackTrace.ToString());
+                try
+                {
+                    File.WriteAllText(@"C:\ORS\AppData\kojima.log", ex.StackTrace.ToString());
+                }
+                catch { }
             }
         }
         static string EncodeTo64(string toEncode)
