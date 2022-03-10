@@ -176,7 +176,6 @@
     <Compile Include="M_Store_DL.cs" />
     <Compile Include="M_TankaCD_DL.cs" />
     <Compile Include="M_Tokuisaki_DL.cs" />
-    <Compile Include="M_User_DL.cs" />
     <Compile Include="M_VendorFTP_DL.cs" />
     <Compile Include="M_Vendor_DL.cs" />
     <Compile Include="M_ZipCode_DL.cs" />
