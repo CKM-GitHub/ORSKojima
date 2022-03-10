@@ -740,18 +740,6 @@ namespace Base.Client
                 System.Environment.Exit(0);
             }
 
-            //共通処理　Operator 確認
-            //[User](ORSコジマ様用)
-            M_User_Entity mue = new M_User_Entity
-            {
-                Login_ID = InOperatorCD
-            };
-            mue = loginbl.M_User_InitSelect(mue);
-            this.lblOperatorName.Text = mue.User_Name;
-            this.lblLoginDate.Text = mue.SysDate;
-
-
-
             // ★★↓↓↓SMS用なので後に消去予定↓↓↓★★
             //
             ////ログインIDチェック
@@ -772,11 +760,7 @@ namespace Base.Client
             //mse1 = loginbl.M_Souko_InitSelect(mse1);
             //this.SoukoCD = mse1.SoukoCD.ToStringOrEmpty();
             //
-            // ★★ ↑↑↑SMS用なので後に消去予定↑↑↑★★
 
-
-
-            // ★★↓↓↓PTKさんが引き継ぎ済みの部分なので　動かす為に今はコメントアウト↓↓↓★★★
             //
             ////共通処理　プログラム
             ////Authorizations判断
@@ -799,8 +783,6 @@ namespace Base.Client
             }
             this.Text = made.ProgramID;
             lblHeaderTitle.Text = made.ProgramName;
-            //
-            // ★★↑↑↑PTKさんが引き継ぎ済みの部分なので 動かす為に今はコメントアウト↑↑↑★★
 
 
 

@@ -20,12 +20,8 @@ namespace BL
         /// INIファイル名
         /// </summary>
         /// 
-        // ★★↓↓↓PTKさんが引き継ぎ済みの部分　動かす為にとりあえず↓↓↓★★★
-        //private const string IniFileName = "CKM.ini";
         private const string IniFileName = "ORS.ini";
-        // ★★↑↑↑PTKさんが引き継ぎ済みの部分　動かす為にとりあえず↑↑↑★★
         //  public static bool Islocalized =false;
-        M_User_DL mudl;                              // ORSコジマ様用
         M_Staff_DL msdl;
         M_Store_DL mstoredl;
         Menu_DL mdl;
@@ -42,7 +38,6 @@ namespace BL
         /// </summary>
         public Login_BL()
         {
-            mudl = new M_User_DL();               // ORSコジマ様用
             msdl = new M_Staff_DL();
             mstoredl = new M_Store_DL();
             mdl = new Menu_DL();
@@ -87,22 +82,6 @@ namespace BL
             }
             return mse;
         }
-
-
-        // ORSコジマ様用
-        public M_User_Entity M_User_InitSelect(M_User_Entity mue)
-        {
-            DataTable dt = mudl.M_User_InitSelect(mue);
-            if (dt.Rows.Count > 0)
-            {
-                mue.ID = dt.Rows[0]["ID"].ToString();
-                mue.User_Name = dt.Rows[0]["User_Name"].ToString();
-                mue.SysDate = dt.Rows[0]["sysDate"].ToString();
-                Base_DL.iniEntity.DatabaseDate = mue.SysDate;
-            }
-            return mue;
-        }
-
 
         /// <summary>
         /// 共通処理　Operator 確認
