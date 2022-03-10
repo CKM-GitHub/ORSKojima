@@ -37,12 +37,12 @@ namespace MainMenu
             }
             this.KeyPreview = true;
             InitializeComponent();
-            //if (ApplicationDeployment.IsNetworkDeployed)
-            //{
-            //    label2.Text = ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString(4);
-            //}
-            //else
-             //   ckM_Button3.Visible = false;
+            if (ApplicationDeployment.IsNetworkDeployed)
+            {
+                label2.Text = ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString(4);
+            }
+            else
+                ckM_Button3.Visible = false;
 
             Login_BL.Ver = label2.Text;
             Control.CheckForIllegalCrossThreadCalls = false;
@@ -50,6 +50,12 @@ namespace MainMenu
         private bool CheckExistFormRunning()
         {
             Process[] localByName = Process.GetProcessesByName("KojimaMenu");
+            if (localByName.Count() > 1)
+            {
+                MessageBox.Show("PLease close the running application before running the new instance one.");
+                return true;
+            }
+             localByName = Process.GetProcessesByName("MainMenu");
             if (localByName.Count() > 1)
             {
                 MessageBox.Show("PLease close the running application before running the new instance one.");

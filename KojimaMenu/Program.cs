@@ -20,7 +20,7 @@ namespace KojimaMenu
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             CreateIfMissingAsync();
-            Application.Run(new MainMenu.KojimaLogin(true));
+            Application.Run(new MainMenu.KojimaLogin());
         }
         public static void CreateIfMissingAsync()
         {
