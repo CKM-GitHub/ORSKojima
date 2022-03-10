@@ -41,6 +41,8 @@ namespace DL
 
             dic.Add("@Login_ID", new ValuePair { value1 = SqlDbType.VarChar, value2 = Staff_CD });
             UseTransaction = true;
+            if (Staff_CD == "")
+                return SelectData(dic, "M_LoginAllItems"); ;
             return SelectData(dic, "M_LoginHMNU");
         }
         public bool SettingSave(M_Setting ms)

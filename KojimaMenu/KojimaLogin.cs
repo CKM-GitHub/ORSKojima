@@ -493,13 +493,36 @@ namespace MainMenu
 
         private void MainmenuLogin_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Process[] localByName = Process.GetProcessesByName("CapitalSMS");
+            Process[] localByName = Process.GetProcessesByName("MainMenu");
             if (localByName.Count() > 0)
             {
+                ForceToClose();
                 System.Environment.Exit(0);
             }
         }
+        public void ForceToClose()
+        {
+            var mbl = new Menu_BL();
+            var menu = mbl.getMenuNo("");
+            foreach (DataRow dr in menu.Rows)
+            {
+                var localByName = Process.GetProcessesByName(dr["programEXE"].ToString());
+                if (localByName.Count() > 0)
+                {
 
+                    foreach (var process in localByName)
+                    {
+                        try
+                        {
+                            process.Kill();
+                        }
+                        catch
+                        {
+                        }
+                    }
+                }
+            }
+        }
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left || e.Button != MouseButtons.Right)
