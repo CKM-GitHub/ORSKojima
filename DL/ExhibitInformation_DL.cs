@@ -83,7 +83,12 @@ namespace DL
             return ret;
         }
 
-
+        /// <summary>
+        /// CSV出力用データ取得
+        /// </summary>
+        /// <param name="dse"></param>
+        /// <param name="dt"></param>
+        /// <returns></returns>
         public DataTable PRC_ExhibitInformation_SelectDataForCsv(D_ShoppingCart_Entity dse, DataTable dt)
         {
             string sp = "PRC_ExhibitInformation_SelectDataForCsv";
