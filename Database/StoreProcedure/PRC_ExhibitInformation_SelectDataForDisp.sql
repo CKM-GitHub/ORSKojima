@@ -189,6 +189,9 @@ BEGIN
 
 
 	--【粗利率・割引率の算出(小数点以下1桁までで四捨五入)】
+	-- 粗利率 = (販売価格 - 原価) / 販売価格
+	-- 割引率 = (定価 - 販売価格) / 定価
+
 	UPDATE tmp
 		SET   GrossProfit =
 					CONVERT(DECIMAL(4,1),
@@ -199,16 +202,16 @@ BEGIN
 							)
 			, Discount = 
 					CONVERT(DECIMAL(4,1),
-								CASE tmp.Cost
+								CASE tmp.List_Price
 									WHEN 0 THEN 0
-									ELSE ROUND(CONVERT(DECIMAL,(tmp.Cost - tmp.Price)) / CONVERT(DECIMAL,TMP.Cost) * 100,1)
+									ELSE ROUND(CONVERT(DECIMAL,(tmp.List_Price - tmp.Price)) / CONVERT(DECIMAL,TMP.List_Price) * 100,1)
 								END
 							)
 	FROM #tmpSelectData tmp
 	;
 
 	--【粗利率/割引率が指定された場合、不要データを削除する】
-	-- 粗利率
+	-- 粗利率 (画面で指定された数値以上の値は削除)
 	IF (@GrossProfit IS NOT NULL)
 	BEGIN
 		
@@ -219,7 +222,7 @@ BEGIN
 
 	END
 
-	-- 割引率
+	-- 割引率 (画面で指定された数値未満の値は削除)
 	IF (@Discount IS NOT NULL)
 	BEGIN
 
