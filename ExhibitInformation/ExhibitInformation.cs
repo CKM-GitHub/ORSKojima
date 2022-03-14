@@ -242,6 +242,7 @@ namespace ExhibitInformation
                 else
                 {
                     bbl.ShowMessage("E128");
+                    detailControls[(int)EIndex.TokuisakiCD].Focus();
                 }
             }
             catch (Exception ex)
@@ -384,6 +385,7 @@ namespace ExhibitInformation
                     if (bbl.ShowMessage("Q004") == DialogResult.Yes)
                     {
                         Scr_Clr(0);
+                        detailControls[(int)EIndex.TokuisakiCD].Focus();
                     }
                     break;
                     //case 7:     //F8:表示

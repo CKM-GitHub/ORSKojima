@@ -760,7 +760,7 @@ namespace CKM_Controls
             this.EnableHeadersVisualStyles = false;
             this.ColumnHeadersDefaultCellStyle.Font = new Font(this.Font, FontStyle.Bold);
             this.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(191, 191, 191);
-            this.BackgroundColor = this.GridColor = Color.FromArgb(198, 224, 180);
+            this.BackgroundColor = this.GridColor = Color.FromArgb(192, 192, 192);
 
             this.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(221, 235, 247);
            // this.RowHeadersVisible = true;

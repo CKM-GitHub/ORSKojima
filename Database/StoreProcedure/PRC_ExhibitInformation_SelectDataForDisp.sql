@@ -19,8 +19,8 @@ CREATE PROCEDURE [dbo].[PRC_ExhibitInformation_SelectDataForDisp]
 	, @Item_Code3 as varchar(32)
 	, @Item_Code4 as varchar(32)
 	, @Item_Code5 as varchar(32)
-	, @GrossProfit as decimal(3,1)
-	, @Discount as decimal(3,1)
+	, @GrossProfit as decimal(4,1)
+	, @Discount as decimal(4,1)
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -115,8 +115,8 @@ BEGIN
 	, [List_Price] int NULL
 	, [Price] int NULL
 	, [Cost] int NULL
-	, [GrossProfit] decimal(3,1) NULL
-	, [Discount] decimal(3,1) NULL
+	, [GrossProfit] decimal(4,1) NULL
+	, [Discount] decimal(4,1) NULL
 	, [ID] int NULL
 	, [Brand_Name] varchar(200) NULL
 	)
@@ -189,22 +189,29 @@ BEGIN
 
 
 	--【粗利率・割引率の算出(小数点以下1桁までで四捨五入)】
+	-- 粗利率 = (販売価格 - 原価) / 販売価格
+	-- 割引率 = (定価 - 販売価格) / 定価
+
 	UPDATE tmp
 		SET   GrossProfit =
-						CASE tmp.Price
-							WHEN 0 THEN 0
-							ELSE ROUND(CONVERT(DECIMAL,(tmp.Price - tmp.Cost)) / CONVERT(DECIMAL,TMP.Price) * 100,1)
-						END
+					CONVERT(DECIMAL(4,1),
+								CASE tmp.Price
+									WHEN 0 THEN 0
+									ELSE ROUND(CONVERT(DECIMAL,(tmp.Price - tmp.Cost)) / CONVERT(DECIMAL,TMP.Price) * 100,1)
+								END
+							)
 			, Discount = 
-						CASE tmp.Cost
-							WHEN 0 THEN 0
-							ELSE ROUND(CONVERT(DECIMAL,(tmp.Cost - tmp.Price)) / CONVERT(DECIMAL,TMP.Cost) * 100,1)
-						END
+					CONVERT(DECIMAL(4,1),
+								CASE tmp.List_Price
+									WHEN 0 THEN 0
+									ELSE ROUND(CONVERT(DECIMAL,(tmp.List_Price - tmp.Price)) / CONVERT(DECIMAL,TMP.List_Price) * 100,1)
+								END
+							)
 	FROM #tmpSelectData tmp
 	;
 
 	--【粗利率/割引率が指定された場合、不要データを削除する】
-	-- 粗利率
+	-- 粗利率 (画面で指定された数値以上の値は削除)
 	IF (@GrossProfit IS NOT NULL)
 	BEGIN
 		
@@ -215,7 +222,7 @@ BEGIN
 
 	END
 
-	-- 割引率
+	-- 割引率 (画面で指定された数値未満の値は削除)
 	IF (@Discount IS NOT NULL)
 	BEGIN
 

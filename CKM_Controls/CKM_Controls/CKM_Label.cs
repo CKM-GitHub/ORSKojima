@@ -43,7 +43,7 @@ namespace CKM_Controls
                         this.ForeColor = Color.White;
                         break;
                     case CKM_Color.Default:
-                        this.ForeColor = Color.Black;
+//                        this.ForeColor = Color.Black;
                         break;
                     case CKM_Color.Green:
                         this.ForeColor = Color.FromArgb(84, 130, 53);
@@ -150,7 +150,7 @@ namespace CKM_Controls
             this.Font = new System.Drawing.Font("MS Gothic", 9F, System.Drawing.FontStyle.Bold);
             this.BackColor = Color.Transparent;
             this.TextAlign = ContentAlignment.MiddleRight;
-            this.AutoSize = true;
+            this.AutoSize = false;
         }
     }
 }

@@ -250,7 +250,7 @@ BEGIN
 		SET @StrSql = @StrSql + '         LEFT JOIN Monotaro_Item_Master ON Monotaro_Item_Master.[ID] = Main.[ID] '
 		SET @StrSql = @StrSql + '      ) Main '
 		-- タイトル不要の場合
-		IF (@TitleKBN = 1)
+		IF (@TitleKBN = 0)
 		BEGIN
 			SET @StrSql = @StrSql + ' WHERE Main.OrderNum <> '' '''
 		END
