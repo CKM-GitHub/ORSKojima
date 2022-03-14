@@ -43,9 +43,12 @@
             this.lblOperatorName = new System.Windows.Forms.Label();
             this.lblOperator = new System.Windows.Forms.Label();
             this.lblDisp = new System.Windows.Forms.Label();
-            this.btnChangeIkkatuHacchuuMode = new CKM_Controls.CKM_Button();
             this.PanelFooter = new System.Windows.Forms.Panel();
             this.i = new System.Windows.Forms.TableLayoutPanel();
+            this.lblProgramID = new CKM_Controls.CKM_Label();
+            this.lblStoreAuthorizationChangeDate = new CKM_Controls.CKM_Label();
+            this.lblStoreCD = new CKM_Controls.CKM_Label();
+            this.lblStoreAuthoCD = new CKM_Controls.CKM_Label();
             this.BtnF3 = new CKM_Controls.CKM_Button();
             this.BtnF4 = new CKM_Controls.CKM_Button();
             this.BtnF5 = new CKM_Controls.CKM_Button();
@@ -58,10 +61,7 @@
             this.BtnF1 = new CKM_Controls.CKM_Button();
             this.BtnF2 = new CKM_Controls.CKM_Button();
             this.BtnF12 = new CKM_Controls.CKM_Button();
-            this.lblStoreAuthoCD = new CKM_Controls.CKM_Label();
-            this.lblStoreCD = new CKM_Controls.CKM_Label();
-            this.lblStoreAuthorizationChangeDate = new CKM_Controls.CKM_Label();
-            this.lblProgramID = new CKM_Controls.CKM_Label();
+            this.btnChangeIkkatuHacchuuMode = new CKM_Controls.CKM_Button();
             this.panelTop.SuspendLayout();
             this.PanelHeader.SuspendLayout();
             this.PanelSubFooter.SuspendLayout();
@@ -85,6 +85,7 @@
             // 
             // PanelHeader
             // 
+            this.PanelHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(184)))), ((int)(((byte)(231)))));
             this.PanelHeader.Controls.Add(this.PanelSubFooter);
             this.PanelHeader.Controls.Add(this.label1);
             this.PanelHeader.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -121,6 +122,7 @@
             // 
             // PanelTitle
             // 
+            this.PanelTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(184)))), ((int)(((byte)(231)))));
             this.PanelTitle.Controls.Add(this.lblIkkatuHacchuuMode);
             this.PanelTitle.Controls.Add(this.PanelLeft);
             this.PanelTitle.Controls.Add(this.PanelRight);
@@ -147,6 +149,7 @@
             // 
             // PanelLeft
             // 
+            this.PanelLeft.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(184)))), ((int)(((byte)(231)))));
             this.PanelLeft.Controls.Add(this.lblMode);
             this.PanelLeft.Controls.Add(this.lblHeaderTitle);
             this.PanelLeft.Dock = System.Windows.Forms.DockStyle.Left;
@@ -169,9 +172,10 @@
             // 
             // lblHeaderTitle
             // 
-            this.lblHeaderTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(112)))), ((int)(((byte)(173)))), ((int)(((byte)(71)))));
+            this.lblHeaderTitle.BackColor = System.Drawing.Color.Blue;
             this.lblHeaderTitle.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblHeaderTitle.Font = new System.Drawing.Font("ＭＳ ゴシック", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHeaderTitle.ForeColor = System.Drawing.Color.White;
             this.lblHeaderTitle.Location = new System.Drawing.Point(11, 9);
             this.lblHeaderTitle.Name = "lblHeaderTitle";
             this.lblHeaderTitle.Size = new System.Drawing.Size(465, 21);
@@ -180,6 +184,7 @@
             // 
             // PanelRight
             // 
+            this.PanelRight.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(184)))), ((int)(((byte)(231)))));
             this.PanelRight.Controls.Add(this.lblLoginDate);
             this.PanelRight.Controls.Add(this.lblOperatorName);
             this.PanelRight.Controls.Add(this.lblOperator);
@@ -237,25 +242,6 @@
             this.lblDisp.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblDisp.Visible = false;
             // 
-            // btnChangeIkkatuHacchuuMode
-            // 
-            this.btnChangeIkkatuHacchuuMode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
-            this.btnChangeIkkatuHacchuuMode.BackgroundColor = CKM_Controls.CKM_Button.CKM_Color.Default;
-            this.btnChangeIkkatuHacchuuMode.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnChangeIkkatuHacchuuMode.DefaultBtnSize = false;
-            this.btnChangeIkkatuHacchuuMode.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnChangeIkkatuHacchuuMode.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnChangeIkkatuHacchuuMode.Font = new System.Drawing.Font("ＭＳ ゴシック", 9F, System.Drawing.FontStyle.Bold);
-            this.btnChangeIkkatuHacchuuMode.Font_Size = CKM_Controls.CKM_Button.CKM_FontSize.Normal;
-            this.btnChangeIkkatuHacchuuMode.Location = new System.Drawing.Point(676, 9);
-            this.btnChangeIkkatuHacchuuMode.Margin = new System.Windows.Forms.Padding(1);
-            this.btnChangeIkkatuHacchuuMode.Name = "btnChangeIkkatuHacchuuMode";
-            this.btnChangeIkkatuHacchuuMode.Size = new System.Drawing.Size(120, 29);
-            this.btnChangeIkkatuHacchuuMode.TabIndex = 704;
-            this.btnChangeIkkatuHacchuuMode.Text = "FAX発注";
-            this.btnChangeIkkatuHacchuuMode.UseVisualStyleBackColor = false;
-            this.btnChangeIkkatuHacchuuMode.Visible = false;
-            // 
             // PanelFooter
             // 
             this.PanelFooter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(198)))), ((int)(((byte)(224)))), ((int)(((byte)(180)))));
@@ -302,6 +288,74 @@
             this.i.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.i.Size = new System.Drawing.Size(1370, 32);
             this.i.TabIndex = 99;
+            // 
+            // lblProgramID
+            // 
+            this.lblProgramID.AutoSize = true;
+            this.lblProgramID.Back_Color = CKM_Controls.CKM_Label.CKM_Color.Default;
+            this.lblProgramID.BackColor = System.Drawing.Color.Transparent;
+            this.lblProgramID.DefaultlabelSize = true;
+            this.lblProgramID.Font = new System.Drawing.Font("ＭＳ ゴシック", 9F, System.Drawing.FontStyle.Bold);
+            this.lblProgramID.Font_Size = CKM_Controls.CKM_Label.CKM_FontSize.Normal;
+            this.lblProgramID.ForeColor = System.Drawing.Color.Black;
+            this.lblProgramID.Location = new System.Drawing.Point(284, 171);
+            this.lblProgramID.Name = "lblProgramID";
+            this.lblProgramID.Size = new System.Drawing.Size(0, 12);
+            this.lblProgramID.TabIndex = 12;
+            this.lblProgramID.Text_Color = CKM_Controls.CKM_Label.CKM_Color.Default;
+            this.lblProgramID.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblProgramID.Visible = false;
+            // 
+            // lblStoreAuthorizationChangeDate
+            // 
+            this.lblStoreAuthorizationChangeDate.AutoSize = true;
+            this.lblStoreAuthorizationChangeDate.Back_Color = CKM_Controls.CKM_Label.CKM_Color.Default;
+            this.lblStoreAuthorizationChangeDate.BackColor = System.Drawing.Color.Transparent;
+            this.lblStoreAuthorizationChangeDate.DefaultlabelSize = true;
+            this.lblStoreAuthorizationChangeDate.Font = new System.Drawing.Font("ＭＳ ゴシック", 9F, System.Drawing.FontStyle.Bold);
+            this.lblStoreAuthorizationChangeDate.Font_Size = CKM_Controls.CKM_Label.CKM_FontSize.Normal;
+            this.lblStoreAuthorizationChangeDate.ForeColor = System.Drawing.Color.Black;
+            this.lblStoreAuthorizationChangeDate.Location = new System.Drawing.Point(142, 171);
+            this.lblStoreAuthorizationChangeDate.Name = "lblStoreAuthorizationChangeDate";
+            this.lblStoreAuthorizationChangeDate.Size = new System.Drawing.Size(0, 12);
+            this.lblStoreAuthorizationChangeDate.TabIndex = 11;
+            this.lblStoreAuthorizationChangeDate.Text_Color = CKM_Controls.CKM_Label.CKM_Color.Default;
+            this.lblStoreAuthorizationChangeDate.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblStoreAuthorizationChangeDate.Visible = false;
+            // 
+            // lblStoreCD
+            // 
+            this.lblStoreCD.AutoSize = true;
+            this.lblStoreCD.Back_Color = CKM_Controls.CKM_Label.CKM_Color.Default;
+            this.lblStoreCD.BackColor = System.Drawing.Color.Transparent;
+            this.lblStoreCD.DefaultlabelSize = true;
+            this.lblStoreCD.Font = new System.Drawing.Font("ＭＳ ゴシック", 9F, System.Drawing.FontStyle.Bold);
+            this.lblStoreCD.Font_Size = CKM_Controls.CKM_Label.CKM_FontSize.Normal;
+            this.lblStoreCD.ForeColor = System.Drawing.Color.Black;
+            this.lblStoreCD.Location = new System.Drawing.Point(216, 171);
+            this.lblStoreCD.Name = "lblStoreCD";
+            this.lblStoreCD.Size = new System.Drawing.Size(0, 12);
+            this.lblStoreCD.TabIndex = 10;
+            this.lblStoreCD.Text_Color = CKM_Controls.CKM_Label.CKM_Color.Default;
+            this.lblStoreCD.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblStoreCD.Visible = false;
+            // 
+            // lblStoreAuthoCD
+            // 
+            this.lblStoreAuthoCD.AutoSize = true;
+            this.lblStoreAuthoCD.Back_Color = CKM_Controls.CKM_Label.CKM_Color.Default;
+            this.lblStoreAuthoCD.BackColor = System.Drawing.Color.Transparent;
+            this.lblStoreAuthoCD.DefaultlabelSize = true;
+            this.lblStoreAuthoCD.Font = new System.Drawing.Font("ＭＳ ゴシック", 9F, System.Drawing.FontStyle.Bold);
+            this.lblStoreAuthoCD.Font_Size = CKM_Controls.CKM_Label.CKM_FontSize.Normal;
+            this.lblStoreAuthoCD.ForeColor = System.Drawing.Color.Black;
+            this.lblStoreAuthoCD.Location = new System.Drawing.Point(75, 171);
+            this.lblStoreAuthoCD.Name = "lblStoreAuthoCD";
+            this.lblStoreAuthoCD.Size = new System.Drawing.Size(0, 12);
+            this.lblStoreAuthoCD.TabIndex = 9;
+            this.lblStoreAuthoCD.Text_Color = CKM_Controls.CKM_Label.CKM_Color.Default;
+            this.lblStoreAuthoCD.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblStoreAuthoCD.Visible = false;
             // 
             // BtnF3
             // 
@@ -565,79 +619,30 @@
             this.BtnF12.Click += new System.EventHandler(this.Btn_Click);
             this.BtnF12.MouseEnter += new System.EventHandler(this.BtnF1_MouseEnter);
             // 
-            // lblStoreAuthoCD
+            // btnChangeIkkatuHacchuuMode
             // 
-            this.lblStoreAuthoCD.AutoSize = true;
-            this.lblStoreAuthoCD.Back_Color = CKM_Controls.CKM_Label.CKM_Color.Default;
-            this.lblStoreAuthoCD.BackColor = System.Drawing.Color.Transparent;
-            this.lblStoreAuthoCD.DefaultlabelSize = true;
-            this.lblStoreAuthoCD.Font = new System.Drawing.Font("ＭＳ ゴシック", 9F, System.Drawing.FontStyle.Bold);
-            this.lblStoreAuthoCD.Font_Size = CKM_Controls.CKM_Label.CKM_FontSize.Normal;
-            this.lblStoreAuthoCD.ForeColor = System.Drawing.Color.Black;
-            this.lblStoreAuthoCD.Location = new System.Drawing.Point(75, 171);
-            this.lblStoreAuthoCD.Name = "lblStoreAuthoCD";
-            this.lblStoreAuthoCD.Size = new System.Drawing.Size(0, 12);
-            this.lblStoreAuthoCD.TabIndex = 9;
-            this.lblStoreAuthoCD.Text_Color = CKM_Controls.CKM_Label.CKM_Color.Default;
-            this.lblStoreAuthoCD.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lblStoreAuthoCD.Visible = false;
-            // 
-            // lblStoreCD
-            // 
-            this.lblStoreCD.AutoSize = true;
-            this.lblStoreCD.Back_Color = CKM_Controls.CKM_Label.CKM_Color.Default;
-            this.lblStoreCD.BackColor = System.Drawing.Color.Transparent;
-            this.lblStoreCD.DefaultlabelSize = true;
-            this.lblStoreCD.Font = new System.Drawing.Font("ＭＳ ゴシック", 9F, System.Drawing.FontStyle.Bold);
-            this.lblStoreCD.Font_Size = CKM_Controls.CKM_Label.CKM_FontSize.Normal;
-            this.lblStoreCD.ForeColor = System.Drawing.Color.Black;
-            this.lblStoreCD.Location = new System.Drawing.Point(216, 171);
-            this.lblStoreCD.Name = "lblStoreCD";
-            this.lblStoreCD.Size = new System.Drawing.Size(0, 12);
-            this.lblStoreCD.TabIndex = 10;
-            this.lblStoreCD.Text_Color = CKM_Controls.CKM_Label.CKM_Color.Default;
-            this.lblStoreCD.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lblStoreCD.Visible = false;
-            // 
-            // lblStoreAuthorizationChangeDate
-            // 
-            this.lblStoreAuthorizationChangeDate.AutoSize = true;
-            this.lblStoreAuthorizationChangeDate.Back_Color = CKM_Controls.CKM_Label.CKM_Color.Default;
-            this.lblStoreAuthorizationChangeDate.BackColor = System.Drawing.Color.Transparent;
-            this.lblStoreAuthorizationChangeDate.DefaultlabelSize = true;
-            this.lblStoreAuthorizationChangeDate.Font = new System.Drawing.Font("ＭＳ ゴシック", 9F, System.Drawing.FontStyle.Bold);
-            this.lblStoreAuthorizationChangeDate.Font_Size = CKM_Controls.CKM_Label.CKM_FontSize.Normal;
-            this.lblStoreAuthorizationChangeDate.ForeColor = System.Drawing.Color.Black;
-            this.lblStoreAuthorizationChangeDate.Location = new System.Drawing.Point(142, 171);
-            this.lblStoreAuthorizationChangeDate.Name = "lblStoreAuthorizationChangeDate";
-            this.lblStoreAuthorizationChangeDate.Size = new System.Drawing.Size(0, 12);
-            this.lblStoreAuthorizationChangeDate.TabIndex = 11;
-            this.lblStoreAuthorizationChangeDate.Text_Color = CKM_Controls.CKM_Label.CKM_Color.Default;
-            this.lblStoreAuthorizationChangeDate.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lblStoreAuthorizationChangeDate.Visible = false;
-            // 
-            // lblProgramID
-            // 
-            this.lblProgramID.AutoSize = true;
-            this.lblProgramID.Back_Color = CKM_Controls.CKM_Label.CKM_Color.Default;
-            this.lblProgramID.BackColor = System.Drawing.Color.Transparent;
-            this.lblProgramID.DefaultlabelSize = true;
-            this.lblProgramID.Font = new System.Drawing.Font("ＭＳ ゴシック", 9F, System.Drawing.FontStyle.Bold);
-            this.lblProgramID.Font_Size = CKM_Controls.CKM_Label.CKM_FontSize.Normal;
-            this.lblProgramID.ForeColor = System.Drawing.Color.Black;
-            this.lblProgramID.Location = new System.Drawing.Point(284, 171);
-            this.lblProgramID.Name = "lblProgramID";
-            this.lblProgramID.Size = new System.Drawing.Size(0, 12);
-            this.lblProgramID.TabIndex = 12;
-            this.lblProgramID.Text_Color = CKM_Controls.CKM_Label.CKM_Color.Default;
-            this.lblProgramID.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lblProgramID.Visible = false;
+            this.btnChangeIkkatuHacchuuMode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
+            this.btnChangeIkkatuHacchuuMode.BackgroundColor = CKM_Controls.CKM_Button.CKM_Color.Default;
+            this.btnChangeIkkatuHacchuuMode.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnChangeIkkatuHacchuuMode.DefaultBtnSize = false;
+            this.btnChangeIkkatuHacchuuMode.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnChangeIkkatuHacchuuMode.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnChangeIkkatuHacchuuMode.Font = new System.Drawing.Font("ＭＳ ゴシック", 9F, System.Drawing.FontStyle.Bold);
+            this.btnChangeIkkatuHacchuuMode.Font_Size = CKM_Controls.CKM_Button.CKM_FontSize.Normal;
+            this.btnChangeIkkatuHacchuuMode.Location = new System.Drawing.Point(676, 9);
+            this.btnChangeIkkatuHacchuuMode.Margin = new System.Windows.Forms.Padding(1);
+            this.btnChangeIkkatuHacchuuMode.Name = "btnChangeIkkatuHacchuuMode";
+            this.btnChangeIkkatuHacchuuMode.Size = new System.Drawing.Size(120, 29);
+            this.btnChangeIkkatuHacchuuMode.TabIndex = 704;
+            this.btnChangeIkkatuHacchuuMode.Text = "FAX発注";
+            this.btnChangeIkkatuHacchuuMode.UseVisualStyleBackColor = false;
+            this.btnChangeIkkatuHacchuuMode.Visible = false;
             // 
             // FrmMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(198)))), ((int)(((byte)(224)))), ((int)(((byte)(180)))));
+            this.BackColor = System.Drawing.SystemColors.Menu;
             this.ClientSize = new System.Drawing.Size(1370, 749);
             this.Controls.Add(this.lblProgramID);
             this.Controls.Add(this.lblStoreAuthorizationChangeDate);
