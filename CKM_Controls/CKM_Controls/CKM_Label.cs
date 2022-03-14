@@ -150,7 +150,8 @@ namespace CKM_Controls
             this.Font = new System.Drawing.Font("MS Gothic", 9F, System.Drawing.FontStyle.Bold);
             this.BackColor = Color.Transparent;
             this.TextAlign = ContentAlignment.MiddleRight;
-            this.AutoSize = true;
+//            this.AutoSize = true;
+            this.AutoSize = false;
         }
     }
 }
