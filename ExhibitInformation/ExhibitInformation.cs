@@ -242,6 +242,7 @@ namespace ExhibitInformation
                 else
                 {
                     bbl.ShowMessage("E128");
+                    detailControls[(int)EIndex.TokuisakiCD].Focus();
                 }
             }
             catch (Exception ex)
