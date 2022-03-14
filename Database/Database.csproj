@@ -151,7 +151,6 @@
     <Content Include="StoreProcedure\PRC_ExhibitInformation_SelectDataForCsv.sql" />
     <Content Include="StoreProcedure\PRC_ExhibitInformation_SelectDataForDisp.sql" />
     <Content Include="StoreProcedure\PRC_JuchuuDataCheck.sql" />
-    <Content Include="StoreProcedure\ptkEnco.sql" />
     <Content Include="StoreProcedure\Select_SetCheckdigit.sql" />
     <Content Include="StoreProcedure\SplitString.sql" />
     <Content Include="StoreProcedure\Update_M_Customer.sql" />
