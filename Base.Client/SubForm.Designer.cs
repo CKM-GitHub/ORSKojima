@@ -59,6 +59,7 @@
             // 
             // PanelHeader
             // 
+            this.PanelHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(184)))), ((int)(((byte)(231)))));
             this.PanelHeader.Controls.Add(this.label1);
             this.PanelHeader.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PanelHeader.Location = new System.Drawing.Point(0, 42);
@@ -77,6 +78,7 @@
             // 
             // PanelTitle
             // 
+            this.PanelTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(184)))), ((int)(((byte)(231)))));
             this.PanelTitle.Controls.Add(this.lblHeaderTitle);
             this.PanelTitle.Dock = System.Windows.Forms.DockStyle.Top;
             this.PanelTitle.Location = new System.Drawing.Point(0, 0);
@@ -86,9 +88,10 @@
             // 
             // lblHeaderTitle
             // 
-            this.lblHeaderTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(112)))), ((int)(((byte)(173)))), ((int)(((byte)(71)))));
+            this.lblHeaderTitle.BackColor = System.Drawing.Color.Blue;
             this.lblHeaderTitle.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblHeaderTitle.Font = new System.Drawing.Font("MS Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHeaderTitle.ForeColor = System.Drawing.Color.White;
             this.lblHeaderTitle.Location = new System.Drawing.Point(12, 9);
             this.lblHeaderTitle.Name = "lblHeaderTitle";
             this.lblHeaderTitle.Size = new System.Drawing.Size(370, 23);
@@ -224,7 +227,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(198)))), ((int)(((byte)(224)))), ((int)(((byte)(180)))));
+            this.BackColor = System.Drawing.SystemColors.ControlLight;
             this.ClientSize = new System.Drawing.Size(838, 536);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.PanelFooter);

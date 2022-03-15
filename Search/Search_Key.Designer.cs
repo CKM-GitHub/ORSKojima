@@ -29,13 +29,12 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Search_Key));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.ckM_Label1 = new CKM_Controls.CKM_Label();
-            this.ckM_Label4 = new CKM_Controls.CKM_Label();
             this.txtKey1 = new CKM_Controls.CKM_TextBox();
             this.txtKey2 = new CKM_Controls.CKM_TextBox();
             this.ckM_Label5 = new CKM_Controls.CKM_Label();
@@ -51,111 +50,95 @@
             this.colDailyPayment = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblID = new System.Windows.Forms.Label();
             this.lblName = new System.Windows.Forms.Label();
+            this.ckM_Label18 = new CKM_Controls.CKM_Label();
+            this.ckM_Label17 = new CKM_Controls.CKM_Label();
             this.PanelHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GvKey)).BeginInit();
             this.SuspendLayout();
             // 
             // PanelHeader
             // 
+            this.PanelHeader.Controls.Add(this.ckM_Label18);
+            this.PanelHeader.Controls.Add(this.ckM_Label17);
             this.PanelHeader.Controls.Add(this.lblName);
             this.PanelHeader.Controls.Add(this.lblID);
             this.PanelHeader.Controls.Add(this.F11Show);
             this.PanelHeader.Controls.Add(this.ckM_Label5);
             this.PanelHeader.Controls.Add(this.txtKey2);
             this.PanelHeader.Controls.Add(this.txtKey1);
-            this.PanelHeader.Controls.Add(this.ckM_Label4);
-            this.PanelHeader.Controls.Add(this.ckM_Label1);
             this.PanelHeader.Size = new System.Drawing.Size(1425, 108);
-            this.PanelHeader.Controls.SetChildIndex(this.ckM_Label1, 0);
-            this.PanelHeader.Controls.SetChildIndex(this.ckM_Label4, 0);
             this.PanelHeader.Controls.SetChildIndex(this.txtKey1, 0);
             this.PanelHeader.Controls.SetChildIndex(this.txtKey2, 0);
             this.PanelHeader.Controls.SetChildIndex(this.ckM_Label5, 0);
             this.PanelHeader.Controls.SetChildIndex(this.F11Show, 0);
             this.PanelHeader.Controls.SetChildIndex(this.lblID, 0);
             this.PanelHeader.Controls.SetChildIndex(this.lblName, 0);
-            // 
-            // ckM_Label1
-            // 
-            this.ckM_Label1.AutoSize = true;
-            this.ckM_Label1.Back_Color = CKM_Controls.CKM_Label.CKM_Color.Default;
-            this.ckM_Label1.BackColor = System.Drawing.Color.Transparent;
-            this.ckM_Label1.DefaultlabelSize = true;
-            this.ckM_Label1.Font = new System.Drawing.Font("MS Gothic", 9F, System.Drawing.FontStyle.Bold);
-            this.ckM_Label1.Font_Size = CKM_Controls.CKM_Label.CKM_FontSize.Normal;
-            this.ckM_Label1.ForeColor = System.Drawing.Color.Black;
-            this.ckM_Label1.Location = new System.Drawing.Point(33, 19);
-            this.ckM_Label1.Name = "ckM_Label1";
-            this.ckM_Label1.Size = new System.Drawing.Size(19, 12);
-            this.ckM_Label1.TabIndex = 2;
-            this.ckM_Label1.Text = "ID";
-            this.ckM_Label1.Text_Color = CKM_Controls.CKM_Label.CKM_Color.Default;
-            this.ckM_Label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // ckM_Label4
-            // 
-            this.ckM_Label4.AutoSize = true;
-            this.ckM_Label4.Back_Color = CKM_Controls.CKM_Label.CKM_Color.Default;
-            this.ckM_Label4.BackColor = System.Drawing.Color.Transparent;
-            this.ckM_Label4.DefaultlabelSize = true;
-            this.ckM_Label4.Font = new System.Drawing.Font("MS Gothic", 9F, System.Drawing.FontStyle.Bold);
-            this.ckM_Label4.Font_Size = CKM_Controls.CKM_Label.CKM_FontSize.Normal;
-            this.ckM_Label4.ForeColor = System.Drawing.Color.Black;
-            this.ckM_Label4.Location = new System.Drawing.Point(26, 44);
-            this.ckM_Label4.Name = "ckM_Label4";
-            this.ckM_Label4.Size = new System.Drawing.Size(26, 12);
-            this.ckM_Label4.TabIndex = 5;
-            this.ckM_Label4.Text = "Key";
-            this.ckM_Label4.Text_Color = CKM_Controls.CKM_Label.CKM_Color.Default;
-            this.ckM_Label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.PanelHeader.Controls.SetChildIndex(this.ckM_Label17, 0);
+            this.PanelHeader.Controls.SetChildIndex(this.ckM_Label18, 0);
             // 
             // txtKey1
             // 
             this.txtKey1.AllowMinus = false;
             this.txtKey1.Back_Color = CKM_Controls.CKM_TextBox.CKM_Color.White;
             this.txtKey1.BackColor = System.Drawing.Color.White;
+            this.txtKey1.BorderColor = false;
             this.txtKey1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtKey1.ClientColor = System.Drawing.Color.White;
             this.txtKey1.Ctrl_Byte = CKM_Controls.CKM_TextBox.Bytes.半角;
             this.txtKey1.Ctrl_Type = CKM_Controls.CKM_TextBox.Type.Normal;
             this.txtKey1.DecimalPlace = 0;
+            this.txtKey1.EnabledInsertKeyModeOnMouseEnter = false;
             this.txtKey1.Font = new System.Drawing.Font("MS Gothic", 9F);
+            this.txtKey1.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Overwrite;
             this.txtKey1.IntegerPart = 0;
             this.txtKey1.IsCorrectDate = true;
             this.txtKey1.isEnterKeyDown = false;
+            this.txtKey1.IsFirstTime = true;
+            this.txtKey1.isMaxLengthErr = false;
             this.txtKey1.IsNumber = true;
             this.txtKey1.IsShop = false;
+            this.txtKey1.IsTimemmss = false;
             this.txtKey1.Length = 50;
-            this.txtKey1.Location = new System.Drawing.Point(58, 42);
+            this.txtKey1.Location = new System.Drawing.Point(84, 40);
             this.txtKey1.MaxLength = 50;
             this.txtKey1.MoveNext = true;
             this.txtKey1.Name = "txtKey1";
             this.txtKey1.Size = new System.Drawing.Size(500, 19);
             this.txtKey1.TabIndex = 0;
             this.txtKey1.TextSize = CKM_Controls.CKM_TextBox.FontSize.Normal;
+            this.txtKey1.UseColorSizMode = false;
             // 
             // txtKey2
             // 
             this.txtKey2.AllowMinus = false;
             this.txtKey2.Back_Color = CKM_Controls.CKM_TextBox.CKM_Color.White;
             this.txtKey2.BackColor = System.Drawing.Color.White;
+            this.txtKey2.BorderColor = false;
             this.txtKey2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtKey2.ClientColor = System.Drawing.Color.White;
             this.txtKey2.Ctrl_Byte = CKM_Controls.CKM_TextBox.Bytes.半角;
             this.txtKey2.Ctrl_Type = CKM_Controls.CKM_TextBox.Type.Normal;
             this.txtKey2.DecimalPlace = 0;
+            this.txtKey2.EnabledInsertKeyModeOnMouseEnter = false;
             this.txtKey2.Font = new System.Drawing.Font("MS Gothic", 9F);
+            this.txtKey2.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Overwrite;
             this.txtKey2.IntegerPart = 0;
             this.txtKey2.IsCorrectDate = true;
             this.txtKey2.isEnterKeyDown = false;
+            this.txtKey2.IsFirstTime = true;
+            this.txtKey2.isMaxLengthErr = false;
             this.txtKey2.IsNumber = true;
             this.txtKey2.IsShop = false;
+            this.txtKey2.IsTimemmss = false;
             this.txtKey2.Length = 50;
-            this.txtKey2.Location = new System.Drawing.Point(587, 42);
+            this.txtKey2.Location = new System.Drawing.Point(613, 40);
             this.txtKey2.MaxLength = 50;
             this.txtKey2.MoveNext = true;
             this.txtKey2.Name = "txtKey2";
             this.txtKey2.Size = new System.Drawing.Size(500, 19);
             this.txtKey2.TabIndex = 1;
             this.txtKey2.TextSize = CKM_Controls.CKM_TextBox.FontSize.Normal;
+            this.txtKey2.UseColorSizMode = false;
             this.txtKey2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtKey2_KeyDown);
             // 
             // ckM_Label5
@@ -167,7 +150,7 @@
             this.ckM_Label5.Font = new System.Drawing.Font("MS Gothic", 9F, System.Drawing.FontStyle.Bold);
             this.ckM_Label5.Font_Size = CKM_Controls.CKM_Label.CKM_FontSize.Normal;
             this.ckM_Label5.ForeColor = System.Drawing.Color.Black;
-            this.ckM_Label5.Location = new System.Drawing.Point(564, 45);
+            this.ckM_Label5.Location = new System.Drawing.Point(590, 43);
             this.ckM_Label5.Name = "ckM_Label5";
             this.ckM_Label5.Size = new System.Drawing.Size(18, 12);
             this.ckM_Label5.TabIndex = 8;
@@ -201,7 +184,8 @@
             this.GvKey.AllowUserToResizeRows = false;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(221)))), ((int)(((byte)(235)))), ((int)(((byte)(247)))));
             this.GvKey.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.GvKey.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(198)))), ((int)(((byte)(224)))), ((int)(((byte)(180)))));
+            this.GvKey.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.GvKey.CheckCol = ((System.Collections.ArrayList)(resources.GetObject("GvKey.CheckCol")));
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
@@ -221,9 +205,11 @@
             this.colDigital3,
             this.colDailyPayment});
             this.GvKey.EnableHeadersVisualStyles = false;
-            this.GvKey.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(198)))), ((int)(((byte)(224)))), ((int)(((byte)(180)))));
+            this.GvKey.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.GvKey.Location = new System.Drawing.Point(12, 156);
             this.GvKey.Name = "GvKey";
+            this.GvKey.RowHeight_ = 20;
+            this.GvKey.RowTemplate.Height = 20;
             this.GvKey.Size = new System.Drawing.Size(1405, 402);
             this.GvKey.TabIndex = 5;
             this.GvKey.UseRowNo = true;
@@ -298,7 +284,7 @@
             // 
             this.lblID.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(208)))), ((int)(((byte)(142)))));
             this.lblID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblID.Location = new System.Drawing.Point(58, 15);
+            this.lblID.Location = new System.Drawing.Point(84, 15);
             this.lblID.Name = "lblID";
             this.lblID.Size = new System.Drawing.Size(30, 20);
             this.lblID.TabIndex = 48;
@@ -309,12 +295,44 @@
             // 
             this.lblName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(208)))), ((int)(((byte)(142)))));
             this.lblName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblName.Location = new System.Drawing.Point(88, 15);
+            this.lblName.Location = new System.Drawing.Point(114, 15);
             this.lblName.Name = "lblName";
             this.lblName.Size = new System.Drawing.Size(650, 20);
             this.lblName.TabIndex = 49;
             this.lblName.Text = "YYYY/MM/DD";
             this.lblName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // ckM_Label18
+            // 
+            this.ckM_Label18.Back_Color = CKM_Controls.CKM_Label.CKM_Color.Default;
+            this.ckM_Label18.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.ckM_Label18.DefaultlabelSize = true;
+            this.ckM_Label18.Font = new System.Drawing.Font("MS Gothic", 9F, System.Drawing.FontStyle.Bold);
+            this.ckM_Label18.Font_Size = CKM_Controls.CKM_Label.CKM_FontSize.Normal;
+            this.ckM_Label18.ForeColor = System.Drawing.Color.Black;
+            this.ckM_Label18.Location = new System.Drawing.Point(20, 16);
+            this.ckM_Label18.Name = "ckM_Label18";
+            this.ckM_Label18.Size = new System.Drawing.Size(64, 18);
+            this.ckM_Label18.TabIndex = 726;
+            this.ckM_Label18.Text = "ID";
+            this.ckM_Label18.Text_Color = CKM_Controls.CKM_Label.CKM_Color.Default;
+            this.ckM_Label18.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // ckM_Label17
+            // 
+            this.ckM_Label17.Back_Color = CKM_Controls.CKM_Label.CKM_Color.Default;
+            this.ckM_Label17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.ckM_Label17.DefaultlabelSize = true;
+            this.ckM_Label17.Font = new System.Drawing.Font("MS Gothic", 9F, System.Drawing.FontStyle.Bold);
+            this.ckM_Label17.Font_Size = CKM_Controls.CKM_Label.CKM_FontSize.Normal;
+            this.ckM_Label17.ForeColor = System.Drawing.Color.Black;
+            this.ckM_Label17.Location = new System.Drawing.Point(20, 40);
+            this.ckM_Label17.Name = "ckM_Label17";
+            this.ckM_Label17.Size = new System.Drawing.Size(64, 18);
+            this.ckM_Label17.TabIndex = 725;
+            this.ckM_Label17.Text = "KEY";
+            this.ckM_Label17.Text_Color = CKM_Controls.CKM_Label.CKM_Color.Default;
+            this.ckM_Label17.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // Search_Key
             // 
@@ -323,6 +341,7 @@
             this.ClientSize = new System.Drawing.Size(1425, 621);
             this.Controls.Add(this.GvKey);
             this.F11Visible = true;
+            this.F12Visible = true;
             this.F9Visible = true;
             this.Name = "Search_Key";
             this.PanelHeaderHeight = 150;
@@ -338,9 +357,7 @@
         }
 
         #endregion
-        private CKM_Controls.CKM_Label ckM_Label1;
         private CKM_Controls.CKM_TextBox txtKey1;
-        private CKM_Controls.CKM_Label ckM_Label4;
         private CKM_Controls.CKM_Button F11Show;
         private CKM_Controls.CKM_Label ckM_Label5;
         private CKM_Controls.CKM_TextBox txtKey2;
@@ -355,5 +372,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colDigital2;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDigital3;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDailyPayment;
+        private CKM_Controls.CKM_Label ckM_Label18;
+        private CKM_Controls.CKM_Label ckM_Label17;
     }
 }

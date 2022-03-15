@@ -32,10 +32,11 @@ namespace MasterTouroku_Hanyou
 
             SetFunctionLabel(EProMode.MENTE);
             StartProgram();
-
+           
             mthbl = new MasterTouroku_Hanyou_BL();
 
-            ScID.Focus();            
+            ScID.Focus();
+            ChangeMode(EOperationMode.INSERT);
         }
 
         /// <summary>
@@ -51,7 +52,7 @@ namespace MasterTouroku_Hanyou
         /// </summary>
         /// <param name="index"> button index+1, eg.if index is 0,it means F1 click </param>
         public override void FunctionProcess(int index)
-        {          
+        {  
             switch (index + 1)
             {
                 case 2:
