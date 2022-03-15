@@ -28,7 +28,7 @@ GO
 CREATE PROCEDURE [dbo].[PRC_ExhibitInformation_SelectDataForCsv]
 	-- Add the parameters for the stored procedure here
 
-	  @TokuisakiCD as varchar(5)
+	  @TokuisakiCD	as varchar(5)
 	, @TableCSV		T_ItemCsv READONLY
 AS
 BEGIN
@@ -43,7 +43,13 @@ BEGIN
 				, @Title_listSEL varchar(max)
 				, @Title_sql nvarchar(max)
 				, @Detail_sql nvarchar(max)
+				, @Henkan_sql nvarchar(max)
+				, @Output_sql nvarchar(max)
 				, @StrSql nvarchar(max)
+				, @strOutput nvarchar(max)
+				, @RowCnt int
+				, @MaxRowCnt int
+
 
 
 		--【Item_ExportFieldからCSV出力する項目を取得】
@@ -69,6 +75,36 @@ BEGIN
 		; 
 
 
+		--【出力する項目数を取得する】
+		SET @MaxRowCnt =
+		(
+			SELECT COUNT(*)
+			FROM tmpSplit
+		);
+
+		--【得意先がタイトル行有りか無しかの判断】
+		DECLARE @TitleKBN tinyint = 
+		(
+			SELECT TitleUmuKBN
+			FROM M_Tokuisaki
+			WHERE TokuisakiCD = @TokuisakiCD
+		)
+		;
+
+
+		--【最終的に出力する値を格納する為のテーブル】
+		CREATE TABLE #tmpOutputValue
+		(
+			  [RowNum] INT identity(1,1)
+			, [CsvValue] [NVARCHAR](MAX)
+		)
+		;
+
+
+
+
+
+		--====↓【タイトル部データ取得処理】↓====--
 
 		SET @Title_listIN = NULL;
 		SET @Title_listSEL = NULL;
@@ -91,7 +127,7 @@ BEGIN
 		LEFT JOIN M_HENKAN MHen
 		ON	MHen.TokuisakiCD = @TokuisakiCD
 		AND	MHen.RCMItemName = tmp.SplitStr
-		AND	MHen.RCMItemValue = 99999
+		AND	MHen.RCMItemValue = '99999'
 		;
 
 		--【動的SQLを使用して行と列を入れ替える】
@@ -101,8 +137,8 @@ BEGIN
 					END
 
 				, @Title_listSEL = 
-					CASE WHEN @Title_listSEL IS NULL THEN '[' + tmp.SplitStr  + '] AS ' + tmp.SplitStr 
-							ELSE @Title_listSEL + ', [' + tmp.SplitStr + '] AS ' + tmp.SplitStr 
+					CASE WHEN @Title_listSEL IS NULL THEN '[' + tmp.SplitStr  + '] '
+							ELSE @Title_listSEL + ' + '','' + [' + tmp.SplitStr + '] ' 
 					END
 
 		FROM #tmpTitle tmp
@@ -112,33 +148,51 @@ BEGIN
 		SET @Title_listSEL = REPLACE(@Title_listSEL, '[', 'MAX([');
 		SET @Title_listSEL = REPLACE(@Title_listSEL, ']', '])');
 
-		SET @Title_sql = 
-						'SELECT '' '' AS OrderNum,  '
-						+
-						@Title_listSEL
-						+
-						+ ' FROM #tmpTitle PIVOT (MAX(SplitStr) FOR SplitStr IN ( '
-						+ @Title_listIN
-						+ ' )) AS PV '
-					;
+
+		-- タイトルが必要な得意先の場合
+		IF (@TitleKBN = 1)
+		BEGIN
+
+			SET @Title_sql = 'INSERT INTO #tmpOutputValue '
+							+ ' ( CsvValue )'
+							+ ' SELECT '
+							+
+							@Title_listSEL
+							+
+							+ ' FROM #tmpTitle PIVOT (MAX(SplitStr) FOR SplitStr IN ( '
+							+ @Title_listIN
+							+ ' )) AS PV '
+						;
+
+			EXECUTE sp_executesql @Title_sql;
+
+		END
 
 
+		--====↑【タイトル部データ取得処理】↑====--
 
 
-		--【明細部データ取得処理】
+		--====↓【明細部データ取得処理】↓====--
 
 		-- 動的SQL用変数
+		SET @Henkan_sql = NULL;
 		SET @Detail_sql = NULL;
 
+
+		-- CUR_Porpose用変数
 		DECLARE @CurCsvTitle	AS VARCHAR(50);
 		DECLARE @CurTableName	AS VARCHAR(50);
 		DECLARE @CurStrChar		AS VARCHAR(50);
 		DECLARE @CurNumKBN		AS INT;
+		DECLARE @CurChar3		AS VARCHAR(100);
+
+		-- CUR_Output用変数
+		DECLARE @CurRowNum		AS INT;
 
 
 		--【汎用マスタから実際に出力したい項目を取得する】
 		DECLARE CUR_Porpose CURSOR FOR
-			SELECT Main.SplitStr AS CsvTitle, Sub.Char1, ISNULL(Sub.Char3, Sub.Char2) StrChar, Sub.Num1 
+			SELECT Main.SplitStr AS CsvTitle, Sub.Char1, ISNULL(Sub.Char3, Sub.Char2) StrChar, Sub.Num1, Sub.Char3
 			FROM #tmpSplit Main
 			LEFT JOIN M_MultiPorpose Sub
 			ON  Sub.[id] = 2
@@ -151,39 +205,46 @@ BEGIN
 
 		--最初の1行目を取得して変数へ値をセット
 		FETCH NEXT FROM CUR_Porpose
-		INTO @CurCsvTitle, @CurTableName, @CurStrChar, @CurNumKBN;
+		INTO @CurCsvTitle, @CurTableName, @CurStrChar, @CurNumKBN, @CurChar3;
 
 		--データの行数分ループ処理を実行する
 		WHILE @@FETCH_STATUS = 0
 		BEGIN
 			-- ループ内の実際の処理 ここから===*******************CUR_Porpose
 
+			IF (@CurChar3 IS NOT NULL)
+			BEGIN
+				
+				SET @CurStrChar = '''' + @CurStrChar + '''' ;
+
+			END
+
 			IF (@CurNumKBN = 0)
 			BEGIN
-					IF (@Detail_sql IS NULL)
+					IF (@Henkan_sql IS NULL)
 					BEGIN
-						SET @Detail_sql = 'SELECT Main.Item_Code as OrderNum, ';
+						SET @Henkan_sql = 'SELECT @parOutput = ';
 					END
 					ELSE
 					BEGIN
-						SET @Detail_sql = @Detail_sql + ', ';
+						SET @Henkan_sql = @Henkan_sql + ' + '','' +  ';
 					END
 
 
-					SET @Detail_sql = @Detail_sql +  ' CONVERT(VARCHAR(MAX), ' + @CurStrChar + ') ';
+					SET @Henkan_sql = @Henkan_sql +  ' CONVERT(VARCHAR(MAX), ' + @CurStrChar + ') ';
 			END
-			IF (@CurNumKBN = 1)
+			IF (@CurNumKBN = 1)		-- Num1 = 1 の時、文字列内で最初のスペースまでの値を採用
 			BEGIN
-					IF (@Detail_sql IS NULL)
+					IF (@Henkan_sql IS NULL)
 					BEGIN
-						SET @Detail_sql = 'SELECT Main.Item_Code as OrderNum, ' ;
+						SET @Henkan_sql = 'SELECT @parOutput = ';
 					END
 					ELSE
 					BEGIN
-						SET @Detail_sql = @Detail_sql + ', ' ;
+						SET @Henkan_sql = @Henkan_sql + ' + '','' + ' ;
 					END
 
-					SET @Detail_sql = @Detail_sql + ' CASE CHARINDEX('' '',' + @CurStrChar + ' )' 
+					SET @Henkan_sql = @Henkan_sql + ' CASE CHARINDEX('' '',' + @CurStrChar + ' )' 
 													+ '   WHEN 0 THEN ' + @CurStrChar
 													+ '   ELSE SUBSTRING(' + @CurStrChar + ', 1, CHARINDEX('' '', ' + @CurStrChar + '))'
 													+ ' END '
@@ -194,19 +255,26 @@ BEGIN
 
 			--次の行のデータを取得して変数へ値をセット
 			FETCH NEXT FROM CUR_Porpose
-			INTO @CurCsvTitle, @CurTableName, @CurStrChar, @CurNumKBN;
+			INTO @CurCsvTitle, @CurTableName, @CurStrChar, @CurNumKBN, @CurChar3;
 
 		END	-- LOOPの終わり***************************************CUR_Porpose
 
 		--カーソルを閉じる
 		CLOSE CUR_Porpose;
 		DEALLOCATE CUR_Porpose;
-	
-		
+
+
+		-- 上記の動的SQLに対してJOIN句まで変数に追加する
+		SET @Henkan_sql = @Henkan_sql + ' FROM #tmpItemCSV Main '
+		SET @Henkan_sql = @Henkan_sql + ' LEFT JOIN Item_Master ON Item_Master.[ID] = Main.[ID] '
+		SET @Henkan_sql = @Henkan_sql + ' LEFT JOIN Monotaro_Item_Master ON Monotaro_Item_Master.[ID] = Main.[ID] '
+
+
 
 		-- 【動的SQLの為に一時テーブルにデータを移行する】
-		CREATE TABLE #tmp_ItemCsv
+		CREATE TABLE #tmpItemCsv
 		(
+			[RowNum] [int]  identity(1,1),
 			[Chk] [varchar](1) ,
 			[Item_Code] [varchar](32),
 			[Item_Name] [varchar](255),
@@ -219,45 +287,146 @@ BEGIN
 			[Brand_Name][varchar](200)
 		);
 
-		INSERT #tmp_ItemCSV
+
+		INSERT #tmpItemCSV
+		(
+			[Chk] ,
+			[Item_Code],
+			[Item_Name],
+			[List_Price],
+			[Price],
+			[Cost],
+			[ArariRate],
+			[WaribikiRate],
+			[ID],
+			[Brand_Name]
+		)
 		SELECT *
 		FROM @TableCSV
+		ORDER BY [ID]
 		;
+		
 
 
-
-		--【得意先がタイトル行有りか無しかの判断】
-		DECLARE @TitleKBN tinyint = 
+		-- 変換マスタをREADする為のテーブル
+		CREATE TABLE #tmpHenkan
 		(
-			SELECT TitleUmuKBN
-			FROM M_Tokuisaki
-			WHERE TokuisakiCD = @TokuisakiCD
+			  [SplitNum] INT identity(1,1)
+			, [SplitTitle]  [NVARCHAR](MAX)
+			, [SplitStr]  [NVARCHAR](MAX)
 		)
 		;
+		
 
 
-		-- 【動的SQLを実行してデータを取得】
+		-- 出力対象データについて1件ずつ処理する
+		DECLARE CUR_Output CURSOR FOR
+			SELECT RowNum
+			FROM #tmpItemCSV
+			ORDER BY RowNum
+		;
 
-		SET @StrSql = '';
+		--カーソルオープン
+		OPEN CUR_Output;
 
-		SET @StrSql = @StrSql + ' SELECT ' + @Title_listIN
-		SET @StrSql = @StrSql + ' FROM ('
-		SET @StrSql = @StrSql + '         ' + @Title_sql
-		SET @StrSql = @StrSql + '         UNION  '
-		SET @StrSql = @StrSql + '         ' + @Detail_sql
-		SET @StrSql = @StrSql + '         FROM #tmp_ItemCSV Main '
-		SET @StrSql = @StrSql + '         LEFT JOIN Item_Master ON Item_Master.[ID] = Main.[ID] '
-		SET @StrSql = @StrSql + '         LEFT JOIN Monotaro_Item_Master ON Monotaro_Item_Master.[ID] = Main.[ID] '
-		SET @StrSql = @StrSql + '      ) Main '
-		-- タイトル不要の場合
-		IF (@TitleKBN = 0)
+		--最初の1行目を取得して変数へ値をセット
+		FETCH NEXT FROM CUR_Output
+		INTO @CurRowNum;
+
+		--データの行数分ループ処理を実行する
+		WHILE @@FETCH_STATUS = 0
 		BEGIN
-			SET @StrSql = @StrSql + ' WHERE Main.OrderNum <> '' '''
-		END
-		SET @StrSql = @StrSql + ' ORDER BY Main.OrderNum '
+			-- ループ内の実際の処理 ここから===*******************CUR_Output
+				
+				SET @strOutput = '';
+				SET @Detail_sql = '';
+
+				SET @Detail_sql = @Henkan_sql 
+				SET @Detail_sql = @Detail_sql + ' WHERE Main.RowNum = ' + CONVERT(VARCHAR,@CurRowNum)
+				
+
+				EXECUTE sp_executesql @Detail_sql, N'@parOutput NVARCHAR(MAX) OUTPUT', @parOutput = @strOutput OUTPUT;
 
 
-		EXECUTE sp_executesql @StrSql;
+				--　INSERT前にワークテーブルをTRUNCATE
+				TRUNCATE TABLE #tmpHenkan
+				;
+
+				--　新規行のデータを挿入
+				INSERT INTO #tmpHenkan
+				([SplitStr])
+				SELECT *
+				FROM STRING_SPLIT(@strOutput,',')
+				; 
+
+				-- M_Henkanをreadする時に必要なExport_fieldsの1つ1つをUpdate
+				UPDATE Main
+				SET Main.SplitTitle = Sub.SplitStr
+				FROM #tmpHenkan Main
+				INNER JOIN #tmpSplit Sub
+				ON Sub.SplitNum = Main.SplitNum
+				;
+
+				-- M_Henkanを結合して、値の変換値があった場合はそちらを使用する
+				UPDATE tmp
+				SET tmp.SplitStr = ISNULL(MH.CsvOutputItemValue, tmp.SplitStr)
+				FROM #tmpHenkan tmp
+				LEFT JOIN M_Henkan MH
+				ON  MH.TokuisakiCD = @TokuisakiCD
+				AND MH.RCMItemName = tmp.SplitTitle
+				AND MH.RCMItemValue = tmp.SplitStr
+				;
+
+				SET @RowCnt = 1;
+
+				--最終出力用#tmpOutputValue に行を挿入
+				SET @Output_sql = '';
+
+				SET @Output_sql = 'INSERT INTO #tmpOutputValue '
+				SET @Output_sql = @Output_sql + ' (CsvValue) ' 
+				SET @Output_sql = @Output_sql + ' SELECT '
+
+				WHILE (@RowCnt < @MaxRowCnt + 1)
+				BEGIN
+					
+					IF (@RowCnt > 1)
+					BEGIN
+						SET @Output_sql = @Output_sql + ' + '','' + '
+					END
+
+					SET @Output_sql = @Output_sql + ' MAX(CASE SplitNum WHEN ' + CONVERT(VARCHAR,@RowCnt) + ' THEN SplitStr ELSE '''' END )'
+
+					SET @RowCnt = @RowCnt + 1;
+
+				END
+				
+				SET @Output_sql = @Output_sql + ' FROM #tmpHenkan '
+
+
+				EXECUTE sp_executesql @Output_sql;
+
+
+
+			--次の行のデータを取得して変数へ値をセット
+			FETCH NEXT FROM CUR_Output
+			INTO @CurRowNum;
+
+		END	-- LOOPの終わり***************************************CUR_Output
+
+		--カーソルを閉じる
+		CLOSE CUR_Output;
+		DEALLOCATE CUR_Output;
+
+	
+		--====↑【明細部データ取得処理】↑====--
+
+
+
+
+		--【出力データを取得】
+		SELECT CsvValue
+		FROM #tmpOutputValue
+		ORDER BY RowNum;
 
 
 
@@ -266,8 +435,11 @@ BEGIN
 		;
 		DROP TABLE #tmpSplit
 		;
-		DROP TABLE #tmp_ItemCSV
+		DROP TABLE #tmpItemCSV
 		;
-
+		DROP TABLE #tmpHenkan
+		;
+		DROP TABLE #tmpOutputValue
+		;
 					
 END
