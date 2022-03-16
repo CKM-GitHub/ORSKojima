@@ -389,6 +389,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KojimaMenu", "KojimaMenu\Ko
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExhibitInformation", "ExhibitInformation\ExhibitInformation.csproj", "{2E73EEE1-7718-41BD-9C22-9B60883AFD86}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MasterTouroku_Henkan", "MasterTouroku_Henkan\MasterTouroku_Henkan.csproj", "{F2D27AA1-4E56-4647-A4FD-5360512302BE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -2701,6 +2703,18 @@ Global
 		{2E73EEE1-7718-41BD-9C22-9B60883AFD86}.Release|x64.Build.0 = Release|Any CPU
 		{2E73EEE1-7718-41BD-9C22-9B60883AFD86}.Release|x86.ActiveCfg = Release|Any CPU
 		{2E73EEE1-7718-41BD-9C22-9B60883AFD86}.Release|x86.Build.0 = Release|Any CPU
+		{F2D27AA1-4E56-4647-A4FD-5360512302BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2D27AA1-4E56-4647-A4FD-5360512302BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2D27AA1-4E56-4647-A4FD-5360512302BE}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F2D27AA1-4E56-4647-A4FD-5360512302BE}.Debug|x64.Build.0 = Debug|Any CPU
+		{F2D27AA1-4E56-4647-A4FD-5360512302BE}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F2D27AA1-4E56-4647-A4FD-5360512302BE}.Debug|x86.Build.0 = Debug|Any CPU
+		{F2D27AA1-4E56-4647-A4FD-5360512302BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2D27AA1-4E56-4647-A4FD-5360512302BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2D27AA1-4E56-4647-A4FD-5360512302BE}.Release|x64.ActiveCfg = Release|Any CPU
+		{F2D27AA1-4E56-4647-A4FD-5360512302BE}.Release|x64.Build.0 = Release|Any CPU
+		{F2D27AA1-4E56-4647-A4FD-5360512302BE}.Release|x86.ActiveCfg = Release|Any CPU
+		{F2D27AA1-4E56-4647-A4FD-5360512302BE}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
