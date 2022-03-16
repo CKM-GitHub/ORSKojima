@@ -46,6 +46,7 @@ BEGIN
 				, @Henkan_sql nvarchar(max)
 				, @Output_sql nvarchar(max)
 				, @StrSql nvarchar(max)
+				, @StrWrkSql nvarchar(max)
 				, @strOutput nvarchar(max)
 				, @RowCnt int
 				, @MaxRowCnt int
@@ -59,6 +60,12 @@ BEGIN
 			FROM Item_ExportField
 			WHERE Export_Name = (SELECT ExportName FROM M_Tokuisaki WHERE TokuisakiCD = @TokuisakiCD)
 		);
+
+		-- 定義がない場合は処理終了
+		IF (@strSplit IS NULL)
+		BEGIN
+			RETURN NULL;
+		END
 
 
 		--【","で区切られた出力項目を分離してワークテーブルに挿入】
@@ -79,8 +86,15 @@ BEGIN
 		SET @MaxRowCnt =
 		(
 			SELECT COUNT(*)
-			FROM tmpSplit
+			FROM #tmpSplit
 		);
+
+		-- 出力する項目がない場合は処理終了
+		IF (@MaxRowCnt = 0)
+		BEGIN
+			RETURN NULL;
+		END
+
 
 		--【得意先がタイトル行有りか無しかの判断】
 		DECLARE @TitleKBN tinyint = 
@@ -93,18 +107,44 @@ BEGIN
 
 
 		--【最終的に出力する値を格納する為のテーブル】
-		CREATE TABLE #tmpOutputValue
-		(
-			  [RowNum] INT identity(1,1)
-			, [CsvValue] [NVARCHAR](MAX)
-		)
-		;
+		--     項目数が不明な為動的SQLで作成する → グローバル一時テーブルになる
+
+		SET @StrSql = '';
+		SET @StrWrkSql = '';
+
+		SET @StrSql = @StrSql + ' CREATE TABLE ##tmpOutputValue '
+		SET @StrSql = @StrSql + ' ('
+		SET @StrSql = @StrSql + '   [RowNum] int identity(1,1) '
+
+		SET @RowCnt = 1;
+		WHILE (@RowCnt < @MaxRowCnt + 1)
+		BEGIN
+			SET @StrSql = @StrSql + ' , [CsvValue' + CONVERT(VARCHAR,@RowCnt) + '] [nvarchar](max)';
+
+			IF(@RowCnt = 1)
+			BEGIN
+				SET @StrWrkSql = ' (';
+			END
+			ELSE
+			BEGIN
+				SET @StrWrkSql = @StrWrkSql + ', '
+			END
+			
+			SET @StrWrkSql = @StrWrkSql + ' CsvValue' + CONVERT(VARCHAR,@RowCnt) 
+
+			SET @RowCnt = @RowCnt + 1;
+		END
+
+		SET @StrSql = @StrSql + ' )';
+		SET @StrWrkSql = @StrWrkSql + ') ';
+
+		EXECUTE sp_executesql @StrSql;
+
+		SET @StrSql = '';
 
 
 
-
-
-		--====↓【タイトル部データ取得処理】↓====--
+		--============↓【タイトル部データ取得処理】↓============--
 
 		SET @Title_listIN = NULL;
 		SET @Title_listSEL = NULL;
@@ -138,7 +178,7 @@ BEGIN
 
 				, @Title_listSEL = 
 					CASE WHEN @Title_listSEL IS NULL THEN '[' + tmp.SplitStr  + '] '
-							ELSE @Title_listSEL + ' + '','' + [' + tmp.SplitStr + '] ' 
+							ELSE @Title_listSEL + ', [' + tmp.SplitStr + '] ' 
 					END
 
 		FROM #tmpTitle tmp
@@ -153,8 +193,8 @@ BEGIN
 		IF (@TitleKBN = 1)
 		BEGIN
 
-			SET @Title_sql = 'INSERT INTO #tmpOutputValue '
-							+ ' ( CsvValue )'
+			SET @Title_sql = 'INSERT INTO ##tmpOutputValue '
+							+ @StrWrkSql
 							+ ' SELECT '
 							+
 							@Title_listSEL
@@ -168,11 +208,10 @@ BEGIN
 
 		END
 
+		--============↑【タイトル部データ取得処理】↑============--
 
-		--====↑【タイトル部データ取得処理】↑====--
 
-
-		--====↓【明細部データ取得処理】↓====--
+		--============↓【明細部データ取得処理】↓============--
 
 		-- 動的SQL用変数
 		SET @Henkan_sql = NULL;
@@ -210,47 +249,55 @@ BEGIN
 		--データの行数分ループ処理を実行する
 		WHILE @@FETCH_STATUS = 0
 		BEGIN
+			
 			-- ループ内の実際の処理 ここから===*******************CUR_Porpose
 
-			IF (@CurChar3 IS NOT NULL)
+			IF (@Henkan_sql IS NULL)
+			BEGIN
+				SET @Henkan_sql = 'SELECT @parOutput = ';
+			END
+			ELSE
+			BEGIN
+				SET @Henkan_sql = @Henkan_sql + ' + '','' +  ';
+			END
+
+
+			
+			IF (@CurChar3 IS NOT NULL)		-- M_MultiPorposeに固定値が設定されている場合
 			BEGIN
 				
-				SET @CurStrChar = '''' + @CurStrChar + '''' ;
+				SET @Henkan_sql = @Henkan_sql + '''' + @CurStrChar + '''' ;
 
 			END
-
-			IF (@CurNumKBN = 0)
+			ELSE
 			BEGIN
-					IF (@Henkan_sql IS NULL)
+				
+				IF (@CurStrChar IS NOT NULL)	-- 取得するテーブル項目が指定されている場合
+				BEGIN
+
+					IF (@CurNumKBN = 1)		-- Num1 = 1 の時、文字列内で最初のスペースまでの値を採用
 					BEGIN
-						SET @Henkan_sql = 'SELECT @parOutput = ';
+						SET @Henkan_sql = @Henkan_sql + ' CASE CHARINDEX('' '',' + @CurStrChar + ' )' 
+														+ '   WHEN 0 THEN ' + @CurStrChar
+														+ '   ELSE SUBSTRING(' + @CurStrChar + ', 1, CHARINDEX('' '', ' + @CurStrChar + ') - 1)'
+														+ ' END '
+						;
 					END
 					ELSE
 					BEGIN
-						SET @Henkan_sql = @Henkan_sql + ' + '','' +  ';
+
+						SET @Henkan_sql = @Henkan_sql +  ' CONVERT(VARCHAR(MAX), ' + @CurStrChar + ') ';
+
 					END
+				END
+				ELSE	-- 出力する文字が無い場合
+				BEGIN
 
+					SET @Henkan_sql = @Henkan_sql + '''' + '''';
 
-					SET @Henkan_sql = @Henkan_sql +  ' CONVERT(VARCHAR(MAX), ' + @CurStrChar + ') ';
+				END
+
 			END
-			IF (@CurNumKBN = 1)		-- Num1 = 1 の時、文字列内で最初のスペースまでの値を採用
-			BEGIN
-					IF (@Henkan_sql IS NULL)
-					BEGIN
-						SET @Henkan_sql = 'SELECT @parOutput = ';
-					END
-					ELSE
-					BEGIN
-						SET @Henkan_sql = @Henkan_sql + ' + '','' + ' ;
-					END
-
-					SET @Henkan_sql = @Henkan_sql + ' CASE CHARINDEX('' '',' + @CurStrChar + ' )' 
-													+ '   WHEN 0 THEN ' + @CurStrChar
-													+ '   ELSE SUBSTRING(' + @CurStrChar + ', 1, CHARINDEX('' '', ' + @CurStrChar + '))'
-													+ ' END '
-					;
-			END
-
 
 
 			--次の行のデータを取得して変数へ値をセット
@@ -338,6 +385,7 @@ BEGIN
 		BEGIN
 			-- ループ内の実際の処理 ここから===*******************CUR_Output
 				
+				-- 出力項目を","繋ぎの文字列として@strOutput変数に挿入
 				SET @strOutput = '';
 				SET @Detail_sql = '';
 
@@ -352,14 +400,14 @@ BEGIN
 				TRUNCATE TABLE #tmpHenkan
 				;
 
-				--　新規行のデータを挿入
+				--　文字列のデータを","で区切って変換マスタ用テーブルに挿入
 				INSERT INTO #tmpHenkan
 				([SplitStr])
 				SELECT *
 				FROM STRING_SPLIT(@strOutput,',')
 				; 
 
-				-- M_Henkanをreadする時に必要なExport_fieldsの1つ1つをUpdate
+				-- M_Henkanをreadする時に必要なExport_fieldsの1つ1つをテーブルにUpdate
 				UPDATE Main
 				SET Main.SplitTitle = Sub.SplitStr
 				FROM #tmpHenkan Main
@@ -379,11 +427,11 @@ BEGIN
 
 				SET @RowCnt = 1;
 
-				--最終出力用#tmpOutputValue に行を挿入
+				--最終出力用##tmpOutputValue に行を挿入
 				SET @Output_sql = '';
 
-				SET @Output_sql = 'INSERT INTO #tmpOutputValue '
-				SET @Output_sql = @Output_sql + ' (CsvValue) ' 
+				SET @Output_sql = 'INSERT INTO ##tmpOutputValue '
+				SET @Output_sql = @Output_sql + @StrWrkSql
 				SET @Output_sql = @Output_sql + ' SELECT '
 
 				WHILE (@RowCnt < @MaxRowCnt + 1)
@@ -391,7 +439,8 @@ BEGIN
 					
 					IF (@RowCnt > 1)
 					BEGIN
-						SET @Output_sql = @Output_sql + ' + '','' + '
+						--SET @Output_sql = @Output_sql + ' + '','' + '
+						SET @Output_sql = @Output_sql + ' , '
 					END
 
 					SET @Output_sql = @Output_sql + ' MAX(CASE SplitNum WHEN ' + CONVERT(VARCHAR,@RowCnt) + ' THEN SplitStr ELSE '''' END )'
@@ -418,14 +467,14 @@ BEGIN
 		DEALLOCATE CUR_Output;
 
 	
-		--====↑【明細部データ取得処理】↑====--
+		--============↑【明細部データ取得処理】↑============--
 
 
 
 
 		--【出力データを取得】
-		SELECT CsvValue
-		FROM #tmpOutputValue
+		SELECT *
+		FROM ##tmpOutputValue
 		ORDER BY RowNum;
 
 
@@ -439,7 +488,7 @@ BEGIN
 		;
 		DROP TABLE #tmpHenkan
 		;
-		DROP TABLE #tmpOutputValue
+		DROP TABLE ##tmpOutputValue
 		;
 					
 END

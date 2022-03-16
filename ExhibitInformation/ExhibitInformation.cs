@@ -445,10 +445,13 @@ namespace ExhibitInformation
                         // 
                         for (int i = 0; i < dtRegist.Columns.Count; i++)
                         {
-                            field += EncloseDoubleQuotesIfNeed(row[i].ToString());
-                            if (i < dtRegist.Columns.Count - 1)
-                            {
-                                field += ", ";
+                            if (i != 0)　　// 1つめの項目は行番号なので除外する
+                            { 
+                                field += EncloseDoubleQuotesIfNeed(row[i].ToString());
+                                if (i < dtRegist.Columns.Count - 1)
+                                {
+                                    field += ",";
+                                }
                             }
                         };
 
