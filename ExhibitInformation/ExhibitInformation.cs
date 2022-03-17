@@ -285,17 +285,20 @@ namespace ExhibitInformation
 
                 //CSV出力処理
                 if (this.OutputCSV(dtCsv))
-                { 
+                {
+                    bool ret = true;
 
-                    //出品履歴データ（D_ExhibitHistory）更新処理
-                    //更新処理
-                    bool ret = eibl.PRC_ExhibitInformation_Register(dse, dtRegist);
-
+                    if (dtCsv.Rows.Count != 0)
+                    { 
+                        //出品履歴データ（D_ExhibitHistory）更新処理
+                        //更新処理
+                        ret = eibl.PRC_ExhibitInformation_Register(dse, dtRegist);
+                    }
                     if (ret)
                         bbl.ShowMessage("I002");
                     else
-                        bbl.ShowMessage("S001");
-
+                        bbl.ShowMessage("S002");
+                    
 
                     this.Scr_Clr(0);
                     detailControls[(int)EIndex.TokuisakiCD].Focus();
@@ -372,7 +375,7 @@ namespace ExhibitInformation
 
             switch (Index)
             {
-                case 0:     // F1:終了
+                case 0:     //F1:終了
                 case 1:     //F2:新規
                 case 2:     //F3:変更
                 case 3:     //F4:削除
@@ -385,14 +388,10 @@ namespace ExhibitInformation
                     if (bbl.ShowMessage("Q004") == DialogResult.Yes)
                     {
                         Scr_Clr(0);
-                        detailControls[(int)EIndex.TokuisakiCD].Focus();
                     }
+                    detailControls[(int)EIndex.TokuisakiCD].Focus();
                     break;
-                    //case 7:     //F8:表示
-                    //    this.Cursor = Cursors.WaitCursor;
-                    //    ExecDisp();
-                    //    this.Cursor = Cursors.Default;
-                    //    break;
+
 
             }   //switch end
 
@@ -403,7 +402,7 @@ namespace ExhibitInformation
         /// </summary>
         /// <param name="dtRegist"></param>
         /// <returns></returns>
-        private bool OutputCSV(DataTable dtRegist)
+        private bool OutputCSV(DataTable dt)
         {
 
             bool ret = false;
@@ -432,23 +431,23 @@ namespace ExhibitInformation
 
 
 
-                //CSV出力処理                        
+                // CSV出力処理                        
                 string field = string.Empty;
 
-                //CSVファイルに書き込むときに使うEncoding
+                // CSVファイルに書き込むときに使うEncoding
                 System.Text.Encoding enc = System.Text.Encoding.GetEncoding("Shift_JIS");
                 using (StreamWriter sw = new StreamWriter(strFullPath, false, enc))
                 {
 
-                    foreach (DataRow row in dtRegist.Rows)
+                    foreach (DataRow row in dt.Rows)
                     {
                         // 
-                        for (int i = 0; i < dtRegist.Columns.Count; i++)
+                        for (int i = 0; i < dt.Columns.Count; i++)
                         {
                             if (i != 0)　　// 1つめの項目は行番号なので除外する
                             { 
                                 field += EncloseDoubleQuotesIfNeed(row[i].ToString());
-                                if (i < dtRegist.Columns.Count - 1)
+                                if (i < dt.Columns.Count - 1)
                                 {
                                     field += ",";
                                 }
@@ -672,6 +671,16 @@ namespace ExhibitInformation
             {
                 //エラー時共通処理
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+
+        private void GvDetail_CurrentCellDirtyStateChanged(object sender, EventArgs e)
+        {
+            if (GvDetail.CurrentCellAddress.X == 0 && GvDetail.IsCurrentCellDirty)
+            {
+                //コミットする
+                GvDetail.CommitEdit(DataGridViewDataErrorContexts.Commit);
             }
         }
 

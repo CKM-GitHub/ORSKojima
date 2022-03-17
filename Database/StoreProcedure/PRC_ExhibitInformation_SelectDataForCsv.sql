@@ -277,16 +277,18 @@ BEGIN
 
 					IF (@CurNumKBN = 1)		-- Num1 = 1 の時、文字列内で最初のスペースまでの値を採用
 					BEGIN
-						SET @Henkan_sql = @Henkan_sql + ' CASE CHARINDEX('' '',' + @CurStrChar + ' )' 
-														+ '   WHEN 0 THEN ' + @CurStrChar
-														+ '   ELSE SUBSTRING(' + @CurStrChar + ', 1, CHARINDEX('' '', ' + @CurStrChar + ') - 1)'
-														+ ' END '
+						SET @Henkan_sql = @Henkan_sql + ' ISNULL('
+						SET @Henkan_sql = @Henkan_sql + '   CASE CHARINDEX('' '',' + @CurStrChar + ' )' 
+													  + '     WHEN 0 THEN ' + @CurStrChar
+													  + '     ELSE SUBSTRING(' + @CurStrChar + ', 1, CHARINDEX('' '', ' + @CurStrChar + ') - 1)'
+													  + '   END '
+						SET @Henkan_sql = @Henkan_sql + '  , '''') '
 						;
 					END
 					ELSE
 					BEGIN
 
-						SET @Henkan_sql = @Henkan_sql +  ' CONVERT(VARCHAR(MAX), ' + @CurStrChar + ') ';
+						SET @Henkan_sql = @Henkan_sql +  ' ISNULL(CONVERT(VARCHAR(MAX), ' + @CurStrChar + '), '''') ';
 
 					END
 				END
