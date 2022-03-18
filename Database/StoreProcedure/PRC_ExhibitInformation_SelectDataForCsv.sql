@@ -52,6 +52,23 @@ BEGIN
 				, @MaxRowCnt int
 
 
+		/* -------------------------------------------------- */
+		/*     項目転送表01 №Ⅰ タイトル行有り無しの判断     */
+		/* -------------------------------------------------- */
+
+		--【得意先がタイトル行有りか無しかの判断】
+		DECLARE @TitleKBN tinyint = 
+		(
+			SELECT TitleUmuKBN
+			FROM M_Tokuisaki
+			WHERE TokuisakiCD = @TokuisakiCD
+		)
+		;
+
+
+		/* ---------------------------------------- */
+		/*      項目転送表01 №Ⅱ CSV項目の取得     */
+		/* ---------------------------------------- */
 
 		--【Item_ExportFieldからCSV出力する項目を取得】
 		DECLARE @strSplit NVARCHAR(MAX) =
@@ -96,21 +113,13 @@ BEGIN
 		END
 
 
-		--【得意先がタイトル行有りか無しかの判断】
-		DECLARE @TitleKBN tinyint = 
-		(
-			SELECT TitleUmuKBN
-			FROM M_Tokuisaki
-			WHERE TokuisakiCD = @TokuisakiCD
-		)
-		;
 
+		--【最終的に出力する値を格納する為のテーブルを作成】
+		--     項目数が不明な為、
+		--     CREATE TABLE *** ([RowNum],[CsvVaue1],[CsvValue2],[CsvValue3], ..... )と項目数に応じて動的に作成   → グローバル一時テーブルになる
 
-		--【最終的に出力する値を格納する為のテーブル】
-		--     項目数が不明な為動的SQLで作成する → グローバル一時テーブルになる
-
-		SET @StrSql = '';
-		SET @StrWrkSql = '';
+		SET @StrSql = '';				-- CREATE TABLE用変数
+		SET @StrWrkSql = '';			-- 作成したワークテーブルに対し ヘッダー・明細データをINSERTする時に使用する変数
 
 		SET @StrSql = @StrSql + ' CREATE TABLE ##tmpOutputValue '
 		SET @StrSql = @StrSql + ' ('
@@ -144,11 +153,15 @@ BEGIN
 
 
 
-		--============↓【タイトル部データ取得処理】↓============--
+		/* ------------------------------------------------------------ */
+		/*     項目転送表01 №Ⅲ (Ⅰ)でタイトル行有りだった場合のみ     */
+		/* ------------------------------------------------------------ */
 
-		SET @Title_listIN = NULL;
-		SET @Title_listSEL = NULL;
-		SET @Title_sql = NULL;
+		--============↓【CSVタイトル部データ取得処理】↓============--
+
+		SET @Title_listIN = NULL;		-- PIVOT句で使用する変数1
+		SET @Title_listSEL = NULL;		-- PIVOT句で使用する変数2
+		SET @Title_sql = NULL;			-- 最終的にクエリを作成する為の変数
 
 
 		CREATE TABLE #tmpTitle
@@ -168,6 +181,7 @@ BEGIN
 		ON	MHen.TokuisakiCD = @TokuisakiCD
 		AND	MHen.RCMItemName = tmp.SplitStr
 		AND	MHen.RCMItemValue = '99999'
+		ORDER BY tmp.SplitNum
 		;
 
 		--【動的SQLを使用して行と列を入れ替える】
@@ -196,9 +210,7 @@ BEGIN
 			SET @Title_sql = 'INSERT INTO ##tmpOutputValue '
 							+ @StrWrkSql
 							+ ' SELECT '
-							+
-							@Title_listSEL
-							+
+							+ @Title_listSEL
 							+ ' FROM #tmpTitle PIVOT (MAX(SplitStr) FOR SplitStr IN ( '
 							+ @Title_listIN
 							+ ' )) AS PV '
@@ -208,26 +220,71 @@ BEGIN
 
 		END
 
-		--============↑【タイトル部データ取得処理】↑============--
+		--============↑【CSVタイトル部データ取得処理】↑============--
+
 
 
 		--============↓【明細部データ取得処理】↓============--
 
 		-- 動的SQL用変数
-		SET @Henkan_sql = NULL;
-		SET @Detail_sql = NULL;
+		SET @Henkan_sql = NULL;			-- M_HenkanをREADする為に使用する変数
+		SET @Detail_sql = NULL;			-- 最終的にクエリを作成する為の変数
 
 
 		-- CUR_Porpose用変数
-		DECLARE @CurCsvTitle	AS VARCHAR(50);
-		DECLARE @CurTableName	AS VARCHAR(50);
-		DECLARE @CurStrChar		AS VARCHAR(50);
+		DECLARE @CurCsvTitle	AS VARCHAR(100);
+		DECLARE @CurTableName	AS VARCHAR(200);
+		DECLARE @CurStrChar		AS VARCHAR(200);
 		DECLARE @CurNumKBN		AS INT;
-		DECLARE @CurChar3		AS VARCHAR(100);
+		DECLARE @CurChar3		AS VARCHAR(200);
 
 		-- CUR_Output用変数
 		DECLARE @CurRowNum		AS INT;
 
+
+
+		-- 【動的SQLの為に一時テーブルにデータを移行する】
+		CREATE TABLE #tmpItemCsv
+		(
+			[RowNum] [int]  identity(1,1),
+			[Chk] [varchar](1) ,
+			[Item_Code] [varchar](32),
+			[Item_Name] [varchar](255),
+			[List_Price] [int],
+			[Price] [int],
+			[Cost] [int],
+			[ArariRate] [decimal](5,1),
+			[WaribikiRate] [decimal](5,1),
+			[ID][int],
+			[Brand_Name][varchar](200)
+		);
+
+
+		INSERT #tmpItemCSV
+		(
+			[Chk] ,
+			[Item_Code],
+			[Item_Name],
+			[List_Price],
+			[Price],
+			[Cost],
+			[ArariRate],
+			[WaribikiRate],
+			[ID],
+			[Brand_Name]
+		)
+		SELECT *
+		FROM @TableCSV
+		ORDER BY [ID]
+		;
+
+		/* ------------------------------------------------------------------------------------ */
+		/*     項目転送表01 №Ⅳ (Ⅱ)で取得したエクスポート定義を変換し、抽出する項目を決定     */
+		/* ------------------------------------------------------------------------------------ */
+
+		/* --------------------------------------------------------------------------------- */
+		/*     項目転送表01 №Ⅴ 画面.対象チェックボックス=ONの行に対してCSVデータを出力     */
+		/* --------------------------------------------------------------------------------- */
 
 		--【汎用マスタから実際に出力したい項目を取得する】
 		DECLARE CUR_Porpose CURSOR FOR
@@ -270,12 +327,12 @@ BEGIN
 
 			END
 			ELSE
-			BEGIN
+			BEGIN							-- M_MultiPorposeに固定値が設定されていない場合
 				
 				IF (@CurStrChar IS NOT NULL)	-- 取得するテーブル項目が指定されている場合
 				BEGIN
 
-					IF (@CurNumKBN = 1)		-- Num1 = 1 の時、文字列内で最初のスペースまでの値を採用
+					IF (@CurNumKBN = 1)		-- Num1 = 1 の時、文字列内で最初のスペースまでの値を採用する場合
 					BEGIN
 						SET @Henkan_sql = @Henkan_sql + ' ISNULL('
 						SET @Henkan_sql = @Henkan_sql + '   CASE CHARINDEX('' '',' + @CurStrChar + ' )' 
@@ -285,7 +342,7 @@ BEGIN
 						SET @Henkan_sql = @Henkan_sql + '  , '''') '
 						;
 					END
-					ELSE
+					ELSE					-- Num1 = 0 で値をそのまま出力する場合
 					BEGIN
 
 						SET @Henkan_sql = @Henkan_sql +  ' ISNULL(CONVERT(VARCHAR(MAX), ' + @CurStrChar + '), '''') ';
@@ -313,48 +370,11 @@ BEGIN
 		DEALLOCATE CUR_Porpose;
 
 
-		-- 上記の動的SQLに対してJOIN句まで変数に追加する
+		-- 上記の動的SQLに対して FROM から JOIN句まで変数に追加する
 		SET @Henkan_sql = @Henkan_sql + ' FROM #tmpItemCSV Main '
 		SET @Henkan_sql = @Henkan_sql + ' LEFT JOIN Item_Master ON Item_Master.[ID] = Main.[ID] '
 		SET @Henkan_sql = @Henkan_sql + ' LEFT JOIN Monotaro_Item_Master ON Monotaro_Item_Master.[ID] = Main.[ID] '
 
-
-
-		-- 【動的SQLの為に一時テーブルにデータを移行する】
-		CREATE TABLE #tmpItemCsv
-		(
-			[RowNum] [int]  identity(1,1),
-			[Chk] [varchar](1) ,
-			[Item_Code] [varchar](32),
-			[Item_Name] [varchar](255),
-			[List_Price] [int],
-			[Price] [int],
-			[Cost] [int],
-			[ArariRate] [decimal](5,1),
-			[WaribikiRate] [decimal](5,1),
-			[ID][int],
-			[Brand_Name][varchar](200)
-		);
-
-
-		INSERT #tmpItemCSV
-		(
-			[Chk] ,
-			[Item_Code],
-			[Item_Name],
-			[List_Price],
-			[Price],
-			[Cost],
-			[ArariRate],
-			[WaribikiRate],
-			[ID],
-			[Brand_Name]
-		)
-		SELECT *
-		FROM @TableCSV
-		ORDER BY [ID]
-		;
-		
 
 
 		-- 変換マスタをREADする為のテーブル
@@ -365,7 +385,6 @@ BEGIN
 			, [SplitStr]  [NVARCHAR](MAX)
 		)
 		;
-		
 
 
 		-- 出力対象データについて1件ずつ処理する
@@ -398,7 +417,7 @@ BEGIN
 				EXECUTE sp_executesql @Detail_sql, N'@parOutput NVARCHAR(MAX) OUTPUT', @parOutput = @strOutput OUTPUT;
 
 
-				--　INSERT前にワークテーブルをTRUNCATE
+				--　INSERT前にワークテーブルをTRUNCATE([SplitNum]がidentity値の為)
 				TRUNCATE TABLE #tmpHenkan
 				;
 
@@ -477,8 +496,8 @@ BEGIN
 		--【出力データを取得】
 		SELECT *
 		FROM ##tmpOutputValue
-		ORDER BY RowNum;
-
+		ORDER BY RowNum
+		;
 
 
 		--【最後にワークテーブルを削除する】
@@ -492,5 +511,6 @@ BEGIN
 		;
 		DROP TABLE ##tmpOutputValue
 		;
+
 					
 END

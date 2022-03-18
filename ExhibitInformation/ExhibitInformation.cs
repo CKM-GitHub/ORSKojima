@@ -261,6 +261,15 @@ namespace ExhibitInformation
         {
             try
             {
+                //入力項目のチェック(ヘッダー部はいつでも入力可な為)
+                for (int i = 0; i < detailControls.Length; i++)
+                    if (CheckDetail(i) == false)
+                    {
+                        detailControls[i].Focus();
+                        return;
+                    }
+
+
                 //対象明細があるかチェック
                 //チェックONのみ取得
                 DataRow[] chkDt = dtData.AsEnumerable()
