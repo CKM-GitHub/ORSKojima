@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.LB_Tokuisaki = new System.Windows.Forms.Label();
             this.ckM_Label6 = new CKM_Controls.CKM_Label();
             this.ckM_Label5 = new CKM_Controls.CKM_Label();
             this.ckM_Label4 = new CKM_Controls.CKM_Label();
@@ -36,14 +37,12 @@
             this.RCMItemName = new CKM_Controls.CKM_TextBox();
             this.TokuisakiCD = new CKM_Controls.CKM_TextBox();
             this.ckM_ComboBox1 = new CKM_Controls.CKM_ComboBox();
-            this.panel2 = new System.Windows.Forms.Panel();
             this.ckM_Label8 = new CKM_Controls.CKM_Label();
             this.Label4 = new CKM_Controls.CKM_Label();
             this.CsvTitleName = new CKM_Controls.CKM_TextBox();
             this.CsvOutputItemValue = new CKM_Controls.CKM_TextBox();
             this.PanelHeader.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // PanelHeader
@@ -63,6 +62,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Transparent;
+            this.panel1.Controls.Add(this.LB_Tokuisaki);
             this.panel1.Controls.Add(this.ckM_Label6);
             this.panel1.Controls.Add(this.ckM_Label5);
             this.panel1.Controls.Add(this.ckM_Label4);
@@ -73,20 +73,30 @@
             this.panel1.Location = new System.Drawing.Point(40, -20);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1000, 160);
-            this.panel1.TabIndex = 100;
+            this.panel1.TabIndex = 0;
+            // 
+            // LB_Tokuisaki
+            // 
+            this.LB_Tokuisaki.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(184)))), ((int)(((byte)(231)))));
+            this.LB_Tokuisaki.Font = new System.Drawing.Font("MS Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LB_Tokuisaki.Location = new System.Drawing.Point(334, 55);
+            this.LB_Tokuisaki.Name = "LB_Tokuisaki";
+            this.LB_Tokuisaki.Size = new System.Drawing.Size(320, 19);
+            this.LB_Tokuisaki.TabIndex = 727;
+            this.LB_Tokuisaki.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // ckM_Label6
             // 
             this.ckM_Label6.Back_Color = CKM_Controls.CKM_Label.CKM_Color.Default;
-            this.ckM_Label6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(123)))), ((int)(((byte)(131)))));
+            this.ckM_Label6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.ckM_Label6.DefaultlabelSize = true;
             this.ckM_Label6.Font = new System.Drawing.Font("MS Gothic", 9F, System.Drawing.FontStyle.Bold);
             this.ckM_Label6.Font_Size = CKM_Controls.CKM_Label.CKM_FontSize.Normal;
             this.ckM_Label6.ForeColor = System.Drawing.Color.Black;
             this.ckM_Label6.Location = new System.Drawing.Point(141, 109);
             this.ckM_Label6.Name = "ckM_Label6";
-            this.ckM_Label6.Size = new System.Drawing.Size(92, 17);
-            this.ckM_Label6.TabIndex = 21;
+            this.ckM_Label6.Size = new System.Drawing.Size(92, 18);
+            this.ckM_Label6.TabIndex = 3;
             this.ckM_Label6.Text = "RCM項目値";
             this.ckM_Label6.Text_Color = CKM_Controls.CKM_Label.CKM_Color.Default;
             this.ckM_Label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -94,15 +104,15 @@
             // ckM_Label5
             // 
             this.ckM_Label5.Back_Color = CKM_Controls.CKM_Label.CKM_Color.Default;
-            this.ckM_Label5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(123)))), ((int)(((byte)(131)))));
+            this.ckM_Label5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.ckM_Label5.DefaultlabelSize = true;
             this.ckM_Label5.Font = new System.Drawing.Font("MS Gothic", 9F, System.Drawing.FontStyle.Bold);
             this.ckM_Label5.Font_Size = CKM_Controls.CKM_Label.CKM_FontSize.Normal;
             this.ckM_Label5.ForeColor = System.Drawing.Color.Black;
-            this.ckM_Label5.Location = new System.Drawing.Point(141, 85);
+            this.ckM_Label5.Location = new System.Drawing.Point(141, 84);
             this.ckM_Label5.Name = "ckM_Label5";
-            this.ckM_Label5.Size = new System.Drawing.Size(92, 17);
-            this.ckM_Label5.TabIndex = 20;
+            this.ckM_Label5.Size = new System.Drawing.Size(92, 18);
+            this.ckM_Label5.TabIndex = 2;
             this.ckM_Label5.Text = "RCM項目名";
             this.ckM_Label5.Text_Color = CKM_Controls.CKM_Label.CKM_Color.Default;
             this.ckM_Label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -110,15 +120,15 @@
             // ckM_Label4
             // 
             this.ckM_Label4.Back_Color = CKM_Controls.CKM_Label.CKM_Color.Default;
-            this.ckM_Label4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(123)))), ((int)(((byte)(131)))));
+            this.ckM_Label4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.ckM_Label4.DefaultlabelSize = true;
             this.ckM_Label4.Font = new System.Drawing.Font("MS Gothic", 9F, System.Drawing.FontStyle.Bold);
             this.ckM_Label4.Font_Size = CKM_Controls.CKM_Label.CKM_FontSize.Normal;
             this.ckM_Label4.ForeColor = System.Drawing.Color.Black;
             this.ckM_Label4.Location = new System.Drawing.Point(141, 57);
             this.ckM_Label4.Name = "ckM_Label4";
-            this.ckM_Label4.Size = new System.Drawing.Size(92, 17);
-            this.ckM_Label4.TabIndex = 19;
+            this.ckM_Label4.Size = new System.Drawing.Size(92, 18);
+            this.ckM_Label4.TabIndex = 1;
             this.ckM_Label4.Text = "得意先";
             this.ckM_Label4.Text_Color = CKM_Controls.CKM_Label.CKM_Color.Default;
             this.ckM_Label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -152,7 +162,7 @@
             this.RCMItemValue.MoveNext = true;
             this.RCMItemValue.Name = "RCMItemValue";
             this.RCMItemValue.Size = new System.Drawing.Size(300, 19);
-            this.RCMItemValue.TabIndex = 18;
+            this.RCMItemValue.TabIndex = 2;
             this.RCMItemValue.TextSize = CKM_Controls.CKM_TextBox.FontSize.Normal;
             this.RCMItemValue.UseColorSizMode = false;
             // 
@@ -180,12 +190,12 @@
             this.RCMItemName.IsShop = false;
             this.RCMItemName.IsTimemmss = false;
             this.RCMItemName.Length = 100;
-            this.RCMItemName.Location = new System.Drawing.Point(233, 84);
+            this.RCMItemName.Location = new System.Drawing.Point(233, 83);
             this.RCMItemName.MaxLength = 100;
             this.RCMItemName.MoveNext = true;
             this.RCMItemName.Name = "RCMItemName";
             this.RCMItemName.Size = new System.Drawing.Size(300, 19);
-            this.RCMItemName.TabIndex = 17;
+            this.RCMItemName.TabIndex = 1;
             this.RCMItemName.TextSize = CKM_Controls.CKM_TextBox.FontSize.Normal;
             this.RCMItemName.UseColorSizMode = false;
             // 
@@ -217,8 +227,8 @@
             this.TokuisakiCD.MaxLength = 100;
             this.TokuisakiCD.MoveNext = true;
             this.TokuisakiCD.Name = "TokuisakiCD";
-            this.TokuisakiCD.Size = new System.Drawing.Size(190, 19);
-            this.TokuisakiCD.TabIndex = 16;
+            this.TokuisakiCD.Size = new System.Drawing.Size(100, 19);
+            this.TokuisakiCD.TabIndex = 0;
             this.TokuisakiCD.TextSize = CKM_Controls.CKM_TextBox.FontSize.Normal;
             this.TokuisakiCD.UseColorSizMode = false;
             // 
@@ -237,17 +247,7 @@
             this.ckM_ComboBox1.Name = "ckM_ComboBox1";
             this.ckM_ComboBox1.Size = new System.Drawing.Size(100, 20);
             this.ckM_ComboBox1.TabIndex = 0;
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.ckM_Label8);
-            this.panel2.Controls.Add(this.Label4);
-            this.panel2.Controls.Add(this.CsvTitleName);
-            this.panel2.Controls.Add(this.CsvOutputItemValue);
-            this.panel2.Location = new System.Drawing.Point(0, 200);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1713, 650);
-            this.panel2.TabIndex = 100;
+            this.ckM_ComboBox1.Visible = false;
             // 
             // ckM_Label8
             // 
@@ -257,10 +257,10 @@
             this.ckM_Label8.Font = new System.Drawing.Font("MS Gothic", 9F, System.Drawing.FontStyle.Bold);
             this.ckM_Label8.Font_Size = CKM_Controls.CKM_Label.CKM_FontSize.Normal;
             this.ckM_Label8.ForeColor = System.Drawing.Color.Black;
-            this.ckM_Label8.Location = new System.Drawing.Point(182, 55);
+            this.ckM_Label8.Location = new System.Drawing.Point(182, 252);
             this.ckM_Label8.Name = "ckM_Label8";
             this.ckM_Label8.Size = new System.Drawing.Size(92, 17);
-            this.ckM_Label8.TabIndex = 21;
+            this.ckM_Label8.TabIndex = 103;
             this.ckM_Label8.Text = "CSVタイトル名";
             this.ckM_Label8.Text_Color = CKM_Controls.CKM_Label.CKM_Color.Default;
             this.ckM_Label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -273,10 +273,10 @@
             this.Label4.Font = new System.Drawing.Font("MS Gothic", 9F, System.Drawing.FontStyle.Bold);
             this.Label4.Font_Size = CKM_Controls.CKM_Label.CKM_FontSize.Normal;
             this.Label4.ForeColor = System.Drawing.Color.Black;
-            this.Label4.Location = new System.Drawing.Point(182, 22);
+            this.Label4.Location = new System.Drawing.Point(182, 219);
             this.Label4.Name = "Label4";
             this.Label4.Size = new System.Drawing.Size(92, 17);
-            this.Label4.TabIndex = 20;
+            this.Label4.TabIndex = 102;
             this.Label4.Text = "CSV出力項目値";
             this.Label4.Text_Color = CKM_Controls.CKM_Label.CKM_Color.Default;
             this.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -292,6 +292,7 @@
             this.CsvTitleName.Ctrl_Byte = CKM_Controls.CKM_TextBox.Bytes.半全角;
             this.CsvTitleName.Ctrl_Type = CKM_Controls.CKM_TextBox.Type.Normal;
             this.CsvTitleName.DecimalPlace = 0;
+            this.CsvTitleName.Enabled = false;
             this.CsvTitleName.EnabledInsertKeyModeOnMouseEnter = false;
             this.CsvTitleName.Font = new System.Drawing.Font("MS Gothic", 9F);
             this.CsvTitleName.ImeMode = System.Windows.Forms.ImeMode.Hiragana;
@@ -305,12 +306,12 @@
             this.CsvTitleName.IsShop = false;
             this.CsvTitleName.IsTimemmss = false;
             this.CsvTitleName.Length = 100;
-            this.CsvTitleName.Location = new System.Drawing.Point(274, 54);
+            this.CsvTitleName.Location = new System.Drawing.Point(274, 251);
             this.CsvTitleName.MaxLength = 100;
             this.CsvTitleName.MoveNext = true;
             this.CsvTitleName.Name = "CsvTitleName";
             this.CsvTitleName.Size = new System.Drawing.Size(300, 19);
-            this.CsvTitleName.TabIndex = 19;
+            this.CsvTitleName.TabIndex = 101;
             this.CsvTitleName.TextSize = CKM_Controls.CKM_TextBox.FontSize.Normal;
             this.CsvTitleName.UseColorSizMode = false;
             // 
@@ -325,6 +326,7 @@
             this.CsvOutputItemValue.Ctrl_Byte = CKM_Controls.CKM_TextBox.Bytes.半全角;
             this.CsvOutputItemValue.Ctrl_Type = CKM_Controls.CKM_TextBox.Type.Normal;
             this.CsvOutputItemValue.DecimalPlace = 0;
+            this.CsvOutputItemValue.Enabled = false;
             this.CsvOutputItemValue.EnabledInsertKeyModeOnMouseEnter = false;
             this.CsvOutputItemValue.Font = new System.Drawing.Font("MS Gothic", 9F);
             this.CsvOutputItemValue.ImeMode = System.Windows.Forms.ImeMode.Hiragana;
@@ -338,12 +340,12 @@
             this.CsvOutputItemValue.IsShop = false;
             this.CsvOutputItemValue.IsTimemmss = false;
             this.CsvOutputItemValue.Length = 100;
-            this.CsvOutputItemValue.Location = new System.Drawing.Point(274, 21);
+            this.CsvOutputItemValue.Location = new System.Drawing.Point(274, 218);
             this.CsvOutputItemValue.MaxLength = 100;
             this.CsvOutputItemValue.MoveNext = true;
             this.CsvOutputItemValue.Name = "CsvOutputItemValue";
             this.CsvOutputItemValue.Size = new System.Drawing.Size(300, 19);
-            this.CsvOutputItemValue.TabIndex = 18;
+            this.CsvOutputItemValue.TabIndex = 0;
             this.CsvOutputItemValue.TextSize = CKM_Controls.CKM_TextBox.FontSize.Normal;
             this.CsvOutputItemValue.UseColorSizMode = false;
             // 
@@ -352,19 +354,23 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1713, 887);
-            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.ckM_Label8);
+            this.Controls.Add(this.Label4);
+            this.Controls.Add(this.CsvTitleName);
+            this.Controls.Add(this.CsvOutputItemValue);
             this.Location = new System.Drawing.Point(0, 0);
             this.ModeVisible = true;
             this.Name = "MasterTouroku_Henkan";
             this.PanelHeaderHeight = 200;
             this.Text = "MasterTouroku_Henkan";
             this.Load += new System.EventHandler(this.MasterTouroku_Henkan_Load);
-            this.Controls.SetChildIndex(this.panel2, 0);
+            this.Controls.SetChildIndex(this.CsvOutputItemValue, 0);
+            this.Controls.SetChildIndex(this.CsvTitleName, 0);
+            this.Controls.SetChildIndex(this.Label4, 0);
+            this.Controls.SetChildIndex(this.ckM_Label8, 0);
             this.PanelHeader.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -380,7 +386,7 @@
         private CKM_Controls.CKM_TextBox RCMItemValue;
         private CKM_Controls.CKM_TextBox RCMItemName;
         private CKM_Controls.CKM_TextBox TokuisakiCD;
-        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Label LB_Tokuisaki;
         private CKM_Controls.CKM_Label ckM_Label8;
         private CKM_Controls.CKM_Label Label4;
         private CKM_Controls.CKM_TextBox CsvTitleName;

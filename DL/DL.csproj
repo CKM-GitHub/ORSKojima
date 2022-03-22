@@ -140,6 +140,7 @@
     <Compile Include="M_DenominationKBN_DL.cs" />
     <Compile Include="M_FiscalYear_DL.cs" />
     <Compile Include="M_Hanyou_DL.cs" />
+    <Compile Include="M_Henkan_DL.cs" />
     <Compile Include="M_ItemOrderPrice_DL.cs" />
     <Compile Include="M_ItemPrice_DL.cs" />
     <Compile Include="M_ITEM_DL.cs" />

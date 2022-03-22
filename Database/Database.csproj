@@ -115,6 +115,7 @@
     <Content Include="StoreProcedure\M_CustomerInitial_Select.sql" />
     <Content Include="StoreProcedure\M_Customer_SelectForTenzikai.sql" />
     <Content Include="StoreProcedure\M_DenominationKBN_SelectKBN.sql" />
+    <Content Include="StoreProcedure\M_Henkan_Select.sql" />
     <Content Include="StoreProcedure\M_ItemOrderPrice_SelectFromItem.sql" />
     <Content Include="StoreProcedure\M_ItemOrderPrice_SelectFromSKU.sql" />
     <Content Include="StoreProcedure\M_ITEM_CheckExistsByItemCD.sql" />
