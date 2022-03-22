@@ -374,6 +374,11 @@ BEGIN
 		SET @Henkan_sql = @Henkan_sql + ' FROM #tmpItemCSV Main '
 		SET @Henkan_sql = @Henkan_sql + ' LEFT JOIN Item_Master ON Item_Master.[ID] = Main.[ID] '
 		SET @Henkan_sql = @Henkan_sql + ' LEFT JOIN Monotaro_Item_Master ON Monotaro_Item_Master.[ID] = Main.[ID] '
+		SET @Henkan_sql = @Henkan_sql + ' LEFT JOIN Template_Detail ON Template_Detail.Item_Code = Main.Item_Code '
+		SET @Henkan_sql = @Henkan_sql + ' LEFT JOIN Dangarous_Goods ON Dangarous_Goods.Dangarous_Goods_ID = Monotaro_Item_Master.Dangarous_Goods '
+		SET @Henkan_sql = @Henkan_sql + ' LEFT JOIN Dangerous_Goods_Name ON Dangerous_Goods_Name.Dangarous_Goods_Name_ID = Monotaro_Item_Master.Dangarous_Goods_Name '
+		SET @Henkan_sql = @Henkan_sql + ' LEFT JOIN Risk_Rating ON Risk_Rating.Risk_Rating_ID = Monotaro_Item_Master.Risk_Rating '
+		SET @Henkan_sql = @Henkan_sql + ' LEFT JOIN Dangerous_Goods_Nature ON Dangerous_Goods_Nature.Dangerous_Goods_Nature_ID = Monotaro_Item_Master.Dangerous_Goods_Nature '
 
 
 
@@ -438,7 +443,7 @@ BEGIN
 
 				-- M_Henkanを結合して、値の変換値があった場合はそちらを使用する
 				UPDATE tmp
-				SET tmp.SplitStr = ISNULL(MH.CsvOutputItemValue, tmp.SplitStr)
+				SET tmp.SplitStr = CASE WHEN  MH.CsvOutputItemValue IS NULL THEN tmp.SplitStr ELSE MH.CsvOutputItemValue END
 				FROM #tmpHenkan tmp
 				LEFT JOIN M_Henkan MH
 				ON  MH.TokuisakiCD = @TokuisakiCD
