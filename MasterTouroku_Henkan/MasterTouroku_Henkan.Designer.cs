@@ -41,7 +41,6 @@
             this.Label4 = new CKM_Controls.CKM_Label();
             this.CsvTitleName = new CKM_Controls.CKM_TextBox();
             this.CsvOutputItemValue = new CKM_Controls.CKM_TextBox();
-            this.ckM_Label1 = new CKM_Controls.CKM_Label();
             this.PanelHeader.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -64,7 +63,6 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Transparent;
-            this.panel1.Controls.Add(this.ckM_Label1);
             this.panel1.Controls.Add(this.ckM_Label6);
             this.panel1.Controls.Add(this.ckM_Label5);
             this.panel1.Controls.Add(this.ckM_Label4);
@@ -349,21 +347,6 @@
             this.CsvOutputItemValue.TextSize = CKM_Controls.CKM_TextBox.FontSize.Normal;
             this.CsvOutputItemValue.UseColorSizMode = false;
             // 
-            // ckM_Label1
-            // 
-            this.ckM_Label1.Back_Color = CKM_Controls.CKM_Label.CKM_Color.Default;
-            this.ckM_Label1.DefaultlabelSize = true;
-            this.ckM_Label1.Font = new System.Drawing.Font("MS Gothic", 9F, System.Drawing.FontStyle.Bold);
-            this.ckM_Label1.Font_Size = CKM_Controls.CKM_Label.CKM_FontSize.Normal;
-            this.ckM_Label1.ForeColor = System.Drawing.Color.Black;
-            this.ckM_Label1.Location = new System.Drawing.Point(429, 58);
-            this.ckM_Label1.Name = "ckM_Label1";
-            this.ckM_Label1.Size = new System.Drawing.Size(92, 17);
-            this.ckM_Label1.TabIndex = 22;
-            this.ckM_Label1.Text = "モノタロウ";
-            this.ckM_Label1.Text_Color = CKM_Controls.CKM_Label.CKM_Color.Default;
-            this.ckM_Label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // MasterTouroku_Henkan
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -402,7 +385,6 @@
         private CKM_Controls.CKM_Label Label4;
         private CKM_Controls.CKM_TextBox CsvTitleName;
         private CKM_Controls.CKM_TextBox CsvOutputItemValue;
-        private CKM_Controls.CKM_Label ckM_Label1;
     }
 }
 
