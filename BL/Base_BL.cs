@@ -202,8 +202,8 @@ namespace BL
         /// <param name="lle"></param>
         public void L_Log_Insert(L_Log_Entity lle)
         {
-            L_Log_DL lldl = new L_Log_DL();
-            lldl.L_Log_Insert(lle);
+            //L_Log_DL lldl = new L_Log_DL();
+            //lldl.L_Log_Insert(lle);
         }
 
         /// <summary>
@@ -423,84 +423,85 @@ namespace BL
         /// <returns></returns>	
         public bool CheckStoreClose(M_StoreClose_Entity mse, bool uri, bool sir, bool nyk, bool sha, bool son)
         {
-            M_StoreClose_DL msdl = new M_StoreClose_DL();
-            DataTable dt = msdl.M_StoreClose_Select(mse);
-            if (dt.Rows.Count > 0)
-            {
-                //M_StoreClose.ClosePosition2＝	1		
-                //M_StoreClose.ClosePosition2＝	2		
-                //であればエラー	
-                if (uri)
-                {
-                    if (dt.Rows[0]["ClosePosition1"].ToString().Equals("1"))
-                    {
-                        ShowMessage("E203");
-                        return false;
-                    }
-                    else if (dt.Rows[0]["ClosePosition1"].ToString().Equals("2"))
-                    {
-                        ShowMessage("E194");
-                        return false;
-                    }
-                }
-                if (sir)
-                {
-                    if (dt.Rows[0]["ClosePosition2"].ToString().Equals("1"))
-                    {
-                        ShowMessage("E203");
-                        return false;
-                    }
-                    else if (dt.Rows[0]["ClosePosition2"].ToString().Equals("2"))
-                    {
-                        ShowMessage("E194");
-                        return false;
-                    }
-                }
-                if (nyk)
-                {
-                    if (dt.Rows[0]["ClosePosition3"].ToString().Equals("1"))
-                    {
-                        ShowMessage("E203");
-                        return false;
-                    }
-                    else if (dt.Rows[0]["ClosePosition3"].ToString().Equals("2"))
-                    {
-                        ShowMessage("E194");
-                        return false;
-                    }
-                }
-                if (sha)
-                {
-                    if (dt.Rows[0]["ClosePosition4"].ToString().Equals("1"))
-                    {
-                        ShowMessage("E203");
-                        return false;
-                    }
-                    else if (dt.Rows[0]["ClosePosition4"].ToString().Equals("2"))
-                    {
-                        ShowMessage("E194");
-                        return false;
-                    }
-                }
-                if (son)
-                {
-                    if (dt.Rows[0]["ClosePosition5"].ToString().Equals("1"))
-                    {
-                        ShowMessage("E203");
-                        return false;
-                    }
-                    else if (dt.Rows[0]["ClosePosition5"].ToString().Equals("2"))
-                    {
-                        ShowMessage("E194");
-                        return false;
-                    }
-                }
-                return true;
-            }
-            else
-            {
-                return true;
-            }
+            //M_StoreClose_DL msdl = new M_StoreClose_DL();
+            //DataTable dt = msdl.M_StoreClose_Select(mse);
+            //if (dt.Rows.Count > 0)
+            //{
+            //    //M_StoreClose.ClosePosition2＝	1		
+            //    //M_StoreClose.ClosePosition2＝	2		
+            //    //であればエラー	
+            //    if (uri)
+            //    {
+            //        if (dt.Rows[0]["ClosePosition1"].ToString().Equals("1"))
+            //        {
+            //            ShowMessage("E203");
+            //            return false;
+            //        }
+            //        else if (dt.Rows[0]["ClosePosition1"].ToString().Equals("2"))
+            //        {
+            //            ShowMessage("E194");
+            //            return false;
+            //        }
+            //    }
+            //    if (sir)
+            //    {
+            //        if (dt.Rows[0]["ClosePosition2"].ToString().Equals("1"))
+            //        {
+            //            ShowMessage("E203");
+            //            return false;
+            //        }
+            //        else if (dt.Rows[0]["ClosePosition2"].ToString().Equals("2"))
+            //        {
+            //            ShowMessage("E194");
+            //            return false;
+            //        }
+            //    }
+            //    if (nyk)
+            //    {
+            //        if (dt.Rows[0]["ClosePosition3"].ToString().Equals("1"))
+            //        {
+            //            ShowMessage("E203");
+            //            return false;
+            //        }
+            //        else if (dt.Rows[0]["ClosePosition3"].ToString().Equals("2"))
+            //        {
+            //            ShowMessage("E194");
+            //            return false;
+            //        }
+            //    }
+            //    if (sha)
+            //    {
+            //        if (dt.Rows[0]["ClosePosition4"].ToString().Equals("1"))
+            //        {
+            //            ShowMessage("E203");
+            //            return false;
+            //        }
+            //        else if (dt.Rows[0]["ClosePosition4"].ToString().Equals("2"))
+            //        {
+            //            ShowMessage("E194");
+            //            return false;
+            //        }
+            //    }
+            //    if (son)
+            //    {
+            //        if (dt.Rows[0]["ClosePosition5"].ToString().Equals("1"))
+            //        {
+            //            ShowMessage("E203");
+            //            return false;
+            //        }
+            //        else if (dt.Rows[0]["ClosePosition5"].ToString().Equals("2"))
+            //        {
+            //            ShowMessage("E194");
+            //            return false;
+            //        }
+            //    }
+            //    return true;
+            //}
+            //else
+            //{
+            //    return true;
+            //}
+            return true;
         }
         public string LeftB(string s, int maxByteCount)
         {
