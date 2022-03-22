@@ -43,6 +43,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MasterTouroku_Henkan", "Mas
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Search", "Search\Search.csproj", "{83D6364B-73EA-4288-BCE7-55A1119EE5A2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExhibitHistory", "ExhibitHistory\ExhibitHistory.csproj", "{93531BEE-E94B-4715-BDA6-CBBFFA0B97C0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -281,6 +283,18 @@ Global
 		{83D6364B-73EA-4288-BCE7-55A1119EE5A2}.Release|x64.Build.0 = Release|Any CPU
 		{83D6364B-73EA-4288-BCE7-55A1119EE5A2}.Release|x86.ActiveCfg = Release|Any CPU
 		{83D6364B-73EA-4288-BCE7-55A1119EE5A2}.Release|x86.Build.0 = Release|Any CPU
+		{93531BEE-E94B-4715-BDA6-CBBFFA0B97C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93531BEE-E94B-4715-BDA6-CBBFFA0B97C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93531BEE-E94B-4715-BDA6-CBBFFA0B97C0}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{93531BEE-E94B-4715-BDA6-CBBFFA0B97C0}.Debug|x64.Build.0 = Debug|Any CPU
+		{93531BEE-E94B-4715-BDA6-CBBFFA0B97C0}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{93531BEE-E94B-4715-BDA6-CBBFFA0B97C0}.Debug|x86.Build.0 = Debug|Any CPU
+		{93531BEE-E94B-4715-BDA6-CBBFFA0B97C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93531BEE-E94B-4715-BDA6-CBBFFA0B97C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93531BEE-E94B-4715-BDA6-CBBFFA0B97C0}.Release|x64.ActiveCfg = Release|Any CPU
+		{93531BEE-E94B-4715-BDA6-CBBFFA0B97C0}.Release|x64.Build.0 = Release|Any CPU
+		{93531BEE-E94B-4715-BDA6-CBBFFA0B97C0}.Release|x86.ActiveCfg = Release|Any CPU
+		{93531BEE-E94B-4715-BDA6-CBBFFA0B97C0}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
