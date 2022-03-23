@@ -236,22 +236,70 @@ namespace MasterTouroku_Henkan
                     };
                     M_Henkan_BL mhbl = new M_Henkan_BL();
                     bool res = mhbl.M_Henkan_Select(mhe);
-                    if (res)
+                    switch (OperationMode)
                     {
-                        CsvOutputItemValue.Text = mhe.CsvOutputItemValue;
-                        CsvTitleName.Text = mhe.CsvTitleName;
+                        case EOperationMode.INSERT:
+                         if (res)
+                            {
+                                bbl.ShowMessage("E107");
+                                return false;
+                            }
+                            else
+                            {
+                                CsvOutputItemValue.Enabled = true;
+                                CsvOutputItemValue.Focus();
+                            }
+                            
+                            break;
+                        case EOperationMode.UPDATE:
+                            if (res)
+                            {
+                                CsvOutputItemValue.Text = mhe.CsvOutputItemValue;
+                                CsvTitleName.Text = mhe.CsvTitleName;
+                            }
+                            else
+                            {
+                                bbl.ShowMessage("E101");
+                                return false;
+                            }
+                            break;
+                        case EOperationMode.DELETE:
+                            if (res)
+                            {
+                                CsvOutputItemValue.Text = mhe.CsvOutputItemValue;
+                                CsvTitleName.Text = mhe.CsvTitleName;
+                            }
+                            else
+                            {
+                                bbl.ShowMessage("E101");
+                                return false;
+                            }
+                            break;
+                        case EOperationMode.SHOW:
+                            if (res)
+                            {
+                                CsvOutputItemValue.Text = mhe.CsvOutputItemValue;
+                                CsvTitleName.Text = mhe.CsvTitleName;
+                            }
+                            else
+                            {
+                                bbl.ShowMessage("E101");
+                                return false;
+                            }
+                            break;
                     }
-                    else
-                    {
-                        bbl.ShowMessage("E101");
-                        return false;
-                    }
+                  
                     break;
 
 
             }
 
             return true;
+        }
+        private void CheckHenkan(int index)
+        {
+           
+           
         }
 
         protected override void EndSec()
