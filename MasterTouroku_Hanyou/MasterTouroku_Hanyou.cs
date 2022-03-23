@@ -446,7 +446,7 @@ namespace MasterTouroku_Hanyou
                     }
                     else
                     {
-                        ScID.LabelText = dtID.Rows[0]["Char1"].ToString();
+                        ScID.LabelText = dtID.Rows[0]["IDName"].ToString();
                     }
                 }
                 else
@@ -454,7 +454,7 @@ namespace MasterTouroku_Hanyou
                     dtID = mthbl.Hanyou_IDSelect(mhe);
                     if (dtID.Rows.Count > 0)
                     {
-                        ScID.LabelText = dtID.Rows[0]["Char1"].ToString();
+                        ScID.LabelText = dtID.Rows[0]["IDName"].ToString();
                     }
                 }
             }
