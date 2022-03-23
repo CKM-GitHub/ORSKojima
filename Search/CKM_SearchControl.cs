@@ -985,560 +985,561 @@ namespace Search
             string changedate = string.IsNullOrWhiteSpace(txtChangeDate.Text) ? bbl.GetDate() : txtChangeDate.Text;
             switch (Stype)
             {
-                case SearchType.倉庫:
-                    FrmSearch_Souko frmss = new FrmSearch_Souko(changedate);
-                    frmss.ShowDialog();
-                    if (!frmss.flgCancel)
-                    {
-                        txtCode.Text = frmss.SoukoCD;
-                        lblName.Text = frmss.SoukoName;
-                        txtChangeDate.Text = frmss.ChangeDate;
+                #region SMS用コードをコメントアウト
+                //case SearchType.倉庫:
+                //    FrmSearch_Souko frmss = new FrmSearch_Souko(changedate);
+                //    frmss.ShowDialog();
+                //    if (!frmss.flgCancel)
+                //    {
+                //        txtCode.Text = frmss.SoukoCD;
+                //        lblName.Text = frmss.SoukoName;
+                //        txtChangeDate.Text = frmss.ChangeDate;
 
-                        CheckBasedFormPanel();//PTK added
+                //        CheckBasedFormPanel();//PTK added
 
-                    }
-                    break;
-                case SearchType.JuchuuNO:
-                    Search_TenzikaiJuchuuNO juchuu = new Search_TenzikaiJuchuuNO();
-                    juchuu.ShowDialog();
-                    if (!juchuu.flgCancel)
-                    {
-                        txtCode.Text = juchuu.OrderNum;
-                        
-                        CheckBasedFormPanel();//PTK added
+                //    }
+                //    break;
+                //case SearchType.JuchuuNO:
+                //    Search_TenzikaiJuchuuNO juchuu = new Search_TenzikaiJuchuuNO();
+                //    juchuu.ShowDialog();
+                //    if (!juchuu.flgCancel)
+                //    {
+                //        txtCode.Text = juchuu.OrderNum;
 
-                    }
-                    break;
-                case SearchType.店舗:
-                    using (Search_Store frmStore = new Search_Store())
-                    {
-                        frmStore.parChangeDate = changedate;
-                        frmStore.ShowDialog();
+                //        CheckBasedFormPanel();//PTK added
 
-                        if (!frmStore.flgCancel)
-                        {
-                            txtCode.Text = frmStore.parStoreCD;
-                            lblName.Text = frmStore.parStoreName;
-                            txtChangeDate.Text = frmStore.parChangeDate;
+                //    }
+                //    break;
+                //case SearchType.店舗:
+                //    using (Search_Store frmStore = new Search_Store())
+                //    {
+                //        frmStore.parChangeDate = changedate;
+                //        frmStore.ShowDialog();
 
-                            CheckBasedFormPanel();//PTK added
-                        }
-                    }
-                    break;
-                case SearchType.仕入先:
-                    using (Search_Vendor frmVendor = new Search_Vendor(changedate,Value1))
-                    {
-                        frmVendor.parChangeDate = changedate;
-                        frmVendor.ShowDialog();
-                        if (!frmVendor.flgCancel)
-                        {
-                            txtCode.Text = frmVendor.VendorCD;
-                            lblName.Text = frmVendor.VendorName;
-                            if (UseChangeDate == true)
-                                txtChangeDate.Text = frmVendor.ChangeDate;
-                            txtChangeDate.Text = frmVendor.ChangeDate;
-                            CheckBasedFormPanel();//PTK added
-                        }
-                    }
-                    break;
-                case SearchType.仕入先PayeeFlg:
-                    using (Search_Vendor frmVendor = new Search_Vendor(changedate, Value1))
-                    {
-                        frmVendor.parChangeDate = changedate;
-                        frmVendor.ShowDialog();
-                        if (!frmVendor.flgCancel)
-                        {
-                            txtCode.Text = frmVendor.VendorCD;
-                            lblName.Text = frmVendor.VendorName;
-                            if (UseChangeDate == true)
-                                txtChangeDate.Text = frmVendor.ChangeDate;
+                //        if (!frmStore.flgCancel)
+                //        {
+                //            txtCode.Text = frmStore.parStoreCD;
+                //            lblName.Text = frmStore.parStoreName;
+                //            txtChangeDate.Text = frmStore.parChangeDate;
 
-                            CheckBasedFormPanel();//PTK added
-                        }
-                    }
-                    break;
-                case SearchType.スタッフ:
-                    using (Search_Staff frmStaff = new Search_Staff())
-                    {
-                        frmStaff.parChangeDate = changedate;
-                        frmStaff.ShowDialog();
-                        if (!frmStaff.flgCancel)
-                        {
-                            txtCode.Text = frmStaff.parStaffCD;
-                            lblName.Text = frmStaff.parStaffName;
-                            if (UseChangeDate == true)
-                                txtChangeDate.Text = frmStaff.parChangeDate;
+                //            CheckBasedFormPanel();//PTK added
+                //        }
+                //    }
+                //    break;
+                //case SearchType.仕入先:
+                //    using (Search_Vendor frmVendor = new Search_Vendor(changedate,Value1))
+                //    {
+                //        frmVendor.parChangeDate = changedate;
+                //        frmVendor.ShowDialog();
+                //        if (!frmVendor.flgCancel)
+                //        {
+                //            txtCode.Text = frmVendor.VendorCD;
+                //            lblName.Text = frmVendor.VendorName;
+                //            if (UseChangeDate == true)
+                //                txtChangeDate.Text = frmVendor.ChangeDate;
+                //            txtChangeDate.Text = frmVendor.ChangeDate;
+                //            CheckBasedFormPanel();//PTK added
+                //        }
+                //    }
+                //    break;
+                //case SearchType.仕入先PayeeFlg:
+                //    using (Search_Vendor frmVendor = new Search_Vendor(changedate, Value1))
+                //    {
+                //        frmVendor.parChangeDate = changedate;
+                //        frmVendor.ShowDialog();
+                //        if (!frmVendor.flgCancel)
+                //        {
+                //            txtCode.Text = frmVendor.VendorCD;
+                //            lblName.Text = frmVendor.VendorName;
+                //            if (UseChangeDate == true)
+                //                txtChangeDate.Text = frmVendor.ChangeDate;
 
-                            CheckBasedFormPanel();//PTK added
-                        }                          
-                    }
-                    break;
-                case SearchType.銀行口座:
-                    using (Search_Kouza frmKouza = new Search_Kouza())
-                    {
-                        frmKouza.parChangeDate = changedate;
-                        frmKouza.ShowDialog();
-                        if (!frmKouza.flgCancel)
-                        {
-                            txtCode.Text = frmKouza.parKouzaCD;
-                            txtChangeDate.Text = frmKouza.parChangeDate;
-                            lblName.Text = frmKouza.parKouzaName;
-                            CheckBasedFormPanel();//PTK added
-                        }
+                //            CheckBasedFormPanel();//PTK added
+                //        }
+                //    }
+                //    break;
+                //case SearchType.スタッフ:
+                //    using (Search_Staff frmStaff = new Search_Staff())
+                //    {
+                //        frmStaff.parChangeDate = changedate;
+                //        frmStaff.ShowDialog();
+                //        if (!frmStaff.flgCancel)
+                //        {
+                //            txtCode.Text = frmStaff.parStaffCD;
+                //            lblName.Text = frmStaff.parStaffName;
+                //            if (UseChangeDate == true)
+                //                txtChangeDate.Text = frmStaff.parChangeDate;
 
-                    }
-                    break;
-                case SearchType.モール:
-                    using (Search_Mall frmMal = new Search_Mall())
-                    {
-                        frmMal.parID = MultiPorpose_BL.ID_MALL;
-                        frmMal.ShowDialog();
-                        if (!frmMal.flgCancel)
-                        {
-                            txtCode.Text = frmMal.parKey;
-                            lblName.Text = frmMal.parChar1;
-                            CheckBasedFormPanel();//PTK added
-                        }
-                    }
-                    break;
-                case SearchType.メール文章:
-                    using (Search_MailPattern frmMail = new Search_MailPattern())
-                    {
-                        frmMail.ShowDialog();
-                        if (!frmMail.flgCancel)
-                        {
-                            txtCode.Text = frmMail.parMailPatternCD;
-                            lblName.Text = frmMail.parMailPatternName;
-                            CheckBasedFormPanel();//PTK added__
-                        }
-                    }
-                    break;
-                case SearchType.単位:
-                case SearchType.競技:
-                case SearchType.分類:
-                    using (Search_HanyouKey frmMulti = new Search_HanyouKey())
-                    {
-                        frmMulti.parID = Value1;
-                        frmMulti.ShowDialog();
-                        if (!frmMulti.flgCancel)
-                        {
-                            txtCode.Text = frmMulti.parKey;
-                            lblName.Text = frmMulti.parChar1;
-                            CheckBasedFormPanel();//PTK added
-                        }
-                    }
-                    break;
+                //            CheckBasedFormPanel();//PTK added
+                //        }                          
+                //    }
+                //    break;
+                //case SearchType.銀行口座:
+                //    using (Search_Kouza frmKouza = new Search_Kouza())
+                //    {
+                //        frmKouza.parChangeDate = changedate;
+                //        frmKouza.ShowDialog();
+                //        if (!frmKouza.flgCancel)
+                //        {
+                //            txtCode.Text = frmKouza.parKouzaCD;
+                //            txtChangeDate.Text = frmKouza.parChangeDate;
+                //            lblName.Text = frmKouza.parKouzaName;
+                //            CheckBasedFormPanel();//PTK added
+                //        }
 
-                case SearchType.商品分類:
-                    using (Search_HanyouKey frmMulti = new Search_HanyouKey())
-                    {
-                        frmMulti.parID = Value1;
-                        frmMulti.ShowDialog();
-                        if (!frmMulti.flgCancel)
-                        {
-                            txtCode.Text = frmMulti.parKey;
-                            lblName.Text = frmMulti.parChar1;
-                            CheckBasedFormPanel();//PTK added
-                        }
-                    }
-                    break;
+                //    }
+                //    break;
+                //case SearchType.モール:
+                //    using (Search_Mall frmMal = new Search_Mall())
+                //    {
+                //        frmMal.parID = MultiPorpose_BL.ID_MALL;
+                //        frmMal.ShowDialog();
+                //        if (!frmMal.flgCancel)
+                //        {
+                //            txtCode.Text = frmMal.parKey;
+                //            lblName.Text = frmMal.parChar1;
+                //            CheckBasedFormPanel();//PTK added
+                //        }
+                //    }
+                //    break;
+                //case SearchType.メール文章:
+                //    using (Search_MailPattern frmMail = new Search_MailPattern())
+                //    {
+                //        frmMail.ShowDialog();
+                //        if (!frmMail.flgCancel)
+                //        {
+                //            txtCode.Text = frmMail.parMailPatternCD;
+                //            lblName.Text = frmMail.parMailPatternName;
+                //            CheckBasedFormPanel();//PTK added__
+                //        }
+                //    }
+                //    break;
+                //case SearchType.単位:
+                //case SearchType.競技:
+                //case SearchType.分類:
+                //    using (Search_HanyouKey frmMulti = new Search_HanyouKey())
+                //    {
+                //        frmMulti.parID = Value1;
+                //        frmMulti.ShowDialog();
+                //        if (!frmMulti.flgCancel)
+                //        {
+                //            txtCode.Text = frmMulti.parKey;
+                //            lblName.Text = frmMulti.parChar1;
+                //            CheckBasedFormPanel();//PTK added
+                //        }
+                //    }
+                //    break;
 
-                case SearchType.銀行:
-                    using (FrmSearch_Ginkou frmGinkou = new FrmSearch_Ginkou(changedate))
-                    {
-                        frmGinkou.ShowDialog();
-                        if (!frmGinkou.flgCancel)
-                        {
-                            txtCode.Text = frmGinkou.BankCD;
-                            lblName.Text = frmGinkou.BankName;
-                            if (UseChangeDate == true)
-                                txtChangeDate.Text = frmGinkou.ChangeDate;
+                //case SearchType.商品分類:
+                //    using (Search_HanyouKey frmMulti = new Search_HanyouKey())
+                //    {
+                //        frmMulti.parID = Value1;
+                //        frmMulti.ShowDialog();
+                //        if (!frmMulti.flgCancel)
+                //        {
+                //            txtCode.Text = frmMulti.parKey;
+                //            lblName.Text = frmMulti.parChar1;
+                //            CheckBasedFormPanel();//PTK added
+                //        }
+                //    }
+                //    break;
 
-                            CheckBasedFormPanel();//PTK added
-                        }
-                    }
-                    break;
+                //case SearchType.銀行:
+                //    using (FrmSearch_Ginkou frmGinkou = new FrmSearch_Ginkou(changedate))
+                //    {
+                //        frmGinkou.ShowDialog();
+                //        if (!frmGinkou.flgCancel)
+                //        {
+                //            txtCode.Text = frmGinkou.BankCD;
+                //            lblName.Text = frmGinkou.BankName;
+                //            if (UseChangeDate == true)
+                //                txtChangeDate.Text = frmGinkou.ChangeDate;
 
-                //2019.6.11 add---------------------------------------------------->
-                case SearchType.ブランド:
-                    using (Search_Brand frmBrand = new Search_Brand())
-                    {
-                        if (UseChangeDate == true)
-                            frmBrand.parChangeDate = changedate;
-                        frmBrand.ShowDialog();
-                        if (!frmBrand.flgCancel)
-                        {
-                            txtCode.Text = frmBrand.parBrandCD;
-                            lblName.Text = frmBrand.parBrandName;
-                            CheckBasedFormPanel();//PTK added
-                        }
+                //            CheckBasedFormPanel();//PTK added
+                //        }
+                //    }
+                //    break;
 
-                    }
-                    break;
+                ////2019.6.11 add---------------------------------------------------->
+                //case SearchType.ブランド:
+                //    using (Search_Brand frmBrand = new Search_Brand())
+                //    {
+                //        if (UseChangeDate == true)
+                //            frmBrand.parChangeDate = changedate;
+                //        frmBrand.ShowDialog();
+                //        if (!frmBrand.flgCancel)
+                //        {
+                //            txtCode.Text = frmBrand.parBrandCD;
+                //            lblName.Text = frmBrand.parBrandName;
+                //            CheckBasedFormPanel();//PTK added
+                //        }
 
-                //2020.03.23 add by ses---
-                case SearchType.プログラムID:
-                    using (Search_Program frmProgram = new Search_Program(Value1))
-                    {
-                        frmProgram.ShowDialog();
-                        if (!frmProgram.flgCancel)
-                        {
-                            txtCode.Text = frmProgram.ProgramID;
+                //    }
+                //    break;
 
-                            CheckBasedFormPanel();//PTK added
-                        }
-                        break;
-                    }
-                case SearchType.SKU_ITEM_CD:
-                    using (Search_Product frmItemCD = new Search_Product(changedate))
-                    {
-                        
-                        frmItemCD.Mode = Value1 == null ? "1" : Value1;
-                        frmItemCD.SKUCD = txtCode.Text;
-                        frmItemCD.ShowDialog();
-                        if (!frmItemCD.flgCancel)
-                        {
-                            if (frmItemCD.Mode.Equals("1"))
-                                txtCode.Text = frmItemCD.ITEM;
-                            else if (frmItemCD.Mode.Equals("2"))
-                                txtCode.Text = frmItemCD.SKUCD;
+                ////2020.03.23 add by ses---
+                //case SearchType.プログラムID:
+                //    using (Search_Program frmProgram = new Search_Program(Value1))
+                //    {
+                //        frmProgram.ShowDialog();
+                //        if (!frmProgram.flgCancel)
+                //        {
+                //            txtCode.Text = frmProgram.ProgramID;
 
-                            //if (UseChangeDate == true)
-                                txtChangeDate.Text = frmItemCD.ChangeDate;
+                //            CheckBasedFormPanel();//PTK added
+                //        }
+                //        break;
+                //    }
+                //case SearchType.SKU_ITEM_CD:
+                //    using (Search_Product frmItemCD = new Search_Product(changedate))
+                //    {
 
-                            CheckBasedFormPanel();//PTK added
-                        }
-                    }
-                    break;
-                case SearchType.単価設定:
-                    using (Search_TankaSettei frmTankaSettei = new Search_TankaSettei())
-                    {
-                        frmTankaSettei.parChangeDate = changedate;
-                        frmTankaSettei.ShowDialog();
+                //        frmItemCD.Mode = Value1 == null ? "1" : Value1;
+                //        frmItemCD.SKUCD = txtCode.Text;
+                //        frmItemCD.ShowDialog();
+                //        if (!frmItemCD.flgCancel)
+                //        {
+                //            if (frmItemCD.Mode.Equals("1"))
+                //                txtCode.Text = frmItemCD.ITEM;
+                //            else if (frmItemCD.Mode.Equals("2"))
+                //                txtCode.Text = frmItemCD.SKUCD;
 
-                        if (!frmTankaSettei.flgCancel)
-                        {
-                            txtCode.Text = frmTankaSettei.parTankaCD;
-                            lblName.Text = frmTankaSettei.parTankaName;
-                            txtChangeDate.Text = frmTankaSettei.parChangeDate;
-                            CheckBasedFormPanel();//PTK added
-                        }
-                    }
-                    break;
-                case SearchType.見積番号:
-                    using (Search_Mitsumori frmMitsumori = new Search_Mitsumori(changedate))
-                    {
-                        frmMitsumori.OperatorCD = Value1;
-                        frmMitsumori.AllAvailableStores = Value2;
-                        frmMitsumori.ShowDialog();
+                //            //if (UseChangeDate == true)
+                //                txtChangeDate.Text = frmItemCD.ChangeDate;
 
-                        if (!frmMitsumori.flgCancel)
-                        {
-                            txtCode.Text = frmMitsumori.MitsumoriNo;
-                            lblName.Text = frmMitsumori.MitsumoriName;
-                            txtChangeDate.Text = frmMitsumori.ChangeDate;
-                            CheckBasedFormPanel(); //Added by PTK 
-                        }
-                    }
-                    break;
-                case SearchType.受注番号:   
-                    using (Search_JuchuuNO frmJuchuu = new Search_JuchuuNO(changedate))
-                    {
-                        frmJuchuu.OperatorCD = Value1;
-                        frmJuchuu.AllAvailableStores = Value2;
-                        frmJuchuu.ShowDialog();
+                //            CheckBasedFormPanel();//PTK added
+                //        }
+                //    }
+                //    break;
+                //case SearchType.単価設定:
+                //    using (Search_TankaSettei frmTankaSettei = new Search_TankaSettei())
+                //    {
+                //        frmTankaSettei.parChangeDate = changedate;
+                //        frmTankaSettei.ShowDialog();
 
-                        if (!frmJuchuu.flgCancel)
-                        {
-                            txtCode.Text = frmJuchuu.JuchuuNO;
-                            txtChangeDate.Text = frmJuchuu.ChangeDate;
-                            CheckBasedFormPanel(); //Added by PTK
+                //        if (!frmTankaSettei.flgCancel)
+                //        {
+                //            txtCode.Text = frmTankaSettei.parTankaCD;
+                //            lblName.Text = frmTankaSettei.parTankaName;
+                //            txtChangeDate.Text = frmTankaSettei.parChangeDate;
+                //            CheckBasedFormPanel();//PTK added
+                //        }
+                //    }
+                //    break;
+                //case SearchType.見積番号:
+                //    using (Search_Mitsumori frmMitsumori = new Search_Mitsumori(changedate))
+                //    {
+                //        frmMitsumori.OperatorCD = Value1;
+                //        frmMitsumori.AllAvailableStores = Value2;
+                //        frmMitsumori.ShowDialog();
 
-                        }
-                    }
-                    break;
-                case SearchType.受注処理番号:
-                    using (Search_JuchuuProcessNO frmJuchuu = new Search_JuchuuProcessNO(changedate))
-                    {
-                        frmJuchuu.OperatorCD = Value1;
-                        frmJuchuu.AllAvailableStores = Value2;
-                        frmJuchuu.ShowDialog();
+                //        if (!frmMitsumori.flgCancel)
+                //        {
+                //            txtCode.Text = frmMitsumori.MitsumoriNo;
+                //            lblName.Text = frmMitsumori.MitsumoriName;
+                //            txtChangeDate.Text = frmMitsumori.ChangeDate;
+                //            CheckBasedFormPanel(); //Added by PTK 
+                //        }
+                //    }
+                //    break;
+                //case SearchType.受注番号:   
+                //    using (Search_JuchuuNO frmJuchuu = new Search_JuchuuNO(changedate))
+                //    {
+                //        frmJuchuu.OperatorCD = Value1;
+                //        frmJuchuu.AllAvailableStores = Value2;
+                //        frmJuchuu.ShowDialog();
 
-                        if (!frmJuchuu.flgCancel)
-                        {
-                            txtCode.Text = frmJuchuu.JuchuuProcessNO;
-                            txtChangeDate.Text = frmJuchuu.ChangeDate;
-                            CheckBasedFormPanel(); //Added by PTK
+                //        if (!frmJuchuu.flgCancel)
+                //        {
+                //            txtCode.Text = frmJuchuu.JuchuuNO;
+                //            txtChangeDate.Text = frmJuchuu.ChangeDate;
+                //            CheckBasedFormPanel(); //Added by PTK
 
-                        }
-                    }
-                    break;
-                case SearchType.発注番号:
-                    using (Search_HacchuuNO frmHacchuu = new Search_HacchuuNO(changedate))
-                    {
-                        frmHacchuu.OperatorCD = Value1;
-                        frmHacchuu.AllAvailableStores = Value2;
-                        frmHacchuu.ShowDialog();
+                //        }
+                //    }
+                //    break;
+                //case SearchType.受注処理番号:
+                //    using (Search_JuchuuProcessNO frmJuchuu = new Search_JuchuuProcessNO(changedate))
+                //    {
+                //        frmJuchuu.OperatorCD = Value1;
+                //        frmJuchuu.AllAvailableStores = Value2;
+                //        frmJuchuu.ShowDialog();
 
-                        if (!frmHacchuu.flgCancel)
-                        {
-                            txtCode.Text = frmHacchuu.OrderNO;
-                            txtChangeDate.Text = frmHacchuu.ChangeDate;
-                            CheckBasedFormPanel();//PTK added
-                        }
-                    }
-                    break;
-                case SearchType.発注処理番号:
-                    using (Search_HacchuuShoriNO frmHacchuu = new Search_HacchuuShoriNO(changedate))
-                    {
-                        frmHacchuu.OperatorCD = Value1;
-                        frmHacchuu.AllAvailableStores = Value2;
-                        frmHacchuu.storeCD = Value3;
-                        frmHacchuu.ShowDialog();
+                //        if (!frmJuchuu.flgCancel)
+                //        {
+                //            txtCode.Text = frmJuchuu.JuchuuProcessNO;
+                //            txtChangeDate.Text = frmJuchuu.ChangeDate;
+                //            CheckBasedFormPanel(); //Added by PTK
 
-                        if (!frmHacchuu.flgCancel)
-                        {
-                            txtCode.Text = frmHacchuu.HacchuuShoriNO;
-                            txtChangeDate.Text = frmHacchuu.ChangeDate;
-                            CheckBasedFormPanel();//PTK added
-                        }
-                    }
-                    break;
-                case SearchType.売上番号:
-                    using (Search_TempoUriageNO frmUriage = new Search_TempoUriageNO(changedate))
-                    {
-                        frmUriage.OperatorCD = Value1;
-                        frmUriage.AllAvailableStores = Value2;
-                        frmUriage.ShowDialog();
+                //        }
+                //    }
+                //    break;
+                //case SearchType.発注番号:
+                //    using (Search_HacchuuNO frmHacchuu = new Search_HacchuuNO(changedate))
+                //    {
+                //        frmHacchuu.OperatorCD = Value1;
+                //        frmHacchuu.AllAvailableStores = Value2;
+                //        frmHacchuu.ShowDialog();
 
-                        if (!frmUriage.flgCancel)
-                        {
-                            txtCode.Text = frmUriage.SalesNo;
-                            txtChangeDate.Text = frmUriage.ChangeDate;
-                            CheckBasedFormPanel();//PTK added
-                        }
-                    }
-                    break;
-                case SearchType.入金番号:
-                    using (Search_CollectNO frmNyukin = new Search_CollectNO(changedate))
-                    {
-                        frmNyukin.OperatorCD = Value1;
-                        frmNyukin.AllAvailableStores = Value2;
-                        frmNyukin.ShowDialog();
-                        if (!frmNyukin.flgCancel)
-                        {
-                            txtCode.Text = frmNyukin.CollectNO;
-                            txtChangeDate.Text = frmNyukin.ChangeDate;
-                            CheckBasedFormPanel();//PTK added
-                        }
-                    }
-                    break;
-                case SearchType.入金消込番号:
-                    using (Search_ConfirmNO frmKeshikomi = new Search_ConfirmNO(changedate))
-                    {
-                        frmKeshikomi.ShowDialog();
-                        if (!frmKeshikomi.flgCancel)
-                        {
-                            txtCode.Text = frmKeshikomi.ConfirmNO;
-                            txtChangeDate.Text = frmKeshikomi.ChangeDate;
-                            CheckBasedFormPanel();//PTK added
-                        }
-                    }
-                    break;
-                case SearchType.入荷番号:
-                    using (Search_ArrivalNO frmNyuka = new Search_ArrivalNO(changedate))
-                    {
-                        frmNyuka.OperatorCD = Value1;
-                        frmNyuka.AllAvailableStores = Value2;
-                        frmNyuka.SoukoCD = Value3;
-                        frmNyuka.ShowDialog();
-                        if (!frmNyuka.flgCancel)
-                        {
-                            txtCode.Text = frmNyuka.ArrivalNO;
-                            txtChangeDate.Text = frmNyuka.ChangeDate;
-                            CheckBasedFormPanel();//PTK added
-                        }
-                    }
-                    break;
-                case SearchType.仕入番号:
-                    using (Search_ShiireNO frmShiire = new Search_ShiireNO(changedate))
-                    {
-                        frmShiire.OperatorCD = Value1;
-                        frmShiire.AllAvailableStores = Value2;
-                        frmShiire.ShowDialog();
-                        if (!frmShiire.flgCancel)
-                        {
-                            txtCode.Text = frmShiire.PurchaseNO;
-                            txtChangeDate.Text = frmShiire.ChangeDate;
-                            CheckBasedFormPanel();
-                        }
-                    }
-                    break;
-                case SearchType.移動番号:
-                    using (Search_ZaikoIdouNO frmIdo = new Search_ZaikoIdouNO(changedate))
-                    {
-                        frmIdo.OperatorCD = Value1;
-                        frmIdo.AllAvailableStores = Value2;
-                        frmIdo.ShowDialog();
-                        if (!frmIdo.flgCancel)
-                        {
-                            txtCode.Text = frmIdo.MoveNO;
-                            txtChangeDate.Text = frmIdo.ChangeDate;
-                            CheckBasedFormPanel();//PTK added
-                        }
-                    }
-                    break;
-                case SearchType.移動依頼番号:
-                    using (Search_ZaikoIdouIraiNo frmIdouIrai = new Search_ZaikoIdouIraiNo(changedate))
-                    {
-                        frmIdouIrai.OperatorCD = Value1;
-                        frmIdouIrai.AllAvailableStores = Value2;
-                        frmIdouIrai.ShowDialog();
-                        if (!frmIdouIrai.flgCancel)
-                        {
-                            txtCode.Text = frmIdouIrai.RequestNO;
-                            txtChangeDate.Text = frmIdouIrai.ChangeDate;
-                            CheckBasedFormPanel();//PTK added
-                        }
-                    }
-                    break;
-                    case SearchType.出荷指示番号:
-                    using (Search_InstructionNO frmInst = new Search_InstructionNO(changedate))
-                    {
-                        frmInst.OperatorCD = Value1;
-                        frmInst.AllAvailableStores = Value2;
-                        frmInst.ShowDialog();
-                        if (!frmInst.flgCancel)
-                        {
-                            txtCode.Text = frmInst.InstructionNO;
-                            txtChangeDate.Text = frmInst.ChangeDate;
-                            CheckBasedFormPanel();//PTK added
-                        }
-                    }
-                    break;
-                case SearchType.出荷番号:
-                    using (Search_ShippingNO frmShukka = new Search_ShippingNO(changedate))
-                    {
-                        frmShukka.OperatorCD = Value1;
-                        frmShukka.AllAvailableStores = Value2;
-                        frmShukka.ShowDialog();
-                        if (!frmShukka.flgCancel)
-                        {
-                            txtCode.Text = frmShukka.ShippingNO;
-                            txtChangeDate.Text = frmShukka.ChangeDate;
-                            CheckBasedFormPanel();//PTK added
-                        }
-                    }
-                    break;
-                case SearchType.倉庫棚番:
-                    using (Search_ShiireNO frmShiire = new Search_ShiireNO(changedate)) //TOdo:倉庫棚番検索へ　変更
-                    {
-                        frmShiire.OperatorCD = Value1;
-                        frmShiire.AllAvailableStores = Value2;
-                        frmShiire.ShowDialog();
-                        if (!frmShiire.flgCancel)
-                        {
-                            txtCode.Text = frmShiire.PurchaseNO;
-                            txtChangeDate.Text = frmShiire.ChangeDate;
-                            CheckBasedFormPanel();//PTK added
-                        }
-                    }
-                    break;
-                case SearchType.棚番号:
-                    using (Search_Location frmLocation = new Search_Location(changedate))
-                    {
-                        frmLocation.ChangeDate = changedate;
-                        frmLocation.SoukoCD = Value1;
-                        frmLocation.ShowDialog();
-                        if (!frmLocation.flgCancel)
-                        {
-                            txtCode.Text = frmLocation.TanaCD;
-                            txtChangeDate.Text = frmLocation.ChangeDate;
-                            CheckBasedFormPanel();//PTK added
-                        }
-                    }
-                    break;
-                case SearchType.ピッキング番号:
-                    using (Search_PickingNO frmPickingNO = new Search_PickingNO(changedate))
-                    {
-                        frmPickingNO.ChangeDate = changedate;
-                        frmPickingNO.OperatorCD = Value1;
-                            frmPickingNO.AllAvailableStores = Value2;
-                        //frmPickingNO.SoukoCD = Value1;
-                        frmPickingNO.ShowDialog();
-                        if (!frmPickingNO.flgCancel)
-                        {
-                            txtCode.Text = frmPickingNO.PickingNO;
-                            txtChangeDate.Text = frmPickingNO.ChangeDate;
-                            CheckBasedFormPanel();//PTK added
-                        }
-                    }
-                    break;
-                case SearchType.得意先:
-                    using (FrmSearch_Customer frmCustomer = new FrmSearch_Customer(changedate,Value1,Value2))
-                    {
-                       
-                        frmCustomer.parChangeDate = changedate;
-                        frmCustomer.ShowDialog();
+                //        if (!frmHacchuu.flgCancel)
+                //        {
+                //            txtCode.Text = frmHacchuu.OrderNO;
+                //            txtChangeDate.Text = frmHacchuu.ChangeDate;
+                //            CheckBasedFormPanel();//PTK added
+                //        }
+                //    }
+                //    break;
+                //case SearchType.発注処理番号:
+                //    using (Search_HacchuuShoriNO frmHacchuu = new Search_HacchuuShoriNO(changedate))
+                //    {
+                //        frmHacchuu.OperatorCD = Value1;
+                //        frmHacchuu.AllAvailableStores = Value2;
+                //        frmHacchuu.storeCD = Value3;
+                //        frmHacchuu.ShowDialog();
 
-                        if (!frmCustomer.flgCancel)
-                        {
-                            txtCode.Text = frmCustomer.CustomerCD;
-                            lblName.Text = frmCustomer.CustName;
-                            if (UseChangeDate == true)
-                                txtChangeDate.Text = frmCustomer.ChangeDate;
+                //        if (!frmHacchuu.flgCancel)
+                //        {
+                //            txtCode.Text = frmHacchuu.HacchuuShoriNO;
+                //            txtChangeDate.Text = frmHacchuu.ChangeDate;
+                //            CheckBasedFormPanel();//PTK added
+                //        }
+                //    }
+                //    break;
+                //case SearchType.売上番号:
+                //    using (Search_TempoUriageNO frmUriage = new Search_TempoUriageNO(changedate))
+                //    {
+                //        frmUriage.OperatorCD = Value1;
+                //        frmUriage.AllAvailableStores = Value2;
+                //        frmUriage.ShowDialog();
 
-                            CheckBasedFormPanel();//PTK added
-                        }
-                    }
-                    break;
+                //        if (!frmUriage.flgCancel)
+                //        {
+                //            txtCode.Text = frmUriage.SalesNo;
+                //            txtChangeDate.Text = frmUriage.ChangeDate;
+                //            CheckBasedFormPanel();//PTK added
+                //        }
+                //    }
+                //    break;
+                //case SearchType.入金番号:
+                //    using (Search_CollectNO frmNyukin = new Search_CollectNO(changedate))
+                //    {
+                //        frmNyukin.OperatorCD = Value1;
+                //        frmNyukin.AllAvailableStores = Value2;
+                //        frmNyukin.ShowDialog();
+                //        if (!frmNyukin.flgCancel)
+                //        {
+                //            txtCode.Text = frmNyukin.CollectNO;
+                //            txtChangeDate.Text = frmNyukin.ChangeDate;
+                //            CheckBasedFormPanel();//PTK added
+                //        }
+                //    }
+                //    break;
+                //case SearchType.入金消込番号:
+                //    using (Search_ConfirmNO frmKeshikomi = new Search_ConfirmNO(changedate))
+                //    {
+                //        frmKeshikomi.ShowDialog();
+                //        if (!frmKeshikomi.flgCancel)
+                //        {
+                //            txtCode.Text = frmKeshikomi.ConfirmNO;
+                //            txtChangeDate.Text = frmKeshikomi.ChangeDate;
+                //            CheckBasedFormPanel();//PTK added
+                //        }
+                //    }
+                //    break;
+                //case SearchType.入荷番号:
+                //    using (Search_ArrivalNO frmNyuka = new Search_ArrivalNO(changedate))
+                //    {
+                //        frmNyuka.OperatorCD = Value1;
+                //        frmNyuka.AllAvailableStores = Value2;
+                //        frmNyuka.SoukoCD = Value3;
+                //        frmNyuka.ShowDialog();
+                //        if (!frmNyuka.flgCancel)
+                //        {
+                //            txtCode.Text = frmNyuka.ArrivalNO;
+                //            txtChangeDate.Text = frmNyuka.ChangeDate;
+                //            CheckBasedFormPanel();//PTK added
+                //        }
+                //    }
+                //    break;
+                //case SearchType.仕入番号:
+                //    using (Search_ShiireNO frmShiire = new Search_ShiireNO(changedate))
+                //    {
+                //        frmShiire.OperatorCD = Value1;
+                //        frmShiire.AllAvailableStores = Value2;
+                //        frmShiire.ShowDialog();
+                //        if (!frmShiire.flgCancel)
+                //        {
+                //            txtCode.Text = frmShiire.PurchaseNO;
+                //            txtChangeDate.Text = frmShiire.ChangeDate;
+                //            CheckBasedFormPanel();
+                //        }
+                //    }
+                //    break;
+                //case SearchType.移動番号:
+                //    using (Search_ZaikoIdouNO frmIdo = new Search_ZaikoIdouNO(changedate))
+                //    {
+                //        frmIdo.OperatorCD = Value1;
+                //        frmIdo.AllAvailableStores = Value2;
+                //        frmIdo.ShowDialog();
+                //        if (!frmIdo.flgCancel)
+                //        {
+                //            txtCode.Text = frmIdo.MoveNO;
+                //            txtChangeDate.Text = frmIdo.ChangeDate;
+                //            CheckBasedFormPanel();//PTK added
+                //        }
+                //    }
+                //    break;
+                //case SearchType.移動依頼番号:
+                //    using (Search_ZaikoIdouIraiNo frmIdouIrai = new Search_ZaikoIdouIraiNo(changedate))
+                //    {
+                //        frmIdouIrai.OperatorCD = Value1;
+                //        frmIdouIrai.AllAvailableStores = Value2;
+                //        frmIdouIrai.ShowDialog();
+                //        if (!frmIdouIrai.flgCancel)
+                //        {
+                //            txtCode.Text = frmIdouIrai.RequestNO;
+                //            txtChangeDate.Text = frmIdouIrai.ChangeDate;
+                //            CheckBasedFormPanel();//PTK added
+                //        }
+                //    }
+                //    break;
+                //case SearchType.出荷指示番号:
+                //using (Search_InstructionNO frmInst = new Search_InstructionNO(changedate))
+                //{
+                //    frmInst.OperatorCD = Value1;
+                //    frmInst.AllAvailableStores = Value2;
+                //    frmInst.ShowDialog();
+                //    if (!frmInst.flgCancel)
+                //    {
+                //        txtCode.Text = frmInst.InstructionNO;
+                //        txtChangeDate.Text = frmInst.ChangeDate;
+                //        CheckBasedFormPanel();//PTK added
+                //    }
+                //}
+                //break;
+                //case SearchType.出荷番号:
+                //    using (Search_ShippingNO frmShukka = new Search_ShippingNO(changedate))
+                //    {
+                //        frmShukka.OperatorCD = Value1;
+                //        frmShukka.AllAvailableStores = Value2;
+                //        frmShukka.ShowDialog();
+                //        if (!frmShukka.flgCancel)
+                //        {
+                //            txtCode.Text = frmShukka.ShippingNO;
+                //            txtChangeDate.Text = frmShukka.ChangeDate;
+                //            CheckBasedFormPanel();//PTK added
+                //        }
+                //    }
+                //    break;
+                //case SearchType.倉庫棚番:
+                //    using (Search_ShiireNO frmShiire = new Search_ShiireNO(changedate)) //TOdo:倉庫棚番検索へ　変更
+                //    {
+                //        frmShiire.OperatorCD = Value1;
+                //        frmShiire.AllAvailableStores = Value2;
+                //        frmShiire.ShowDialog();
+                //        if (!frmShiire.flgCancel)
+                //        {
+                //            txtCode.Text = frmShiire.PurchaseNO;
+                //            txtChangeDate.Text = frmShiire.ChangeDate;
+                //            CheckBasedFormPanel();//PTK added
+                //        }
+                //    }
+                //    break;
+                //case SearchType.棚番号:
+                //    using (Search_Location frmLocation = new Search_Location(changedate))
+                //    {
+                //        frmLocation.ChangeDate = changedate;
+                //        frmLocation.SoukoCD = Value1;
+                //        frmLocation.ShowDialog();
+                //        if (!frmLocation.flgCancel)
+                //        {
+                //            txtCode.Text = frmLocation.TanaCD;
+                //            txtChangeDate.Text = frmLocation.ChangeDate;
+                //            CheckBasedFormPanel();//PTK added
+                //        }
+                //    }
+                //    break;
+                //case SearchType.ピッキング番号:
+                //    using (Search_PickingNO frmPickingNO = new Search_PickingNO(changedate))
+                //    {
+                //        frmPickingNO.ChangeDate = changedate;
+                //        frmPickingNO.OperatorCD = Value1;
+                //            frmPickingNO.AllAvailableStores = Value2;
+                //        //frmPickingNO.SoukoCD = Value1;
+                //        frmPickingNO.ShowDialog();
+                //        if (!frmPickingNO.flgCancel)
+                //        {
+                //            txtCode.Text = frmPickingNO.PickingNO;
+                //            txtChangeDate.Text = frmPickingNO.ChangeDate;
+                //            CheckBasedFormPanel();//PTK added
+                //        }
+                //    }
+                //    break;
+                //case SearchType.得意先:
+                //    using (FrmSearch_Customer frmCustomer = new FrmSearch_Customer(changedate,Value1,Value2))
+                //    {
 
-                case SearchType.JANCD:
-                    using (Search_Product frmJanCD = new Search_Product(changedate))
-                    {
-                        frmJanCD.Mode = "4";
-                        frmJanCD.JANCD = txtCode.Text;
-                        frmJanCD.ShowDialog();
+                //        frmCustomer.parChangeDate = changedate;
+                //        frmCustomer.ShowDialog();
 
-                        if (!frmJanCD.flgCancel)
-                        {
-                            txtCode.Text = frmJanCD.JANCD;
-                            txtChangeDate.Text = frmJanCD.ChangeDate;
-                            CheckBasedFormPanel();//PTK added
-                        }
-                    }
-                    break;
+                //        if (!frmCustomer.flgCancel)
+                //        {
+                //            txtCode.Text = frmCustomer.CustomerCD;
+                //            lblName.Text = frmCustomer.CustName;
+                //            if (UseChangeDate == true)
+                //                txtChangeDate.Text = frmCustomer.ChangeDate;
 
-                case SearchType.MakerItem:
-                    using (Search_Product frmMakerItem = new Search_Product(changedate))
-                    {
-                        frmMakerItem.Mode = "3";
-                        frmMakerItem.MakerItem = txtCode.Text;
-                        frmMakerItem.ShowDialog();
-                        if (!frmMakerItem.flgCancel)
-                        {
-                            txtCode.Text = frmMakerItem.MakerItem;
-                            txtChangeDate.Text = frmMakerItem.ChangeDate;
-                            CheckBasedFormPanel();//PTK added
-                        }
-                    }
-                    break;
+                //            CheckBasedFormPanel();//PTK added
+                //        }
+                //    }
+                //    break;
 
-                case SearchType.SKUCD:
-                    using (Search_Product frmSKUCD = new Search_Product(changedate))
-                    {
-                        frmSKUCD.Mode = "2";
-                        frmSKUCD.SKUCD = txtCode.Text;
-                        frmSKUCD.ShowDialog();
+                //case SearchType.JANCD:
+                //    using (Search_Product frmJanCD = new Search_Product(changedate))
+                //    {
+                //        frmJanCD.Mode = "4";
+                //        frmJanCD.JANCD = txtCode.Text;
+                //        frmJanCD.ShowDialog();
 
-                        if (!frmSKUCD.flgCancel)
-                        {
-                            txtCode.Text = frmSKUCD.SKUCD;
-                            txtChangeDate.Text = frmSKUCD.ChangeDate;
-                            CheckBasedFormPanel();//PTK added
-                        }
-                    }
-                    break;
+                //        if (!frmJanCD.flgCancel)
+                //        {
+                //            txtCode.Text = frmJanCD.JANCD;
+                //            txtChangeDate.Text = frmJanCD.ChangeDate;
+                //            CheckBasedFormPanel();//PTK added
+                //        }
+                //    }
+                //    break;
+
+                //case SearchType.MakerItem:
+                //    using (Search_Product frmMakerItem = new Search_Product(changedate))
+                //    {
+                //        frmMakerItem.Mode = "3";
+                //        frmMakerItem.MakerItem = txtCode.Text;
+                //        frmMakerItem.ShowDialog();
+                //        if (!frmMakerItem.flgCancel)
+                //        {
+                //            txtCode.Text = frmMakerItem.MakerItem;
+                //            txtChangeDate.Text = frmMakerItem.ChangeDate;
+                //            CheckBasedFormPanel();//PTK added
+                //        }
+                //    }
+                //    break;
+
+                //case SearchType.SKUCD:
+                //    using (Search_Product frmSKUCD = new Search_Product(changedate))
+                //    {
+                //        frmSKUCD.Mode = "2";
+                //        frmSKUCD.SKUCD = txtCode.Text;
+                //        frmSKUCD.ShowDialog();
+
+                //        if (!frmSKUCD.flgCancel)
+                //        {
+                //            txtCode.Text = frmSKUCD.SKUCD;
+                //            txtChangeDate.Text = frmSKUCD.ChangeDate;
+                //            CheckBasedFormPanel();//PTK added
+                //        }
+                //    }
+                //    break;
 
                 //case SearchType.競技:
                 //    using (Search_Mall frmMal = new Search_Mall())
@@ -1552,64 +1553,282 @@ namespace Search
                 //        }
                 //    }
                 //    break;
-                case SearchType.大分類:
-                    using (Search_Mall frmMal = new Search_Mall())
-                    {
-                        frmMal.parID = MultiPorpose_BL.ID_MALL;
-                        frmMal.ShowDialog();
-                        if (!frmMal.flgCancel)
-                        {
-                            txtCode.Text = frmMal.parKey;
-                            lblName.Text = frmMal.parChar1;
-                            CheckBasedFormPanel();//PTK added
-                        }
-                    }
-                    break;
-                case SearchType.中分類:
-                    using (Search_Mall frmMal = new Search_Mall())
-                    {
-                        frmMal.parID = MultiPorpose_BL.ID_MALL;
-                        frmMal.ShowDialog();
-                        if (!frmMal.flgCancel)
-                        {
-                            txtCode.Text = frmMal.parKey;
-                            lblName.Text = frmMal.parChar1;
-                            CheckBasedFormPanel();//PTK added
-                        }
-                    }
-                    break;
-                case SearchType.小分類:
-                    using (Search_Mall frmMal = new Search_Mall())
-                    {
-                        frmMal.parID = MultiPorpose_BL.ID_MALL;
-                        frmMal.ShowDialog();
-                        if (!frmMal.flgCancel)
-                        {
-                            txtCode.Text = frmMal.parKey;
-                            lblName.Text = frmMal.parChar1;
-                            CheckBasedFormPanel();//PTK added
-                        }
-                    }
-                    break;
-                //<----------------------------------------------------2019.6.11 add
-                case SearchType.銀行支店:
-                    using (FrmSearch_GinkouShiten frmGinkouShiten = new FrmSearch_GinkouShiten(changedate, Value1, Value2))
-                    {
-                        frmGinkouShiten.ShowDialog();
+                //case SearchType.大分類:
+                //    using (Search_Mall frmMal = new Search_Mall())
+                //    {
+                //        frmMal.parID = MultiPorpose_BL.ID_MALL;
+                //        frmMal.ShowDialog();
+                //        if (!frmMal.flgCancel)
+                //        {
+                //            txtCode.Text = frmMal.parKey;
+                //            lblName.Text = frmMal.parChar1;
+                //            CheckBasedFormPanel();//PTK added
+                //        }
+                //    }
+                //    break;
+                //case SearchType.中分類:
+                //    using (Search_Mall frmMal = new Search_Mall())
+                //    {
+                //        frmMal.parID = MultiPorpose_BL.ID_MALL;
+                //        frmMal.ShowDialog();
+                //        if (!frmMal.flgCancel)
+                //        {
+                //            txtCode.Text = frmMal.parKey;
+                //            lblName.Text = frmMal.parChar1;
+                //            CheckBasedFormPanel();//PTK added
+                //        }
+                //    }
+                //    break;
+                //case SearchType.小分類:
+                //    using (Search_Mall frmMal = new Search_Mall())
+                //    {
+                //        frmMal.parID = MultiPorpose_BL.ID_MALL;
+                //        frmMal.ShowDialog();
+                //        if (!frmMal.flgCancel)
+                //        {
+                //            txtCode.Text = frmMal.parKey;
+                //            lblName.Text = frmMal.parChar1;
+                //            CheckBasedFormPanel();//PTK added
+                //        }
+                //    }
+                //    break;
+                ////<----------------------------------------------------2019.6.11 add
+                //case SearchType.銀行支店:
+                //    using (FrmSearch_GinkouShiten frmGinkouShiten = new FrmSearch_GinkouShiten(changedate, Value1, Value2))
+                //    {
+                //        frmGinkouShiten.ShowDialog();
 
-                        if (!frmGinkouShiten.flgCancel)
-                        {
-                            txtCode.Text = frmGinkouShiten.BranchCD;
-                            lblName.Text = frmGinkouShiten.BranchName;
-                            if (UseChangeDate == true)
-                                txtChangeDate.Text = frmGinkouShiten.ChangeDate;
+                //        if (!frmGinkouShiten.flgCancel)
+                //        {
+                //            txtCode.Text = frmGinkouShiten.BranchCD;
+                //            lblName.Text = frmGinkouShiten.BranchName;
+                //            if (UseChangeDate == true)
+                //                txtChangeDate.Text = frmGinkouShiten.ChangeDate;
 
-                            CheckBasedFormPanel();//PTK added
-                        }
-                    }
-                    break;
+                //            CheckBasedFormPanel();//PTK added
+                //        }
+                //    }
+                //    break;
+
+                ////case SearchType.Shipping: // 2019.06.28 add
+                ////    using (Search_Shipping frmshipping = new Search_Shipping())
+                ////    {
+                ////        frmshipping.parChangeDate = changedate;
+                ////        //frmBrand.parMakerCD = 
+                ////        frmshipping.ShowDialog();
+                ////        if (!frmshipping.flgCancel)
+                ////        {
+                ////            txtCode.Text = frmshipping.ID;
+                ////        }
+                ////    }
+                ////    break;
+                //case SearchType.Supplier:
+                //    using (Search_Supplier frmSupplier = new Search_Supplier(changedate))
+                //    {
+                //        frmSupplier.parChangeDate = changedate;
+                //        frmSupplier.ShowDialog();
+                //        if (!frmSupplier.flgCancel)
+                //        {
+                //            txtCode.Text = frmSupplier.ID;
+                //            lblName.Text = frmSupplier.parName;
+                //            if (UseChangeDate == true)
+                //                txtChangeDate.Text = frmSupplier.date;
+
+                //            CheckBasedFormPanel();//PTK added
+                //        }
+                //    }
+                //    break;
+                //case SearchType.経費番号:
+                //    using (frmSearch_KeihiNO skeihino = new frmSearch_KeihiNO())
+                //    {
+                //        skeihino.ShowDialog();
+                //        if (!skeihino.flgCancel)
+                //        {
+                //            TxtCode.Text = skeihino.ExpenseNumber;
+                //            CheckBasedFormPanel();//PTK added
+                //        }
+                //    }
+                //    //frmSearch_KeihiNO skeihino = new frmSearch_KeihiNO();
+                //    //skeihino.ShowDialog();
+                //    break;
+                //case SearchType.Carrier:
+                //    using (FrmSearch_Carrier carrier = new FrmSearch_Carrier(changedate))
+                //    {
+                //        carrier.parChangeDate = changedate;
+                //        carrier.ShowDialog();
+                //        if (!carrier.flgCancel)
+                //        {
+                //            txtCode.Text = carrier.ID;
+                //            lblName.Text = carrier.parName;
+                //            txtChangeDate.Text = carrier.date;
+                //            CheckBasedFormPanel();//PTK Added
+                //        }
+                //    }
+                //    break;
+                //case SearchType.EDI処理番号:
+                //    using (Search_EDIHacchuuNO frmHacchuu = new Search_EDIHacchuuNO(changedate))
+                //    {
+                //        frmHacchuu.OperatorCD = Value1;
+                //        frmHacchuu.AllAvailableStores = Value2;
+                //        frmHacchuu.ShowDialog();
+                //        if (!frmHacchuu.flgCancel)
+                //        {
+                //            txtCode.Text = frmHacchuu.EDIOrderNO;
+                //            txtChangeDate.Text = frmHacchuu.ChangeDate;
+                //            CheckBasedFormPanel();//PTK added
+                //        }
+                //    }
+                //    break;
+
+                //case SearchType.JANMulti:
+                //    using (Search_Product frmJanCD = new Search_Product(changedate))
+                //    {
+                //        frmJanCD.Mode = "5";
+                //        frmJanCD.JANCD = txtCode.Text;
+                //        frmJanCD.ShowDialog();
+
+                //        if (!frmJanCD.flgCancel)
+                //        {
+                //            txtCode.Text = frmJanCD.JANCD;
+                //            txtChangeDate.Text = frmJanCD.ChangeDate;
+                //            //KTP 2020/06/18
+                //            //Prevent to Move next control with no record select
+                //            if(!string.IsNullOrWhiteSpace(TxtCode.Text))
+                //                CheckBasedFormPanel();//PTK added
+                //        }
+                //    }
+                //    break;
+
+                //case SearchType.ITEMMulti:
+                //    using (Search_Product frmMakerItem = new Search_Product(changedate))
+                //    {
+                //        frmMakerItem.Mode = "6";
+                //        frmMakerItem.ITEM = txtCode.Text;
+                //        frmMakerItem.ShowDialog();
+
+                //        if (!frmMakerItem.flgCancel)
+                //        {
+                //            txtCode.Text = frmMakerItem.ITEM;
+                //            txtChangeDate.Text = frmMakerItem.ChangeDate;
+                //            if (!string.IsNullOrWhiteSpace(TxtCode.Text))
+                //                CheckBasedFormPanel();
+
+                //        }
+                //    }
+                //    break;
+
+                //case SearchType.SKUMulti:
+                //    using (Search_Product frmSKUCD = new Search_Product(changedate))
+                //    {
+                //        frmSKUCD.Mode = "7";
+                //        frmSKUCD.SKUCD = txtCode.Text;
+                //        frmSKUCD.ShowDialog();
+
+                //        if (!frmSKUCD.flgCancel)
+                //        {
+                //            txtCode.Text = frmSKUCD.SKUCD;
+                //            txtChangeDate.Text = frmSKUCD.ChangeDate;
+                //            CheckBasedFormPanel();
+                //        }
+                //    }
+                //    break;
+
+                //case SearchType.支払処理:
+                //    using (FrmSearch_SiharaiNO frmsiharaino = new FrmSearch_SiharaiNO())
+                //    {
+                //        frmsiharaino.ShowDialog();
+                //        if (!frmsiharaino.flgCancel)
+                //        {
+                //            txtCode.Text = frmsiharaino.ID;
+                //            txtChangeDate.Text = frmsiharaino.date;
+                //            lblName.Text = frmsiharaino.parName;
+                //            CheckBasedFormPanel();
+                //        }
+                //    }
+                //    break;
+                ////case SearchType.Location: // 2019.12.09
+                ////    using (Search_Location frmLocation = new Search_Location(changedate, Value1))
+                ////    {
+                ////        frmLocation.ShowDialog();
+
+                ////        if (!frmLocation.flgCancel)
+                ////        {
+                ////            txtCode.Text = frmLocation.TanaCD;
+                ////        }
+                ////    }
+                ////    break;
+                //case SearchType.支払番号検索: // 2019.12.19
+                //    using (Search_SiharaiShoriNO frmShoriNo = new Search_SiharaiShoriNO())
+                //    {
+                //        frmShoriNo.ShowDialog();
+                //        {
+                //            if (!frmShoriNo.flgCancel)
+                //            {
+                //                txtCode.Text = frmShoriNo.Sc_Code;
+                //                CheckBasedFormPanel();//PTK added
+                //            }
+                //        }
+                //    }
+                //    break;
+
+                //case SearchType.展示会名://SES added
+                //    using (Search_Tenzikai frmTenzikai = new Search_Tenzikai(changedate))
+                //    {
+                //        frmTenzikai.ShowDialog();
+                //        if (!frmTenzikai.flgCancel)
+                //        {
+                //            txtCode.Text = frmTenzikai.TenzikaiName;
+                //            CheckBasedFormPanel();
+                //        }
+                //    }
+                //    break;
+                //case SearchType.展示会商品:
+                //    using (Search_TenzikaiShouhin frmTenzikaishouhin = new Search_TenzikaiShouhin())
+                //    {
+                //        frmTenzikaishouhin.parChangeDate = changedate;
+
+                //        //if (UseChangeDate == true)
+                //        //    frmTenzikaishouhin.parChangeDate = changedate;
+                //        frmTenzikaishouhin.ShowDialog();
+                //        if (!frmTenzikaishouhin.flgCancel)
+                //        {
+                //            txtCode.Text = frmTenzikaishouhin.parTenzikaiName;
+                //           // lblName.Text = frmTenzikaishouhin.parSKUName;
+                //            CheckBasedFormPanel();//PTK added
+                //        }
+
+                //    }
+                //    break;
+                ////2020.02.21 add by etz
+                //case SearchType.HanyouKeyStart:
+                //    using (Search_Key frmKey = new Search_Key(Value1, Value2))
+                //    {
+                //        frmKey.ShowDialog();
+                //        if (!frmKey.flgCancel)
+                //        {
+                //            TxtCode.Text = frmKey.KeyCode;
+                //            lblName.Text = frmKey.Char1;
+                //            CheckBasedFormPanel();//PTK added
+                //        }
+                //    }
+                //    break;
+                //case SearchType.HanyouKeyEnd:
+                //    using (Search_Key frmKey = new Search_Key(Value1, Value2))
+                //    {
+                //        frmKey.ShowDialog();
+                //        if (!frmKey.flgCancel)
+                //        {
+                //            TxtCode.Text = frmKey.Char2;    //補助科目CD
+                //            lblName.Text = frmKey.Char3;    //補助科目名
+                //            Value3 = frmKey.Char1;  //勘定科目CD
+                //            CheckBasedFormPanel();//PTK added
+                //        }
+                //    }
+                //    break;
+                #endregion
+
                 case SearchType.ID:
-                    using (Search_ID frmID = new Search_ID()) 
+                    using (Search_ID frmID = new Search_ID())
                     {
                         frmID.ShowDialog();
                         if (!frmID.flgCancel)
@@ -1633,221 +1852,7 @@ namespace Search
                         }
                     }
                     break;
-                //2020.02.21 add by etz
-                case SearchType.HanyouKeyStart:
-                    using (Search_Key frmKey = new Search_Key(Value1, Value2))
-                    {
-                        frmKey.ShowDialog();
-                        if (!frmKey.flgCancel)
-                        {
-                            TxtCode.Text = frmKey.KeyCode;
-                            lblName.Text = frmKey.Char1;
-                            CheckBasedFormPanel();//PTK added
-                        }
-                    }
-                    break;
-                case SearchType.HanyouKeyEnd:
-                    using (Search_Key frmKey = new Search_Key(Value1, Value2))
-                    {
-                        frmKey.ShowDialog();
-                        if (!frmKey.flgCancel)
-                        {
-                            TxtCode.Text = frmKey.Char2;    //補助科目CD
-                            lblName.Text = frmKey.Char3;    //補助科目名
-                            Value3 = frmKey.Char1;  //勘定科目CD
-                            CheckBasedFormPanel();//PTK added
-                        }
-                    }
-                    break;
-                //case SearchType.Shipping: // 2019.06.28 add
-                //    using (Search_Shipping frmshipping = new Search_Shipping())
-                //    {
-                //        frmshipping.parChangeDate = changedate;
-                //        //frmBrand.parMakerCD = 
-                //        frmshipping.ShowDialog();
-                //        if (!frmshipping.flgCancel)
-                //        {
-                //            txtCode.Text = frmshipping.ID;
-                //        }
-                //    }
-                //    break;
-                case SearchType.Supplier:
-                    using (Search_Supplier frmSupplier = new Search_Supplier(changedate))
-                    {
-                        frmSupplier.parChangeDate = changedate;
-                        frmSupplier.ShowDialog();
-                        if (!frmSupplier.flgCancel)
-                        {
-                            txtCode.Text = frmSupplier.ID;
-                            lblName.Text = frmSupplier.parName;
-                            if (UseChangeDate == true)
-                                txtChangeDate.Text = frmSupplier.date;
 
-                            CheckBasedFormPanel();//PTK added
-                        }
-                    }
-                    break;
-                case SearchType.経費番号:
-                    using (frmSearch_KeihiNO skeihino = new frmSearch_KeihiNO())
-                    {
-                        skeihino.ShowDialog();
-                        if (!skeihino.flgCancel)
-                        {
-                            TxtCode.Text = skeihino.ExpenseNumber;
-                            CheckBasedFormPanel();//PTK added
-                        }
-                    }
-                    //frmSearch_KeihiNO skeihino = new frmSearch_KeihiNO();
-                    //skeihino.ShowDialog();
-                    break;
-                case SearchType.Carrier:
-                    using (FrmSearch_Carrier carrier = new FrmSearch_Carrier(changedate))
-                    {
-                        carrier.parChangeDate = changedate;
-                        carrier.ShowDialog();
-                        if (!carrier.flgCancel)
-                        {
-                            txtCode.Text = carrier.ID;
-                            lblName.Text = carrier.parName;
-                            txtChangeDate.Text = carrier.date;
-                            CheckBasedFormPanel();//PTK Added
-                        }
-                    }
-                    break;
-                case SearchType.EDI処理番号:
-                    using (Search_EDIHacchuuNO frmHacchuu = new Search_EDIHacchuuNO(changedate))
-                    {
-                        frmHacchuu.OperatorCD = Value1;
-                        frmHacchuu.AllAvailableStores = Value2;
-                        frmHacchuu.ShowDialog();
-                        if (!frmHacchuu.flgCancel)
-                        {
-                            txtCode.Text = frmHacchuu.EDIOrderNO;
-                            txtChangeDate.Text = frmHacchuu.ChangeDate;
-                            CheckBasedFormPanel();//PTK added
-                        }
-                    }
-                    break;
-
-                case SearchType.JANMulti:
-                    using (Search_Product frmJanCD = new Search_Product(changedate))
-                    {
-                        frmJanCD.Mode = "5";
-                        frmJanCD.JANCD = txtCode.Text;
-                        frmJanCD.ShowDialog();
-
-                        if (!frmJanCD.flgCancel)
-                        {
-                            txtCode.Text = frmJanCD.JANCD;
-                            txtChangeDate.Text = frmJanCD.ChangeDate;
-                            //KTP 2020/06/18
-                            //Prevent to Move next control with no record select
-                            if(!string.IsNullOrWhiteSpace(TxtCode.Text))
-                                CheckBasedFormPanel();//PTK added
-                        }
-                    }
-                    break;
-
-                case SearchType.ITEMMulti:
-                    using (Search_Product frmMakerItem = new Search_Product(changedate))
-                    {
-                        frmMakerItem.Mode = "6";
-                        frmMakerItem.ITEM = txtCode.Text;
-                        frmMakerItem.ShowDialog();
-
-                        if (!frmMakerItem.flgCancel)
-                        {
-                            txtCode.Text = frmMakerItem.ITEM;
-                            txtChangeDate.Text = frmMakerItem.ChangeDate;
-                            if (!string.IsNullOrWhiteSpace(TxtCode.Text))
-                                CheckBasedFormPanel();
-
-                        }
-                    }
-                    break;
-
-                case SearchType.SKUMulti:
-                    using (Search_Product frmSKUCD = new Search_Product(changedate))
-                    {
-                        frmSKUCD.Mode = "7";
-                        frmSKUCD.SKUCD = txtCode.Text;
-                        frmSKUCD.ShowDialog();
-
-                        if (!frmSKUCD.flgCancel)
-                        {
-                            txtCode.Text = frmSKUCD.SKUCD;
-                            txtChangeDate.Text = frmSKUCD.ChangeDate;
-                            CheckBasedFormPanel();
-                        }
-                    }
-                    break;
-
-                case SearchType.支払処理:
-                    using (FrmSearch_SiharaiNO frmsiharaino = new FrmSearch_SiharaiNO())
-                    {
-                        frmsiharaino.ShowDialog();
-                        if (!frmsiharaino.flgCancel)
-                        {
-                            txtCode.Text = frmsiharaino.ID;
-                            txtChangeDate.Text = frmsiharaino.date;
-                            lblName.Text = frmsiharaino.parName;
-                            CheckBasedFormPanel();
-                        }
-                    }
-                    break;
-                //case SearchType.Location: // 2019.12.09
-                //    using (Search_Location frmLocation = new Search_Location(changedate, Value1))
-                //    {
-                //        frmLocation.ShowDialog();
-
-                //        if (!frmLocation.flgCancel)
-                //        {
-                //            txtCode.Text = frmLocation.TanaCD;
-                //        }
-                //    }
-                //    break;
-                case SearchType.支払番号検索: // 2019.12.19
-                    using (Search_SiharaiShoriNO frmShoriNo = new Search_SiharaiShoriNO())
-                    {
-                        frmShoriNo.ShowDialog();
-                        {
-                            if (!frmShoriNo.flgCancel)
-                            {
-                                txtCode.Text = frmShoriNo.Sc_Code;
-                                CheckBasedFormPanel();//PTK added
-                            }
-                        }
-                    }
-                    break;
-
-                case SearchType.展示会名://SES added
-                    using (Search_Tenzikai frmTenzikai = new Search_Tenzikai(changedate))
-                    {
-                        frmTenzikai.ShowDialog();
-                        if (!frmTenzikai.flgCancel)
-                        {
-                            txtCode.Text = frmTenzikai.TenzikaiName;
-                            CheckBasedFormPanel();
-                        }
-                    }
-                    break;
-                case SearchType.展示会商品:
-                    using (Search_TenzikaiShouhin frmTenzikaishouhin = new Search_TenzikaiShouhin())
-                    {
-                        frmTenzikaishouhin.parChangeDate = changedate;
-
-                        //if (UseChangeDate == true)
-                        //    frmTenzikaishouhin.parChangeDate = changedate;
-                        frmTenzikaishouhin.ShowDialog();
-                        if (!frmTenzikaishouhin.flgCancel)
-                        {
-                            txtCode.Text = frmTenzikaishouhin.parTenzikaiName;
-                           // lblName.Text = frmTenzikaishouhin.parSKUName;
-                            CheckBasedFormPanel();//PTK added
-                        }
-
-                    }
-                    break;
             }
 
 
@@ -1913,16 +1918,16 @@ namespace Search
             DataTable dtResult = new DataTable();
             switch (Search_Type)
             {
+                #region SMS用コードをコメントアウト
+                //case SearchType.倉庫:
+                //    dtResult = bbl.SimpleSelect1("1", TxtChangeDate.Text.Replace("/", "-"), TxtCode.Text);
+                //    break;
 
-                case SearchType.倉庫:
-                    dtResult = bbl.SimpleSelect1("1", TxtChangeDate.Text.Replace("/", "-"), TxtCode.Text);
-                    break;
+                //case SearchType.銀行支店:
+                //    dtResult = bbl.SimpleSelect1("7", TxtChangeDate.Text.Replace("/", "-"), TxtCode.Text, Value1);
 
-                case SearchType.銀行支店:
-                    dtResult = bbl.SimpleSelect1("7", TxtChangeDate.Text.Replace("/", "-"), TxtCode.Text, Value1);
-
-                    break;
-
+                //    break;
+                #endregion
             }
 
             if (dtResult.Rows.Count > 0)
@@ -1936,146 +1941,147 @@ namespace Search
             DataTable dtResult = new DataTable();
             if (i == 1)
             {
-                switch (Search_Type)
-                {
-                    case SearchType.倉庫:
-                        dtResult = bbl.SimpleSelect1("1", TxtChangeDate.Text.Replace("/", "-"), TxtCode.Text);
-                        //FieldsName = "1";
-                        //TableName = "M_Souko";
-                        //Condition = "SoukoCD = '" + TxtCode.Text + "' and " +
-                        //           "ChangeDate = '" + (string.IsNullOrWhiteSpace(TxtChangeDate.Text) ? DateTime.Now.ToString("yyyy/MM/dd") : TxtChangeDate.Text.Replace("/", "-")) + "'";
-                        //dtResult = bbl.SimpleSelect(FieldsName, TableName, Condition);
-                        break;
-                    case SearchType.銀行口座:
-                        dtResult = bbl.SimpleSelect1("5", TxtChangeDate.Text.Replace("/", "-"), TxtCode.Text);
-                        //FieldsName = "1";
-                        //TableName = "M_Kouza";
-                        //Condition = TxtCode.Text;
-                        //           "ChangeDate = '" + (string.IsNullOrWhiteSpace(TxtChangeDate.Text) ? DateTime.Now.ToString("yyyy/MM/dd") : TxtChangeDate.Text.Replace("/", "-")) + "'";
-                        //dtResult = bbl.SimpleSelect(FieldsName, TableName, Condition);
-                        break;
-                    case SearchType.銀行:
-                        dtResult = bbl.SimpleSelect1("3", TxtChangeDate.Text.Replace("/", "-"), TxtCode.Text);
-                        //FieldsName = "1";
-                        //TableName = "M_Bank";
-                        //Condition = "BankCD = '" + TxtCode.Text + "' and " +
-                        //           "ChangeDate = '" + (string.IsNullOrWhiteSpace(TxtChangeDate.Text) ? DateTime.Now.ToString("yyyy/MM/dd") : TxtChangeDate.Text.Replace("/", "-")) + "'";
-                        //dtResult = bbl.SimpleSelect(FieldsName, TableName, Condition);
-                        break;
-                    case SearchType.銀行支店:
-                        dtResult = bbl.SimpleSelect1("7", TxtChangeDate.Text.Replace("/", "-"), TxtCode.Text, Value1);
-                        //FieldsName = "1";
-                        //TableName = "M_BankShiten";
-                        //Condition = "BranchCD = '" + TxtCode.Text + "' and " + "BankCD = '" + Value1 + "'and " +
-                        //           "ChangeDate = '" + (string.IsNullOrWhiteSpace(TxtChangeDate.Text) ? DateTime.Now.ToString("yyyy/MM/dd") : TxtChangeDate.Text.Replace("/", "-")) + "'";
+                #region SMS用コードをコメントアウト
+                //switch (Search_Type)
+                //{
+                //    case SearchType.倉庫:
+                //        dtResult = bbl.SimpleSelect1("1", TxtChangeDate.Text.Replace("/", "-"), TxtCode.Text);
+                //        //FieldsName = "1";
+                //        //TableName = "M_Souko";
+                //        //Condition = "SoukoCD = '" + TxtCode.Text + "' and " +
+                //        //           "ChangeDate = '" + (string.IsNullOrWhiteSpace(TxtChangeDate.Text) ? DateTime.Now.ToString("yyyy/MM/dd") : TxtChangeDate.Text.Replace("/", "-")) + "'";
+                //        //dtResult = bbl.SimpleSelect(FieldsName, TableName, Condition);
+                //        break;
+                //    case SearchType.銀行口座:
+                //        dtResult = bbl.SimpleSelect1("5", TxtChangeDate.Text.Replace("/", "-"), TxtCode.Text);
+                //        //FieldsName = "1";
+                //        //TableName = "M_Kouza";
+                //        //Condition = TxtCode.Text;
+                //        //           "ChangeDate = '" + (string.IsNullOrWhiteSpace(TxtChangeDate.Text) ? DateTime.Now.ToString("yyyy/MM/dd") : TxtChangeDate.Text.Replace("/", "-")) + "'";
+                //        //dtResult = bbl.SimpleSelect(FieldsName, TableName, Condition);
+                //        break;
+                //    case SearchType.銀行:
+                //        dtResult = bbl.SimpleSelect1("3", TxtChangeDate.Text.Replace("/", "-"), TxtCode.Text);
+                //        //FieldsName = "1";
+                //        //TableName = "M_Bank";
+                //        //Condition = "BankCD = '" + TxtCode.Text + "' and " +
+                //        //           "ChangeDate = '" + (string.IsNullOrWhiteSpace(TxtChangeDate.Text) ? DateTime.Now.ToString("yyyy/MM/dd") : TxtChangeDate.Text.Replace("/", "-")) + "'";
+                //        //dtResult = bbl.SimpleSelect(FieldsName, TableName, Condition);
+                //        break;
+                //    case SearchType.銀行支店:
+                //        dtResult = bbl.SimpleSelect1("7", TxtChangeDate.Text.Replace("/", "-"), TxtCode.Text, Value1);
+                //        //FieldsName = "1";
+                //        //TableName = "M_BankShiten";
+                //        //Condition = "BranchCD = '" + TxtCode.Text + "' and " + "BankCD = '" + Value1 + "'and " +
+                //        //           "ChangeDate = '" + (string.IsNullOrWhiteSpace(TxtChangeDate.Text) ? DateTime.Now.ToString("yyyy/MM/dd") : TxtChangeDate.Text.Replace("/", "-")) + "'";
 
-                        //dtResult = bbl.SimpleSelect(FieldsName, TableName, Condition);
-                        break;
-                    case SearchType.スタッフ:
-                        dtResult = bbl.SimpleSelect1("11", TxtChangeDate.Text.Replace("/", "-"), TxtCode.Text);
-                        //FieldsName = "1";
-                        //TableName = "M_Staff";
-                        //Condition = "StaffCD = '" + TxtCode.Text + "' and " +
-                        //           "ChangeDate = '" + (string.IsNullOrWhiteSpace(TxtChangeDate.Text) ? DateTime.Now.ToString("yyyy/MM/dd") : TxtChangeDate.Text.Replace("/", "-")) + "'";
-                        //dtResult = bbl.SimpleSelect(FieldsName, TableName, Condition);
-                        break;
-                    case SearchType.経費番号:
-                        dtResult = bbl.SimpleSelect1("10", TxtChangeDate.Text.Replace("/", "-"), TxtCode.Text);
-                        //FieldsName = "1";
-                        //TableName = "D_Cost";
-                        //Condition = "CostNO = '" + TxtCode.Text + "'";
-                        //dtResult = bbl.SimpleSelect(FieldsName, TableName, Condition);
-                        break;
-                    case SearchType.仕入先:
-                        dtResult = bbl.SimpleSelect1("29", TxtChangeDate.Text.Replace("/", "-"), TxtCode.Text);
-                        break;
-                    case SearchType.Carrier:
-                        dtResult = bbl.SimpleSelect1("33", TxtChangeDate.Text.Replace("/", "-"), TxtCode.Text);
-                        break;
-                    case SearchType.プログラムID:
-                        dtResult = bbl.SimpleSelect1("55", DateTime.Now.ToString("yyyy/MM/dd").Replace("/", "-"), TxtCode.Text);
-                        break;
-                    case SearchType.得意先://Search_Customer
-                        dtResult = bbl.SimpleSelect1("45", DateTime.Now.ToString("yyyy/MM/dd").Replace("/", "-"), TxtCode.Text);
-                        break;
-                }
+                //        //dtResult = bbl.SimpleSelect(FieldsName, TableName, Condition);
+                //        break;
+                //    case SearchType.スタッフ:
+                //        dtResult = bbl.SimpleSelect1("11", TxtChangeDate.Text.Replace("/", "-"), TxtCode.Text);
+                //        //FieldsName = "1";
+                //        //TableName = "M_Staff";
+                //        //Condition = "StaffCD = '" + TxtCode.Text + "' and " +
+                //        //           "ChangeDate = '" + (string.IsNullOrWhiteSpace(TxtChangeDate.Text) ? DateTime.Now.ToString("yyyy/MM/dd") : TxtChangeDate.Text.Replace("/", "-")) + "'";
+                //        //dtResult = bbl.SimpleSelect(FieldsName, TableName, Condition);
+                //        break;
+                //    case SearchType.経費番号:
+                //        dtResult = bbl.SimpleSelect1("10", TxtChangeDate.Text.Replace("/", "-"), TxtCode.Text);
+                //        //FieldsName = "1";
+                //        //TableName = "D_Cost";
+                //        //Condition = "CostNO = '" + TxtCode.Text + "'";
+                //        //dtResult = bbl.SimpleSelect(FieldsName, TableName, Condition);
+                //        break;
+                //    case SearchType.仕入先:
+                //        dtResult = bbl.SimpleSelect1("29", TxtChangeDate.Text.Replace("/", "-"), TxtCode.Text);
+                //        break;
+                //    case SearchType.Carrier:
+                //        dtResult = bbl.SimpleSelect1("33", TxtChangeDate.Text.Replace("/", "-"), TxtCode.Text);
+                //        break;
+                //    case SearchType.プログラムID:
+                //        dtResult = bbl.SimpleSelect1("55", DateTime.Now.ToString("yyyy/MM/dd").Replace("/", "-"), TxtCode.Text);
+                //        break;
+                //    case SearchType.得意先://Search_Customer
+                //        dtResult = bbl.SimpleSelect1("45", DateTime.Now.ToString("yyyy/MM/dd").Replace("/", "-"), TxtCode.Text);
+                //        break;
+                //}
+                #endregion
             }
             else
             {
-                switch (Search_Type)
-                {
-                    case SearchType.倉庫:
-                        dtResult = bbl.SimpleSelect1("2", TxtChangeDate.Text.Replace("/", "-"), TxtCode.Text);
-                        break;
-                    case SearchType.銀行口座:
-                        dtResult = bbl.SimpleSelect1("6", TxtChangeDate.Text.Replace("/", "-"), TxtCode.Text);
-                        break;
-                    case SearchType.銀行:
-                        dtResult = bbl.SimpleSelect1("4", TxtChangeDate.Text.Replace("/", "-"), TxtCode.Text);
-                        break;
-                    case SearchType.銀行支店:
-                        dtResult = bbl.SimpleSelect1("8", TxtChangeDate.Text.Replace("/", "-"), TxtCode.Text, Value1);
-                        break;
-                    case SearchType.仕入先:
-                        dtResult = bbl.SimpleSelect1("28", TxtChangeDate.Text.Replace("/", "-"), TxtCode.Text);
-                        break;
+                #region SMS用コードをコメントアウト
+                //switch (Search_Type)
+                //{
+                //    case SearchType.倉庫:
+                //        dtResult = bbl.SimpleSelect1("2", TxtChangeDate.Text.Replace("/", "-"), TxtCode.Text);
+                //        break;
+                //    case SearchType.銀行口座:
+                //        dtResult = bbl.SimpleSelect1("6", TxtChangeDate.Text.Replace("/", "-"), TxtCode.Text);
+                //        break;
+                //    case SearchType.銀行:
+                //        dtResult = bbl.SimpleSelect1("4", TxtChangeDate.Text.Replace("/", "-"), TxtCode.Text);
+                //        break;
+                //    case SearchType.銀行支店:
+                //        dtResult = bbl.SimpleSelect1("8", TxtChangeDate.Text.Replace("/", "-"), TxtCode.Text, Value1);
+                //        break;
+                //    case SearchType.仕入先:
+                //        dtResult = bbl.SimpleSelect1("28", TxtChangeDate.Text.Replace("/", "-"), TxtCode.Text);
+                //        break;
 
-                    case SearchType.仕入先PayeeFlg:
-                        dtResult = bbl.SimpleSelect1("44", TxtChangeDate.Text.Replace("/", "-"), TxtCode.Text);
-                        break;
+                //    case SearchType.仕入先PayeeFlg:
+                //        dtResult = bbl.SimpleSelect1("44", TxtChangeDate.Text.Replace("/", "-"), TxtCode.Text);
+                //        break;
 
-                    case SearchType.スタッフ:
-                        dtResult = bbl.SimpleSelect1("41", TxtChangeDate.Text.Replace("/", "-"), TxtCode.Text);
-                        break;
+                //    case SearchType.スタッフ:
+                //        dtResult = bbl.SimpleSelect1("41", TxtChangeDate.Text.Replace("/", "-"), TxtCode.Text);
+                //        break;
 
-                    case SearchType.SKUCD:
-                        dtResult = bbl.SimpleSelect1("39", DateTime.Now.ToString("yyyy/MM/dd").Replace("/", "-"), TxtCode.Text);
-                        break;
-                    
-                    case SearchType.得意先://Search_Customer
-                        dtResult = bbl.SimpleSelect1("45", DateTime.Now.ToString("yyyy/MM/dd").Replace("/", "-"), TxtCode.Text);
-                        break;
-                    case SearchType.ピッキング番号:
-                        dtResult = bbl.SimpleSelect1("46", DateTime.Now.ToString("yyyy/MM/dd").Replace("/", "-"), TxtCode.Text);
-                        break;
+                //    case SearchType.SKUCD:
+                //        dtResult = bbl.SimpleSelect1("39", DateTime.Now.ToString("yyyy/MM/dd").Replace("/", "-"), TxtCode.Text);
+                //        break;
 
-                    case SearchType.HanyouKeyStart:
-                        dtResult = bbl.SimpleSelect1("53", DateTime.Now.ToString("yyyy/MM/dd").Replace("/", "-"), TxtCode.Text,Value1);
-                        break;
+                //    case SearchType.得意先://Search_Customer
+                //        dtResult = bbl.SimpleSelect1("45", DateTime.Now.ToString("yyyy/MM/dd").Replace("/", "-"), TxtCode.Text);
+                //        break;
+                //    case SearchType.ピッキング番号:
+                //        dtResult = bbl.SimpleSelect1("46", DateTime.Now.ToString("yyyy/MM/dd").Replace("/", "-"), TxtCode.Text);
+                //        break;
 
-                    case SearchType.HanyouKeyEnd:
-                        dtResult = bbl.SimpleSelect1("54", DateTime.Now.ToString("yyyy/MM/dd").Replace("/", "-"), TxtCode.Text,Value1,Value2);
-                        break;
-                    case SearchType.ブランド:
-                        dtResult = bbl.SimpleSelect1("56", DateTime.Now.ToString("yyyy/MM/dd").Replace("/", "-"), TxtCode.Text);
-                        break;
-                    case SearchType.競技:
-                        dtResult = bbl.SimpleSelect1("57", DateTime.Now.ToString("yyyy/MM/dd").Replace("/", "-"), TxtCode.Text,Value1);
-                        break;
-                    case SearchType.商品分類:
-                        dtResult = bbl.SimpleSelect1("64", DateTime.Now.ToString("yyyy/MM/dd").Replace("/", "-"), TxtCode.Text,Value1);
-                        break;
-                    case SearchType.SKU_ITEM_CD:
-                        dtResult = bbl.SimpleSelect1("65", DateTime.Now.ToString("yyyy/MM/dd").Replace("/", "-"), TxtCode.Text);
-                        break;
-                    case SearchType.JANCD:
-                        dtResult = bbl.SimpleSelect1("66", DateTime.Now.ToString("yyyy/MM/dd").Replace("/", "-"), TxtCode.Text);
-                        break;
-                    case SearchType.MakerItem:
-                        dtResult = bbl.SimpleSelect1("69", DateTime.Now.ToString("yyyy/MM/dd").Replace("/", "-"), TxtCode.Text);
-                        break;
-                    case SearchType.単価設定:
-                        dtResult = bbl.SimpleSelect1("72", DateTime.Now.ToString("yyyy/MM/dd").Replace("/", "-"), TxtCode.Text);
-                        break;
+                //    case SearchType.HanyouKeyStart:
+                //        dtResult = bbl.SimpleSelect1("53", DateTime.Now.ToString("yyyy/MM/dd").Replace("/", "-"), TxtCode.Text,Value1);
+                //        break;
 
-                    case SearchType.展示会商品:
-                        dtResult = bbl.SimpleSelect1("74", DateTime.Now.ToString("yyyy/MM/dd").Replace("/", "-"), TxtCode.Text);
-                        break;
+                //    case SearchType.HanyouKeyEnd:
+                //        dtResult = bbl.SimpleSelect1("54", DateTime.Now.ToString("yyyy/MM/dd").Replace("/", "-"), TxtCode.Text,Value1,Value2);
+                //        break;
+                //    case SearchType.ブランド:
+                //        dtResult = bbl.SimpleSelect1("56", DateTime.Now.ToString("yyyy/MM/dd").Replace("/", "-"), TxtCode.Text);
+                //        break;
+                //    case SearchType.競技:
+                //        dtResult = bbl.SimpleSelect1("57", DateTime.Now.ToString("yyyy/MM/dd").Replace("/", "-"), TxtCode.Text,Value1);
+                //        break;
+                //    case SearchType.商品分類:
+                //        dtResult = bbl.SimpleSelect1("64", DateTime.Now.ToString("yyyy/MM/dd").Replace("/", "-"), TxtCode.Text,Value1);
+                //        break;
+                //    case SearchType.SKU_ITEM_CD:
+                //        dtResult = bbl.SimpleSelect1("65", DateTime.Now.ToString("yyyy/MM/dd").Replace("/", "-"), TxtCode.Text);
+                //        break;
+                //    case SearchType.JANCD:
+                //        dtResult = bbl.SimpleSelect1("66", DateTime.Now.ToString("yyyy/MM/dd").Replace("/", "-"), TxtCode.Text);
+                //        break;
+                //    case SearchType.MakerItem:
+                //        dtResult = bbl.SimpleSelect1("69", DateTime.Now.ToString("yyyy/MM/dd").Replace("/", "-"), TxtCode.Text);
+                //        break;
+                //    case SearchType.単価設定:
+                //        dtResult = bbl.SimpleSelect1("72", DateTime.Now.ToString("yyyy/MM/dd").Replace("/", "-"), TxtCode.Text);
+                //        break;
 
+                //    case SearchType.展示会商品:
+                //        dtResult = bbl.SimpleSelect1("74", DateTime.Now.ToString("yyyy/MM/dd").Replace("/", "-"), TxtCode.Text);
+                //        break;
 
-
-                }
-
+                //}
+                #endregion
             }
             return dtResult.Rows.Count > 0 ? true : false;
         }
@@ -2122,63 +2128,65 @@ namespace Search
             DataTable dtResult = new DataTable();
             switch (Search_Type)
             {
-                case SearchType.銀行:
-                    dtResult = bbl.Select_SearchName(TxtChangeDate.Text.Replace("/", "-"), 1, TxtCode.Text);
-                    break;
-                case SearchType.銀行支店:
-                    dtResult = bbl.Select_SearchName(txtChangeDate.Text.Replace("/", "-"), 2, Value1, TxtCode.Text);
-                    break;
-                case SearchType.店舗:
-                    dtResult = bbl.Select_SearchName(txtChangeDate.Text.Replace("/", "-"), 3, Value1, TxtCode.Text);
-                    break;
-                case SearchType.仕入先:
-                    dtResult = bbl.Select_SearchName(txtChangeDate.Text.Replace("/", "-"), 4, TxtCode.Text);
-                    break;
-                
-                case SearchType.スタッフ:
-                    dtResult = bbl.Select_SearchName(txtChangeDate.Text.Replace("/", "-"), 5, TxtCode.Text);
-                    break;
-                case SearchType.SKUCD:
-                    dtResult = bbl.Select_SearchName(DateTime.Now.ToString("yyyy/MM/dd").Replace("/", "-"), 6, TxtCode.Text);
-                    break;
-                case SearchType.銀行口座:
-                    dtResult = bbl.Select_SearchName(txtChangeDate.Text.Replace("/", "-"), 7, TxtCode.Text);
-                    break;
-                case SearchType.得意先:
-                    dtResult = bbl.Select_SearchName(DateTime.Now.ToString("yyyy/MM/dd").Replace("/", "-"), 8, txtCode.Text);
-                    break;
+                #region SMS用コードをコメントアウト
+                //case SearchType.銀行:
+                //    dtResult = bbl.Select_SearchName(TxtChangeDate.Text.Replace("/", "-"), 1, TxtCode.Text);
+                //    break;
+                //case SearchType.銀行支店:
+                //    dtResult = bbl.Select_SearchName(txtChangeDate.Text.Replace("/", "-"), 2, Value1, TxtCode.Text);
+                //    break;
+                //case SearchType.店舗:
+                //    dtResult = bbl.Select_SearchName(txtChangeDate.Text.Replace("/", "-"), 3, Value1, TxtCode.Text);
+                //    break;
+                //case SearchType.仕入先:
+                //    dtResult = bbl.Select_SearchName(txtChangeDate.Text.Replace("/", "-"), 4, TxtCode.Text);
+                //    break;
 
-                case SearchType.HanyouKeyStart:
-                    dtResult = bbl.Select_SearchName(DateTime.Now.ToString("yyyy/MM/dd").Replace("/", "-"), 9, txtCode.Text,Value1);
-                    break;
-                case SearchType.HanyouKeyEnd:
-                    dtResult = bbl.Select_SearchName(DateTime.Now.ToString("yyyy/MM/dd").Replace("/", "-"), 10, txtCode.Text, Value1,Value3);
-                    break;
-                //20200317
-                case SearchType.ブランド:
-                    dtResult = bbl.Select_SearchName(txtChangeDate.Text.Replace("/", "-"), 11, txtCode.Text, Value1);
-                    break;
-                case SearchType.競技:
-                    dtResult = bbl.Select_SearchName(txtChangeDate.Text.Replace("/", "-"), 12, txtCode.Text, Value1);
-                    break;
-                case SearchType.商品分類:
-                    dtResult = bbl.Select_SearchName(txtChangeDate.Text.Replace("/", "-"), 13, txtCode.Text, Value1);
-                    break;
+                //case SearchType.スタッフ:
+                //    dtResult = bbl.Select_SearchName(txtChangeDate.Text.Replace("/", "-"), 5, TxtCode.Text);
+                //    break;
+                //case SearchType.SKUCD:
+                //    dtResult = bbl.Select_SearchName(DateTime.Now.ToString("yyyy/MM/dd").Replace("/", "-"), 6, TxtCode.Text);
+                //    break;
+                //case SearchType.銀行口座:
+                //    dtResult = bbl.Select_SearchName(txtChangeDate.Text.Replace("/", "-"), 7, TxtCode.Text);
+                //    break;
+                //case SearchType.得意先:
+                //    dtResult = bbl.Select_SearchName(DateTime.Now.ToString("yyyy/MM/dd").Replace("/", "-"), 8, txtCode.Text);
+                //    break;
 
-                case SearchType.仕入先PayeeFlg:
-                    dtResult = bbl.Select_SearchName(txtChangeDate.Text.Replace("/", "-"), 14, TxtCode.Text);
-                    break;
+                //case SearchType.HanyouKeyStart:
+                //    dtResult = bbl.Select_SearchName(DateTime.Now.ToString("yyyy/MM/dd").Replace("/", "-"), 9, txtCode.Text,Value1);
+                //    break;
+                //case SearchType.HanyouKeyEnd:
+                //    dtResult = bbl.Select_SearchName(DateTime.Now.ToString("yyyy/MM/dd").Replace("/", "-"), 10, txtCode.Text, Value1,Value3);
+                //    break;
+                ////20200317
+                //case SearchType.ブランド:
+                //    dtResult = bbl.Select_SearchName(txtChangeDate.Text.Replace("/", "-"), 11, txtCode.Text, Value1);
+                //    break;
+                //case SearchType.競技:
+                //    dtResult = bbl.Select_SearchName(txtChangeDate.Text.Replace("/", "-"), 12, txtCode.Text, Value1);
+                //    break;
+                //case SearchType.商品分類:
+                //    dtResult = bbl.Select_SearchName(txtChangeDate.Text.Replace("/", "-"), 13, txtCode.Text, Value1);
+                //    break;
 
-                case SearchType.SKU_ITEM_CD:
-                    dtResult = bbl.Select_SearchName(txtChangeDate.Text.Replace("/", "-"), 15, txtCode.Text, Value1);
-                    break;
-                case SearchType.単価設定:
-                    dtResult = bbl.Select_SearchName(txtChangeDate.Text.Replace("/", "-"), 16, txtCode.Text, Value1);
-                    break;
+                //case SearchType.仕入先PayeeFlg:
+                //    dtResult = bbl.Select_SearchName(txtChangeDate.Text.Replace("/", "-"), 14, TxtCode.Text);
+                //    break;
 
-                case SearchType.展示会商品:
-                    dtResult = bbl.Select_SearchName(DateTime.Now.ToString("yyyy/MM/dd").Replace("/", "-"), 17, txtCode.Text);
-                    break;
+                //case SearchType.SKU_ITEM_CD:
+                //    dtResult = bbl.Select_SearchName(txtChangeDate.Text.Replace("/", "-"), 15, txtCode.Text, Value1);
+                //    break;
+                //case SearchType.単価設定:
+                //    dtResult = bbl.Select_SearchName(txtChangeDate.Text.Replace("/", "-"), 16, txtCode.Text, Value1);
+                //    break;
+
+                //case SearchType.展示会商品:
+                //    dtResult = bbl.Select_SearchName(DateTime.Now.ToString("yyyy/MM/dd").Replace("/", "-"), 17, txtCode.Text);
+                //    break;
+                #endregion
             }
             if (dtResult.Rows.Count > 0)
             {
