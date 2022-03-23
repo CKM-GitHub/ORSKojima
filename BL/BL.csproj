@@ -63,6 +63,7 @@
     <Compile Include="EDIHacchuu_BL.cs" />
     <Compile Include="ExceptionExtentions.cs" />
     <Compile Include="DenominationKBN_BL.cs" />
+    <Compile Include="ExhibitHistory_BL.cs" />
     <Compile Include="ExhibitInformation_BL.cs" />
     <Compile Include="Extentions.cs" />
     <Compile Include="HacchuuNyuuryoku_BL.cs" />

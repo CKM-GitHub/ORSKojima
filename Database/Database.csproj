@@ -147,6 +147,7 @@
     <Content Include="StoreProcedure\M_Tokuisaki_Insert_Update.sql" />
     <Content Include="StoreProcedure\M_Tokuisaki_Select.sql" />
     <Content Include="StoreProcedure\PRC_EDIOrder_MailInsert.sql" />
+    <Content Include="StoreProcedure\PRC_ExhibitHistory_SelectDataForDisp.sql" />
     <Content Include="StoreProcedure\PRC_ExhibitInformation_Delete.sql" />
     <Content Include="StoreProcedure\PRC_ExhibitInformation_Register.sql" />
     <Content Include="StoreProcedure\PRC_ExhibitInformation_SelectDataForCsv.sql" />
