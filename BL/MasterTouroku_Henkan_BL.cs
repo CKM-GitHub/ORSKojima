@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BL
 {
-   public class MasterTouroku_Henkan_BL
+   public class MasterTouroku_Henkan_BL:Base_BL
     {
 
         M_Henkan_DL mhdl;
@@ -16,9 +16,9 @@ namespace BL
         {
             mhdl = new M_Henkan_DL();
         }
-        public bool MasterTouroku_Henkan_Insert_Update(M_Henkan_Entity mhe)
+        public bool MasterTouroku_Henkan_Insert_Update(M_Henkan_Entity mhe,int mode)
         {
-            return mhdl.MasterTouroku_Henkan_Insert_Update(mhe);
+            return mhdl.MasterTouroku_Henkan_Insert_Update(mhe,mode);
         }
     }
 }
