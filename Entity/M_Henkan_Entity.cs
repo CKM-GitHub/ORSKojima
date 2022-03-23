@@ -14,5 +14,14 @@ namespace Entity
         public string RCMItemValue { get; set; }
         public string CsvTitleName { get; set; }
         public string CsvOutputItemValue { get; set; }
+        public string Yobi1 { get; set; }
+        public string Yobi2 { get; set; }
+        public string Yobi3 { get; set; }
+        public string Yobi4 { get; set; }
+        public string Yobi5 { get; set; }
+        public string Yobi6 { get; set; }
+        public string Yobi7 { get; set; }
+        public string Yobi8 { get; set; }
+        public string Yobi9 { get; set; }
     }
 }
