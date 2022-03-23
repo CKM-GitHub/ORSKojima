@@ -10,17 +10,28 @@ namespace DL
 {
    public class M_Henkan_DL:Base_DL
     {
-        public DataTable M_Henkan_Select(M_Henkan_Entity mte)
+        public DataTable M_Henkan_Select(M_Henkan_Entity mhe)
         {
             string sp = "M_Henkan_Select";
 
             Dictionary<string, ValuePair> dic = new Dictionary<string, ValuePair>
             {
-                { "@TokuisakiCD", new ValuePair { value1 = SqlDbType.VarChar, value2 = mte.TokuisakiCD  } },
-                { "@RCMItemName", new ValuePair { value1 = SqlDbType.VarChar, value2 = mte.RCMItemName  } },
-                { "@RCMItemValue", new ValuePair { value1 = SqlDbType.VarChar, value2 = mte.RCMItemValue } }
+                { "@TokuisakiCD", new ValuePair { value1 = SqlDbType.VarChar, value2 = mhe.TokuisakiCD  } },
+                { "@RCMItemName", new ValuePair { value1 = SqlDbType.VarChar, value2 = mhe.RCMItemName  } },
+                { "@RCMItemValue", new ValuePair { value1 = SqlDbType.VarChar, value2 = mhe.RCMItemValue } }
             };
             return SelectData(dic, sp);
+        }
+
+        public bool MasterTouroku_Henkan_Insert_Update(M_Henkan_Entity mhe)
+        {
+            Dictionary<string, ValuePair> dic = new Dictionary<string, ValuePair>
+            {
+            };
+            UseTransaction = true;
+            return InsertUpdateDeleteData(dic, "MasterTouroku_Henkan_Insert_Update");
+
+            
         }
     }
 }

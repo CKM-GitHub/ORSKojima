@@ -74,6 +74,7 @@
     <Compile Include="MarkDownNyuuryoku_BL.cs" />
     <Compile Include="MasterTouroku_Brand_BL.cs" />
     <Compile Include="MasterTouroku_Hanyou_BL.cs" />
+    <Compile Include="MasterTouroku_Henkan_BL.cs" />
     <Compile Include="MasterTouroku_Program_BL.cs" />
     <Compile Include="MasterTouroku_Souko_BL.cs" />
     <Compile Include="MasterTouroku_TenzikaiHanbaiTankaKakeritu_BL.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="MitsumoriNyuuryoku_BL.cs" />
     <Compile Include="MultiPorpose_BL.cs" />
     <Compile Include="M_CustomerUpdate_BL.cs" />
+    <Compile Include="M_Henkan_BL.cs" />
     <Compile Include="NyuukaNyuuryoku_BL.cs" />
     <Compile Include="NyuukinNyuuryoku_BL.cs" />
     <Compile Include="PickingNyuuryoku_BL.cs" />
