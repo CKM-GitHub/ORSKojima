@@ -84,6 +84,7 @@
     <Compile Include="D_StockReplica_DL.cs" />
     <Compile Include="D_Stock_DL.cs" />
     <Compile Include="D_TenzikaiJuchuu_DL.cs" />
+    <Compile Include="ExhibitHistory_DL.cs" />
     <Compile Include="ExhibitInformation_DL.cs" />
     <Compile Include="Function_DL.cs" />
     <Compile Include="IkkatuHacchuuNyuuryoku_DL.cs" />

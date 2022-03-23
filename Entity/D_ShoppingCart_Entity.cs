@@ -30,6 +30,8 @@ namespace Entity
         public string Yobi9 { get; set; }
 
         // データ検索用
+        public string ExhibitDate1 { get; set; }
+        public string ExhibitDate2 { get; set; }
         public string Item_Name1 { get; set; }
         public string Item_Name2 { get; set; }
         public string Item_Code1 { get; set; }
