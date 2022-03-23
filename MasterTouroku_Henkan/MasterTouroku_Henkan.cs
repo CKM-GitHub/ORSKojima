@@ -15,7 +15,7 @@ namespace MasterTouroku_Henkan
 {
     public partial class MasterTouroku_Henkan : Base.Client.FrmMainForm
     {
-       
+        MasterTouroku_Henkan_BL mhkbl;
         int type = 0; //1 = ID & Key, 2 = ID & CopyKey (for f11)
 
         private enum EIndex : int
@@ -41,6 +41,7 @@ namespace MasterTouroku_Henkan
             StartProgram();
             ChangeMode(EOperationMode.INSERT);
             detailControls[(int)EIndex.TokuisakiCD].Focus();
+            mhkbl = new MasterTouroku_Henkan_BL();
         }
 
         public override void FunctionProcess(int index)
@@ -82,13 +83,14 @@ namespace MasterTouroku_Henkan
             switch (OperationMode)
             {
                 case EOperationMode.INSERT:
-                    
                 case EOperationMode.UPDATE:
                 case EOperationMode.DELETE:
                 case EOperationMode.SHOW:
                     Clear(panel3);
                     Clear(panel2);
                     LB_Tokuisaki.Text = "";
+                    CsvTitleName.Enabled = false;
+                    CsvOutputItemValue.Enabled = false;
                     break;
             }
             TokuisakiCD.Focus();
@@ -96,7 +98,7 @@ namespace MasterTouroku_Henkan
 
         private void InitialControlArray()
         {
-            detailControls = new Control[] { TokuisakiCD, RCMItemName, RCMItemValue, CsvOutputItemValue, CsvTitleName };
+            detailControls = new Control[] { TokuisakiCD, RCMItemName, RCMItemValue, CsvOutputItemValue, CsvTitleName ,Btn_F12};
 
            
             foreach (Control ctl in detailControls)
@@ -197,6 +199,14 @@ namespace MasterTouroku_Henkan
                         return false;
 
                     break;
+                case (int)EIndex.CsvOutputItemValue:
+                    CsvTitleName.Enabled = true;
+                    detailControls[(int)EIndex.CsvTitleName].Focus();
+                    break;
+                case (int)EIndex.CsvTitleName:
+
+                    Btn_F12.Focus();
+                    break;
             }
 
             return true;
@@ -256,6 +266,8 @@ namespace MasterTouroku_Henkan
                             {
                                 CsvOutputItemValue.Text = mhe.CsvOutputItemValue;
                                 CsvTitleName.Text = mhe.CsvTitleName;
+                                CsvOutputItemValue.Enabled = true;
+                                CsvOutputItemValue.Focus();
                             }
                             else
                             {
@@ -296,12 +308,18 @@ namespace MasterTouroku_Henkan
 
             return true;
         }
-        private void CheckHenkan(int index)
+        private void InsertUpdate(int mode)
         {
-           
-           
+            M_Henkan_Entity mhe = new M_Henkan_Entity();
+            if (mhkbl.MasterTouroku_Henkan_Insert_Update(mhe, mode))
+            {
+                mhkbl.ShowMessage("I101");
+            }
+            else
+            {
+                mhkbl.ShowMessage("S001");
+            }
         }
-
         protected override void EndSec()
         {
             this.Close();
