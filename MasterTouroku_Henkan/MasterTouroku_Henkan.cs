@@ -92,12 +92,12 @@ namespace MasterTouroku_Henkan
                 case EOperationMode.SHOW:
                     Clear(panel3);
                     Clear(panel2);
+                    TokuisakiCD.Focus();
                     LB_Tokuisaki.Text = "";
                     CsvTitleName.Enabled = false;
                     CsvOutputItemValue.Enabled = false;
                     break;
             }
-            TokuisakiCD.Focus();
         }
 
         private void InitialControlArray()
@@ -220,7 +220,6 @@ namespace MasterTouroku_Henkan
             switch (index)
             {
                 case (int)EIndex.TokuisakiCD:
-                    //[M_Tokuisaki]INVCheck
                     M_Tokuisaki_Entity mte = new M_Tokuisaki_Entity
                     {
                         TokuisakiCD = detailControls[index].Text
@@ -286,7 +285,6 @@ namespace MasterTouroku_Henkan
                             {
                                 CsvOutputItemValue.Text = mhe.CsvOutputItemValue;
                                 CsvTitleName.Text = mhe.CsvTitleName;
-                                Btn_F12.Focus();
                             }
                             else
                             {
