@@ -76,7 +76,7 @@ namespace MasterTouroku_Hanyou
                     else
                         PreviousCtrl.Focus();
                     break;
-                case 11:                   
+                case 8:                   
                     F11();
                     break;
                 case 12:
@@ -466,7 +466,7 @@ namespace MasterTouroku_Hanyou
                 }
                 else
                 {
-                    ScID.LabelText = dtID.Rows[0]["Char1"].ToString();
+                    ScID.LabelText = dtID.Rows[0]["IDName"].ToString();
                 }
             }
 
@@ -521,7 +521,7 @@ namespace MasterTouroku_Hanyou
 
         private void BtnF11Show_Click(object sender, EventArgs e)
         {
-            FunctionProcess(10);
+            FunctionProcess(7);
         }
 
         private void ScID_Leave(object sender, EventArgs e)
