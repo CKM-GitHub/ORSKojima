@@ -110,6 +110,7 @@
     <Content Include="StoreProcedure\MasterTorikomi_SKU_CheckDuplicateSizeAndColor.sql" />
     <Content Include="StoreProcedure\MasterTorikomi_SKU_CheckItemExists.sql" />
     <Content Include="StoreProcedure\MasterTorikomi_SKU_CheckSKUExists.sql" />
+    <Content Include="StoreProcedure\MasterTouroku_Henkan_Insert_Update_Delete.sql" />
     <Content Include="StoreProcedure\M_CarrierBoxSize_Bind.sql" />
     <Content Include="StoreProcedure\M_CarrierDeliveryTime_Bind.sql" />
     <Content Include="StoreProcedure\M_CustomerInitial_Select.sql" />

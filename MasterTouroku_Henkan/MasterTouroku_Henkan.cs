@@ -50,15 +50,19 @@ namespace MasterTouroku_Henkan
             {
                 case 2:
                     ChangeMode(EOperationMode.INSERT);
+                    Btn_F12.Enabled = true;
                     break;
                 case 3:
                     ChangeMode(EOperationMode.UPDATE);
+                    Btn_F12.Enabled = true;
                     break;
                 case 4:
                     ChangeMode(EOperationMode.DELETE);
+                    Btn_F12.Enabled = true;
                     break;
                 case 5:
                     ChangeMode(EOperationMode.SHOW);
+                    Btn_F12.Enabled = false;
                     break;
                 case 6:
                     if (bbl.ShowMessage("Q004") == DialogResult.Yes)
@@ -204,7 +208,7 @@ namespace MasterTouroku_Henkan
                     detailControls[(int)EIndex.CsvTitleName].Focus();
                     break;
                 case (int)EIndex.CsvTitleName:
-
+                    Btn_F12.Enabled = true;
                     Btn_F12.Focus();
                     break;
             }
@@ -256,6 +260,9 @@ namespace MasterTouroku_Henkan
                             }
                             else
                             {
+                                CsvOutputItemValue.Text = "";
+                                CsvTitleName.Text = "";
+
                                 CsvOutputItemValue.Enabled = true;
                                 CsvOutputItemValue.Focus();
                             }
@@ -264,13 +271,14 @@ namespace MasterTouroku_Henkan
                         case EOperationMode.UPDATE:
                             if (res)
                             {
-                                CsvOutputItemValue.Text = mhe.CsvOutputItemValue;
-                                CsvTitleName.Text = mhe.CsvTitleName;
+                                
                                 CsvOutputItemValue.Enabled = true;
                                 CsvOutputItemValue.Focus();
                             }
                             else
                             {
+                                CsvOutputItemValue.Text = mhe.CsvOutputItemValue;
+                                CsvTitleName.Text = mhe.CsvTitleName;
                                 bbl.ShowMessage("E101");
                                 return false;
                             }
@@ -280,9 +288,12 @@ namespace MasterTouroku_Henkan
                             {
                                 CsvOutputItemValue.Text = mhe.CsvOutputItemValue;
                                 CsvTitleName.Text = mhe.CsvTitleName;
+                                Btn_F12.Focus();
                             }
                             else
                             {
+                                CsvOutputItemValue.Text = mhe.CsvOutputItemValue;
+                                CsvTitleName.Text = mhe.CsvTitleName;
                                 bbl.ShowMessage("E101");
                                 return false;
                             }
@@ -295,6 +306,8 @@ namespace MasterTouroku_Henkan
                             }
                             else
                             {
+                                CsvOutputItemValue.Text = mhe.CsvOutputItemValue;
+                                CsvTitleName.Text = mhe.CsvTitleName;
                                 bbl.ShowMessage("E101");
                                 return false;
                             }
@@ -308,12 +321,28 @@ namespace MasterTouroku_Henkan
 
             return true;
         }
-        private void InsertUpdate(int mode)
+        private void InsertUpdateDelete(int mode)
         {
-            M_Henkan_Entity mhe = new M_Henkan_Entity();
-            if (mhkbl.MasterTouroku_Henkan_Insert_Update(mhe, mode))
+            M_Henkan_Entity mhe = new M_Henkan_Entity
             {
-                mhkbl.ShowMessage("I101");
+                TokuisakiCD = detailControls[(int)EIndex.TokuisakiCD].Text,
+                RCMItemName = detailControls[(int)EIndex.RCMItemName].Text,
+                RCMItemValue = detailControls[(int)EIndex.RCMItemValue].Text,
+                CsvOutputItemValue = detailControls[(int)EIndex.CsvOutputItemValue].Text,
+                CsvTitleName = detailControls[(int)EIndex.CsvTitleName].Text,
+                InsertOperator = InOperatorCD
+            };
+            if (mhkbl.MasterTouroku_Henkan_Insert_Update_Delete(mhe, mode))
+            {
+               if (OperationMode == EOperationMode.DELETE )
+                {
+                    mhkbl.ShowMessage("I102");
+                }
+                else
+                {
+                    mhkbl.ShowMessage("I101");
+                }
+                
             }
             else
             {
@@ -327,32 +356,34 @@ namespace MasterTouroku_Henkan
 
         private void F12()
         {
+
+            for (int i = 0; i < detailControls.Length; i++)
+                if (CheckDetail(i) == false)
+                {
+                    detailControls[i].Focus();
+                    return;
+                }
             M_Henkan_BL mhkbl = new M_Henkan_BL();
-            if (ErrorCheck(12))
-            {
+           
                 if (mhkbl.ShowMessage(OperationMode == EOperationMode.DELETE ? "Q102" : "Q101") == DialogResult.Yes)
                 {
-                    M_Henkan_Entity mhe = new M_Henkan_Entity
-                    {
-                        CsvOutputItemValue = detailControls[(int)EIndex.CsvOutputItemValue].Text,
-                        CsvTitleName = detailControls[(int)EIndex.CsvTitleName].Text
-                    };
+                   
                     switch (OperationMode)
                     {
                         case EOperationMode.INSERT:
-                           
+                            InsertUpdateDelete(1);
                             break;
                         case EOperationMode.UPDATE:
-                           
+                            InsertUpdateDelete(2);
                             break;
                         case EOperationMode.DELETE:
-                           
+                            InsertUpdateDelete(3);
                             break;
                     }
                 }
                 else
                     PreviousCtrl.Focus();
-            }
+           
         }
     }
 }
