@@ -102,7 +102,7 @@ namespace MasterTouroku_Henkan
 
         private void InitialControlArray()
         {
-            detailControls = new Control[] { TokuisakiCD, RCMItemName, RCMItemValue, CsvOutputItemValue, CsvTitleName ,Btn_F12};
+            detailControls = new Control[] { TokuisakiCD, RCMItemName, RCMItemValue, CsvOutputItemValue, CsvTitleName,Btn_F12};
 
            
             foreach (Control ctl in detailControls)
@@ -257,9 +257,7 @@ namespace MasterTouroku_Henkan
                             }
                             else
                             {
-                                CsvOutputItemValue.Text = "";
-                                CsvTitleName.Text = "";
-
+                               
                                 CsvOutputItemValue.Enabled = true;
                                 CsvOutputItemValue.Focus();
                             }
@@ -274,9 +272,9 @@ namespace MasterTouroku_Henkan
                             }
                             else
                             {
+                                bbl.ShowMessage("E101");
                                 CsvOutputItemValue.Text = mhe.CsvOutputItemValue;
                                 CsvTitleName.Text = mhe.CsvTitleName;
-                                bbl.ShowMessage("E101");
                                 return false;
                             }
                             break;
@@ -288,9 +286,10 @@ namespace MasterTouroku_Henkan
                             }
                             else
                             {
+                               
+                                bbl.ShowMessage("E101");
                                 CsvOutputItemValue.Text = mhe.CsvOutputItemValue;
                                 CsvTitleName.Text = mhe.CsvTitleName;
-                                bbl.ShowMessage("E101");
                                 return false;
                             }
                             break;
@@ -349,7 +348,7 @@ namespace MasterTouroku_Henkan
         {
             this.Close();
         }  
-
+      
         private void F12()
         {
 
@@ -359,7 +358,8 @@ namespace MasterTouroku_Henkan
                     detailControls[i].Focus();
                     return;
                 }
-            M_Henkan_BL mhkbl = new M_Henkan_BL();
+
+             M_Henkan_BL mhkbl = new M_Henkan_BL();
            
                 if (mhkbl.ShowMessage(OperationMode == EOperationMode.DELETE ? "Q102" : "Q101") == DialogResult.Yes)
                 {
