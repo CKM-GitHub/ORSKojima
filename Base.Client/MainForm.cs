@@ -1174,47 +1174,47 @@ namespace Base.Client
             return true;
         }
 
-        /// <summary>
-        /// get Log information
-        /// form close log
-        /// </summary>
-        /// <returns>return L_Log_Entity</returns>
-        private L_Log_Entity Get_L_Log_Entity()
-        {
-            lle = new L_Log_Entity
-            {
-                InsertOperator = this.InOperatorCD,
-                PC = this.InPcID,
-                Program = this.InProgramID,
-                OperateMode = "Close"
-            };
-            return lle;
-        }
+        ///// <summary>
+        ///// get Log information
+        ///// form close log
+        ///// </summary>
+        ///// <returns>return L_Log_Entity</returns>
+        //private L_Log_Entity Get_L_Log_Entity()
+        //{
+        //    lle = new L_Log_Entity
+        //    {
+        //        InsertOperator = this.InOperatorCD,
+        //        PC = this.InPcID,
+        //        Program = this.InProgramID,
+        //        OperateMode = "Close"
+        //    };
+        //    return lle;
+        //}
 
-        /// <summary>
-        /// get Log information
-        /// form open log
-        /// </summary>
-        /// <returns>return L_Log_Entity</returns>
-        private L_Log_Entity Get_L_Log_Entity(bool start)
-        {
-            lle = new L_Log_Entity
-            {
-                InsertOperator = this.InOperatorCD,
-                PC = this.InPcID,
-                Program = this.InProgramID,
-                OperateMode = "Open"
-            };
-            return lle;
-        }
-        /// <summary>
-        /// insert to Log table
-        /// </summary>
-        /// <param name="lle"></param>
-        protected void InsertLog(L_Log_Entity lle)
-        {
-            bbl.L_Log_Insert(lle);
-        }
+        ///// <summary>
+        ///// get Log information
+        ///// form open log
+        ///// </summary>
+        ///// <returns>return L_Log_Entity</returns>
+        //private L_Log_Entity Get_L_Log_Entity(bool start)
+        //{
+        //    lle = new L_Log_Entity
+        //    {
+        //        InsertOperator = this.InOperatorCD,
+        //        PC = this.InPcID,
+        //        Program = this.InProgramID,
+        //        OperateMode = "Open"
+        //    };
+        //    return lle;
+        //}
+        ///// <summary>
+        ///// insert to Log table
+        ///// </summary>
+        ///// <param name="lle"></param>
+        //protected void InsertLog(L_Log_Entity lle)
+        //{
+        //    bbl.L_Log_Insert(lle);
+        //}
 
         /// <summary>
         /// Insert to log table on form closed
