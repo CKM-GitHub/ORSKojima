@@ -106,7 +106,7 @@
             this.BtnF11Show.Name = "BtnF11Show";
             this.BtnF11Show.Size = new System.Drawing.Size(118, 28);
             this.BtnF11Show.TabIndex = 0;
-            this.BtnF11Show.Text = "表示(F11)";
+            this.BtnF11Show.Text = "表示(F8)";
             this.BtnF11Show.UseVisualStyleBackColor = false;
             this.BtnF11Show.Click += new System.EventHandler(this.BtnF11Show_Click);
             // 
