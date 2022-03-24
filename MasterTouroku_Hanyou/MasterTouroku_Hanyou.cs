@@ -466,7 +466,7 @@ namespace MasterTouroku_Hanyou
                 }
                 else
                 {
-                    ScID.LabelText = dtID.Rows[0]["Char1"].ToString();
+                    ScID.LabelText = dtID.Rows[0]["IDName"].ToString();
                 }
             }
 
