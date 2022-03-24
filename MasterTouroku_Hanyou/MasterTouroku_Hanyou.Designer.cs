@@ -925,11 +925,11 @@
             // ckM_Label18
             // 
             this.ckM_Label18.Back_Color = CKM_Controls.CKM_Label.CKM_Color.Default;
-            this.ckM_Label18.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.ckM_Label18.BackColor = System.Drawing.Color.HotPink;
             this.ckM_Label18.DefaultlabelSize = true;
             this.ckM_Label18.Font = new System.Drawing.Font("MS Gothic", 9F, System.Drawing.FontStyle.Bold);
             this.ckM_Label18.Font_Size = CKM_Controls.CKM_Label.CKM_FontSize.Normal;
-            this.ckM_Label18.ForeColor = System.Drawing.Color.Black;
+            this.ckM_Label18.ForeColor = System.Drawing.Color.White;
             this.ckM_Label18.Location = new System.Drawing.Point(30, 7);
             this.ckM_Label18.Name = "ckM_Label18";
             this.ckM_Label18.Size = new System.Drawing.Size(92, 17);
@@ -941,11 +941,11 @@
             // ckM_Label17
             // 
             this.ckM_Label17.Back_Color = CKM_Controls.CKM_Label.CKM_Color.Default;
-            this.ckM_Label17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.ckM_Label17.BackColor = System.Drawing.Color.HotPink;
             this.ckM_Label17.DefaultlabelSize = true;
             this.ckM_Label17.Font = new System.Drawing.Font("MS Gothic", 9F, System.Drawing.FontStyle.Bold);
             this.ckM_Label17.Font_Size = CKM_Controls.CKM_Label.CKM_FontSize.Normal;
-            this.ckM_Label17.ForeColor = System.Drawing.Color.Black;
+            this.ckM_Label17.ForeColor = System.Drawing.Color.White;
             this.ckM_Label17.Location = new System.Drawing.Point(30, 31);
             this.ckM_Label17.Name = "ckM_Label17";
             this.ckM_Label17.Size = new System.Drawing.Size(92, 17);

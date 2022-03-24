@@ -740,8 +740,7 @@ namespace Base.Client
                 System.Environment.Exit(0);
             }
 
-            // ★★↓↓↓SMS用なので後に消去予定↓↓↓★★
-            //
+            
             ////ログインIDチェック
             M_Staff_Entity mse = new M_Staff_Entity
             {
@@ -750,16 +749,6 @@ namespace Base.Client
             mse = loginbl.M_Staff_InitSelect(mse);
             this.lblOperatorName.Text = mse.StaffName;
             this.lblLoginDate.Text = mse.SysDate;
-
-            //this.StoreCD = lblStoreCD.Text = mse.StoreCD;
-
-            //M_Staff_Entity mse1 = new M_Staff_Entity
-            //{
-            //    StaffCD = InOperatorCD
-            //};
-            //mse1 = loginbl.M_Souko_InitSelect(mse1);
-            //this.SoukoCD = mse1.SoukoCD.ToStringOrEmpty();
-            //
 
             //
             ////共通処理　プログラム
@@ -783,41 +772,6 @@ namespace Base.Client
             }
             this.Text = made.ProgramID;
             lblHeaderTitle.Text = made.ProgramName;
-
-
-
-
-
-            // ★★↓↓↓SMS用なので後に消去予定↓↓↓★★
-            //
-            //this.StoreAuthorizationsCD = lblStoreAuthoCD.Text = made.StoreAuthorizationsCD;
-            //this.StoreAuthorizationsChangeDate = lblStoreAuthorizationChangeDate.Text = made.StoreAuthorization_ChangeDate;
-
-
-            //処理可能店舗
-            //[M_StoreAuthorizations]
-            //M_StoreAuthorizations_Entity msa = new M_StoreAuthorizations_Entity
-            //{
-            //    StoreAuthorizationsCD = made.StoreAuthorizationsCD
-            //};
-
-            //DataTable dt = bbl.M_StoreAuthorizations_Select(msa);
-            //if (dt.Rows.Count > 0)
-            //{
-            //    availableStores = new string[dt.Rows.Count];
-            //    int i = 0;
-            //    foreach (DataRow row in dt.Rows)
-            //    {
-            //        availableStores[i] = row["StoreCD"].ToString();
-            //        i++;
-            //    }
-            //}
-
-            //プログラム起動履歴
-            //InsertLog(Get_L_Log_Entity(true));
-            //
-            // ★★ ↑↑↑SMS用なので後に消去予定↑↑↑★★
-
 
 
             ////Todo:入力プログラム以外を考慮
@@ -885,10 +839,7 @@ namespace Base.Client
                         this.BtnF3.Text = "";
                         this.BtnF4.Text = "";
                         this.BtnF5.Text = "";
-                        this.BtnF7.Text = "";
-                        this.BtnF8.Text = "";
                         this.BtnF10.Text = "";
-                        this.BtnF11.Text = "表示(F11)";
                         this.BtnF12.Text = "";
                         this.ModeVisible = false;
                         break;

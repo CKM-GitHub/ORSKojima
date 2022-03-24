@@ -1,7 +1,0 @@
-﻿namespace TempoRegiTorihikiReceipt
-{
-}
-
-namespace TempoRegiTorihikiReceipt
-{
-}

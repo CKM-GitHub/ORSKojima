@@ -136,6 +136,7 @@
     <Compile Include="M_FiscalYear_Entity.cs" />
     <Compile Include="M_Ginkou_Entity.cs" />
     <Compile Include="M_Hanyou_Entity.cs" />
+    <Compile Include="M_Henkan_Entity.cs" />
     <Compile Include="M_ItemOrderPrice_Entity.cs" />
     <Compile Include="M_ItemPrice_Entity.cs" />
     <Compile Include="M_ITEM_Entity.cs" />
