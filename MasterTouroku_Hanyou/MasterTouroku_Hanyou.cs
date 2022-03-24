@@ -434,31 +434,42 @@ namespace MasterTouroku_Hanyou
                 DataTable dtID = new DataTable();
                 mhe = GetHanyouEntity();
 
-                //if (Convert.ToInt32(ScID.Code) != 000)
-                if (ScID.Code != "000")
+                ////if (Convert.ToInt32(ScID.Code) != 000)
+                //if (Convert.ToInt32(ScID.Code) != 0)
+                //{
+                //    dtID = mthbl.Hanyou_IDSelect(mhe);
+                //    if (dtID.Rows.Count == 0)
+                //    {
+                //        mthbl.ShowMessage("E101");
+                //        ScID.TxtCode.MoveNext = false;
+                //        return false;
+                //    }
+                //    else
+                //    {
+                //        ScID.LabelText = dtID.Rows[0]["Char1"].ToString();
+                //    }
+                //}
+                //else
+                //{
+                //    dtID = mthbl.Hanyou_IDSelect(mhe);
+                //    if (dtID.Rows.Count > 0)
+                //    {
+                //        ScID.LabelText = dtID.Rows[0]["IDName"].ToString();
+                //    }
+                //}
+                dtID = mthbl.Hanyou_IDSelect(mhe);
+                if (dtID.Rows.Count == 0)
                 {
-                    dtID = mthbl.Hanyou_IDSelect(mhe);
-                    if (dtID.Rows.Count == 0)
-                    {
-                        mthbl.ShowMessage("E101");
-                        ScID.TxtCode.MoveNext = false;
-                        return false;
-                    }
-                    else
-                    {
-                        ScID.LabelText = dtID.Rows[0]["IDName"].ToString();
-                    }
+                    mthbl.ShowMessage("E101");
+                    ScID.TxtCode.MoveNext = false;
+                    return false;
                 }
                 else
                 {
-                    dtID = mthbl.Hanyou_IDSelect(mhe);
-                    if (dtID.Rows.Count > 0)
-                    {
-                        ScID.LabelText = dtID.Rows[0]["IDName"].ToString();
-                    }
+                    ScID.LabelText = dtID.Rows[0]["Char1"].ToString();
                 }
             }
-            
+
             return true;
         }
 
