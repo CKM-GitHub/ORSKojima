@@ -64,12 +64,7 @@
             this.Btn_NoSelect = new CKM_Controls.CKM_Button();
             this.Btn_SelectAll = new CKM_Controls.CKM_Button();
             this.GvDetail = new CKM_Controls.CKM_GridView();
-            this.BtnSubF8 = new CKM_Controls.CKM_Button();
-            this.ckM_ExhibitDate = new CKM_Controls.CKM_Label();
-            this.TB_ExhibitDate1 = new CKM_Controls.CKM_TextBox();
-            this.TB_ExhibitDate2 = new CKM_Controls.CKM_TextBox();
-            this.LB_Date = new System.Windows.Forms.Label();
-            this.colExhibitDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCheck = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.coIItem_Code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colItem_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colList_Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -77,17 +72,15 @@
             this.colCost = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colGrossProfit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDiscount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTokuisakiName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colhiddenID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colBrand_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BtnSubF8 = new CKM_Controls.CKM_Button();
             this.PanelHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GvDetail)).BeginInit();
             this.SuspendLayout();
             // 
             // PanelHeader
             // 
-            this.PanelHeader.Controls.Add(this.LB_Date);
-            this.PanelHeader.Controls.Add(this.TB_ExhibitDate2);
-            this.PanelHeader.Controls.Add(this.TB_ExhibitDate1);
-            this.PanelHeader.Controls.Add(this.ckM_ExhibitDate);
             this.PanelHeader.Controls.Add(this.BtnSubF8);
             this.PanelHeader.Controls.Add(this.TB_Discount);
             this.PanelHeader.Controls.Add(this.TB_GrossProfit);
@@ -129,10 +122,6 @@
             this.PanelHeader.Controls.SetChildIndex(this.TB_GrossProfit, 0);
             this.PanelHeader.Controls.SetChildIndex(this.TB_Discount, 0);
             this.PanelHeader.Controls.SetChildIndex(this.BtnSubF8, 0);
-            this.PanelHeader.Controls.SetChildIndex(this.ckM_ExhibitDate, 0);
-            this.PanelHeader.Controls.SetChildIndex(this.TB_ExhibitDate1, 0);
-            this.PanelHeader.Controls.SetChildIndex(this.TB_ExhibitDate2, 0);
-            this.PanelHeader.Controls.SetChildIndex(this.LB_Date, 0);
             // 
             // PanelSearch
             // 
@@ -155,7 +144,7 @@
             this.ckM_Tokuisaki.Name = "ckM_Tokuisaki";
             this.ckM_Tokuisaki.Size = new System.Drawing.Size(92, 18);
             this.ckM_Tokuisaki.TabIndex = 255;
-            this.ckM_Tokuisaki.Text = "親得意先";
+            this.ckM_Tokuisaki.Text = "得意先　　　";
             this.ckM_Tokuisaki.Text_Color = CKM_Controls.CKM_Label.CKM_Color.Default;
             this.ckM_Tokuisaki.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -332,7 +321,7 @@
             this.TB_BrandName.MoveNext = true;
             this.TB_BrandName.Name = "TB_BrandName";
             this.TB_BrandName.Size = new System.Drawing.Size(245, 19);
-            this.TB_BrandName.TabIndex = 3;
+            this.TB_BrandName.TabIndex = 1;
             this.TB_BrandName.Text = "XXXXXXXXX1XXXXXXXXX2XXXXXXXXX3XXXXXXXXX4";
             this.TB_BrandName.TextSize = CKM_Controls.CKM_TextBox.FontSize.Normal;
             this.TB_BrandName.UseColorSizMode = false;
@@ -443,7 +432,7 @@
             this.TB_ItemCode1.MoveNext = true;
             this.TB_ItemCode1.Name = "TB_ItemCode1";
             this.TB_ItemCode1.Size = new System.Drawing.Size(130, 19);
-            this.TB_ItemCode1.TabIndex = 6;
+            this.TB_ItemCode1.TabIndex = 4;
             this.TB_ItemCode1.Text = "XXXXXXXXX1XXXXXXXXX2";
             this.TB_ItemCode1.TextSize = CKM_Controls.CKM_TextBox.FontSize.Normal;
             this.TB_ItemCode1.UseColorSizMode = false;
@@ -476,7 +465,7 @@
             this.TB_ItemCode2.MoveNext = true;
             this.TB_ItemCode2.Name = "TB_ItemCode2";
             this.TB_ItemCode2.Size = new System.Drawing.Size(130, 19);
-            this.TB_ItemCode2.TabIndex = 7;
+            this.TB_ItemCode2.TabIndex = 5;
             this.TB_ItemCode2.Text = "XXXXXXXXX1XXXXXXXXX2";
             this.TB_ItemCode2.TextSize = CKM_Controls.CKM_TextBox.FontSize.Normal;
             this.TB_ItemCode2.UseColorSizMode = false;
@@ -509,7 +498,7 @@
             this.TB_ItemCode3.MoveNext = true;
             this.TB_ItemCode3.Name = "TB_ItemCode3";
             this.TB_ItemCode3.Size = new System.Drawing.Size(130, 19);
-            this.TB_ItemCode3.TabIndex = 8;
+            this.TB_ItemCode3.TabIndex = 6;
             this.TB_ItemCode3.Text = "XXXXXXXXX1XXXXXXXXX2";
             this.TB_ItemCode3.TextSize = CKM_Controls.CKM_TextBox.FontSize.Normal;
             this.TB_ItemCode3.UseColorSizMode = false;
@@ -542,7 +531,7 @@
             this.TB_ItemCode4.MoveNext = true;
             this.TB_ItemCode4.Name = "TB_ItemCode4";
             this.TB_ItemCode4.Size = new System.Drawing.Size(130, 19);
-            this.TB_ItemCode4.TabIndex = 9;
+            this.TB_ItemCode4.TabIndex = 7;
             this.TB_ItemCode4.Text = "XXXXXXXXX1XXXXXXXXX2";
             this.TB_ItemCode4.TextSize = CKM_Controls.CKM_TextBox.FontSize.Normal;
             this.TB_ItemCode4.UseColorSizMode = false;
@@ -575,7 +564,7 @@
             this.TB_ItemCode5.MoveNext = true;
             this.TB_ItemCode5.Name = "TB_ItemCode5";
             this.TB_ItemCode5.Size = new System.Drawing.Size(130, 19);
-            this.TB_ItemCode5.TabIndex = 10;
+            this.TB_ItemCode5.TabIndex = 8;
             this.TB_ItemCode5.Text = "XXXXXXXXX1XXXXXXXXX2";
             this.TB_ItemCode5.TextSize = CKM_Controls.CKM_TextBox.FontSize.Normal;
             this.TB_ItemCode5.UseColorSizMode = false;
@@ -609,7 +598,7 @@
             this.TB_ItemName1.MoveNext = true;
             this.TB_ItemName1.Name = "TB_ItemName1";
             this.TB_ItemName1.Size = new System.Drawing.Size(245, 19);
-            this.TB_ItemName1.TabIndex = 4;
+            this.TB_ItemName1.TabIndex = 2;
             this.TB_ItemName1.Text = "XXXXXXXXX1XXXXXXXXX2XXXXXXXXX3XXXXXXXXX4";
             this.TB_ItemName1.TextSize = CKM_Controls.CKM_TextBox.FontSize.Normal;
             this.TB_ItemName1.UseColorSizMode = false;
@@ -643,7 +632,7 @@
             this.TB_ItemName2.MoveNext = true;
             this.TB_ItemName2.Name = "TB_ItemName2";
             this.TB_ItemName2.Size = new System.Drawing.Size(245, 19);
-            this.TB_ItemName2.TabIndex = 5;
+            this.TB_ItemName2.TabIndex = 3;
             this.TB_ItemName2.Text = "XXXXXXXXX1XXXXXXXXX2XXXXXXXXX3XXXXXXXXX4";
             this.TB_ItemName2.TextSize = CKM_Controls.CKM_TextBox.FontSize.Normal;
             this.TB_ItemName2.UseColorSizMode = false;
@@ -677,7 +666,7 @@
             this.TB_GrossProfit.MoveNext = true;
             this.TB_GrossProfit.Name = "TB_GrossProfit";
             this.TB_GrossProfit.Size = new System.Drawing.Size(100, 19);
-            this.TB_GrossProfit.TabIndex = 11;
+            this.TB_GrossProfit.TabIndex = 9;
             this.TB_GrossProfit.Text = "999.9";
             this.TB_GrossProfit.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TB_GrossProfit.TextSize = CKM_Controls.CKM_TextBox.FontSize.Normal;
@@ -712,7 +701,7 @@
             this.TB_Discount.MoveNext = true;
             this.TB_Discount.Name = "TB_Discount";
             this.TB_Discount.Size = new System.Drawing.Size(100, 19);
-            this.TB_Discount.TabIndex = 12;
+            this.TB_Discount.TabIndex = 10;
             this.TB_Discount.Text = "999.9";
             this.TB_Discount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TB_Discount.TextSize = CKM_Controls.CKM_TextBox.FontSize.Normal;
@@ -732,7 +721,7 @@
             this.Btn_NoSelect.Margin = new System.Windows.Forms.Padding(1);
             this.Btn_NoSelect.Name = "Btn_NoSelect";
             this.Btn_NoSelect.Size = new System.Drawing.Size(104, 21);
-            this.Btn_NoSelect.TabIndex = 15;
+            this.Btn_NoSelect.TabIndex = 13;
             this.Btn_NoSelect.Text = "全キャンセル";
             this.Btn_NoSelect.UseVisualStyleBackColor = false;
             this.Btn_NoSelect.Click += new System.EventHandler(this.Btn_NoSelect_Click);
@@ -751,7 +740,7 @@
             this.Btn_SelectAll.Margin = new System.Windows.Forms.Padding(1);
             this.Btn_SelectAll.Name = "Btn_SelectAll";
             this.Btn_SelectAll.Size = new System.Drawing.Size(104, 21);
-            this.Btn_SelectAll.TabIndex = 14;
+            this.Btn_SelectAll.TabIndex = 12;
             this.Btn_SelectAll.Text = "全選択";
             this.Btn_SelectAll.UseVisualStyleBackColor = false;
             this.Btn_SelectAll.Click += new System.EventHandler(this.Btn_SelectAll_Click);
@@ -775,7 +764,7 @@
             this.GvDetail.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.GvDetail.ColumnHeadersHeight = 25;
             this.GvDetail.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colExhibitDate,
+            this.colCheck,
             this.coIItem_Code,
             this.colItem_Name,
             this.colList_Price,
@@ -783,7 +772,8 @@
             this.colCost,
             this.colGrossProfit,
             this.colDiscount,
-            this.colTokuisakiName});
+            this.colhiddenID,
+            this.colBrand_Name});
             this.GvDetail.EnableHeadersVisualStyles = false;
             this.GvDetail.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.GvDetail.Location = new System.Drawing.Point(35, 250);
@@ -792,133 +782,21 @@
             this.GvDetail.RowHeadersWidth = 30;
             this.GvDetail.RowHeight_ = 20;
             this.GvDetail.RowTemplate.Height = 20;
-            this.GvDetail.Size = new System.Drawing.Size(1305, 627);
-            this.GvDetail.TabIndex = 16;
+            this.GvDetail.Size = new System.Drawing.Size(1050, 627);
+            this.GvDetail.TabIndex = 100;
             this.GvDetail.UseRowNo = true;
             this.GvDetail.UseSetting = true;
             this.GvDetail.CurrentCellChanged += new System.EventHandler(this.GvDetail_CurrentCellChanged);
             this.GvDetail.CurrentCellDirtyStateChanged += new System.EventHandler(this.GvDetail_CurrentCellDirtyStateChanged);
             this.GvDetail.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.GvDetail_DataError);
             // 
-            // BtnSubF8
+            // colCheck
             // 
-            this.BtnSubF8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
-            this.BtnSubF8.BackgroundColor = CKM_Controls.CKM_Button.CKM_Color.Default;
-            this.BtnSubF8.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BtnSubF8.DefaultBtnSize = true;
-            this.BtnSubF8.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.BtnSubF8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnSubF8.Font = new System.Drawing.Font("ＭＳ ゴシック", 9F, System.Drawing.FontStyle.Bold);
-            this.BtnSubF8.Font_Size = CKM_Controls.CKM_Button.CKM_FontSize.Normal;
-            this.BtnSubF8.Location = new System.Drawing.Point(896, 77);
-            this.BtnSubF8.Margin = new System.Windows.Forms.Padding(1);
-            this.BtnSubF8.Name = "BtnSubF8";
-            this.BtnSubF8.Size = new System.Drawing.Size(118, 28);
-            this.BtnSubF8.TabIndex = 13;
-            this.BtnSubF8.Text = "表示(F8)";
-            this.BtnSubF8.UseVisualStyleBackColor = false;
-            this.BtnSubF8.Click += new System.EventHandler(this.BtnSubF8_Click);
-            // 
-            // ckM_ExhibitDate
-            // 
-            this.ckM_ExhibitDate.Back_Color = CKM_Controls.CKM_Label.CKM_Color.Default;
-            this.ckM_ExhibitDate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.ckM_ExhibitDate.DefaultlabelSize = true;
-            this.ckM_ExhibitDate.Font = new System.Drawing.Font("ＭＳ ゴシック", 9F, System.Drawing.FontStyle.Bold);
-            this.ckM_ExhibitDate.Font_Size = CKM_Controls.CKM_Label.CKM_FontSize.Normal;
-            this.ckM_ExhibitDate.ForeColor = System.Drawing.Color.White;
-            this.ckM_ExhibitDate.Location = new System.Drawing.Point(562, 8);
-            this.ckM_ExhibitDate.Name = "ckM_ExhibitDate";
-            this.ckM_ExhibitDate.Size = new System.Drawing.Size(92, 18);
-            this.ckM_ExhibitDate.TabIndex = 729;
-            this.ckM_ExhibitDate.Text = "出品日付";
-            this.ckM_ExhibitDate.Text_Color = CKM_Controls.CKM_Label.CKM_Color.Default;
-            this.ckM_ExhibitDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // TB_ExhibitDate1
-            // 
-            this.TB_ExhibitDate1.AllowMinus = false;
-            this.TB_ExhibitDate1.Back_Color = CKM_Controls.CKM_TextBox.CKM_Color.White;
-            this.TB_ExhibitDate1.BackColor = System.Drawing.Color.White;
-            this.TB_ExhibitDate1.BorderColor = false;
-            this.TB_ExhibitDate1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.TB_ExhibitDate1.ClientColor = System.Drawing.Color.White;
-            this.TB_ExhibitDate1.Ctrl_Byte = CKM_Controls.CKM_TextBox.Bytes.半角;
-            this.TB_ExhibitDate1.Ctrl_Type = CKM_Controls.CKM_TextBox.Type.Date;
-            this.TB_ExhibitDate1.DecimalPlace = 0;
-            this.TB_ExhibitDate1.EnabledInsertKeyModeOnMouseEnter = false;
-            this.TB_ExhibitDate1.Font = new System.Drawing.Font("ＭＳ ゴシック", 9F);
-            this.TB_ExhibitDate1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.TB_ExhibitDate1.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Overwrite;
-            this.TB_ExhibitDate1.IntegerPart = 0;
-            this.TB_ExhibitDate1.IsCorrectDate = true;
-            this.TB_ExhibitDate1.isEnterKeyDown = false;
-            this.TB_ExhibitDate1.IsFirstTime = true;
-            this.TB_ExhibitDate1.isMaxLengthErr = false;
-            this.TB_ExhibitDate1.IsNumber = true;
-            this.TB_ExhibitDate1.IsShop = false;
-            this.TB_ExhibitDate1.IsTimemmss = false;
-            this.TB_ExhibitDate1.Length = 10;
-            this.TB_ExhibitDate1.Location = new System.Drawing.Point(654, 7);
-            this.TB_ExhibitDate1.MaxLength = 10;
-            this.TB_ExhibitDate1.MoveNext = true;
-            this.TB_ExhibitDate1.Name = "TB_ExhibitDate1";
-            this.TB_ExhibitDate1.Size = new System.Drawing.Size(100, 19);
-            this.TB_ExhibitDate1.TabIndex = 1;
-            this.TB_ExhibitDate1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.TB_ExhibitDate1.TextSize = CKM_Controls.CKM_TextBox.FontSize.Normal;
-            this.TB_ExhibitDate1.UseColorSizMode = false;
-            // 
-            // TB_ExhibitDate2
-            // 
-            this.TB_ExhibitDate2.AllowMinus = false;
-            this.TB_ExhibitDate2.Back_Color = CKM_Controls.CKM_TextBox.CKM_Color.White;
-            this.TB_ExhibitDate2.BackColor = System.Drawing.Color.White;
-            this.TB_ExhibitDate2.BorderColor = false;
-            this.TB_ExhibitDate2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.TB_ExhibitDate2.ClientColor = System.Drawing.Color.White;
-            this.TB_ExhibitDate2.Ctrl_Byte = CKM_Controls.CKM_TextBox.Bytes.半角;
-            this.TB_ExhibitDate2.Ctrl_Type = CKM_Controls.CKM_TextBox.Type.Date;
-            this.TB_ExhibitDate2.DecimalPlace = 0;
-            this.TB_ExhibitDate2.EnabledInsertKeyModeOnMouseEnter = false;
-            this.TB_ExhibitDate2.Font = new System.Drawing.Font("ＭＳ ゴシック", 9F);
-            this.TB_ExhibitDate2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.TB_ExhibitDate2.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Overwrite;
-            this.TB_ExhibitDate2.IntegerPart = 0;
-            this.TB_ExhibitDate2.IsCorrectDate = true;
-            this.TB_ExhibitDate2.isEnterKeyDown = false;
-            this.TB_ExhibitDate2.IsFirstTime = true;
-            this.TB_ExhibitDate2.isMaxLengthErr = false;
-            this.TB_ExhibitDate2.IsNumber = true;
-            this.TB_ExhibitDate2.IsShop = false;
-            this.TB_ExhibitDate2.IsTimemmss = false;
-            this.TB_ExhibitDate2.Length = 10;
-            this.TB_ExhibitDate2.Location = new System.Drawing.Point(799, 7);
-            this.TB_ExhibitDate2.MaxLength = 10;
-            this.TB_ExhibitDate2.MoveNext = true;
-            this.TB_ExhibitDate2.Name = "TB_ExhibitDate2";
-            this.TB_ExhibitDate2.Size = new System.Drawing.Size(100, 19);
-            this.TB_ExhibitDate2.TabIndex = 2;
-            this.TB_ExhibitDate2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.TB_ExhibitDate2.TextSize = CKM_Controls.CKM_TextBox.FontSize.Normal;
-            this.TB_ExhibitDate2.UseColorSizMode = false;
-            // 
-            // LB_Date
-            // 
-            this.LB_Date.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(184)))), ((int)(((byte)(231)))));
-            this.LB_Date.Font = new System.Drawing.Font("ＭＳ ゴシック", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LB_Date.Location = new System.Drawing.Point(763, 7);
-            this.LB_Date.Name = "LB_Date";
-            this.LB_Date.Size = new System.Drawing.Size(25, 19);
-            this.LB_Date.TabIndex = 732;
-            this.LB_Date.Text = "～";
-            this.LB_Date.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // colExhibitDate
-            // 
-            this.colExhibitDate.DataPropertyName = "ExhibitDate";
-            this.colExhibitDate.HeaderText = "出品日付";
-            this.colExhibitDate.Name = "colExhibitDate";
+            this.colCheck.DataPropertyName = "CheckTaishou";
+            this.colCheck.HeaderText = "対象";
+            this.colCheck.Name = "colCheck";
+            this.colCheck.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.colCheck.Width = 40;
             // 
             // coIItem_Code
             // 
@@ -998,14 +876,41 @@
             this.colDiscount.ReadOnly = true;
             this.colDiscount.Width = 80;
             // 
-            // colTokuisakiName
+            // colhiddenID
             // 
-            this.colTokuisakiName.DataPropertyName = "TokuisakiName";
+            this.colhiddenID.DataPropertyName = "ID";
+            this.colhiddenID.HeaderText = "ID";
+            this.colhiddenID.Name = "colhiddenID";
+            this.colhiddenID.Visible = false;
+            // 
+            // colBrand_Name
+            // 
+            this.colBrand_Name.DataPropertyName = "Brand_Name";
             dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.colTokuisakiName.DefaultCellStyle = dataGridViewCellStyle10;
-            this.colTokuisakiName.HeaderText = "得意先名";
-            this.colTokuisakiName.Name = "colTokuisakiName";
-            this.colTokuisakiName.Width = 190;
+            this.colBrand_Name.DefaultCellStyle = dataGridViewCellStyle10;
+            this.colBrand_Name.HeaderText = "ブランド名";
+            this.colBrand_Name.Name = "colBrand_Name";
+            this.colBrand_Name.Visible = false;
+            this.colBrand_Name.Width = 296;
+            // 
+            // BtnSubF8
+            // 
+            this.BtnSubF8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
+            this.BtnSubF8.BackgroundColor = CKM_Controls.CKM_Button.CKM_Color.Default;
+            this.BtnSubF8.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BtnSubF8.DefaultBtnSize = true;
+            this.BtnSubF8.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.BtnSubF8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnSubF8.Font = new System.Drawing.Font("ＭＳ ゴシック", 9F, System.Drawing.FontStyle.Bold);
+            this.BtnSubF8.Font_Size = CKM_Controls.CKM_Button.CKM_FontSize.Normal;
+            this.BtnSubF8.Location = new System.Drawing.Point(896, 77);
+            this.BtnSubF8.Margin = new System.Windows.Forms.Padding(1);
+            this.BtnSubF8.Name = "BtnSubF8";
+            this.BtnSubF8.Size = new System.Drawing.Size(118, 28);
+            this.BtnSubF8.TabIndex = 11;
+            this.BtnSubF8.Text = "表示(F8)";
+            this.BtnSubF8.UseVisualStyleBackColor = false;
+            this.BtnSubF8.Click += new System.EventHandler(this.BtnSubF8_Click);
             // 
             // ExhibitHistory
             // 
@@ -1058,12 +963,7 @@
         private CKM_Controls.CKM_Button Btn_NoSelect;
         private CKM_Controls.CKM_Button Btn_SelectAll;
         private CKM_Controls.CKM_GridView GvDetail;
-        private CKM_Controls.CKM_Button BtnSubF8;
-        private CKM_Controls.CKM_Label ckM_ExhibitDate;
-        private System.Windows.Forms.Label LB_Date;
-        private CKM_Controls.CKM_TextBox TB_ExhibitDate2;
-        private CKM_Controls.CKM_TextBox TB_ExhibitDate1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colExhibitDate;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn colCheck;
         private System.Windows.Forms.DataGridViewTextBoxColumn coIItem_Code;
         private System.Windows.Forms.DataGridViewTextBoxColumn colItem_Name;
         private System.Windows.Forms.DataGridViewTextBoxColumn colList_Price;
@@ -1071,7 +971,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colCost;
         private System.Windows.Forms.DataGridViewTextBoxColumn colGrossProfit;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDiscount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTokuisakiName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colhiddenID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colBrand_Name;
+        private CKM_Controls.CKM_Button BtnSubF8;
     }
 }
 
