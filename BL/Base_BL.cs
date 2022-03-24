@@ -75,7 +75,7 @@ namespace BL
         /// <returns>dialogresult(ok,cancel,...)</returns>
         private DialogResult GetMessage(M_Message_Entity mme)
         {
-            List<string> listDefaultBUtton2 = new List<string>() { "Q003", "Q326" };
+            //List<string> listDefaultBUtton2 = new List<string>() { "Q003", "Q326" };
             M_Message_DL mmdl = new M_Message_DL();
             DataTable dtMsg = mmdl.M_Message_Select(mme);
             string message = string.Empty;
@@ -104,10 +104,13 @@ namespace BL
                                          dtMsg.Rows[0]["MessageMark"].ToString().Equals("6") ? MessageBoxIcon.Exclamation :
                                          MessageBoxIcon.None;
 
-                if (listDefaultBUtton2.Contains(mme.MessageID))
-                    return MessageBox.Show(message, mme.MessageID, msgbtn, msgicon, MessageBoxDefaultButton.Button2);
-                else
-                    return MessageBox.Show(message, mme.MessageID, msgbtn, msgicon, MessageBoxDefaultButton.Button1);
+                MessageBoxDefaultButton msgdfb = dtMsg.Rows[0]["ButtonValues"].ToString().Equals("1") ? MessageBoxDefaultButton.Button1 :
+                                                 dtMsg.Rows[0]["ButtonValues"].ToString().Equals("2") ? MessageBoxDefaultButton.Button2 :
+                                                 dtMsg.Rows[0]["ButtonValues"].ToString().Equals("3") ? MessageBoxDefaultButton.Button3 :
+                                                 MessageBoxDefaultButton.Button1;
+
+
+                return MessageBox.Show(message, mme.MessageID, msgbtn, msgicon, msgdfb);
             }
             else
             {
