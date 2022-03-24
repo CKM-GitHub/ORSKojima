@@ -49,9 +49,9 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Transparent;
-            this.panel1.Location = new System.Drawing.Point(13, 41);
+            this.panel1.Location = new System.Drawing.Point(40, -20);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1000, 100);
+            this.panel1.Size = new System.Drawing.Size(1000, 160);
             this.panel1.TabIndex = 100;
             // 
             // MasterTouroku_Henkan
