@@ -183,8 +183,6 @@ namespace MasterTouroku_Henkan
                     //必須入力項目(Entry required)
                     if (!RequireCheck(new Control[] { detailControls[index] }))
                         return false;
-
-                    //得意先マスタINVチェック
                     if (!ErrorCheck(index))
                         return false;
 
