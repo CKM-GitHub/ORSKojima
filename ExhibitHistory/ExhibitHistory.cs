@@ -16,7 +16,6 @@ namespace ExhibitHistory
     /// ExhibitHistory 出品履歴照会
     /// </summary>
     internal partial class ExhibitHistory : FrmMainForm
-
     {
         private const string ProID = "ExhibitHistory";
         private const string ProNm = "出品履歴照会";
@@ -24,8 +23,6 @@ namespace ExhibitHistory
         private enum EIndex : int
         {
             TokuisakiCD,
-            ExhibitDate1,
-            ExhibitDate2,
             BrandName,
             ItemName1,
             ItemName2,
@@ -54,7 +51,7 @@ namespace ExhibitHistory
 
         private Control[] detailControls;
 
-        private ExhibitHistory_BL ehbl;
+        private ExhibitInformation_BL eibl;
         private D_ShoppingCart_Entity dse;
         DataTable dtData;
 
@@ -74,13 +71,13 @@ namespace ExhibitHistory
                 InProgramID = ProID;
                 InProgramNM = ProNm;
 
-                this.SetFunctionLabel(EProMode.SHOW);
+                this.SetFunctionLabel(EProMode.OUTPUT);
                 this.InitialControlArray();
 
                 //起動時共通処理
                 base.StartProgram();
 
-                ehbl = new ExhibitHistory_BL();
+                eibl = new ExhibitInformation_BL();
                 Scr_Clr(0);
 
                 detailControls[(int)EIndex.TokuisakiCD].Focus(); 
@@ -96,7 +93,7 @@ namespace ExhibitHistory
 
         private void InitialControlArray()
         {
-            detailControls = new Control[] { TB_Tokuisaki, TB_ExhibitDate1, TB_ExhibitDate2, TB_BrandName, TB_ItemName1, TB_ItemName2, TB_ItemCode1, TB_ItemCode2, TB_ItemCode3, TB_ItemCode4, TB_ItemCode5, TB_GrossProfit, TB_Discount };
+            detailControls = new Control[] { TB_Tokuisaki, TB_BrandName, TB_ItemName1, TB_ItemName2, TB_ItemCode1, TB_ItemCode2, TB_ItemCode3, TB_ItemCode4, TB_ItemCode5, TB_GrossProfit, TB_Discount };
 
             //イベント付与
             foreach (Control ctl in detailControls)
@@ -128,18 +125,6 @@ namespace ExhibitHistory
 
                     //得意先マスタINVチェック
                     if (!CheckMaster(index))
-                        return false;
-
-                    break;
-
-                case (int)EIndex.ExhibitDate1:
-                case (int)EIndex.ExhibitDate2:
-                    //必須入力項目(Entry required)
-                    if (!RequireCheck(new Control[] { detailControls[index] }))
-                        return false;
-
-                    //日付チェック
-                    if (!CheckDate(index))
                         return false;
 
                     break;
@@ -182,36 +167,6 @@ namespace ExhibitHistory
         }
 
         /// <summary>
-        /// 日付項目チェック
-        /// </summary>
-        /// <param name="index"></param>
-        /// <returns></returns>
-        private bool CheckDate(int index)
-        {
-            switch (index)
-            {
-                case (int)EIndex.ExhibitDate1:
-
-
-                    break;
-                case (int)EIndex.ExhibitDate2:
-
-                    DateTime dt1 = Convert.ToDateTime(TB_ExhibitDate1.Text);
-                    DateTime dt2 = Convert.ToDateTime(TB_ExhibitDate2.Text);
-
-                    if (dt1 > dt2)
-                    {
-                        bbl.ShowMessage("E104");
-                        return false;
-                    }
-                    
-                    break;
-            }
-
-            return true;
-        }
-
-        /// <summary>
         /// 全選択・全キャンセルボタン押下時処理
         /// </summary>
         /// <param name="check"></param>
@@ -225,6 +180,41 @@ namespace ExhibitHistory
         }
 
         /// <summary>
+        /// D_ShoppingCart 全削除処理
+        /// </summary>
+        protected override void ExecDelete()
+        {
+            try 
+            {
+                //画面条件に関わらず全データ削除
+                if (bbl.ShowMessage("Q107") == DialogResult.Yes)
+                {
+                    //更新処理
+                    bool ret = eibl.PRC_ExhibitInformation_Delete();
+
+                    if (ret)
+                        bbl.ShowMessage("I102");
+                    else
+                        bbl.ShowMessage("S001");
+
+                    Scr_Clr(0);
+                    detailControls[(int)EIndex.TokuisakiCD].Focus();
+                }
+                else
+                {
+                    detailControls[(int)EIndex.TokuisakiCD].Focus();
+                }
+            }
+            catch (Exception ex)
+            {
+                //エラー時共通処理
+                MessageBox.Show(ex.Message);
+                //EndSec();
+            }
+
+        }
+
+        /// <summary>
         /// 画面表示処理
         /// </summary>
         protected override void ExecDisp()
@@ -232,7 +222,7 @@ namespace ExhibitHistory
             try
             {
                 for (int i = 0; i < detailControls.Length; i++)
-                if (!CheckDetail(i))
+                if (CheckDetail(i) == false)
                 {
                     detailControls[i].Focus();
                     return;
@@ -241,7 +231,7 @@ namespace ExhibitHistory
                 //画面表示処理
                 dse = GetEntity();
                 dtData = new DataTable();
-                dtData = ehbl.PRC_ExhibitHistory_SelectDataForDisp(dse);
+                dtData = eibl.PRC_ExhibitInformation_SelectDataForDisp(dse);
 
                 GvDetail.DataSource = dtData;
 
@@ -271,57 +261,57 @@ namespace ExhibitHistory
         {
             try
             {
-                ////入力項目のチェック(ヘッダー部はいつでも入力可な為)
-                //for (int i = 0; i < detailControls.Length; i++)
-                //    if (CheckDetail(i) == false)
-                //    {
-                //        detailControls[i].Focus();
-                //        return;
-                //    }
+                //入力項目のチェック(ヘッダー部はいつでも入力可な為)
+                for (int i = 0; i < detailControls.Length; i++)
+                    if (CheckDetail(i) == false)
+                    {
+                        detailControls[i].Focus();
+                        return;
+                    }
 
 
-                ////対象明細があるかチェック
-                ////チェックONのみ取得
-                //DataRow[] chkDt = dtData.AsEnumerable()
-                //        .Where(x => x["CheckTaishou"].ToString() == "1").ToArray();
+                //対象明細があるかチェック
+                //チェックONのみ取得
+                DataRow[] chkDt = dtData.AsEnumerable()
+                        .Where(x => x["CheckTaishou"].ToString() == "1").ToArray();
 
-                //if (chkDt.Length == 0)
-                //{
-                //    //E216
-                //    bbl.ShowMessage("E216");
-                //    return;
-                //}
+                if (chkDt.Length == 0)
+                {
+                    //E216
+                    bbl.ShowMessage("E216");
+                    return;
+                }
 
-                ////Q211	
-                //if (bbl.ShowMessage("Q211") != DialogResult.Yes)
-                //    return;
+                //Q211	
+                if (bbl.ShowMessage("Q211") != DialogResult.Yes)
+                    return;
 
-                ////対象データをDataTable型に変換
-                //DataTable dtRegist = chkDt.CopyToDataTable();
+                //対象データをDataTable型に変換
+                DataTable dtRegist = chkDt.CopyToDataTable();
 
-                ////CSV用データを取得
-                //DataTable dtCsv = ehbl.PRC_ExhibitHistory_SelectDataForCSV(dse, dtRegist);
+                //CSV用データを取得
+                DataTable dtCsv = eibl.PRC_ExhibitInformation_SelectDataForCSV(dse, dtRegist);
 
-                ////CSV出力処理
-                //if (this.OutputCSV(dtCsv))
-                //{
-                //    bool ret = true;
+                //CSV出力処理
+                if (this.OutputCSV(dtCsv))
+                {
+                    bool ret = true;
 
-                //    if (dtCsv.Rows.Count != 0)
-                //    { 
-                //        //出品履歴データ（D_ExhibitHistory）更新処理
-                //        //更新処理
-                //        ret = ehbl.PRC_ExhibitInformation_Register(dse, dtRegist);
-                //    }
-                //    if (ret)
-                //        bbl.ShowMessage("I002");
-                //    else
-                //        bbl.ShowMessage("S002");
+                    if (dtCsv.Rows.Count != 0)
+                    { 
+                        //出品履歴データ（D_ExhibitHistory）更新処理
+                        //更新処理
+                        ret = eibl.PRC_ExhibitInformation_Register(dse, dtRegist);
+                    }
+                    if (ret)
+                        bbl.ShowMessage("I002");
+                    else
+                        bbl.ShowMessage("S002");
                     
 
-                //    this.Scr_Clr(0);
-                //    detailControls[(int)EIndex.TokuisakiCD].Focus();
-                //}
+                    this.Scr_Clr(0);
+                    detailControls[(int)EIndex.TokuisakiCD].Focus();
+                }
 
             }
             catch (Exception ex)
@@ -340,8 +330,6 @@ namespace ExhibitHistory
             dse = new D_ShoppingCart_Entity();
 
             dse.TokuisakiCD = detailControls[(int)EIndex.TokuisakiCD].Text;
-            dse.ExhibitDate1 = detailControls[(int)EIndex.ExhibitDate1].Text;
-            dse.ExhibitDate2 = detailControls[(int)EIndex.ExhibitDate2].Text;
             dse.Brand_Name = detailControls[(int)EIndex.BrandName].Text;
             dse.Item_Name1 = detailControls[(int)EIndex.ItemName1].Text;
             dse.Item_Name2 = detailControls[(int)EIndex.ItemName2].Text;
@@ -418,123 +406,123 @@ namespace ExhibitHistory
 
         }
 
- //       /// <summary>
- //       /// CSV出力処理
- //       /// </summary>
- //       /// <param name="dtRegist"></param>
- //       /// <returns></returns>
- //       private bool OutputCSV(DataTable dt)
- //       {
+        /// <summary>
+        /// CSV出力処理
+        /// </summary>
+        /// <param name="dtRegist"></param>
+        /// <returns></returns>
+        private bool OutputCSV(DataTable dt)
+        {
 
- //           bool ret = false;
- //           try
- //           {
- //               string strFullPath;
+            bool ret = false;
+            try
+            {
+                string strFullPath;
 
- //               using (SaveFileDialog saveFileDialog = new SaveFileDialog())
- //               {
- //                   // ファイルの種類リストを設定
- //                   saveFileDialog.FileName = ProNm + " " + DateTime.Now.ToString("yyyyMMdd_HHmmss") + " " + InOperatorCD;
- //                   saveFileDialog.Filter = "CSVファイル (*.CSV)|*.CSV";
- //                   saveFileDialog.RestoreDirectory = true;
+                using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+                {
+                    // ファイルの種類リストを設定
+                    saveFileDialog.FileName = ProNm + " " + DateTime.Now.ToString("yyyyMMdd_HHmmss") + " " + InOperatorCD;
+                    saveFileDialog.Filter = "CSVファイル (*.CSV)|*.CSV";
+                    saveFileDialog.RestoreDirectory = true;
 
- //                   // ダイアログを表示
- //                   DialogResult dialogResult = saveFileDialog.ShowDialog();
- //                   if (dialogResult == DialogResult.Cancel)
- //                   {
- //                       // キャンセルされたので終了
- //                       return ret;
- //                   }
+                    // ダイアログを表示
+                    DialogResult dialogResult = saveFileDialog.ShowDialog();
+                    if (dialogResult == DialogResult.Cancel)
+                    {
+                        // キャンセルされたので終了
+                        return ret;
+                    }
 
- //                   // 選択されたファイル名 (ファイルパス) をテキストボックスに設定
- //                   strFullPath = saveFileDialog.FileName;
- //               }
-
-
-
- //               // CSV出力処理                        
- //               string field = string.Empty;
-
- //               // CSVファイルに書き込むときに使うEncoding
- //               System.Text.Encoding enc = System.Text.Encoding.GetEncoding("Shift_JIS");
- //               using (StreamWriter sw = new StreamWriter(strFullPath, false, enc))
- //               {
-
- //                   foreach (DataRow row in dt.Rows)
- //                   {
- //                       // 
- //                       for (int i = 0; i < dt.Columns.Count; i++)
- //                       {
- //                           if (i != 0)　　// 1つめの項目は行番号なので除外する
- //                           { 
- //                               field += EncloseDoubleQuotesIfNeed(row[i].ToString());
- //                               if (i < dt.Columns.Count - 1)
- //                               {
- //                                   field += ",";
- //                               }
- //                           }
- //                       };
-
- //                       sw.Write(field);
- //                       sw.Write("\r\n");
- //                       field = "";
-
- //                   }
- //               }
- //               ret = true;
-
- ////               bbl.ShowMessage("I201");
-
- //               return ret;
- //           }
-
- //           catch (Exception ex)
- //           {
- //               MessageBox.Show(ex.Message);
- //           }
-
- //           return ret;
-
- //       }
-
- //       private string EncloseDoubleQuotesIfNeed(string field)
- //       {
- //           if (NeedEncloseDoubleQuotes(field))
- //           {
- //               return EncloseDoubleQuotes(field);
- //           }
- //           return field;
- //       }
-
- //       /// <summary>
- //       /// 文字列をダブルクォートで囲む
- //       /// </summary>
- //       private string EncloseDoubleQuotes(string field)
- //       {
- //           if (field.IndexOf('"') > -1)
- //           {
- //               //"を""とする
- //               field = field.Replace("\"", "\"\"");
- //           }
- //           return "\"" + field + "\"";
- //       }
-
- //       /// <summary>
- //       /// 文字列をダブルクォートで囲む必要があるか調べる
- //       /// </summary>
- //       private bool NeedEncloseDoubleQuotes(string field)
- //       {
- //           return field.IndexOf('"') > -1 ||
- //               field.IndexOf(',') > -1 ||
- //               field.IndexOf('\r') > -1 ||
- //               field.IndexOf('\n') > -1 ||
- //               field.StartsWith(" ") ||
- //               field.StartsWith("\t") ||
- //               field.EndsWith(" ") ||
- //               field.EndsWith("\t");
+                    // 選択されたファイル名 (ファイルパス) をテキストボックスに設定
+                    strFullPath = saveFileDialog.FileName;
+                }
 
 
- //       }
+
+                // CSV出力処理                        
+                string field = string.Empty;
+
+                // CSVファイルに書き込むときに使うEncoding
+                System.Text.Encoding enc = System.Text.Encoding.GetEncoding("Shift_JIS");
+                using (StreamWriter sw = new StreamWriter(strFullPath, false, enc))
+                {
+
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        // 
+                        for (int i = 0; i < dt.Columns.Count; i++)
+                        {
+                            if (i != 0)　　// 1つめの項目は行番号なので除外する
+                            { 
+                                field += EncloseDoubleQuotesIfNeed(row[i].ToString());
+                                if (i < dt.Columns.Count - 1)
+                                {
+                                    field += ",";
+                                }
+                            }
+                        };
+
+                        sw.Write(field);
+                        sw.Write("\r\n");
+                        field = "";
+
+                    }
+                }
+                ret = true;
+
+ //               bbl.ShowMessage("I201");
+
+                return ret;
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+            return ret;
+
+        }
+
+        private string EncloseDoubleQuotesIfNeed(string field)
+        {
+            if (NeedEncloseDoubleQuotes(field))
+            {
+                return EncloseDoubleQuotes(field);
+            }
+            return field;
+        }
+
+        /// <summary>
+        /// 文字列をダブルクォートで囲む
+        /// </summary>
+        private string EncloseDoubleQuotes(string field)
+        {
+            if (field.IndexOf('"') > -1)
+            {
+                //"を""とする
+                field = field.Replace("\"", "\"\"");
+            }
+            return "\"" + field + "\"";
+        }
+
+        /// <summary>
+        /// 文字列をダブルクォートで囲む必要があるか調べる
+        /// </summary>
+        private bool NeedEncloseDoubleQuotes(string field)
+        {
+            return field.IndexOf('"') > -1 ||
+                field.IndexOf(',') > -1 ||
+                field.IndexOf('\r') > -1 ||
+                field.IndexOf('\n') > -1 ||
+                field.StartsWith(" ") ||
+                field.StartsWith("\t") ||
+                field.EndsWith(" ") ||
+                field.EndsWith("\t");
+
+
+        }
         // ==================================================
         // 終了処理
         // ==================================================
