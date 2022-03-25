@@ -56,7 +56,7 @@ namespace DL
             {
                 { "@ID", new ValuePair { value1 = SqlDbType.Int, value2 = mhe.ID } },
                 { "@Key", new ValuePair { value1 = SqlDbType.VarChar, value2 = mhe.Key } },
-                //{ "@IDName", new ValuePair { value1 = SqlDbType.VarChar, value2 = mhe.IDName } },
+                { "@IDName", new ValuePair { value1 = SqlDbType.VarChar, value2 = mhe.IDName } },
                 { "@Text1", new ValuePair { value1 = SqlDbType.VarChar, value2 = mhe.Text1 } },
                 { "@Text2", new ValuePair { value1 = SqlDbType.VarChar, value2 = mhe.Text2 } },
                 { "@Text3", new ValuePair { value1 = SqlDbType.VarChar, value2 = mhe.Text3 } },
