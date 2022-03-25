@@ -31,6 +31,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ExhibitHistory));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -71,10 +72,10 @@
             this.coIItem_Code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colItem_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colList_Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSale_Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCost = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colGrossProfit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDiscount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colArariRate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colWaribikiRate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTokuisakiName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PanelHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GvDetail)).BeginInit();
@@ -727,7 +728,7 @@
             this.GvDetail.CheckCol = ((System.Collections.ArrayList)(resources.GetObject("GvDetail.CheckCol")));
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("ＭＳ ゴシック", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -739,11 +740,19 @@
             this.coIItem_Code,
             this.colItem_Name,
             this.colList_Price,
-            this.colPrice,
+            this.colSale_Price,
             this.colCost,
-            this.colGrossProfit,
-            this.colDiscount,
+            this.colArariRate,
+            this.colWaribikiRate,
             this.colTokuisakiName});
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("ＭＳ ゴシック", 9F);
+            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.GvDetail.DefaultCellStyle = dataGridViewCellStyle11;
             this.GvDetail.EnableHeadersVisualStyles = false;
             this.GvDetail.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.GvDetail.Location = new System.Drawing.Point(35, 250);
@@ -752,7 +761,8 @@
             this.GvDetail.RowHeadersWidth = 30;
             this.GvDetail.RowHeight_ = 20;
             this.GvDetail.RowTemplate.Height = 20;
-            this.GvDetail.Size = new System.Drawing.Size(1310, 627);
+            this.GvDetail.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.GvDetail.Size = new System.Drawing.Size(1305, 627);
             this.GvDetail.TabIndex = 16;
             this.GvDetail.UseRowNo = true;
             this.GvDetail.UseSetting = true;
@@ -913,16 +923,16 @@
             this.colList_Price.Name = "colList_Price";
             this.colList_Price.ReadOnly = true;
             // 
-            // colPrice
+            // colSale_Price
             // 
-            this.colPrice.DataPropertyName = "Price";
+            this.colSale_Price.DataPropertyName = "Sale_Price";
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle6.Format = "N0";
             dataGridViewCellStyle6.NullValue = null;
-            this.colPrice.DefaultCellStyle = dataGridViewCellStyle6;
-            this.colPrice.HeaderText = "販売単価";
-            this.colPrice.Name = "colPrice";
-            this.colPrice.ReadOnly = true;
+            this.colSale_Price.DefaultCellStyle = dataGridViewCellStyle6;
+            this.colSale_Price.HeaderText = "販売単価";
+            this.colSale_Price.Name = "colSale_Price";
+            this.colSale_Price.ReadOnly = true;
             // 
             // colCost
             // 
@@ -935,29 +945,29 @@
             this.colCost.Name = "colCost";
             this.colCost.ReadOnly = true;
             // 
-            // colGrossProfit
+            // colArariRate
             // 
-            this.colGrossProfit.DataPropertyName = "GrossProfit";
+            this.colArariRate.DataPropertyName = "ArariRate";
             dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle8.Format = "N1";
             dataGridViewCellStyle8.NullValue = null;
-            this.colGrossProfit.DefaultCellStyle = dataGridViewCellStyle8;
-            this.colGrossProfit.HeaderText = "粗利率";
-            this.colGrossProfit.Name = "colGrossProfit";
-            this.colGrossProfit.ReadOnly = true;
-            this.colGrossProfit.Width = 80;
+            this.colArariRate.DefaultCellStyle = dataGridViewCellStyle8;
+            this.colArariRate.HeaderText = "粗利率";
+            this.colArariRate.Name = "colArariRate";
+            this.colArariRate.ReadOnly = true;
+            this.colArariRate.Width = 80;
             // 
-            // colDiscount
+            // colWaribikiRate
             // 
-            this.colDiscount.DataPropertyName = "Discount";
+            this.colWaribikiRate.DataPropertyName = "WaribikiRate";
             dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle9.Format = "N1";
             dataGridViewCellStyle9.NullValue = null;
-            this.colDiscount.DefaultCellStyle = dataGridViewCellStyle9;
-            this.colDiscount.HeaderText = "割引率";
-            this.colDiscount.Name = "colDiscount";
-            this.colDiscount.ReadOnly = true;
-            this.colDiscount.Width = 80;
+            this.colWaribikiRate.DefaultCellStyle = dataGridViewCellStyle9;
+            this.colWaribikiRate.HeaderText = "割引率";
+            this.colWaribikiRate.Name = "colWaribikiRate";
+            this.colWaribikiRate.ReadOnly = true;
+            this.colWaribikiRate.Width = 80;
             // 
             // colTokuisakiName
             // 
@@ -1023,10 +1033,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn coIItem_Code;
         private System.Windows.Forms.DataGridViewTextBoxColumn colItem_Name;
         private System.Windows.Forms.DataGridViewTextBoxColumn colList_Price;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPrice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSale_Price;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCost;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colGrossProfit;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDiscount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colArariRate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colWaribikiRate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTokuisakiName;
     }
 }
