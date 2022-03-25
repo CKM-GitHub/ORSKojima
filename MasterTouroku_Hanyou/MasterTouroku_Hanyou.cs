@@ -354,9 +354,6 @@ namespace MasterTouroku_Hanyou
                         if (!RequireCheck(new Control[] { ScKey.TxtCode }))
                             return false;
 
-
-                        if (!string.IsNullOrWhiteSpace(ScCopyKey.Code))
-                        {
                             DataTable dtKey = new DataTable();
                             mhe = GetHanyouEntity();
                             dtKey = mthbl.Hanyou_KeySelect(mhe);
@@ -368,19 +365,22 @@ namespace MasterTouroku_Hanyou
                             }
                             else
                             {
-                                mhe.ID = ScID.Code;
-                                mhe.Key = ScCopyKey.Code;
-                                ScCopyKey.SearchEnable = true;
-                                DataTable dtcopyKey = new DataTable();
-                                dtcopyKey = mthbl.Hanyou_KeySelect(mhe);
-                                if (dtcopyKey.Rows.Count == 0)
+                                if (!string.IsNullOrWhiteSpace(ScCopyKey.Code))
                                 {
-                                    mthbl.ShowMessage("E133");
-                                    ScCopyKey.SetFocus(1);
-                                    return false;
+                                    mhe.ID = ScID.Code;
+                                    mhe.Key = ScCopyKey.Code;
+                                    ScCopyKey.SearchEnable = true;
+                                    DataTable dtcopyKey = new DataTable();
+                                    dtcopyKey = mthbl.Hanyou_KeySelect(mhe);
+                                    if (dtcopyKey.Rows.Count == 0)
+                                    {
+                                        mthbl.ShowMessage("E133");
+                                        ScCopyKey.SetFocus(1);
+                                        return false;
+                                    }
                                 }
+
                             }
-                        }
                     }
                 }
                 else
