@@ -168,7 +168,8 @@ namespace ExhibitHistory
                     bool ret = bl.M_Tokuisaki_Select(mte);
                     if (ret)
                     {
-                        LB_Tokuisaki.Text = mte.TokuisakiName;
+                        // 得意先名は30バイトで切る
+                        LB_Tokuisaki.Text = ehbl.LeftB(mte.TokuisakiName,30);
                     }
                     else
                     {

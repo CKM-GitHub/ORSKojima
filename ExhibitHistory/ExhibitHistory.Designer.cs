@@ -63,11 +63,6 @@
             this.TB_GrossProfit = new CKM_Controls.CKM_TextBox();
             this.TB_Discount = new CKM_Controls.CKM_TextBox();
             this.GvDetail = new CKM_Controls.CKM_GridView();
-            this.BtnSubF8 = new CKM_Controls.CKM_Button();
-            this.ckM_Label1 = new CKM_Controls.CKM_Label();
-            this.TB_ExhibitDate1 = new CKM_Controls.CKM_TextBox();
-            this.TB_ExhibitDate2 = new CKM_Controls.CKM_TextBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.colExhibitDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.coIItem_Code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colItem_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -77,6 +72,11 @@
             this.colArariRate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colWaribikiRate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTokuisakiName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BtnSubF8 = new CKM_Controls.CKM_Button();
+            this.ckM_Label1 = new CKM_Controls.CKM_Label();
+            this.TB_ExhibitDate1 = new CKM_Controls.CKM_TextBox();
+            this.TB_ExhibitDate2 = new CKM_Controls.CKM_TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.PanelHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GvDetail)).BeginInit();
             this.SuspendLayout();
@@ -376,9 +376,9 @@
             this.LB_Tokuisaki.Font = new System.Drawing.Font("ＭＳ ゴシック", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_Tokuisaki.Location = new System.Drawing.Point(226, 7);
             this.LB_Tokuisaki.Name = "LB_Tokuisaki";
-            this.LB_Tokuisaki.Size = new System.Drawing.Size(320, 19);
+            this.LB_Tokuisaki.Size = new System.Drawing.Size(190, 19);
             this.LB_Tokuisaki.TabIndex = 726;
-            this.LB_Tokuisaki.Text = "XXXXXXXXX1XXXXXXXXX2XXXXXXXXX3XXXXXXXXX4XXXXXXXXX5";
+            this.LB_Tokuisaki.Text = "XXXXXXXXX1XXXXXXXXX2XXXXXXXXX3";
             this.LB_Tokuisaki.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // ckM_ItemName
@@ -770,120 +770,6 @@
             this.GvDetail.CurrentCellDirtyStateChanged += new System.EventHandler(this.GvDetail_CurrentCellDirtyStateChanged);
             this.GvDetail.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.GvDetail_DataError);
             // 
-            // BtnSubF8
-            // 
-            this.BtnSubF8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
-            this.BtnSubF8.BackgroundColor = CKM_Controls.CKM_Button.CKM_Color.Default;
-            this.BtnSubF8.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BtnSubF8.DefaultBtnSize = true;
-            this.BtnSubF8.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.BtnSubF8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnSubF8.Font = new System.Drawing.Font("ＭＳ ゴシック", 9F, System.Drawing.FontStyle.Bold);
-            this.BtnSubF8.Font_Size = CKM_Controls.CKM_Button.CKM_FontSize.Normal;
-            this.BtnSubF8.Location = new System.Drawing.Point(896, 77);
-            this.BtnSubF8.Margin = new System.Windows.Forms.Padding(1);
-            this.BtnSubF8.Name = "BtnSubF8";
-            this.BtnSubF8.Size = new System.Drawing.Size(118, 28);
-            this.BtnSubF8.TabIndex = 13;
-            this.BtnSubF8.Text = "表示(F8)";
-            this.BtnSubF8.UseVisualStyleBackColor = false;
-            this.BtnSubF8.Click += new System.EventHandler(this.BtnSubF8_Click);
-            // 
-            // ckM_Label1
-            // 
-            this.ckM_Label1.Back_Color = CKM_Controls.CKM_Label.CKM_Color.Default;
-            this.ckM_Label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.ckM_Label1.DefaultlabelSize = true;
-            this.ckM_Label1.Font = new System.Drawing.Font("ＭＳ ゴシック", 9F, System.Drawing.FontStyle.Bold);
-            this.ckM_Label1.Font_Size = CKM_Controls.CKM_Label.CKM_FontSize.Normal;
-            this.ckM_Label1.ForeColor = System.Drawing.Color.White;
-            this.ckM_Label1.Location = new System.Drawing.Point(562, 8);
-            this.ckM_Label1.Name = "ckM_Label1";
-            this.ckM_Label1.Size = new System.Drawing.Size(92, 18);
-            this.ckM_Label1.TabIndex = 729;
-            this.ckM_Label1.Text = "出品日付";
-            this.ckM_Label1.Text_Color = CKM_Controls.CKM_Label.CKM_Color.Default;
-            this.ckM_Label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // TB_ExhibitDate1
-            // 
-            this.TB_ExhibitDate1.AllowMinus = false;
-            this.TB_ExhibitDate1.Back_Color = CKM_Controls.CKM_TextBox.CKM_Color.White;
-            this.TB_ExhibitDate1.BackColor = System.Drawing.Color.White;
-            this.TB_ExhibitDate1.BorderColor = false;
-            this.TB_ExhibitDate1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.TB_ExhibitDate1.ClientColor = System.Drawing.Color.White;
-            this.TB_ExhibitDate1.Ctrl_Byte = CKM_Controls.CKM_TextBox.Bytes.半角;
-            this.TB_ExhibitDate1.Ctrl_Type = CKM_Controls.CKM_TextBox.Type.Date;
-            this.TB_ExhibitDate1.DecimalPlace = 0;
-            this.TB_ExhibitDate1.EnabledInsertKeyModeOnMouseEnter = false;
-            this.TB_ExhibitDate1.Font = new System.Drawing.Font("ＭＳ ゴシック", 9F);
-            this.TB_ExhibitDate1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.TB_ExhibitDate1.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Overwrite;
-            this.TB_ExhibitDate1.IntegerPart = 0;
-            this.TB_ExhibitDate1.IsCorrectDate = true;
-            this.TB_ExhibitDate1.isEnterKeyDown = false;
-            this.TB_ExhibitDate1.IsFirstTime = true;
-            this.TB_ExhibitDate1.isMaxLengthErr = false;
-            this.TB_ExhibitDate1.IsNumber = true;
-            this.TB_ExhibitDate1.IsShop = false;
-            this.TB_ExhibitDate1.IsTimemmss = false;
-            this.TB_ExhibitDate1.Length = 10;
-            this.TB_ExhibitDate1.Location = new System.Drawing.Point(654, 7);
-            this.TB_ExhibitDate1.MaxLength = 10;
-            this.TB_ExhibitDate1.MoveNext = true;
-            this.TB_ExhibitDate1.Name = "TB_ExhibitDate1";
-            this.TB_ExhibitDate1.Size = new System.Drawing.Size(100, 19);
-            this.TB_ExhibitDate1.TabIndex = 1;
-            this.TB_ExhibitDate1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.TB_ExhibitDate1.TextSize = CKM_Controls.CKM_TextBox.FontSize.Normal;
-            this.TB_ExhibitDate1.UseColorSizMode = false;
-            // 
-            // TB_ExhibitDate2
-            // 
-            this.TB_ExhibitDate2.AllowMinus = false;
-            this.TB_ExhibitDate2.Back_Color = CKM_Controls.CKM_TextBox.CKM_Color.White;
-            this.TB_ExhibitDate2.BackColor = System.Drawing.Color.White;
-            this.TB_ExhibitDate2.BorderColor = false;
-            this.TB_ExhibitDate2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.TB_ExhibitDate2.ClientColor = System.Drawing.Color.White;
-            this.TB_ExhibitDate2.Ctrl_Byte = CKM_Controls.CKM_TextBox.Bytes.半角;
-            this.TB_ExhibitDate2.Ctrl_Type = CKM_Controls.CKM_TextBox.Type.Date;
-            this.TB_ExhibitDate2.DecimalPlace = 0;
-            this.TB_ExhibitDate2.EnabledInsertKeyModeOnMouseEnter = false;
-            this.TB_ExhibitDate2.Font = new System.Drawing.Font("ＭＳ ゴシック", 9F);
-            this.TB_ExhibitDate2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.TB_ExhibitDate2.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Overwrite;
-            this.TB_ExhibitDate2.IntegerPart = 0;
-            this.TB_ExhibitDate2.IsCorrectDate = true;
-            this.TB_ExhibitDate2.isEnterKeyDown = false;
-            this.TB_ExhibitDate2.IsFirstTime = true;
-            this.TB_ExhibitDate2.isMaxLengthErr = false;
-            this.TB_ExhibitDate2.IsNumber = true;
-            this.TB_ExhibitDate2.IsShop = false;
-            this.TB_ExhibitDate2.IsTimemmss = false;
-            this.TB_ExhibitDate2.Length = 10;
-            this.TB_ExhibitDate2.Location = new System.Drawing.Point(819, 7);
-            this.TB_ExhibitDate2.MaxLength = 10;
-            this.TB_ExhibitDate2.MoveNext = true;
-            this.TB_ExhibitDate2.Name = "TB_ExhibitDate2";
-            this.TB_ExhibitDate2.Size = new System.Drawing.Size(100, 19);
-            this.TB_ExhibitDate2.TabIndex = 2;
-            this.TB_ExhibitDate2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.TB_ExhibitDate2.TextSize = CKM_Controls.CKM_TextBox.FontSize.Normal;
-            this.TB_ExhibitDate2.UseColorSizMode = false;
-            // 
-            // label2
-            // 
-            this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(184)))), ((int)(((byte)(231)))));
-            this.label2.Font = new System.Drawing.Font("ＭＳ ゴシック", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(757, 7);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(60, 19);
-            this.label2.TabIndex = 732;
-            this.label2.Text = "～";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // colExhibitDate
             // 
             this.colExhibitDate.DataPropertyName = "ExhibitDate";
@@ -978,6 +864,120 @@
             this.colTokuisakiName.Name = "colTokuisakiName";
             this.colTokuisakiName.ReadOnly = true;
             this.colTokuisakiName.Width = 195;
+            // 
+            // BtnSubF8
+            // 
+            this.BtnSubF8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
+            this.BtnSubF8.BackgroundColor = CKM_Controls.CKM_Button.CKM_Color.Default;
+            this.BtnSubF8.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BtnSubF8.DefaultBtnSize = true;
+            this.BtnSubF8.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.BtnSubF8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnSubF8.Font = new System.Drawing.Font("ＭＳ ゴシック", 9F, System.Drawing.FontStyle.Bold);
+            this.BtnSubF8.Font_Size = CKM_Controls.CKM_Button.CKM_FontSize.Normal;
+            this.BtnSubF8.Location = new System.Drawing.Point(896, 77);
+            this.BtnSubF8.Margin = new System.Windows.Forms.Padding(1);
+            this.BtnSubF8.Name = "BtnSubF8";
+            this.BtnSubF8.Size = new System.Drawing.Size(118, 28);
+            this.BtnSubF8.TabIndex = 13;
+            this.BtnSubF8.Text = "表示(F8)";
+            this.BtnSubF8.UseVisualStyleBackColor = false;
+            this.BtnSubF8.Click += new System.EventHandler(this.BtnSubF8_Click);
+            // 
+            // ckM_Label1
+            // 
+            this.ckM_Label1.Back_Color = CKM_Controls.CKM_Label.CKM_Color.Default;
+            this.ckM_Label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.ckM_Label1.DefaultlabelSize = true;
+            this.ckM_Label1.Font = new System.Drawing.Font("ＭＳ ゴシック", 9F, System.Drawing.FontStyle.Bold);
+            this.ckM_Label1.Font_Size = CKM_Controls.CKM_Label.CKM_FontSize.Normal;
+            this.ckM_Label1.ForeColor = System.Drawing.Color.White;
+            this.ckM_Label1.Location = new System.Drawing.Point(416, 8);
+            this.ckM_Label1.Name = "ckM_Label1";
+            this.ckM_Label1.Size = new System.Drawing.Size(92, 18);
+            this.ckM_Label1.TabIndex = 729;
+            this.ckM_Label1.Text = "出品日付";
+            this.ckM_Label1.Text_Color = CKM_Controls.CKM_Label.CKM_Color.Default;
+            this.ckM_Label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // TB_ExhibitDate1
+            // 
+            this.TB_ExhibitDate1.AllowMinus = false;
+            this.TB_ExhibitDate1.Back_Color = CKM_Controls.CKM_TextBox.CKM_Color.White;
+            this.TB_ExhibitDate1.BackColor = System.Drawing.Color.White;
+            this.TB_ExhibitDate1.BorderColor = false;
+            this.TB_ExhibitDate1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TB_ExhibitDate1.ClientColor = System.Drawing.Color.White;
+            this.TB_ExhibitDate1.Ctrl_Byte = CKM_Controls.CKM_TextBox.Bytes.半角;
+            this.TB_ExhibitDate1.Ctrl_Type = CKM_Controls.CKM_TextBox.Type.Date;
+            this.TB_ExhibitDate1.DecimalPlace = 0;
+            this.TB_ExhibitDate1.EnabledInsertKeyModeOnMouseEnter = false;
+            this.TB_ExhibitDate1.Font = new System.Drawing.Font("ＭＳ ゴシック", 9F);
+            this.TB_ExhibitDate1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.TB_ExhibitDate1.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Overwrite;
+            this.TB_ExhibitDate1.IntegerPart = 0;
+            this.TB_ExhibitDate1.IsCorrectDate = true;
+            this.TB_ExhibitDate1.isEnterKeyDown = false;
+            this.TB_ExhibitDate1.IsFirstTime = true;
+            this.TB_ExhibitDate1.isMaxLengthErr = false;
+            this.TB_ExhibitDate1.IsNumber = true;
+            this.TB_ExhibitDate1.IsShop = false;
+            this.TB_ExhibitDate1.IsTimemmss = false;
+            this.TB_ExhibitDate1.Length = 10;
+            this.TB_ExhibitDate1.Location = new System.Drawing.Point(507, 7);
+            this.TB_ExhibitDate1.MaxLength = 10;
+            this.TB_ExhibitDate1.MoveNext = true;
+            this.TB_ExhibitDate1.Name = "TB_ExhibitDate1";
+            this.TB_ExhibitDate1.Size = new System.Drawing.Size(100, 19);
+            this.TB_ExhibitDate1.TabIndex = 1;
+            this.TB_ExhibitDate1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.TB_ExhibitDate1.TextSize = CKM_Controls.CKM_TextBox.FontSize.Normal;
+            this.TB_ExhibitDate1.UseColorSizMode = false;
+            // 
+            // TB_ExhibitDate2
+            // 
+            this.TB_ExhibitDate2.AllowMinus = false;
+            this.TB_ExhibitDate2.Back_Color = CKM_Controls.CKM_TextBox.CKM_Color.White;
+            this.TB_ExhibitDate2.BackColor = System.Drawing.Color.White;
+            this.TB_ExhibitDate2.BorderColor = false;
+            this.TB_ExhibitDate2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TB_ExhibitDate2.ClientColor = System.Drawing.Color.White;
+            this.TB_ExhibitDate2.Ctrl_Byte = CKM_Controls.CKM_TextBox.Bytes.半角;
+            this.TB_ExhibitDate2.Ctrl_Type = CKM_Controls.CKM_TextBox.Type.Date;
+            this.TB_ExhibitDate2.DecimalPlace = 0;
+            this.TB_ExhibitDate2.EnabledInsertKeyModeOnMouseEnter = false;
+            this.TB_ExhibitDate2.Font = new System.Drawing.Font("ＭＳ ゴシック", 9F);
+            this.TB_ExhibitDate2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.TB_ExhibitDate2.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Overwrite;
+            this.TB_ExhibitDate2.IntegerPart = 0;
+            this.TB_ExhibitDate2.IsCorrectDate = true;
+            this.TB_ExhibitDate2.isEnterKeyDown = false;
+            this.TB_ExhibitDate2.IsFirstTime = true;
+            this.TB_ExhibitDate2.isMaxLengthErr = false;
+            this.TB_ExhibitDate2.IsNumber = true;
+            this.TB_ExhibitDate2.IsShop = false;
+            this.TB_ExhibitDate2.IsTimemmss = false;
+            this.TB_ExhibitDate2.Length = 10;
+            this.TB_ExhibitDate2.Location = new System.Drawing.Point(673, 7);
+            this.TB_ExhibitDate2.MaxLength = 10;
+            this.TB_ExhibitDate2.MoveNext = true;
+            this.TB_ExhibitDate2.Name = "TB_ExhibitDate2";
+            this.TB_ExhibitDate2.Size = new System.Drawing.Size(100, 19);
+            this.TB_ExhibitDate2.TabIndex = 2;
+            this.TB_ExhibitDate2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.TB_ExhibitDate2.TextSize = CKM_Controls.CKM_TextBox.FontSize.Normal;
+            this.TB_ExhibitDate2.UseColorSizMode = false;
+            // 
+            // label2
+            // 
+            this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(184)))), ((int)(((byte)(231)))));
+            this.label2.Font = new System.Drawing.Font("ＭＳ ゴシック", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(611, 7);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(60, 19);
+            this.label2.TabIndex = 732;
+            this.label2.Text = "～";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // ExhibitHistory
             // 
