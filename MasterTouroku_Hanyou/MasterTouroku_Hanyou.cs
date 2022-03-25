@@ -355,8 +355,8 @@ namespace MasterTouroku_Hanyou
                             return false;
 
 
-                        if (!string.IsNullOrWhiteSpace(ScCopyKey.Code))
-                        {
+                        //if (!string.IsNullOrWhiteSpace(ScCopyKey.Code))
+                        //{
                             DataTable dtKey = new DataTable();
                             mhe = GetHanyouEntity();
                             dtKey = mthbl.Hanyou_KeySelect(mhe);
@@ -380,7 +380,7 @@ namespace MasterTouroku_Hanyou
                                     return false;
                                 }
                             }
-                        }
+                        //}
                     }
                 }
                 else
