@@ -183,43 +183,6 @@ namespace MasterTouroku_Henkan
                     //必須入力項目(Entry required)
                     if (!RequireCheck(new Control[] { detailControls[index] }))
                         return false;
-                    if (!ErrorCheck(index))
-                        return false;
-
-                    break;
-                case (int)EIndex.RCMItemName:
-                    //必須入力項目(Entry required)
-                    if (!RequireCheck(new Control[] { detailControls[index] }))
-                        return false;
-
-                    break;
-                case (int)EIndex.RCMItemValue:
-                    //必須入力項目(Entry required)
-                    if (!RequireCheck(new Control[] { detailControls[index] }))
-                        return false;
-                    if (!ErrorCheck(index))
-                        return false;
-
-                    break;
-                case (int)EIndex.CsvOutputItemValue:
-                    CsvTitleName.Enabled = true;
-                    detailControls[(int)EIndex.CsvTitleName].Focus();
-                    break;
-                case (int)EIndex.CsvTitleName:
-                    Btn_F12.Enabled = true;
-                    Btn_F12.Focus();
-                    break;
-            }
-
-            return true;
-
-        }
-
-        private bool ErrorCheck(int index)
-        {
-            switch (index)
-            {
-                case (int)EIndex.TokuisakiCD:
                     M_Tokuisaki_Entity mte = new M_Tokuisaki_Entity
                     {
                         TokuisakiCD = detailControls[index].Text
@@ -236,9 +199,18 @@ namespace MasterTouroku_Henkan
                         return false;
                     }
 
-                    break;
 
+                    break;
+                case (int)EIndex.RCMItemName:
+                    //必須入力項目(Entry required)
+                    if (!RequireCheck(new Control[] { detailControls[index] }))
+                        return false;
+
+                    break;
                 case (int)EIndex.RCMItemValue:
+                    //必須入力項目(Entry required)
+                    if (!RequireCheck(new Control[] { detailControls[index] }))
+                        return false;
                     M_Henkan_Entity mhe = new M_Henkan_Entity
                     {
                         TokuisakiCD = detailControls[(int)EIndex.TokuisakiCD].Text,
@@ -250,31 +222,31 @@ namespace MasterTouroku_Henkan
                     switch (OperationMode)
                     {
                         case EOperationMode.INSERT:
-                         if (res)
+                            if (res)
                             {
                                 bbl.ShowMessage("E107");
+                                detailControls[index].Focus();
                                 return false;
                             }
                             else
                             {
-                               
+
                                 CsvOutputItemValue.Enabled = true;
                                 CsvOutputItemValue.Focus();
                             }
-                            
+
                             break;
                         case EOperationMode.UPDATE:
                             if (res)
                             {
-                                
+                                CsvOutputItemValue.Text = mhe.CsvOutputItemValue;
+                                CsvTitleName.Text = mhe.CsvTitleName;
                                 CsvOutputItemValue.Enabled = true;
                                 CsvOutputItemValue.Focus();
                             }
                             else
                             {
                                 bbl.ShowMessage("E101");
-                                CsvOutputItemValue.Text = mhe.CsvOutputItemValue;
-                                CsvTitleName.Text = mhe.CsvTitleName;
                                 return false;
                             }
                             break;
@@ -286,10 +258,8 @@ namespace MasterTouroku_Henkan
                             }
                             else
                             {
-                               
+
                                 bbl.ShowMessage("E101");
-                                CsvOutputItemValue.Text = mhe.CsvOutputItemValue;
-                                CsvTitleName.Text = mhe.CsvTitleName;
                                 return false;
                             }
                             break;
@@ -308,14 +278,96 @@ namespace MasterTouroku_Henkan
                             }
                             break;
                     }
-                  
+
+
                     break;
+                case (int)EIndex.CsvOutputItemValue:
+                    CsvTitleName.Enabled = true;
+                    detailControls[(int)EIndex.CsvTitleName].Focus();
+                    break;
+                case (int)EIndex.CsvTitleName:
+                    Btn_F12.Enabled = true;
+                    Btn_F12.Focus();
+                    break;
+            }
+
+            return true;
+
+        }
+
+        private bool ErrorCheck(int index)
+        {
+            if (detailControls[index].GetType().Equals(typeof(CKM_Controls.CKM_TextBox)))
+            {
+                if (((CKM_Controls.CKM_TextBox)detailControls[index]).isMaxLengthErr)
+                    return false;
+            }
+
+            switch (index)
+            {
+                case (int)EIndex.RCMItemValue:
+                    //必須入力項目(Entry required)
+                    if (!RequireCheck(new Control[] { detailControls[index] }))
+                        return false;
+                    M_Henkan_Entity mhe = new M_Henkan_Entity
+                    {
+                        TokuisakiCD = detailControls[(int)EIndex.TokuisakiCD].Text,
+                        RCMItemName = detailControls[(int)EIndex.RCMItemName].Text,
+                        RCMItemValue = detailControls[index].Text,
+                    };
+                    M_Henkan_BL mhbl = new M_Henkan_BL();
+                    bool res = mhbl.M_Henkan_Select(mhe);
+                    switch (OperationMode)
+                    {
+                        case EOperationMode.INSERT:
+                            if (res)
+                            {
+                                bbl.ShowMessage("E107");
+                                detailControls[index].Focus();
+                                return false;
+                            }
+                           
+                            break;
+                        case EOperationMode.UPDATE:
+                            if (!res)
+                            {
+                                bbl.ShowMessage("E101");
+                                detailControls[index].Focus();
+                                return false;
+                            }
+                           
+                            break;
+                        case EOperationMode.DELETE:
+                            if (!res)
+                            {
+                                bbl.ShowMessage("E101");
+                                detailControls[index].Focus();
+                                return false;
+                            }
+                           
+                            break;
+                        case EOperationMode.SHOW:
+                            if (!res)
+                            {
+                                CsvOutputItemValue.Text = mhe.CsvOutputItemValue;
+                                CsvTitleName.Text = mhe.CsvTitleName;
+                                bbl.ShowMessage("E101");
+                                detailControls[index].Focus();
+                                return false;
+                            }
+                           
+                            break;
+                    }
 
 
+                    break;
+                
             }
 
             return true;
         }
+
+       
         private void InsertUpdateDelete(int mode)
         {
             M_Henkan_Entity mhe = new M_Henkan_Entity
@@ -337,7 +389,7 @@ namespace MasterTouroku_Henkan
                 {
                     mhkbl.ShowMessage("I101");
                 }
-                
+                ChangeMode(OperationMode);
             }
             else
             {
@@ -351,20 +403,17 @@ namespace MasterTouroku_Henkan
       
         private void F12()
         {
-
-            for (int i = 0; i < detailControls.Length; i++)
-                if (CheckDetail(i) == false)
-                {
-                    detailControls[i].Focus();
-                    return;
-                }
-
-             M_Henkan_BL mhkbl = new M_Henkan_BL();
+            M_Henkan_BL mhkbl = new M_Henkan_BL();
            
                 if (mhkbl.ShowMessage(OperationMode == EOperationMode.DELETE ? "Q102" : "Q101") == DialogResult.Yes)
                 {
-                   
-                    switch (OperationMode)
+                if (!CheckDetail((int)EIndex.TokuisakiCD))
+                    return;
+                if (!CheckDetail((int)EIndex.RCMItemName))
+                    return;
+                if (!ErrorCheck((int)EIndex.RCMItemValue))
+                    return;
+                switch (OperationMode)
                     {
                         case EOperationMode.INSERT:
                             InsertUpdateDelete(1);
