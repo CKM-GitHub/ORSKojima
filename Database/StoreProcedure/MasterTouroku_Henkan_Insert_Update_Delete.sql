@@ -11,7 +11,7 @@ CREATE PROCEDURE [dbo].[MasterTouroku_Henkan_Insert_Update_Delete]
 	 @RCMItemName varchar(50),
 	 @RCMItemValue varchar(50),
 	 @CsvOutputItemValue varchar(50),
-	 @CsvTitleName varchar(50) ,
+	 @CsvTitleName varchar(50),
 	 @Operator varchar(10),
 	 @Mode as tinyint
 AS
@@ -66,6 +66,15 @@ BEGIN
 	  Update  M_Henkan
 	  SET	  CsvOutputItemValue=@CsvOutputItemValue,
 			  CsvTitleName=@CsvTitleName,
+			  Yobi1=NULL,
+			  Yobi2=NULL,
+			  Yobi3=NULL,
+			  Yobi4=0,
+			  Yobi5=0,
+			  Yobi6=0,
+			  Yobi7=NULL,
+			  Yobi8=NULL,
+			  Yobi9=NULL,
 			  UpdateOperator=@Operator,
 			  UpdateDateTime= @SystemDate
 	  Where   TokuisakiCD=@TokuisakiCD
@@ -81,4 +90,5 @@ BEGIN
 	  AND     RCMItemValue=@RCMItemValue
 	 END
 END
+
 GO
