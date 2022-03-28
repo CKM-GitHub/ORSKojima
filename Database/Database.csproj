@@ -62,7 +62,6 @@
     <Content Include="StoreProcedure\PRC_ExhibitInformation_Register.sql" />
     <Content Include="StoreProcedure\PRC_ExhibitInformation_SelectDataForCsv.sql" />
     <Content Include="StoreProcedure\PRC_ExhibitInformation_SelectDataForDisp.sql" />
-    <Content Include="StoreProcedure\SplitString.sql" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -86,13 +85,6 @@
     <Content Include="StoreProcedure\M_Multipurpose_SelectAll_.sql" />
     <Content Include="StoreProcedure\M_Multipurpose_SelectAll_ByID.sql" />
     <Content Include="StoreProcedure\M_Multipurpose_SelectIDName.sql" />
-    <Content Include="StoreProcedure\sp_alterdiagram.sql" />
-    <Content Include="StoreProcedure\sp_creatediagram.sql" />
-    <Content Include="StoreProcedure\sp_dropdiagram.sql" />
-    <Content Include="StoreProcedure\sp_helpdiagramdefinition.sql" />
-    <Content Include="StoreProcedure\sp_helpdiagrams.sql" />
-    <Content Include="StoreProcedure\sp_renamediagram.sql" />
-    <Content Include="StoreProcedure\sp_upgraddiagrams.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
