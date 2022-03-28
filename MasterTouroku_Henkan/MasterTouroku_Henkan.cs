@@ -242,6 +242,7 @@ namespace MasterTouroku_Henkan
                                 CsvOutputItemValue.Text = mhe.CsvOutputItemValue;
                                 CsvTitleName.Text = mhe.CsvTitleName;
                                 CsvOutputItemValue.Enabled = true;
+                               CsvTitleName.Enabled = true;
                                 CsvOutputItemValue.Focus();
                             }
                             else
