@@ -240,15 +240,15 @@ namespace Base.Client
             DataTable dtShopName =  bbl.SimpleSelect1("42", null, "222", "1");
             this.lblShopName.Text = dtShopName.Rows[0]["Char1"].ToString();
 
-            M_Store_Entity mste = new M_Store_Entity
-            {
-                SysDate = mse.SysDate
-            };
+            //M_Store_Entity mste = new M_Store_Entity
+            //{
+            //    SysDate = mse.SysDate
+            //};
             //mste=loginbl.M_Store_InitSelect(mse,mste);
             //this.lblStoreName.Text = mste.StoreName;
             //StoreCD = mste.StoreCD;
             //StoreName = mste.StoreName;
-            ChangeDate = mste.SysDate;
+            //ChangeDate = mste.SysDate;
 
             //共通処理　プログラム
             //KTP - 2019-05-29 ProgramのチェックはM_Authorizations_AccessCheck にやっています。
@@ -367,30 +367,30 @@ namespace Base.Client
             //        break;
             //}
 
-            //処理可能店舗
-            //[M_StoreAuthorizations]
-            M_StoreAuthorizations_Entity msa = new M_StoreAuthorizations_Entity();
-            msa.StoreAuthorizationsCD = made.StoreAuthorizationsCD;
+            ////処理可能店舗
+            ////[M_StoreAuthorizations]
+            //M_StoreAuthorizations_Entity msa = new M_StoreAuthorizations_Entity();
+            //msa.StoreAuthorizationsCD = made.StoreAuthorizationsCD;
 
-            DataTable dt = bbl.M_StoreAuthorizations_Select(msa);
-            if (dt.Rows.Count > 0)
-            {
-                availableStores = new string[dt.Rows.Count];
-                int i = 0;
-                foreach (DataRow row in dt.Rows)
-                {
-                    availableStores[i] = row["StoreCD"].ToString();
-                    i++;
-                }
-            }
-            ///Added by ETZ ,To close when StoreAuthorization isn't accessed
-            else     
-            {
-                bbl.ShowMessage(mae.MessageID + "M_Sto");
-                //起動時エラー
-                this.Close();
-                System.Environment.Exit(0);
-            }
+            //DataTable dt = bbl.M_StoreAuthorizations_Select(msa);
+            //if (dt.Rows.Count > 0)
+            //{
+            //    availableStores = new string[dt.Rows.Count];
+            //    int i = 0;
+            //    foreach (DataRow row in dt.Rows)
+            //    {
+            //        availableStores[i] = row["StoreCD"].ToString();
+            //        i++;
+            //    }
+            //}
+            /////Added by ETZ ,To close when StoreAuthorization isn't accessed
+            //else     
+            //{
+            //    bbl.ShowMessage(mae.MessageID + "M_Sto");
+            //    //起動時エラー
+            //    this.Close();
+            //    System.Environment.Exit(0);
+            //}
 
             //プログラム起動履歴
             //InsertLog(Get_L_Log_Entity(true));

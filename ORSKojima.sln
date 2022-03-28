@@ -33,8 +33,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "M_Setting", "M_Setting\M_Se
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prerequest", "Prerequest\Prerequest.csproj", "{AD4207DD-806F-4AC7-8936-5220BDEACC64}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Capital_Point_Update", "Capital_Point_Update\Capital_Point_Update.csproj", "{BB40CFAE-80EA-4D8B-966F-272A297095FC}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KojimaMenu", "KojimaMenu\KojimaMenu.csproj", "{52F1F9E1-EC8C-4FB5-BCCE-CEB774621EC0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExhibitInformation", "ExhibitInformation\ExhibitInformation.csproj", "{2E73EEE1-7718-41BD-9C22-9B60883AFD86}"
@@ -223,18 +221,6 @@ Global
 		{AD4207DD-806F-4AC7-8936-5220BDEACC64}.Release|x64.Build.0 = Release|Any CPU
 		{AD4207DD-806F-4AC7-8936-5220BDEACC64}.Release|x86.ActiveCfg = Release|Any CPU
 		{AD4207DD-806F-4AC7-8936-5220BDEACC64}.Release|x86.Build.0 = Release|Any CPU
-		{BB40CFAE-80EA-4D8B-966F-272A297095FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BB40CFAE-80EA-4D8B-966F-272A297095FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BB40CFAE-80EA-4D8B-966F-272A297095FC}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{BB40CFAE-80EA-4D8B-966F-272A297095FC}.Debug|x64.Build.0 = Debug|Any CPU
-		{BB40CFAE-80EA-4D8B-966F-272A297095FC}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{BB40CFAE-80EA-4D8B-966F-272A297095FC}.Debug|x86.Build.0 = Debug|Any CPU
-		{BB40CFAE-80EA-4D8B-966F-272A297095FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BB40CFAE-80EA-4D8B-966F-272A297095FC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BB40CFAE-80EA-4D8B-966F-272A297095FC}.Release|x64.ActiveCfg = Release|Any CPU
-		{BB40CFAE-80EA-4D8B-966F-272A297095FC}.Release|x64.Build.0 = Release|Any CPU
-		{BB40CFAE-80EA-4D8B-966F-272A297095FC}.Release|x86.ActiveCfg = Release|Any CPU
-		{BB40CFAE-80EA-4D8B-966F-272A297095FC}.Release|x86.Build.0 = Release|Any CPU
 		{52F1F9E1-EC8C-4FB5-BCCE-CEB774621EC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{52F1F9E1-EC8C-4FB5-BCCE-CEB774621EC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{52F1F9E1-EC8C-4FB5-BCCE-CEB774621EC0}.Debug|x64.ActiveCfg = Debug|Any CPU

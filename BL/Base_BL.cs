@@ -192,12 +192,12 @@ namespace BL
             return null;
         }
 
-        public DataTable M_StoreAuthorizations_Select(M_StoreAuthorizations_Entity msa)
-        {
-            M_Authorizations_DL madl = new M_Authorizations_DL();
-            DataTable dt = madl.M_StoreAuthorizations_Select(msa);
-            return dt;
-        }
+        //public DataTable M_StoreAuthorizations_Select(M_StoreAuthorizations_Entity msa)
+        //{
+        //    M_Authorizations_DL madl = new M_Authorizations_DL();
+        //    DataTable dt = madl.M_StoreAuthorizations_Select(msa);
+        //    return dt;
+        //}
 
         /// <summary>
         /// log insert
