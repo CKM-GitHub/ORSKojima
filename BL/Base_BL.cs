@@ -368,144 +368,143 @@ namespace BL
 
             return bdl.Select_SearchName(dic, sp);
         }
-        public bool CheckInputPossibleDate(string value)
-        {
-            //[M_Control]
-            M_Control_DL cdl = new M_Control_DL();
-            M_Control_Entity me = new M_Control_Entity();
+        //public bool CheckInputPossibleDate(string value)
+        //{
+        //    //[M_Control]
+        //    M_Control_DL cdl = new M_Control_DL();
+        //    M_Control_Entity me = new M_Control_Entity();
 
-            me.MainKey = "1";
-            me.ChangeDate = value;
+        //    me.MainKey = "1";
+        //    me.ChangeDate = value;
 
-            DataTable dt = cdl.M_Control_CheckDate(me);
-            if (dt.Rows.Count > 0)
-            {
-                return true;
-            }
-            else
-                return false;
-        }
+        //    DataTable dt = cdl.M_Control_CheckDate(me);
+        //    if (dt.Rows.Count > 0)
+        //    {
+        //        return true;
+        //    }
+        //    else
+        //        return false;
+        //}
 
-        public bool CheckInputPossibleDateWithFisicalMonth(string value)
-        {
-            //[M_Control]
-            M_Control_DL cdl = new M_Control_DL();
-            M_Control_Entity me = new M_Control_Entity();
+        //public bool CheckInputPossibleDateWithFisicalMonth(string value)
+        //{
+        //    //[M_Control]
+        //    M_Control_DL cdl = new M_Control_DL();
+        //    M_Control_Entity me = new M_Control_Entity();
 
-            me.MainKey = "1";
-            me.ChangeDate = value;
+        //    me.MainKey = "1";
+        //    me.ChangeDate = value;
 
-            DataTable dt = cdl.M_Control_CheckDateWithFisicalMonth(me);
-            if (dt.Rows.Count > 0)
-            {
-                return true;
-            }
-            else
-                return false;
-        }
-        public int GetTennic()
-        {
-            //[M_Control]
-            M_Control_DL cdl = new M_Control_DL();
-            M_Control_Entity me = new M_Control_Entity();
+        //    DataTable dt = cdl.M_Control_CheckDateWithFisicalMonth(me);
+        //    if (dt.Rows.Count > 0)
+        //    {
+        //        return true;
+        //    }
+        //    else
+        //        return false;
+        //}
+        //public int GetTennic()
+        //{
+        //    //[M_Control]
+        //    M_Control_DL cdl = new M_Control_DL();
+        //    M_Control_Entity me = new M_Control_Entity();
 
-            me.MainKey = "1";
+        //    me.MainKey = "1";
 
-            DataTable dt = cdl.M_Control_Select(me);
-            if (dt.Rows.Count > 0)
-            {
-                return Convert.ToInt16(dt.Rows[0]["Tennic"]);
-            }
-            return 0;
-        }
+        //    DataTable dt = cdl.M_Control_Select(me);
+        //    if (dt.Rows.Count > 0)
+        //    {
+        //        return Convert.ToInt16(dt.Rows[0]["Tennic"]);
+        //    }
+        //    return 0;
+        //}
         /// <summary>	
         /// 店舗の締日チェック	
         /// 店舗締マスターで判断	
         /// </summary>	
         /// <param name="mse">M_StoreClose_Entity</param>	
         /// <returns></returns>	
-        public bool CheckStoreClose(M_StoreClose_Entity mse, bool uri, bool sir, bool nyk, bool sha, bool son)
-        {
-            //M_StoreClose_DL msdl = new M_StoreClose_DL();
-            //DataTable dt = msdl.M_StoreClose_Select(mse);
-            //if (dt.Rows.Count > 0)
-            //{
-            //    //M_StoreClose.ClosePosition2＝	1		
-            //    //M_StoreClose.ClosePosition2＝	2		
-            //    //であればエラー	
-            //    if (uri)
-            //    {
-            //        if (dt.Rows[0]["ClosePosition1"].ToString().Equals("1"))
-            //        {
-            //            ShowMessage("E203");
-            //            return false;
-            //        }
-            //        else if (dt.Rows[0]["ClosePosition1"].ToString().Equals("2"))
-            //        {
-            //            ShowMessage("E194");
-            //            return false;
-            //        }
-            //    }
-            //    if (sir)
-            //    {
-            //        if (dt.Rows[0]["ClosePosition2"].ToString().Equals("1"))
-            //        {
-            //            ShowMessage("E203");
-            //            return false;
-            //        }
-            //        else if (dt.Rows[0]["ClosePosition2"].ToString().Equals("2"))
-            //        {
-            //            ShowMessage("E194");
-            //            return false;
-            //        }
-            //    }
-            //    if (nyk)
-            //    {
-            //        if (dt.Rows[0]["ClosePosition3"].ToString().Equals("1"))
-            //        {
-            //            ShowMessage("E203");
-            //            return false;
-            //        }
-            //        else if (dt.Rows[0]["ClosePosition3"].ToString().Equals("2"))
-            //        {
-            //            ShowMessage("E194");
-            //            return false;
-            //        }
-            //    }
-            //    if (sha)
-            //    {
-            //        if (dt.Rows[0]["ClosePosition4"].ToString().Equals("1"))
-            //        {
-            //            ShowMessage("E203");
-            //            return false;
-            //        }
-            //        else if (dt.Rows[0]["ClosePosition4"].ToString().Equals("2"))
-            //        {
-            //            ShowMessage("E194");
-            //            return false;
-            //        }
-            //    }
-            //    if (son)
-            //    {
-            //        if (dt.Rows[0]["ClosePosition5"].ToString().Equals("1"))
-            //        {
-            //            ShowMessage("E203");
-            //            return false;
-            //        }
-            //        else if (dt.Rows[0]["ClosePosition5"].ToString().Equals("2"))
-            //        {
-            //            ShowMessage("E194");
-            //            return false;
-            //        }
-            //    }
-            //    return true;
-            //}
-            //else
-            //{
-            //    return true;
-            //}
-            return true;
-        }
+        //public bool CheckStoreClose(M_StoreClose_Entity mse, bool uri, bool sir, bool nyk, bool sha, bool son)
+        //{
+        //    M_StoreClose_DL msdl = new M_StoreClose_DL();
+        //    DataTable dt = msdl.M_StoreClose_Select(mse);
+        //    if (dt.Rows.Count > 0)
+        //    {
+        //        //M_StoreClose.ClosePosition2＝	1		
+        //        //M_StoreClose.ClosePosition2＝	2		
+        //        //であればエラー	
+        //        if (uri)
+        //        {
+        //            if (dt.Rows[0]["ClosePosition1"].ToString().Equals("1"))
+        //            {
+        //                ShowMessage("E203");
+        //                return false;
+        //            }
+        //            else if (dt.Rows[0]["ClosePosition1"].ToString().Equals("2"))
+        //            {
+        //                ShowMessage("E194");
+        //                return false;
+        //            }
+        //        }
+        //        if (sir)
+        //        {
+        //            if (dt.Rows[0]["ClosePosition2"].ToString().Equals("1"))
+        //            {
+        //                ShowMessage("E203");
+        //                return false;
+        //            }
+        //            else if (dt.Rows[0]["ClosePosition2"].ToString().Equals("2"))
+        //            {
+        //                ShowMessage("E194");
+        //                return false;
+        //            }
+        //        }
+        //        if (nyk)
+        //        {
+        //            if (dt.Rows[0]["ClosePosition3"].ToString().Equals("1"))
+        //            {
+        //                ShowMessage("E203");
+        //                return false;
+        //            }
+        //            else if (dt.Rows[0]["ClosePosition3"].ToString().Equals("2"))
+        //            {
+        //                ShowMessage("E194");
+        //                return false;
+        //            }
+        //        }
+        //        if (sha)
+        //        {
+        //            if (dt.Rows[0]["ClosePosition4"].ToString().Equals("1"))
+        //            {
+        //                ShowMessage("E203");
+        //                return false;
+        //            }
+        //            else if (dt.Rows[0]["ClosePosition4"].ToString().Equals("2"))
+        //            {
+        //                ShowMessage("E194");
+        //                return false;
+        //            }
+        //        }
+        //        if (son)
+        //        {
+        //            if (dt.Rows[0]["ClosePosition5"].ToString().Equals("1"))
+        //            {
+        //                ShowMessage("E203");
+        //                return false;
+        //            }
+        //            else if (dt.Rows[0]["ClosePosition5"].ToString().Equals("2"))
+        //            {
+        //                ShowMessage("E194");
+        //                return false;
+        //            }
+        //        }
+        //        return true;
+        //    }
+        //    else
+        //    {
+        //        return true;
+        //    }
+        //}
         public string LeftB(string s, int maxByteCount)
         {
             Encoding encoding = Encoding.GetEncoding("Shift_JIS");
@@ -564,191 +563,191 @@ namespace BL
            return  String.Format("{0:0.00}", Convert.ToDecimal(val) );
         }
 
-        /// <summary>
-        /// 消費税計算処理
-        /// 税抜金額より税込金額を取得する
-        /// 計算モード：１
-        /// </summary>
-        /// <param name="kingaku">税抜金額</param>
-        /// <param name="ymd">YYYY/MM/DD形式,未入力時システム日付</param>
-        /// <param name="taxRateFLG">0:非課税、1:通常課税、2:軽減課税</param>
-        /// <returns></returns>
-        public decimal GetZeikomiKingaku(decimal kingaku, int taxRateFLG, out decimal zei, string ymd = "")
-        {
-            decimal outKingaku = 0;
-            zei = 0;
-            Function_DL fdl = new Function_DL();
-            DataTable dt = fdl.Fnc_TAXCalculation(1, kingaku, ymd, taxRateFLG);
-            if (dt.Rows.Count > 0)
-            {
-                zei = Z_Set(dt.Rows[0]["Kingaku1"]);
-                outKingaku = zei + kingaku;
-            }
-            return outKingaku;
-        }
+        ///// <summary>
+        ///// 消費税計算処理
+        ///// 税抜金額より税込金額を取得する
+        ///// 計算モード：１
+        ///// </summary>
+        ///// <param name="kingaku">税抜金額</param>
+        ///// <param name="ymd">YYYY/MM/DD形式,未入力時システム日付</param>
+        ///// <param name="taxRateFLG">0:非課税、1:通常課税、2:軽減課税</param>
+        ///// <returns></returns>
+        //public decimal GetZeikomiKingaku(decimal kingaku, int taxRateFLG, out decimal zei, string ymd = "")
+        //{
+        //    decimal outKingaku = 0;
+        //    zei = 0;
+        //    Function_DL fdl = new Function_DL();
+        //    DataTable dt = fdl.Fnc_TAXCalculation(1, kingaku, ymd, taxRateFLG);
+        //    if (dt.Rows.Count > 0)
+        //    {
+        //        zei = Z_Set(dt.Rows[0]["Kingaku1"]);
+        //        outKingaku = zei + kingaku;
+        //    }
+        //    return outKingaku;
+        //}
 
-        /// <summary>
-        /// 消費税計算処理
-        /// 税抜金額より税込金額を取得する
-        /// 計算モード：１
-        /// </summary>
-        /// <param name="kingaku">税抜金額</param>
-        /// <param name="taxRateFLG">0:非課税、1:通常課税、2:軽減課税</param>
-        /// <param name="zei">OUT:消費税</param>
-        /// <param name="zeiritsu">OUT:消費税率</param>
-        /// <param name="ymd">YYYY/MM/DD形式,未入力時システム日付</param>
-        /// <returns></returns>
-        public decimal GetZeikomiKingaku(decimal kingaku, int taxRateFLG, out decimal zei, out decimal zeiritsu, string ymd = "")
-        {
-            decimal outKingaku = 0;
-            zei = 0;
-            zeiritsu = 0;
-            Function_DL fdl = new Function_DL();
-            DataTable dt = fdl.Fnc_TAXCalculation(1, kingaku, ymd, taxRateFLG);
-            if (dt.Rows.Count > 0)
-            {
-                zei = Z_Set(dt.Rows[0]["Kingaku1"]);
-                zeiritsu = Z_Set(dt.Rows[0]["Zeiritsu"]);
-                outKingaku = zei + kingaku;
-            }
-            return outKingaku;
-        }
+        ///// <summary>
+        ///// 消費税計算処理
+        ///// 税抜金額より税込金額を取得する
+        ///// 計算モード：１
+        ///// </summary>
+        ///// <param name="kingaku">税抜金額</param>
+        ///// <param name="taxRateFLG">0:非課税、1:通常課税、2:軽減課税</param>
+        ///// <param name="zei">OUT:消費税</param>
+        ///// <param name="zeiritsu">OUT:消費税率</param>
+        ///// <param name="ymd">YYYY/MM/DD形式,未入力時システム日付</param>
+        ///// <returns></returns>
+        //public decimal GetZeikomiKingaku(decimal kingaku, int taxRateFLG, out decimal zei, out decimal zeiritsu, string ymd = "")
+        //{
+        //    decimal outKingaku = 0;
+        //    zei = 0;
+        //    zeiritsu = 0;
+        //    Function_DL fdl = new Function_DL();
+        //    DataTable dt = fdl.Fnc_TAXCalculation(1, kingaku, ymd, taxRateFLG);
+        //    if (dt.Rows.Count > 0)
+        //    {
+        //        zei = Z_Set(dt.Rows[0]["Kingaku1"]);
+        //        zeiritsu = Z_Set(dt.Rows[0]["Zeiritsu"]);
+        //        outKingaku = zei + kingaku;
+        //    }
+        //    return outKingaku;
+        //}
 
-        /// <summary>
-        /// 消費税計算処理
-        /// 税込金額より税抜金額を取得する
-        /// 計算モード：２
-        /// </summary>
-        /// <param name="kingaku"></param>
-        /// <param name="ymd">YYYY/MM/DD形式,未入力時システム日付</param>
-        /// <param name="taxRateFLG">0:非課税、1:通常課税、2:軽減課税</param>
-        /// <returns></returns>
-        public decimal GetZeinukiKingaku(decimal kingaku, int taxRateFLG, string ymd = "")
-        {
-            decimal outKingaku = 0;
+        ///// <summary>
+        ///// 消費税計算処理
+        ///// 税込金額より税抜金額を取得する
+        ///// 計算モード：２
+        ///// </summary>
+        ///// <param name="kingaku"></param>
+        ///// <param name="ymd">YYYY/MM/DD形式,未入力時システム日付</param>
+        ///// <param name="taxRateFLG">0:非課税、1:通常課税、2:軽減課税</param>
+        ///// <returns></returns>
+        //public decimal GetZeinukiKingaku(decimal kingaku, int taxRateFLG, string ymd = "")
+        //{
+        //    decimal outKingaku = 0;
 
-            Function_DL fdl = new Function_DL();
-            DataTable dt = fdl.Fnc_TAXCalculation(2, kingaku, ymd, taxRateFLG);
+        //    Function_DL fdl = new Function_DL();
+        //    DataTable dt = fdl.Fnc_TAXCalculation(2, kingaku, ymd, taxRateFLG);
 
-            if (dt.Rows.Count > 0)
-            {
-                outKingaku = Z_Set(dt.Rows[0]["Kingaku1"]);
-            }
+        //    if (dt.Rows.Count > 0)
+        //    {
+        //        outKingaku = Z_Set(dt.Rows[0]["Kingaku1"]);
+        //    }
 
-            return outKingaku;
-        }
+        //    return outKingaku;
+        //}
 
-        /// <summary>
-        /// 単価取得処理
-        /// </summary>
-        /// <param name="fue"></param>
-        /// <returns></returns>
-        public bool Fnc_UnitPrice(Fnc_UnitPrice_Entity fue)
-        {
-            Function_DL fdl = new Function_DL();
-            DataTable dt = fdl.Fnc_UnitPrice(fue);
+        ///// <summary>
+        ///// 単価取得処理
+        ///// </summary>
+        ///// <param name="fue"></param>
+        ///// <returns></returns>
+        //public bool Fnc_UnitPrice(Fnc_UnitPrice_Entity fue)
+        //{
+        //    Function_DL fdl = new Function_DL();
+        //    DataTable dt = fdl.Fnc_UnitPrice(fue);
 
-            if (dt.Rows.Count > 0)
-            {
-                fue.ZeikomiTanka = Z_SetStr(dt.Rows[0]["ZeikomiTanka"]);
-                fue.ZeinukiTanka = Z_SetStr(dt.Rows[0]["ZeinukiTanka"]);
-                fue.Zeiritsu = Z_SetStr(dt.Rows[0]["Zeiritsu"]);
-                fue.Zei = Z_SetStr(dt.Rows[0]["Zei"]);
-                fue.GenkaTanka = Z_SetStr(dt.Rows[0]["GenkaTanka"]);
-                fue.Bikou = dt.Rows[0]["Bikou"].ToString();
-                fue.IppanZeikomiTanka = Z_SetStr(dt.Rows[0]["IppanZeikomiTanka"]);
-                fue.KaiinZeikomiTanka = Z_SetStr(dt.Rows[0]["KaiinZeikomiTanka"]);
-                fue.GaishoZeikomiTanka = Z_SetStr(dt.Rows[0]["GaishoZeikomiTanka"]);
-                fue.SaleTanka = Z_SetStr(dt.Rows[0]["SaleTanka"]);
+        //    if (dt.Rows.Count > 0)
+        //    {
+        //        fue.ZeikomiTanka = Z_SetStr(dt.Rows[0]["ZeikomiTanka"]);
+        //        fue.ZeinukiTanka = Z_SetStr(dt.Rows[0]["ZeinukiTanka"]);
+        //        fue.Zeiritsu = Z_SetStr(dt.Rows[0]["Zeiritsu"]);
+        //        fue.Zei = Z_SetStr(dt.Rows[0]["Zei"]);
+        //        fue.GenkaTanka = Z_SetStr(dt.Rows[0]["GenkaTanka"]);
+        //        fue.Bikou = dt.Rows[0]["Bikou"].ToString();
+        //        fue.IppanZeikomiTanka = Z_SetStr(dt.Rows[0]["IppanZeikomiTanka"]);
+        //        fue.KaiinZeikomiTanka = Z_SetStr(dt.Rows[0]["KaiinZeikomiTanka"]);
+        //        fue.GaishoZeikomiTanka = Z_SetStr(dt.Rows[0]["GaishoZeikomiTanka"]);
+        //        fue.SaleTanka = Z_SetStr(dt.Rows[0]["SaleTanka"]);
 
-                return true;
-            }
-            else
-            {
-                fue.ZeikomiTanka = "0";
-                fue.ZeinukiTanka = "0";
-                fue.Zeiritsu = "0";
-                fue.Zei = "0";
-                fue.GenkaTanka = "0";
-                fue.Bikou = "";
-                fue.IppanZeikomiTanka = "0";
-                fue.KaiinZeikomiTanka = "0";
-                fue.GaishoZeikomiTanka = "0";
-                fue.SaleTanka = "0";
-                return false;
-            }
-        }
+        //        return true;
+        //    }
+        //    else
+        //    {
+        //        fue.ZeikomiTanka = "0";
+        //        fue.ZeinukiTanka = "0";
+        //        fue.Zeiritsu = "0";
+        //        fue.Zei = "0";
+        //        fue.GenkaTanka = "0";
+        //        fue.Bikou = "";
+        //        fue.IppanZeikomiTanka = "0";
+        //        fue.KaiinZeikomiTanka = "0";
+        //        fue.GaishoZeikomiTanka = "0";
+        //        fue.SaleTanka = "0";
+        //        return false;
+        //    }
+        //}
 
-        public bool Fnc_Reserve(Fnc_Reserve_Entity fre)
-        {
-            Function_DL fdl = new Function_DL();
-            DataTable dt = fdl.Fnc_Reserve(fre);
+        //public bool Fnc_Reserve(Fnc_Reserve_Entity fre)
+        //{
+        //    Function_DL fdl = new Function_DL();
+        //    DataTable dt = fdl.Fnc_Reserve(fre);
 
-            if (dt.Rows.Count > 0)
-            {
-                fre.Result = dt.Rows[0]["Result"].ToString();
-                fre.Error = dt.Rows[0]["Error"].ToString();
-                fre.LastDay = dt.Rows[0]["LastDay"].ToString();
-                fre.OutKariHikiateNo = dt.Rows[0]["OutKariHikiateNo"].ToString();
+        //    if (dt.Rows.Count > 0)
+        //    {
+        //        fre.Result = dt.Rows[0]["Result"].ToString();
+        //        fre.Error = dt.Rows[0]["Error"].ToString();
+        //        fre.LastDay = dt.Rows[0]["LastDay"].ToString();
+        //        fre.OutKariHikiateNo = dt.Rows[0]["OutKariHikiateNo"].ToString();
 
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-        public string Fnc_PlanDate(Fnc_PlanDate_Entity fpe)
-        {
-            Function_DL fdl = new Function_DL();
-            DataTable dt = fdl.Fnc_PlanDate(fpe);
+        //        return true;
+        //    }
+        //    else
+        //    {
+        //        return false;
+        //    }
+        //}
+        //public string Fnc_PlanDate(Fnc_PlanDate_Entity fpe)
+        //{
+        //    Function_DL fdl = new Function_DL();
+        //    DataTable dt = fdl.Fnc_PlanDate(fpe);
 
-            if (dt.Rows.Count > 0)
-            {
-                fpe.Yoteibi = dt.Rows[0]["Yoteibi"].ToString();
+        //    if (dt.Rows.Count > 0)
+        //    {
+        //        fpe.Yoteibi = dt.Rows[0]["Yoteibi"].ToString();
 
-                return fpe.Yoteibi;
-            }
-            else
-            {
-                return "";
-            }
-        }
+        //        return fpe.Yoteibi;
+        //    }
+        //    else
+        //    {
+        //        return "";
+        //    }
+        //}
 
-        public bool Fnc_Present(Fnc_Present_Entity fpe)
-        {
-            Function_DL fdl = new Function_DL();
-            DataTable dt = fdl.Fnc_Present(fpe);
+        //public bool Fnc_Present(Fnc_Present_Entity fpe)
+        //{
+        //    Function_DL fdl = new Function_DL();
+        //    DataTable dt = fdl.Fnc_Present(fpe);
 
-            if (dt.Rows.Count > 0)
-            {
-                fpe.outPresentCD1 = dt.Rows[0]["PresentCD1"].ToString();
-                fpe.outPresentCD2 = dt.Rows[0]["PresentCD2"].ToString();
-                fpe.outPresentCD3 = dt.Rows[0]["PresentCD3"].ToString();
-                fpe.outPresentCD4 = dt.Rows[0]["PresentCD4"].ToString();
-                fpe.outPresentCD5 = dt.Rows[0]["PresentCD5"].ToString();
+        //    if (dt.Rows.Count > 0)
+        //    {
+        //        fpe.outPresentCD1 = dt.Rows[0]["PresentCD1"].ToString();
+        //        fpe.outPresentCD2 = dt.Rows[0]["PresentCD2"].ToString();
+        //        fpe.outPresentCD3 = dt.Rows[0]["PresentCD3"].ToString();
+        //        fpe.outPresentCD4 = dt.Rows[0]["PresentCD4"].ToString();
+        //        fpe.outPresentCD5 = dt.Rows[0]["PresentCD5"].ToString();
 
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-        public string Fnc_SetCheckdigit(string janCount)
-        {
-            string outJancd ="";
+        //        return true;
+        //    }
+        //    else
+        //    {
+        //        return false;
+        //    }
+        //}
+        //public string Fnc_SetCheckdigit(string janCount)
+        //{
+        //    string outJancd ="";
 
-            Function_DL fdl = new Function_DL();
-            DataTable dt = fdl.Fnc_SetCheckdigit(janCount);
+        //    Function_DL fdl = new Function_DL();
+        //    DataTable dt = fdl.Fnc_SetCheckdigit(janCount);
 
-            if (dt.Rows.Count > 0)
-            {
-                outJancd =dt.Rows[0]["JANCD"].ToString();
-            }
+        //    if (dt.Rows.Count > 0)
+        //    {
+        //        outJancd =dt.Rows[0]["JANCD"].ToString();
+        //    }
 
-            return outJancd;
-        }
+        //    return outJancd;
+        //}
         public DataTable SimpleSelect1(string checkType = null, string changeDate = null, string param1 = null, string param2 = null, string param3 = null)
         {
             Base_DL bdl = new Base_DL();
@@ -779,25 +778,25 @@ namespace BL
 
             return bdl.SelectData(dic, sp);
         }
-        public bool Fnc_Credit(Fnc_Credit_Entity fce)
-        {
-            Function_DL fdl = new Function_DL();
-            DataTable dt = fdl.Fnc_Credit(fce);
+        //public bool Fnc_Credit(Fnc_Credit_Entity fce)
+        //{
+        //    Function_DL fdl = new Function_DL();
+        //    DataTable dt = fdl.Fnc_Credit(fce);
 
-            if (dt.Rows.Count > 0)
-            {
-                fce.CreditCheckKBN = dt.Rows[0]["CreditCheckKBN"].ToString();
-                fce.CreditMessage = dt.Rows[0]["CreditMessage"].ToString();
-                fce.SaikenGaku = dt.Rows[0]["SaikenGaku"].ToString();
-                fce.CreditAmount = dt.Rows[0]["CreditAmount"].ToString();
+        //    if (dt.Rows.Count > 0)
+        //    {
+        //        fce.CreditCheckKBN = dt.Rows[0]["CreditCheckKBN"].ToString();
+        //        fce.CreditMessage = dt.Rows[0]["CreditMessage"].ToString();
+        //        fce.SaikenGaku = dt.Rows[0]["SaikenGaku"].ToString();
+        //        fce.CreditAmount = dt.Rows[0]["CreditAmount"].ToString();
 
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
+        //        return true;
+        //    }
+        //    else
+        //    {
+        //        return false;
+        //    }
+        //}
 
         //public string GetConnectionString()
         //{

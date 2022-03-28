@@ -23,7 +23,7 @@ namespace BL
         private const string IniFileName = "ORS.ini";
         //  public static bool Islocalized =false;
         M_Staff_DL msdl;
-        M_Store_DL mstoredl;
+        //M_Store_DL mstoredl;
         Menu_DL mdl;
         public const bool isd = false;
         public static bool Islocalized = false;
@@ -39,7 +39,7 @@ namespace BL
         public Login_BL()
         {
             msdl = new M_Staff_DL();
-            mstoredl = new M_Store_DL();
+            //mstoredl = new M_Store_DL();
             mdl = new Menu_DL();
         }
         
@@ -136,19 +136,19 @@ namespace BL
             return mse;
         }
 
-        public M_Store_Entity M_Store_InitSelect(M_Staff_Entity mse, M_Store_Entity mste)
-        {
-            DataTable dt = mstoredl.M_Store_InitSelect(mse);
-            if (dt.Rows.Count > 0)
-            {
-                mste.StoreName = dt.Rows[0]["StoreName"].ToString();
-                mste.SysDate = dt.Rows[0]["sysDate"].ToString();
-                mste.StoreCD = dt.Rows[0]["StoreCD"].ToString();
-                Base_DL.iniEntity.DatabaseDate = mste.SysDate;
-            }
+        //public M_Store_Entity M_Store_InitSelect(M_Staff_Entity mse, M_Store_Entity mste)
+        //{
+        //    DataTable dt = mstoredl.M_Store_InitSelect(mse);
+        //    if (dt.Rows.Count > 0)
+        //    {
+        //        mste.StoreName = dt.Rows[0]["StoreName"].ToString();
+        //        mste.SysDate = dt.Rows[0]["sysDate"].ToString();
+        //        mste.StoreCD = dt.Rows[0]["StoreCD"].ToString();
+        //        Base_DL.iniEntity.DatabaseDate = mste.SysDate;
+        //    }
 
-            return mste;
-        }
+        //    return mste;
+        //}
 
         /// <summary>
         /// 共通処理　プログラム
@@ -344,10 +344,7 @@ namespace BL
             }
             else
             {
-                // ★★↓↓↓PTKさんが引き継ぎ済みの部分　動かす為にとりあえず↓↓↓★★★
-                //filePath = @"C:\\SMS\\AppData\\CKM.ini";
                 filePath = @"C:\\ORS\\AppData\\ORS.ini";
-                // ★★↑↑↑PTKさんが引き継ぎ済みの部分　動かす為にとりあえず↑↑↑★★
             }
             IniFile_DL idl = new IniFile_DL(filePath);
             return idl.IniReadValue("FilePath", key);

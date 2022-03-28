@@ -326,14 +326,14 @@ namespace Search
         { get => txtChangeDate; }
 
         Base_BL bbl;
-        Search_BL sbl;
+        //Search_BL sbl;
         public CKM_SearchControl()
         {
             InitializeComponent();
             this.AutoSize = true;
             this.ImeMode = ImeMode.Disable;
             bbl = new Base_BL();
-            sbl = new Search_BL();
+            //sbl = new Search_BL();
         }
 
         /// <summary>

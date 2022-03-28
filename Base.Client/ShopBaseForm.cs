@@ -193,12 +193,12 @@ namespace Base.Client
 
             this.lblOperatorName.Text = mse.StaffName;
 
-            M_Store_Entity mste = new M_Store_Entity
-            {
-                SysDate = mse.SysDate
-            };
-            mste = loginbl.M_Store_InitSelect(mse, mste);
-            this.lblStoreName.Text = mste.StoreName;
+            //M_Store_Entity mste = new M_Store_Entity
+            //{
+            //    SysDate = mse.SysDate
+            //};
+            //mste = loginbl.M_Store_InitSelect(mse, mste);
+            //this.lblStoreName.Text = mste.StoreName;
            
         }
         /// <summary>
@@ -244,10 +244,10 @@ namespace Base.Client
             {
                 SysDate = mse.SysDate
             };
-            mste=loginbl.M_Store_InitSelect(mse,mste);
-            this.lblStoreName.Text = mste.StoreName;
-            StoreCD = mste.StoreCD;
-            StoreName = mste.StoreName;
+            //mste=loginbl.M_Store_InitSelect(mse,mste);
+            //this.lblStoreName.Text = mste.StoreName;
+            //StoreCD = mste.StoreCD;
+            //StoreName = mste.StoreName;
             ChangeDate = mste.SysDate;
 
             //共通処理　プログラム

@@ -442,90 +442,92 @@ namespace CKM_Controls
             };
             switch (Cbo_Type)
             {
-                case CboType.店舗ストア:
-                    Store_BL sbl = new Store_BL();                 
-                    DataTable dtStore = sbl.BindStore(mse);
-                    BindCombo("StoreCD", "StoreName", dtStore);
-                    break;
-                case CboType.倉庫種別:
-                    MultiPorpose_BL mpbl = new MultiPorpose_BL();
-                    M_MultiPorpose_Entity mme = new M_MultiPorpose_Entity();
-                    mme.ID = mpbl.ID_Store;
-                    DataTable dtSoukoType = mpbl.M_MultiPorpose_SoukoTypeSelect(mme);
-                    BindCombo("Key", "IDName", dtSoukoType);
-                    break;
-                case CboType.部門:
-                    Staff_BL staffBL1 = new Staff_BL();
-                    DataTable dtBMNCD = staffBL1.BindBMN();
-                    BindCombo("Key", "Char1", dtBMNCD);
-                    break;
-                case CboType.メニュー:
-                    Staff_BL staffBL2 = new Staff_BL();
-                    DataTable dtMenu = staffBL2.BindMenu();
-                    BindCombo("MenuID", "MenuName", dtMenu);
-                    break;
-                case CboType.処理権限:
-                    Staff_BL staffBL3 = new Staff_BL();
-                    DataTable dtAuthor = staffBL3.BindAuthorization();
-                    BindCombo("AuthorizationsCD", "AuthorizationsName", dtAuthor);
-                    break;
-                case CboType.店舗権限:
-                    Staff_BL staffBL4 = new Staff_BL();
-                    DataTable dtStoreAuthor = staffBL4.BindStoreAuthorization();
-                    BindCombo("StoreAuthorizationsCD", "StoreAuthorizationsName", dtStoreAuthor);
-                    break;
-                case CboType.役職:
-                    Staff_BL staffBL5 = new Staff_BL();
-                    DataTable dtPosition = staffBL5.BindPosition();
-                    BindCombo("Key", "Char1", dtPosition);
-                    break;
-                case CboType.データ種別:
-                    MultiPorpose_BL mpBL = new MultiPorpose_BL();
-                    DataTable dtKBN = mpBL.BindSeqKBN();
-                    BindCombo("Column1", "Char1", dtKBN);
-                    break;
-                case CboType.貨幣金種名:
-                    MultiPorpose_BL mppbl = new MultiPorpose_BL();
-                    DataTable dtDenomination = mppbl.BindSeqDepo();
-                    BindCombo("Key", "Char1", dtDenomination);
-                    break;
-                case CboType.両替元額:
-                    MultiPorpose_BL mmpbl = new MultiPorpose_BL();
-                    DataTable dtExchangeDenomination = mmpbl.BindSeqDepo();
-                    BindCombo("Num1", "Char1", dtExchangeDenomination);
-                    break;
-                case CboType.店舗名:
-                    Store_BL storebl = new Store_BL();                 
-                    DataTable storetb = storebl.BindData(mse);
-                    BindCombo("StoreCD", "StoreName", storetb);
-                    break;
-                case CboType.金種名:
-                    DenominationKBN_BL dbl = new DenominationKBN_BL();
-                    DataTable dtdeno = dbl.SimpleSelect1("35");
-                    BindCombo("DenominationCD", "DenominationName", dtdeno);
-                    break;
-                case CboType.金種名1:
-                    DenominationKBN_BL dbl1 = new DenominationKBN_BL();
-                    DataTable dtdeno1 = dbl1.SimpleSelect1("63");
-                    BindCombo("DenominationCD", "DenominationName", dtdeno1);
-                    break;
-                case CboType.倉庫:
-                    Search_Souko_BL msbl = new Search_Souko_BL();
-                    M_Souko_Entity mske = new M_Souko_Entity();
-                    mske.DeleteFlg = "0";
-                    //mske.SoukoType = "3"; 3,4の両方へ変更
-                    mske.ChangeDate = changeDate;
-                    DataTable dtSouko = msbl.M_Souko_Bind(mske);
-                    BindCombo("SoukoCD", "SoukoName", dtSouko);
-                    break;
-                case CboType.入荷倉庫:
-                    NyuukaNyuuryoku_BL nnbl = new NyuukaNyuuryoku_BL();
-                    M_Souko_Entity msoe = new M_Souko_Entity();
-                    msoe.ChangeDate = changeDate;
-                    msoe.DeleteFlg = "0";
-                    DataTable dtNSouko = nnbl.M_Souko_BindForNyuuka(msoe);
-                    BindCombo("SoukoCD", "SoukoName", dtNSouko);
-                    break;
+                #region SMS用のソースをコメントアウト
+                //case CboType.店舗ストア:
+                //    Store_BL sbl = new Store_BL();                 
+                //    DataTable dtStore = sbl.BindStore(mse);
+                //    BindCombo("StoreCD", "StoreName", dtStore);
+                //    break;
+                //case CboType.倉庫種別:
+                //    MultiPorpose_BL mpbl = new MultiPorpose_BL();
+                //    M_MultiPorpose_Entity mme = new M_MultiPorpose_Entity();
+                //    mme.ID = mpbl.ID_Store;
+                //    DataTable dtSoukoType = mpbl.M_MultiPorpose_SoukoTypeSelect(mme);
+                //    BindCombo("Key", "IDName", dtSoukoType);
+                //    break;
+                //case CboType.部門:
+                //    Staff_BL staffBL1 = new Staff_BL();
+                //    DataTable dtBMNCD = staffBL1.BindBMN();
+                //    BindCombo("Key", "Char1", dtBMNCD);
+                //    break;
+                //case CboType.メニュー:
+                //    Staff_BL staffBL2 = new Staff_BL();
+                //    DataTable dtMenu = staffBL2.BindMenu();
+                //    BindCombo("MenuID", "MenuName", dtMenu);
+                //    break;
+                //case CboType.処理権限:
+                //    Staff_BL staffBL3 = new Staff_BL();
+                //    DataTable dtAuthor = staffBL3.BindAuthorization();
+                //    BindCombo("AuthorizationsCD", "AuthorizationsName", dtAuthor);
+                //    break;
+                //case CboType.店舗権限:
+                //    Staff_BL staffBL4 = new Staff_BL();
+                //    DataTable dtStoreAuthor = staffBL4.BindStoreAuthorization();
+                //    BindCombo("StoreAuthorizationsCD", "StoreAuthorizationsName", dtStoreAuthor);
+                //    break;
+                //case CboType.役職:
+                //    Staff_BL staffBL5 = new Staff_BL();
+                //    DataTable dtPosition = staffBL5.BindPosition();
+                //    BindCombo("Key", "Char1", dtPosition);
+                //    break;
+                //case CboType.データ種別:
+                //    MultiPorpose_BL mpBL = new MultiPorpose_BL();
+                //    DataTable dtKBN = mpBL.BindSeqKBN();
+                //    BindCombo("Column1", "Char1", dtKBN);
+                //    break;
+                //case CboType.貨幣金種名:
+                //    MultiPorpose_BL mppbl = new MultiPorpose_BL();
+                //    DataTable dtDenomination = mppbl.BindSeqDepo();
+                //    BindCombo("Key", "Char1", dtDenomination);
+                //    break;
+                //case CboType.両替元額:
+                //    MultiPorpose_BL mmpbl = new MultiPorpose_BL();
+                //    DataTable dtExchangeDenomination = mmpbl.BindSeqDepo();
+                //    BindCombo("Num1", "Char1", dtExchangeDenomination);
+                //    break;
+                //case CboType.店舗名:
+                //    Store_BL storebl = new Store_BL();                 
+                //    DataTable storetb = storebl.BindData(mse);
+                //    BindCombo("StoreCD", "StoreName", storetb);
+                //    break;
+                //case CboType.金種名:
+                //    DenominationKBN_BL dbl = new DenominationKBN_BL();
+                //    DataTable dtdeno = dbl.SimpleSelect1("35");
+                //    BindCombo("DenominationCD", "DenominationName", dtdeno);
+                //    break;
+                //case CboType.金種名1:
+                //    DenominationKBN_BL dbl1 = new DenominationKBN_BL();
+                //    DataTable dtdeno1 = dbl1.SimpleSelect1("63");
+                //    BindCombo("DenominationCD", "DenominationName", dtdeno1);
+                //    break;
+                //case CboType.倉庫:
+                //    Search_Souko_BL msbl = new Search_Souko_BL();
+                //    M_Souko_Entity mske = new M_Souko_Entity();
+                //    mske.DeleteFlg = "0";
+                //    //mske.SoukoType = "3"; 3,4の両方へ変更
+                //    mske.ChangeDate = changeDate;
+                //    DataTable dtSouko = msbl.M_Souko_Bind(mske);
+                //    BindCombo("SoukoCD", "SoukoName", dtSouko);
+                //    break;
+                //case CboType.入荷倉庫:
+                //    NyuukaNyuuryoku_BL nnbl = new NyuukaNyuuryoku_BL();
+                //    M_Souko_Entity msoe = new M_Souko_Entity();
+                //    msoe.ChangeDate = changeDate;
+                //    msoe.DeleteFlg = "0";
+                //    DataTable dtNSouko = nnbl.M_Souko_BindForNyuuka(msoe);
+                //    BindCombo("SoukoCD", "SoukoName", dtNSouko);
+                //    break;
+                #endregion
             }
         }
 
