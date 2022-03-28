@@ -43,11 +43,17 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="StoreProcedure\M_LoginChangedPass.sql" />
     <Content Include="StoreProcedure\F_Authorizations.sql" />
     <Content Include="StoreProcedure\F_AuthorizationsDetails.sql" />
     <Content Include="StoreProcedure\F_Menu_Details.sql" />
     <Content Include="StoreProcedure\MasterTouroku_Henkan_Insert_Update_Delete.sql" />
     <Content Include="StoreProcedure\M_Henkan_Select.sql" />
+    <Content Include="StoreProcedure\M_LoginAllItems.sql" />
+    <Content Include="StoreProcedure\M_LoginHMNU.sql" />
+    <Content Include="StoreProcedure\M_LoginStaffSelect.sql" />
+    <Content Include="StoreProcedure\M_LoginUserAccess.sql" />
+    <Content Include="StoreProcedure\M_LoginUserInitSelect.sql" />
     <Content Include="StoreProcedure\M_Tokuisaki_Delete.sql" />
     <Content Include="StoreProcedure\M_Tokuisaki_Insert_Update.sql" />
     <Content Include="StoreProcedure\M_Tokuisaki_Select.sql" />
