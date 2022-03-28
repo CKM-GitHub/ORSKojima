@@ -76,7 +76,6 @@
     <Content Include="StoreProcedure\M_MultiPorpose_SelectByChar1.sql" />
     <Content Include="StoreProcedure\M_MultiPorpose_SupplierSelect.sql" />
     <Content Include="StoreProcedure\M_MultiPorpose_Update.sql" />
-    <Content Include="StoreProcedure\M_MultiPurpose_Delete.sql" />
     <Content Include="StoreProcedure\M_MultiPurpose_IDSearch.sql" />
     <Content Include="StoreProcedure\M_MultiPurpose_IDSelect.sql" />
     <Content Include="StoreProcedure\M_MultiPurpose_Insert_Update.sql" />
