@@ -54,6 +54,7 @@
     <Content Include="StoreProcedure\M_LoginStaffSelect.sql" />
     <Content Include="StoreProcedure\M_LoginUserAccess.sql" />
     <Content Include="StoreProcedure\M_LoginUserInitSelect.sql" />
+    <Content Include="StoreProcedure\M_MultiPurpose_Delete.sql" />
     <Content Include="StoreProcedure\M_Tokuisaki_Delete.sql" />
     <Content Include="StoreProcedure\M_Tokuisaki_Insert_Update.sql" />
     <Content Include="StoreProcedure\M_Tokuisaki_Select.sql" />
