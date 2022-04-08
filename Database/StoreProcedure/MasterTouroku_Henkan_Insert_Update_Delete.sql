@@ -7,12 +7,12 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE PROCEDURE [dbo].[MasterTouroku_Henkan_Insert_Update_Delete]  
-	 @TokuisakiCD varchar(5),
-	 @RCMItemName varchar(50),
-	 @RCMItemValue varchar(50),
-	 @CsvOutputItemValue varchar(50),
-	 @CsvTitleName varchar(50),
-	 @Operator varchar(10),
+	 @TokuisakiCD nvarchar(5),
+	 @RCMItemName nvarchar(50),
+	 @RCMItemValue nvarchar(50),
+	 @CsvOutputItemValue nvarchar(50),
+	 @CsvTitleName nvarchar(50),
+	 @Operator nvarchar(10),
 	 @Mode as tinyint
 AS
 BEGIN

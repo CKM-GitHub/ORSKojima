@@ -16,7 +16,7 @@ namespace DL
 
             Dictionary<string, ValuePair> dic = new Dictionary<string, ValuePair>
             {
-                { "@TokuisakiCD", new ValuePair { value1 = SqlDbType.VarChar, value2 = mte.TokuisakiCD  } }
+                { "@TokuisakiCD", new ValuePair { value1 = SqlDbType.NVarChar, value2 = mte.TokuisakiCD  } }
             };
             return SelectData(dic, sp);
         }

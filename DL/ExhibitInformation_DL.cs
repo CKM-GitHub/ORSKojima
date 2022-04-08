@@ -20,17 +20,17 @@ namespace DL
         {
             Dictionary<string, ValuePair> dic = new Dictionary<string, ValuePair>
             {
-                { "@TokuisakiCD", new ValuePair { value1 = SqlDbType.VarChar, value2 = dse.TokuisakiCD } },
-                { "@BrandName", new ValuePair { value1 = SqlDbType.VarChar, value2 = dse.Brand_Name } },
-                { "@Item_Name1", new ValuePair { value1 = SqlDbType.VarChar, value2 = dse.Item_Name1 } },
-                { "@Item_Name2", new ValuePair { value1 = SqlDbType.VarChar, value2 = dse.Item_Name2 } },
-                { "@Item_Code1", new ValuePair { value1 = SqlDbType.VarChar, value2 = dse.Item_Code1 } },
-                { "@Item_Code2", new ValuePair { value1 = SqlDbType.VarChar, value2 = dse.Item_Code2 } },
-                { "@Item_Code3", new ValuePair { value1 = SqlDbType.VarChar, value2 = dse.Item_Code3 } },
-                { "@Item_Code4", new ValuePair { value1 = SqlDbType.VarChar, value2 = dse.Item_Code4 } },
-                { "@Item_Code5", new ValuePair { value1 = SqlDbType.VarChar, value2 = dse.Item_Code5 } },
-                { "@GrossProfit", new ValuePair { value1 = SqlDbType.VarChar, value2 = dse.ArariRate } },
-                { "@Discount", new ValuePair { value1 = SqlDbType.VarChar, value2 = dse.WaribikiRate } },
+                { "@TokuisakiCD", new ValuePair { value1 = SqlDbType.NVarChar, value2 = dse.TokuisakiCD } },
+                { "@BrandName", new ValuePair { value1 = SqlDbType.NVarChar, value2 = dse.Brand_Name } },
+                { "@Item_Name1", new ValuePair { value1 = SqlDbType.NVarChar, value2 = dse.Item_Name1 } },
+                { "@Item_Name2", new ValuePair { value1 = SqlDbType.NVarChar, value2 = dse.Item_Name2 } },
+                { "@Item_Code1", new ValuePair { value1 = SqlDbType.NVarChar, value2 = dse.Item_Code1 } },
+                { "@Item_Code2", new ValuePair { value1 = SqlDbType.NVarChar, value2 = dse.Item_Code2 } },
+                { "@Item_Code3", new ValuePair { value1 = SqlDbType.NVarChar, value2 = dse.Item_Code3 } },
+                { "@Item_Code4", new ValuePair { value1 = SqlDbType.NVarChar, value2 = dse.Item_Code4 } },
+                { "@Item_Code5", new ValuePair { value1 = SqlDbType.NVarChar, value2 = dse.Item_Code5 } },
+                { "@GrossProfit", new ValuePair { value1 = SqlDbType.NVarChar, value2 = dse.ArariRate } },
+                { "@Discount", new ValuePair { value1 = SqlDbType.NVarChar, value2 = dse.WaribikiRate } },
             };
             return SelectData(dic, "PRC_ExhibitInformation_SelectDataForDisp");
         }
@@ -64,14 +64,14 @@ namespace DL
             command.CommandType = CommandType.StoredProcedure;
             command.CommandTimeout = 0;
 
-            AddParam(command, "@TokuisakiCD", SqlDbType.VarChar, dse.TokuisakiCD);
+            AddParam(command, "@TokuisakiCD", SqlDbType.NVarChar, dse.TokuisakiCD);
             AddParamForDataTable(command, "@TableRegist", SqlDbType.Structured, dtRegist);
-            AddParam(command, "@Operator", SqlDbType.VarChar, dse.Operator);
-            AddParam(command, "@PC", SqlDbType.VarChar, dse.PC);
+            AddParam(command, "@Operator", SqlDbType.NVarChar, dse.Operator);
+            AddParam(command, "@PC", SqlDbType.NVarChar, dse.PC);
 
             //OUTパラメータの追加
             string outPutParam = "@OutTokuisakiCD";
-            command.Parameters.Add(outPutParam, SqlDbType.VarChar, 5);
+            command.Parameters.Add(outPutParam, SqlDbType.NVarChar, 5);
             command.Parameters[outPutParam].Direction = ParameterDirection.Output;
 
             UseTransaction = true;

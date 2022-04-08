@@ -8,9 +8,9 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE PROCEDURE [dbo].[M_Henkan_Select] 
 	-- Add the parameters for the stored procedure here
-	@TokuisakiCD varchar(5),
-	@RCMItemName varchar(50),
-	@RCMItemValue  varchar(50)
+	@TokuisakiCD nvarchar(5),
+	@RCMItemName nvarchar(50),
+	@RCMItemValue  nvarchar(50)
 	
 AS
 BEGIN

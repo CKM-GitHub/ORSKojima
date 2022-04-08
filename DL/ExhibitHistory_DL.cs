@@ -20,19 +20,19 @@ namespace DL
         {
             Dictionary<string, ValuePair> dic = new Dictionary<string, ValuePair>
             {
-                { "@TokuisakiCD", new ValuePair { value1 = SqlDbType.VarChar, value2 = dse.TokuisakiCD } },
-                { "@ExhibitDate1", new ValuePair { value1 = SqlDbType.VarChar, value2 = dse.ExhibitDate1 } },
-                { "@ExhibitDate2", new ValuePair { value1 = SqlDbType.VarChar, value2 = dse.ExhibitDate2 } },
-                { "@BrandName", new ValuePair { value1 = SqlDbType.VarChar, value2 = dse.Brand_Name } },
-                { "@Item_Name1", new ValuePair { value1 = SqlDbType.VarChar, value2 = dse.Item_Name1 } },
-                { "@Item_Name2", new ValuePair { value1 = SqlDbType.VarChar, value2 = dse.Item_Name2 } },
-                { "@Item_Code1", new ValuePair { value1 = SqlDbType.VarChar, value2 = dse.Item_Code1 } },
-                { "@Item_Code2", new ValuePair { value1 = SqlDbType.VarChar, value2 = dse.Item_Code2 } },
-                { "@Item_Code3", new ValuePair { value1 = SqlDbType.VarChar, value2 = dse.Item_Code3 } },
-                { "@Item_Code4", new ValuePair { value1 = SqlDbType.VarChar, value2 = dse.Item_Code4 } },
-                { "@Item_Code5", new ValuePair { value1 = SqlDbType.VarChar, value2 = dse.Item_Code5 } },
-                { "@GrossProfit", new ValuePair { value1 = SqlDbType.VarChar, value2 = dse.ArariRate } },
-                { "@Discount", new ValuePair { value1 = SqlDbType.VarChar, value2 = dse.WaribikiRate } },
+                { "@TokuisakiCD", new ValuePair { value1 = SqlDbType.NVarChar, value2 = dse.TokuisakiCD } },
+                { "@ExhibitDate1", new ValuePair { value1 = SqlDbType.NVarChar, value2 = dse.ExhibitDate1 } },
+                { "@ExhibitDate2", new ValuePair { value1 = SqlDbType.NVarChar, value2 = dse.ExhibitDate2 } },
+                { "@BrandName", new ValuePair { value1 = SqlDbType.NVarChar, value2 = dse.Brand_Name } },
+                { "@Item_Name1", new ValuePair { value1 = SqlDbType.NVarChar, value2 = dse.Item_Name1 } },
+                { "@Item_Name2", new ValuePair { value1 = SqlDbType.NVarChar, value2 = dse.Item_Name2 } },
+                { "@Item_Code1", new ValuePair { value1 = SqlDbType.NVarChar, value2 = dse.Item_Code1 } },
+                { "@Item_Code2", new ValuePair { value1 = SqlDbType.NVarChar, value2 = dse.Item_Code2 } },
+                { "@Item_Code3", new ValuePair { value1 = SqlDbType.NVarChar, value2 = dse.Item_Code3 } },
+                { "@Item_Code4", new ValuePair { value1 = SqlDbType.NVarChar, value2 = dse.Item_Code4 } },
+                { "@Item_Code5", new ValuePair { value1 = SqlDbType.NVarChar, value2 = dse.Item_Code5 } },
+                { "@GrossProfit", new ValuePair { value1 = SqlDbType.NVarChar, value2 = dse.ArariRate } },
+                { "@Discount", new ValuePair { value1 = SqlDbType.NVarChar, value2 = dse.WaribikiRate } },
             };
             return SelectData(dic, "PRC_ExhibitHistory_SelectDataForDisp");
         }

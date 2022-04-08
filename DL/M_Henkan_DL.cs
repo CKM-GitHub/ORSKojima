@@ -16,9 +16,9 @@ namespace DL
 
             Dictionary<string, ValuePair> dic = new Dictionary<string, ValuePair>
             {
-                { "@TokuisakiCD", new ValuePair { value1 = SqlDbType.VarChar, value2 = mhe.TokuisakiCD  } },
-                { "@RCMItemName", new ValuePair { value1 = SqlDbType.VarChar, value2 = mhe.RCMItemName  } },
-                { "@RCMItemValue", new ValuePair { value1 = SqlDbType.VarChar, value2 = mhe.RCMItemValue } }
+                { "@TokuisakiCD", new ValuePair { value1 = SqlDbType.NVarChar, value2 = mhe.TokuisakiCD  } },
+                { "@RCMItemName", new ValuePair { value1 = SqlDbType.NVarChar, value2 = mhe.RCMItemName  } },
+                { "@RCMItemValue", new ValuePair { value1 = SqlDbType.NVarChar, value2 = mhe.RCMItemValue } }
             };
             return SelectData(dic, sp);
         }
@@ -27,13 +27,13 @@ namespace DL
         {
             Dictionary<string, ValuePair> dic = new Dictionary<string, ValuePair>
             {
-                { "@TokuisakiCD", new ValuePair { value1 = SqlDbType.VarChar, value2 = mhe.TokuisakiCD  } },
-                { "@RCMItemName", new ValuePair { value1 = SqlDbType.VarChar, value2 = mhe.RCMItemName  } },
-                { "@RCMItemValue", new ValuePair { value1 = SqlDbType.VarChar, value2 = mhe.RCMItemValue} },
-                { "@CsvOutputItemValue", new ValuePair { value1 = SqlDbType.VarChar, value2 = mhe.CsvOutputItemValue  } },
-                { "@CsvTitleName", new ValuePair { value1 = SqlDbType.VarChar, value2 = mhe.CsvTitleName  } },
-                { "@Operator", new ValuePair { value1 = SqlDbType.VarChar, value2 = mhe.InsertOperator  } },
-                { "@Mode", new ValuePair { value1 = SqlDbType.VarChar, value2 = mode.ToString()} }
+                { "@TokuisakiCD", new ValuePair { value1 = SqlDbType.NVarChar, value2 = mhe.TokuisakiCD  } },
+                { "@RCMItemName", new ValuePair { value1 = SqlDbType.NVarChar, value2 = mhe.RCMItemName  } },
+                { "@RCMItemValue", new ValuePair { value1 = SqlDbType.NVarChar, value2 = mhe.RCMItemValue} },
+                { "@CsvOutputItemValue", new ValuePair { value1 = SqlDbType.NVarChar, value2 = mhe.CsvOutputItemValue  } },
+                { "@CsvTitleName", new ValuePair { value1 = SqlDbType.NVarChar, value2 = mhe.CsvTitleName  } },
+                { "@Operator", new ValuePair { value1 = SqlDbType.NVarChar, value2 = mhe.InsertOperator  } },
+                { "@Mode", new ValuePair { value1 = SqlDbType.TinyInt, value2 = mode.ToString()} }
             };
             UseTransaction = true;
             return InsertUpdateDeleteData(dic, "MasterTouroku_Henkan_Insert_Update_Delete");
