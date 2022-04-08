@@ -1,5 +1,5 @@
-﻿ BEGIN TRY 
- Drop Function dbo.[M_LoginChangedPass]
+﻿BEGIN TRY 
+ Drop PROCEDURE dbo.[M_LoginChangedPass]
 END try
 BEGIN CATCH END CATCH 
 SET ANSI_NULLS ON

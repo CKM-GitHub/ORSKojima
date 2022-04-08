@@ -1,5 +1,5 @@
-﻿ BEGIN TRY 
- Drop Function dbo.[M_LoginAllItems]
+﻿BEGIN TRY 
+ Drop PROCEDURE dbo.[M_LoginAllItems]
 END try
 BEGIN CATCH END CATCH 
 SET ANSI_NULLS ON

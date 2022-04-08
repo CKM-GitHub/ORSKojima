@@ -1,5 +1,5 @@
 ﻿ BEGIN TRY 
- Drop Function dbo.[M_LoginStaffSelect]
+ Drop PROCEDURE dbo.[M_LoginStaffSelect]
 END try
 BEGIN CATCH END CATCH 
 SET ANSI_NULLS ON
