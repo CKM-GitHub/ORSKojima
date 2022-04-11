@@ -31,6 +31,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Search_Key));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -84,11 +85,11 @@
             this.txtKey1.BorderColor = false;
             this.txtKey1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtKey1.ClientColor = System.Drawing.Color.White;
-            this.txtKey1.Ctrl_Byte = CKM_Controls.CKM_TextBox.Bytes.半角;
+            this.txtKey1.Ctrl_Byte = CKM_Controls.CKM_TextBox.Bytes.半全角;
             this.txtKey1.Ctrl_Type = CKM_Controls.CKM_TextBox.Type.Normal;
             this.txtKey1.DecimalPlace = 0;
             this.txtKey1.EnabledInsertKeyModeOnMouseEnter = false;
-            this.txtKey1.Font = new System.Drawing.Font("MS Gothic", 9F);
+            this.txtKey1.Font = new System.Drawing.Font("ＭＳ ゴシック", 9F);
             this.txtKey1.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Overwrite;
             this.txtKey1.IntegerPart = 0;
             this.txtKey1.IsCorrectDate = true;
@@ -116,11 +117,11 @@
             this.txtKey2.BorderColor = false;
             this.txtKey2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtKey2.ClientColor = System.Drawing.Color.White;
-            this.txtKey2.Ctrl_Byte = CKM_Controls.CKM_TextBox.Bytes.半角;
+            this.txtKey2.Ctrl_Byte = CKM_Controls.CKM_TextBox.Bytes.半全角;
             this.txtKey2.Ctrl_Type = CKM_Controls.CKM_TextBox.Type.Normal;
             this.txtKey2.DecimalPlace = 0;
             this.txtKey2.EnabledInsertKeyModeOnMouseEnter = false;
-            this.txtKey2.Font = new System.Drawing.Font("MS Gothic", 9F);
+            this.txtKey2.Font = new System.Drawing.Font("ＭＳ ゴシック", 9F);
             this.txtKey2.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Overwrite;
             this.txtKey2.IntegerPart = 0;
             this.txtKey2.IsCorrectDate = true;
@@ -147,7 +148,7 @@
             this.ckM_Label5.Back_Color = CKM_Controls.CKM_Label.CKM_Color.Default;
             this.ckM_Label5.BackColor = System.Drawing.Color.Transparent;
             this.ckM_Label5.DefaultlabelSize = true;
-            this.ckM_Label5.Font = new System.Drawing.Font("MS Gothic", 9F, System.Drawing.FontStyle.Bold);
+            this.ckM_Label5.Font = new System.Drawing.Font("ＭＳ ゴシック", 9F, System.Drawing.FontStyle.Bold);
             this.ckM_Label5.Font_Size = CKM_Controls.CKM_Label.CKM_FontSize.Normal;
             this.ckM_Label5.ForeColor = System.Drawing.Color.Black;
             this.ckM_Label5.Location = new System.Drawing.Point(590, 43);
@@ -166,7 +167,7 @@
             this.F11Show.DefaultBtnSize = false;
             this.F11Show.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.F11Show.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.F11Show.Font = new System.Drawing.Font("MS Gothic", 9F, System.Drawing.FontStyle.Bold);
+            this.F11Show.Font = new System.Drawing.Font("ＭＳ ゴシック", 9F, System.Drawing.FontStyle.Bold);
             this.F11Show.Font_Size = CKM_Controls.CKM_Button.CKM_FontSize.Normal;
             this.F11Show.Location = new System.Drawing.Point(1300, 66);
             this.F11Show.Margin = new System.Windows.Forms.Padding(1);
@@ -188,7 +189,7 @@
             this.GvKey.CheckCol = ((System.Collections.ArrayList)(resources.GetObject("GvKey.CheckCol")));
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Bold);
             dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -204,6 +205,14 @@
             this.colDigital2,
             this.colDigital3,
             this.colDailyPayment});
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("ＭＳ ゴシック", 9F);
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.GvKey.DefaultCellStyle = dataGridViewCellStyle7;
             this.GvKey.EnableHeadersVisualStyles = false;
             this.GvKey.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.GvKey.Location = new System.Drawing.Point(12, 156);
@@ -307,7 +316,7 @@
             this.ckM_Label18.Back_Color = CKM_Controls.CKM_Label.CKM_Color.Default;
             this.ckM_Label18.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.ckM_Label18.DefaultlabelSize = true;
-            this.ckM_Label18.Font = new System.Drawing.Font("MS Gothic", 9F, System.Drawing.FontStyle.Bold);
+            this.ckM_Label18.Font = new System.Drawing.Font("ＭＳ ゴシック", 9F, System.Drawing.FontStyle.Bold);
             this.ckM_Label18.Font_Size = CKM_Controls.CKM_Label.CKM_FontSize.Normal;
             this.ckM_Label18.ForeColor = System.Drawing.Color.Black;
             this.ckM_Label18.Location = new System.Drawing.Point(20, 16);
@@ -323,7 +332,7 @@
             this.ckM_Label17.Back_Color = CKM_Controls.CKM_Label.CKM_Color.Default;
             this.ckM_Label17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.ckM_Label17.DefaultlabelSize = true;
-            this.ckM_Label17.Font = new System.Drawing.Font("MS Gothic", 9F, System.Drawing.FontStyle.Bold);
+            this.ckM_Label17.Font = new System.Drawing.Font("ＭＳ ゴシック", 9F, System.Drawing.FontStyle.Bold);
             this.ckM_Label17.Font_Size = CKM_Controls.CKM_Label.CKM_FontSize.Normal;
             this.ckM_Label17.ForeColor = System.Drawing.Color.Black;
             this.ckM_Label17.Location = new System.Drawing.Point(20, 40);
