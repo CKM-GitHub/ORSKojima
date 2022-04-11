@@ -981,7 +981,7 @@
             this.ScCopyKey.Ctrl_Type = CKM_Controls.CKM_TextBox.Type.Normal;
             this.ScCopyKey.DataCheck = false;
             this.ScCopyKey.Font = new System.Drawing.Font("ＭＳ ゴシック", 9F);
-            this.ScCopyKey.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.ScCopyKey.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.ScCopyKey.IsCopy = false;
             this.ScCopyKey.LabelText = "";
             this.ScCopyKey.LabelVisible = false;
