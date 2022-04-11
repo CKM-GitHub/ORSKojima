@@ -78,7 +78,7 @@
             this.txtCode.BorderColor = false;
             this.txtCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtCode.ClientColor = System.Drawing.Color.White;
-            this.txtCode.Ctrl_Byte = CKM_Controls.CKM_TextBox.Bytes.半角;
+            this.txtCode.Ctrl_Byte = CKM_Controls.CKM_TextBox.Bytes.半全角;
             this.txtCode.Ctrl_Type = CKM_Controls.CKM_TextBox.Type.Normal;
             this.txtCode.DecimalPlace = 0;
             this.txtCode.EnabledInsertKeyModeOnMouseEnter = false;
