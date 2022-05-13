@@ -23,11 +23,11 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <InstallUrl>http://203.137.92.20/orskojima20220309/</InstallUrl>
-    <UpdateUrl>http://203.137.92.20/orskojima20220309/</UpdateUrl>
+    <InstallUrl>http://203.137.52.25/orskojima20220309/</InstallUrl>
+    <UpdateUrl>http://203.137.52.25/orskojima20220309/</UpdateUrl>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationRevision>1</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
