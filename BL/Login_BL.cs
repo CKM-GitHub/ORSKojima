@@ -7,8 +7,7 @@ using Entity;
 using DL;
 using System.Data;
 using System.Deployment;
-using System.Diagnostics;
-using EPSON_TM30;
+using System.Diagnostics; 
 using System.Data.SqlClient;
 using System.IO;
 
