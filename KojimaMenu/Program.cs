@@ -39,7 +39,7 @@ namespace KojimaMenu
 
                     if (!File.Exists(fullpath))
                     {
-                        byte[] raw = wc.DownloadData("http://203.137.52.25/GetIniFile.aspx?Value=" + key + "&id=" + "kojima");
+                        byte[] raw = wc.DownloadData("http://203.137.52.25:81/GetIniFile.aspx?Value=" + key + "&id=" + "kojima");
                         File.WriteAllBytes(fullpath, raw);
                     }
                 }

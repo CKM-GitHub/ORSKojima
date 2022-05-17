@@ -8,8 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using BL;
 using Entity;
-using CKM_Controls;
-using CrystalDecisions.CrystalReports.Engine;
+using CKM_Controls; 
 using System.Runtime.InteropServices; //EXCEL出力(必要)
 using Search;
 
@@ -1077,47 +1076,7 @@ namespace Base.Client
             }
             return false;
         }
-
-        /// <summary>
-        /// PDF出力処理
-        /// </summary>
-        /// <param name="filePath">ファイルパス</param>
-        /// <param name="report">レポートオブジェクト</param>
-        /// <returns></returns>
-        public bool OutputPDF(string filePath, ReportClass report)
-        {
-            // PDF形式でファイル出力
-            try
-            {
-                string fileName = "";
-                if (System.IO.Path.GetExtension(filePath).ToLower() != ".pdf")
-                {
-                    fileName = System.IO.Path.GetFileNameWithoutExtension(filePath) + ".pdf";
-                }
-
-                // 出力先ファイル名を指定
-                CrystalDecisions.Shared.DiskFileDestinationOptions fileOption;
-                fileOption = new CrystalDecisions.Shared.DiskFileDestinationOptions();
-                fileOption.DiskFileName = System.IO.Path.GetDirectoryName(filePath) + "\\" + fileName;
-
-                // 外部ファイル出力をPDF出力として定義する
-                CrystalDecisions.Shared.ExportOptions option;
-                option = report.ExportOptions;
-                option.ExportDestinationType = CrystalDecisions.Shared.ExportDestinationType.DiskFile;
-                option.ExportFormatType = CrystalDecisions.Shared.ExportFormatType.PortableDocFormat;
-                option.FormatOptions = new CrystalDecisions.Shared.PdfRtfWordFormatOptions();
-                option.DestinationOptions = fileOption;
-                
-                // pdfとして外部ファイル出力を行う
-                report.Export();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message + Environment.NewLine +ex.StackTrace.ToString() );
-                return false;
-            }
-            return true;
-        }
+         
         #endregion
 
         /// <summary>
