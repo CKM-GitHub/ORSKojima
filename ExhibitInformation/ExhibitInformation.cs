@@ -487,11 +487,14 @@ namespace ExhibitInformation
 
         private string EncloseDoubleQuotesIfNeed(string field)
         {
-            if (NeedEncloseDoubleQuotes(field))
-            {
-                return EncloseDoubleQuotes(field);
-            }
-            return field;
+            //全項目を""で囲むように変更
+            //if (NeedEncloseDoubleQuotes(field))
+            //{
+            //    return EncloseDoubleQuotes(field);
+            //}
+            //return field;
+            return EncloseDoubleQuotes(field);
+            
         }
 
         /// <summary>
