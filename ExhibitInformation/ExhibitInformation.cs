@@ -448,7 +448,10 @@ namespace ExhibitInformation
                 using (StreamWriter sw = new StreamWriter(strFullPath, false, enc))
                 {
 
-                    foreach (DataRow row in dt.Rows)
+                    DataRow[] drSelect = dt.Select("", "RowNum");
+
+                    //foreach (DataRow row in dt.Rows)
+                    foreach (DataRow row in drSelect)
                     {
                         // 
                         for (int i = 0; i < dt.Columns.Count; i++)
